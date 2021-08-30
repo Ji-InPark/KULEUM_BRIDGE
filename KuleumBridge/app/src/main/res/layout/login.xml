@@ -39,6 +39,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:hint="   Password"
+        android:inputType="textPassword"
         android:background="@color/white" />
 
     <Button

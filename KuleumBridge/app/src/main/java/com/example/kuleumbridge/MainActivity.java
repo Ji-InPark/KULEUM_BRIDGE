@@ -15,6 +15,17 @@ import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class MainActivity extends AppCompatActivity {
 
     String idCorrect = "obandcass";
@@ -31,11 +42,43 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onLoginBtnClick(View view) {
+
         EditText et1 = findViewById(R.id.idInput);
         idTyped = String.valueOf(et1.getText());
         EditText et2 = findViewById(R.id.passwordInput);
         psTyped = String.valueOf(et2.getText());
 
+        Thread th = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+                OkHttpClient client = new OkHttpClient();
+
+                JSONObject json = new JSONObject();
+                try {
+                    json.put("id", idTyped);
+                    json.put("pwd", psTyped);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                RequestBody body = RequestBody.create(JSON, json.toString());
+                Request request = new Request.Builder()
+                        .url("http://3.37.235.212:5000/login")
+                        .post(body)
+                        .build();
+
+                try {
+                    Response response = client.newCall(request).execute();
+                    System.out.println(response.body().string());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        th.start();
 
         if (check(idTyped,idCorrect) && check(psTyped,psCorrect)) {
             setContentView(R.layout.afterlog);
@@ -134,6 +177,5 @@ public class MainActivity extends AppCompatActivity {
                 break ;
         }
     }
-
 
 }
