@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#23B14D"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:src="@drawable/konkuk"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        />
+
+    <TextView
+        android:id="@+id/Konkuk"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Konkuk University" />
+
+    <EditText
+        android:layout_marginTop="50dp"
+        android:id="@+id/idInput"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:hint="   ID"
+        android:background="@color/white" />
+
+    <EditText
+        android:id="@+id/passwordInput"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:hint="   Password"
+        android:background="@color/white" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="294dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:text="Log in"
+        android:textAllCaps="false"
+        android:onClick="onLoginBtnClick"/>
+
+
+
+
+</LinearLayout>
