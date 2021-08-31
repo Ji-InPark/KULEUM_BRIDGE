@@ -28,27 +28,34 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    Response response;
+
     String idCorrect = "obandcass";
     String psCorrect = "36sh8133";
-    String idTyped;
-    String psTyped;
+    String input_id;
+    String input_pwd;
+
+    // User의 정보들을 저장할 객체
+    UserInfoClass uic;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-
+        uic = new UserInfoClass();
     }
 
     public void onLoginBtnClick(View view) {
+        EditText et_id = findViewById(R.id.idInput);
+        EditText et_pwd = findViewById(R.id.passwordInput);
+        input_id = String.valueOf(et_id.getText());
+        input_pwd = String.valueOf(et_pwd.getText());
 
-        EditText et1 = findViewById(R.id.idInput);
-        idTyped = String.valueOf(et1.getText());
-        EditText et2 = findViewById(R.id.passwordInput);
-        psTyped = String.valueOf(et2.getText());
-
+        // 인터넷 연결은 스레드를 통해서 백그라운드로 돌아가야 하므로(안드로이드 정책) 스레드를 하나 만듦
         Thread th = new Thread(new Runnable() {
+
+            // 스레드가 실행할 부분
             @Override
             public void run() {
                 final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
@@ -57,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
 
                 JSONObject json = new JSONObject();
                 try {
-                    json.put("id", idTyped);
-                    json.put("pwd", psTyped);
+                    json.put("id", input_id);
+                    json.put("pwd", input_pwd);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -66,12 +73,12 @@ public class MainActivity extends AppCompatActivity {
                 RequestBody body = RequestBody.create(JSON, json.toString());
                 Request request = new Request.Builder()
                         .url("http://3.37.235.212:5000/login")
+                        .addHeader("Connection", "close")
                         .post(body)
                         .build();
 
                 try {
-                    Response response = client.newCall(request).execute();
-                    System.out.println(response.body().string());
+                    response = client.newCall(request).execute();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -79,7 +86,44 @@ public class MainActivity extends AppCompatActivity {
         });
 
         th.start();
+        try {
+            th.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
+        try {
+
+            System.out.println(response.body().string());
+
+            // 로그인 실패했는지 판단하는 방법 생각해야됨
+            // String.contains 메소드는 여기서 사용 불가능한듯
+            if(true)
+            {
+                Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+
+                //Toast.makeText(this, response.body().string(), Toast.LENGTH_SHORT).show();
+                /*
+                여기는 로그인 성공부분
+
+                유저 정보 싹다 긁어모아서 만들어둔 UserInfoClass 클래스에 저장할것
+                현재 클래스 메소드만 구현되어있음
+                클래스 필드는 하나도 구현안했으니 필요한 필드 구현해서 사용할 것    -   민규
+
+                그다음 자동 로그인을 위한 암호화된 아이디 비밀번호 저장을 구현     -   지인
+
+                최종적으로 뷰 전환      -   민규
+                */
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        /*
         if (check(idTyped,idCorrect) && check(psTyped,psCorrect)) {
             setContentView(R.layout.afterlog);
 
@@ -108,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "로그인에 실패했습니다.\n 아이디와 패스워드를 다시 확인해주세요"
                     , Toast.LENGTH_LONG).show();
         }
+         */
     }
 
     public void onCalenderBtnClick(View view) {
