@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
+                // rest api 로그인 post로 보냄
                 RequestBody body = RequestBody.create(JSON, json.toString());
                 Request request = new Request.Builder()
                         .url("http://3.37.235.212:5000/login")
@@ -94,18 +95,25 @@ public class MainActivity extends AppCompatActivity {
 
         try {
 
-            System.out.println(response.body().string());
+            String res_string = response.body().string();
 
-            // 로그인 실패했는지 판단하는 방법 생각해야됨
-            // String.contains 메소드는 여기서 사용 불가능한듯
-            if(true)
+            //System.out.println(response.body().string());
+
+            // 로그인 실패했는지 판단
+            if(res_string.contains("로그인 실패하였습니다."))
             {
-                Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
+                JSONObject err_json = new JSONObject(res_string);
+
+                err_json = err_json.getJSONObject("ERRMSGINFO");
+
+                String msg = err_json.getString("ERRMSG");
+
+                // 로그인 실패 메세지 토스트로 띄움
+                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
             }
             else
             {
-
-                //Toast.makeText(this, response.body().string(), Toast.LENGTH_SHORT).show();
+                System.out.println("success test");
                 /*
                 여기는 로그인 성공부분
 
@@ -118,41 +126,10 @@ public class MainActivity extends AppCompatActivity {
                 최종적으로 뷰 전환      -   민규
                 */
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-
-        /*
-        if (check(idTyped,idCorrect) && check(psTyped,psCorrect)) {
-            setContentView(R.layout.afterlog);
-
-
-            TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-            tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-                @Override
-                public void onTabSelected(TabLayout.Tab tab) {
-                    // tab의 상태가 선택 상태로 변경
-                    int pos = tab.getPosition();
-                    changeView(pos);
-                }
-
-                @Override
-                public void onTabUnselected(TabLayout.Tab tab) {
-                    // tab의 상태가 선택되지 않음으로 변경
-                }
-
-                @Override
-                public void onTabReselected(TabLayout.Tab tab) {
-                    // 이미 선택된 상태의 tab이 사용자에 의해 다시 선택됨
-                }
-            });
-
-        } else {
-            Toast.makeText(this, "로그인에 실패했습니다.\n 아이디와 패스워드를 다시 확인해주세요"
-                    , Toast.LENGTH_LONG).show();
-        }
-         */
     }
 
     public void onCalenderBtnClick(View view) {
