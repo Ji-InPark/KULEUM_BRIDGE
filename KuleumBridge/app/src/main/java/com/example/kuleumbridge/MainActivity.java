@@ -125,6 +125,11 @@ public class MainActivity extends AppCompatActivity {
 
                 최종적으로 뷰 전환      -   민규
                 */
+
+                // 유저 정보 저장하는 부분
+
+                // 자동 로그인 구현 부분
+
             }
         } catch (Exception e) {
             e.printStackTrace();
