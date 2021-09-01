@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         uic = new UserInfoClass();
+
     }
 
     public void onLoginBtnClick(View view) {
@@ -104,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
             String res_string = response.body().string();
 
-            //System.out.println(response.body().string());
+            System.out.println(res_string);
 
             // 로그인 실패했는지 판단
             if(res_string.contains("로그인 실패하였습니다."))
@@ -135,12 +136,42 @@ public class MainActivity extends AppCompatActivity {
 
                 // 유저 정보 저장하는 부분
 
-                // 자동 로그인 구현 부분
+                // 자동 로그인을 위한 아이디 비번 암호화 및 저장 부분
                 EncryptClass ec = new EncryptClass(getKey());
+
+                String ec_id = ec.encrypt(input_id);
+                String ec_pwd = ec.encrypt(input_pwd);
+
+                FileOutputStream fos = openFileOutput("login.txt", Context.MODE_PRIVATE);
+
+                PrintWriter writer= new PrintWriter(fos);
+
+                writer.print(ec_id + " : " + ec_pwd);
+
+                // 뷰 전환 부분
 
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public boolean autoLogin(){
+        FileInputStream fis = null;
+        try {
+            fis = openFileInput("login.txt");
+            Scanner scan = new Scanner(fis);
+
+            String[] ec_id_pwd = scan.next().split(" : ");
+
+            EncryptClass ec = new EncryptClass(getKey());
+
+
+            return true;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+
+            return false;
         }
     }
 
