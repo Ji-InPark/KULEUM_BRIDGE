@@ -12,8 +12,15 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class EncryptClass {
     public static String alg = "AES/CBC/PKCS5Padding";
-    private final String key = "01234567890123456789012345678901";
-    private final String iv = key.substring(0, 16); // 16byte
+    private final String key;
+    private final String iv; // 16byte
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public EncryptClass(String key)
+    {
+        this.key = key;
+        iv = this.key.substring(0, 16);
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public String encrypt(String text) throws Exception {

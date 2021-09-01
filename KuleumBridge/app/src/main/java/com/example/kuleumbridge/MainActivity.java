@@ -3,6 +3,7 @@ package com.example.kuleumbridge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,13 @@ import com.google.android.material.tabs.TabLayout;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Random;
+import java.util.Scanner;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -129,12 +136,47 @@ public class MainActivity extends AppCompatActivity {
                 // 유저 정보 저장하는 부분
 
                 // 자동 로그인 구현 부분
+                EncryptClass ec = new EncryptClass(getKey());
 
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    public String getKey(){
+        try {
+            FileInputStream fis = openFileInput("key.txt");
+
+            Scanner scan = new Scanner(fis);
+
+            String key = scan.next();
+
+            // 만약 저장되어 있는 키가 없다면 키를 랜덤으로 만든다.
+            // 그리고 저장한다.
+            if(key == null)
+            {
+                Random rand = new Random();
+                key = "";
+                for(int i = 0; i < 16; i++)
+                {
+                    key += rand.nextInt(10);
+                }
+
+                FileOutputStream fos = openFileOutput("key.txt", Context.MODE_PRIVATE);
+
+                PrintWriter writer= new PrintWriter(fos);
+
+                writer.print(key);
+            }
+
+            return key;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     public void onCalenderBtnClick(View view) {
