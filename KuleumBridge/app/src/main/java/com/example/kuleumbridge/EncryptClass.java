@@ -22,6 +22,7 @@ public class EncryptClass {
         iv = this.key.substring(0, 16);
     }
 
+    // 평문을 받고 암호화하는 과정
     @RequiresApi(api = Build.VERSION_CODES.O)
     public String encrypt(String text) throws Exception {
         Cipher cipher = Cipher.getInstance(alg);
@@ -33,6 +34,7 @@ public class EncryptClass {
         return Base64.getEncoder().encodeToString(encrypted);
     }
 
+    // 암호문을 받고 복호화하는 과정
     @RequiresApi(api = Build.VERSION_CODES.O)
     public String decrypt(String cipherText) throws Exception {
         Cipher cipher = Cipher.getInstance(alg);
