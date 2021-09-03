@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.icu.text.SymbolTable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,10 +36,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
-    boolean login_success = false;
-
-    String idCorrect = "obandcass";
-    String psCorrect = "36sh8133";
     String input_id;
     String input_pwd;
 
@@ -54,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         // 자동 로그인 가능할 경우 바로 뷰전환
         if(autoLogin())
         {
+            System.out.println("auto login success");
             // 뷰 전환 코드
         }
     }
@@ -95,18 +94,19 @@ public class MainActivity extends AppCompatActivity {
             }
             else
             {
-                System.out.println("success test");
-                        /*
-                        여기는 로그인 성공부분
+                /*
+                여기는 로그인 성공부분
 
-                        유저 정보 싹다 긁어모아서 만들어둔 UserInfoClass 클래스에 저장할것
-                        현재 클래스 메소드만 구현되어있음
-                        클래스 필드는 하나도 구현안했으니 필요한 필드 구현해서 사용할 것    -   민규
+                autoLogin 부분과 겹치므로 함수화 할 필요 있음
 
-                        그다음 자동 로그인을 위한 암호화된 아이디 비밀번호 저장을 구현     -   지인
+                유저 정보 싹다 긁어모아서 만들어둔 UserInfoClass 클래스에 저장할것
+                현재 클래스 메소드만 구현되어있음
+                클래스 필드는 하나도 구현안했으니 필요한 필드 구현해서 사용할 것    -   민규
 
-                        최종적으로 뷰 전환      -   민규
-                        */
+                그다음 자동 로그인을 위한 암호화된 아이디 비밀번호 저장을 구현     -   지인
+
+                최종적으로 뷰 전환      -   민규
+                */
 
                 // 유저 정보 저장하는 부분
 
@@ -116,13 +116,17 @@ public class MainActivity extends AppCompatActivity {
                 String ec_id = ec.encrypt(input_id);
                 String ec_pwd = ec.encrypt(input_pwd);
 
-                FileOutputStream fos = openFileOutput("login.txt", Context.MODE_PRIVATE);
+                // 저장 부분
+                SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
 
-                PrintWriter writer= new PrintWriter(fos);
+                SharedPreferences.Editor editor = pref.edit();
 
-                writer.print(ec_id + " : " + ec_pwd);
+                editor.putString("id", ec_id);
+                editor.putString("pwd", ec_pwd);
 
-                login_success = true;
+                editor.commit();
+
+                Toast.makeText(this, ec.decrypt(ec_id), Toast.LENGTH_SHORT).show();
 
                 // 뷰 전환 부분
 
@@ -138,15 +142,20 @@ public class MainActivity extends AppCompatActivity {
     public boolean autoLogin(){
         FileInputStream fis = null;
         try {
-            fis = openFileInput("login.txt");
-            Scanner scan = new Scanner(fis);
+            SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
 
-            String[] ec_id_pwd = scan.next().split(" : ");
+            String ec_id = pref.getString("id", "");
+            String ec_pwd = pref.getString("pwd", "");
+
+            if(ec_id.equals(""))
+                return false;
+
+            System.out.println(getKey());
 
             EncryptClass ec = new EncryptClass(getKey());
 
-            String dc_id = ec.decrypt(ec_id_pwd[0]);
-            String dc_pwd = ec.decrypt(ec_id_pwd[1]);
+            String dc_id = ec.decrypt(ec_id);
+            String dc_pwd = ec.decrypt(ec_pwd);
 
             ApiConnetClass acc = new ApiConnetClass(input_id, input_pwd);
             acc.start();
@@ -167,15 +176,15 @@ public class MainActivity extends AppCompatActivity {
 
     public String getKey(){
         try {
-            FileInputStream fis = openFileInput("key.txt");
+            SharedPreferences pref = getSharedPreferences("key",MODE_PRIVATE);
 
-            Scanner scan = new Scanner(fis);
+            String key = pref.getString("key", "");
 
-            String key = scan.next();
+            System.out.println(key);
 
             // 만약 저장되어 있는 키가 없다면 키를 랜덤으로 만든다.
             // 그리고 저장한다.
-            if(key == null)
+            if(key.equals(""))
             {
                 Random rand = new Random();
                 key = "";
@@ -184,11 +193,11 @@ public class MainActivity extends AppCompatActivity {
                     key += rand.nextInt(10);
                 }
 
-                FileOutputStream fos = openFileOutput("key.txt", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
 
-                PrintWriter writer= new PrintWriter(fos);
+                editor.putString("key", key);
 
-                writer.print(key);
+                editor.commit();
             }
 
             return key;
