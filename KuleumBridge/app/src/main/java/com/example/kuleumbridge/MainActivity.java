@@ -1,39 +1,21 @@
 package com.example.kuleumbridge;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.icu.text.SymbolTable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Random;
-import java.util.Scanner;
-
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
     String input_id;
@@ -84,12 +66,14 @@ public class MainActivity extends AppCompatActivity {
             // 로그인 실패했는지 판단
             if(res_string.contains("로그인 실패하였습니다."))
             {
+                // json으로 받은 에러메세지에서 원하는 부분만 파싱하는 과정
                 JSONObject err_json = new JSONObject(res_string);
 
                 err_json = err_json.getJSONObject("ERRMSGINFO");
 
                 String msg = err_json.getString("ERRMSG");
 
+                // 토스트로 에러메세지 출력
                 Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
             }
             else
@@ -109,14 +93,15 @@ public class MainActivity extends AppCompatActivity {
                 */
 
                 // 유저 정보 저장하는 부분
+                // 유저 정보 저장하는 부분도 자동 로그인에 사용되니 함수화할 필요 있음.
 
-                // 자동 로그인을 위한 아이디 비번 암호화 및 저장 부분
+                // 자동 로그인을 위한 로그인 정보 암호화 부분
                 EncryptClass ec = new EncryptClass(getKey());
 
                 String ec_id = ec.encrypt(input_id);
                 String ec_pwd = ec.encrypt(input_pwd);
 
-                // 저장 부분
+                // 암호화된 로그인 정보 저장 부분
                 SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
 
                 SharedPreferences.Editor editor = pref.edit();
@@ -125,8 +110,6 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString("pwd", ec_pwd);
 
                 editor.commit();
-
-                Toast.makeText(this, ec.decrypt(ec_id), Toast.LENGTH_SHORT).show();
 
                 // 뷰 전환 부분
 
@@ -139,24 +122,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // 자동 로그인 함수
     public boolean autoLogin(){
-        FileInputStream fis = null;
         try {
             SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
 
             String ec_id = pref.getString("id", "");
             String ec_pwd = pref.getString("pwd", "");
 
+            // login 파일에 저장된 정보가 없다면 false 리턴
             if(ec_id.equals(""))
                 return false;
 
-            System.out.println(getKey());
-
             EncryptClass ec = new EncryptClass(getKey());
 
+            // 암호화된 id, pwd를 복호화
             String dc_id = ec.decrypt(ec_id);
             String dc_pwd = ec.decrypt(ec_pwd);
 
+            // 복호화된 login 정보를 가지고 login
             ApiConnetClass acc = new ApiConnetClass(input_id, input_pwd);
             acc.start();
             try {
@@ -211,15 +195,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void onCalenderBtnClick(View view) {
         setContentView(R.layout.calender);
-    }
-
-
-    boolean check(String test, String correct) {
-        if (test.equals(correct) ) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     public void onTabSelected(TabLayout.Tab tab) {
