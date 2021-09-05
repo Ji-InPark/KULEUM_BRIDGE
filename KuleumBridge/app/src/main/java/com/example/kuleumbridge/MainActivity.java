@@ -18,9 +18,6 @@ import org.json.JSONObject;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-    String input_id;
-    String input_pwd;
-
     // User의 정보들을 저장할 객체
     UserInfoClass uic;
 
@@ -42,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
     public void onLoginBtnClick(View view){
         EditText et_id = findViewById(R.id.idInput);
         EditText et_pwd = findViewById(R.id.passwordInput);
-        input_id = String.valueOf(et_id.getText());
-        input_pwd = String.valueOf(et_pwd.getText());
+        String input_id = String.valueOf(et_id.getText());
+        String input_pwd = String.valueOf(et_pwd.getText());
 
         // 인터넷 연결은 스레드를 통해서 백그라운드로 돌아가야 하므로(안드로이드 정책) 스레드를 하나 만듦
         // 그 스레드를 상속한 ApiConnetClass 클래스를 만들어서 객체로 사용하기로 함
@@ -141,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
             String dc_pwd = ec.decrypt(ec_pwd);
 
             // 복호화된 login 정보를 가지고 login
-            ApiConnetClass acc = new ApiConnetClass(input_id, input_pwd);
+            ApiConnetClass acc = new ApiConnetClass(dc_id, dc_pwd);
             acc.start();
             try {
                 acc.join();
