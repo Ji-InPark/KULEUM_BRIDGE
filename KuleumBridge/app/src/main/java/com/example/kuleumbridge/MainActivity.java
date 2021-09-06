@@ -1,40 +1,23 @@
 package com.example.kuleumbridge;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-
-    Response response;
-
-    String idCorrect = "obandcass";
-    String psCorrect = "36sh8133";
-    String input_id;
-    String input_pwd;
-
     // User의 정보들을 저장할 객체
     UserInfoClass uic;
 
@@ -44,70 +27,58 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         uic = new UserInfoClass();
+        
+        // 자동 로그인 가능할 경우 바로 뷰전환
+        if(autoLogin())
+        {
+            System.out.println("auto login success");
+            // 뷰 전환 코드
+        }
     }
 
-    public void onLoginBtnClick(View view) {
+    public void onLoginBtnClick(View view){
         EditText et_id = findViewById(R.id.idInput);
         EditText et_pwd = findViewById(R.id.passwordInput);
-        input_id = String.valueOf(et_id.getText());
-        input_pwd = String.valueOf(et_pwd.getText());
+        String input_id = String.valueOf(et_id.getText());
+        String input_pwd = String.valueOf(et_pwd.getText());
 
         // 인터넷 연결은 스레드를 통해서 백그라운드로 돌아가야 하므로(안드로이드 정책) 스레드를 하나 만듦
-        Thread th = new Thread(new Runnable() {
-
-            // 스레드가 실행할 부분
-            @Override
-            public void run() {
-                final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-
-                OkHttpClient client = new OkHttpClient();
-
-                JSONObject json = new JSONObject();
-                try {
-                    json.put("id", input_id);
-                    json.put("pwd", input_pwd);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                RequestBody body = RequestBody.create(JSON, json.toString());
-                Request request = new Request.Builder()
-                        .url("http://3.37.235.212:5000/login")
-                        .addHeader("Connection", "close")
-                        .post(body)
-                        .build();
-
-                try {
-                    response = client.newCall(request).execute();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        th.start();
+        // 그 스레드를 상속한 ApiConnetClass 클래스를 만들어서 객체로 사용하기로 함
+        // 생성자의 파라매터로 id, pwd 를 받는다.
+        ApiConnetClass acc = new ApiConnetClass(input_id, input_pwd);
+        acc.start();
         try {
-            th.join();
+            acc.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        try {
+        // 로그인 성공 실패 여부 반환
+        try
+        {
+            String res_string = acc.getResult();
 
-            System.out.println(response.body().string());
+            System.out.println(res_string);
 
-            // 로그인 실패했는지 판단하는 방법 생각해야됨
-            // String.contains 메소드는 여기서 사용 불가능한듯
-            if(true)
+            // 로그인 실패했는지 판단
+            if(res_string.contains("로그인 실패하였습니다."))
             {
-                Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
+                // json으로 받은 에러메세지에서 원하는 부분만 파싱하는 과정
+                JSONObject err_json = new JSONObject(res_string);
+
+                err_json = err_json.getJSONObject("ERRMSGINFO");
+
+                String msg = err_json.getString("ERRMSG");
+
+                // 토스트로 에러메세지 출력
+                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
             }
             else
             {
-
-                //Toast.makeText(this, response.body().string(), Toast.LENGTH_SHORT).show();
                 /*
                 여기는 로그인 성공부분
+
+                autoLogin 부분과 겹치므로 함수화 할 필요 있음
 
                 유저 정보 싹다 긁어모아서 만들어둔 UserInfoClass 클래스에 저장할것
                 현재 클래스 메소드만 구현되어있음
@@ -117,55 +88,110 @@ public class MainActivity extends AppCompatActivity {
 
                 최종적으로 뷰 전환      -   민규
                 */
+
+                // 유저 정보 저장하는 부분
+                // 유저 정보 저장하는 부분도 자동 로그인에 사용되니 함수화할 필요 있음.
+
+                // 자동 로그인을 위한 로그인 정보 암호화 부분
+                EncryptClass ec = new EncryptClass(getKey());
+
+                String ec_id = ec.encrypt(input_id);
+                String ec_pwd = ec.encrypt(input_pwd);
+
+                // 암호화된 로그인 정보 저장 부분
+                SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
+
+                SharedPreferences.Editor editor = pref.edit();
+
+                editor.putString("id", ec_id);
+                editor.putString("pwd", ec_pwd);
+
+                editor.commit();
+
+                // 뷰 전환 부분
+
             }
-        } catch (IOException e) {
+        }
+        catch (Exception e)
+        {
+
+        }
+
+    }
+
+    // 자동 로그인 함수
+    public boolean autoLogin(){
+        try {
+            SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
+
+            String ec_id = pref.getString("id", "");
+            String ec_pwd = pref.getString("pwd", "");
+
+            // login 파일에 저장된 정보가 없다면 false 리턴
+            if(ec_id.equals(""))
+                return false;
+
+            EncryptClass ec = new EncryptClass(getKey());
+
+            // 암호화된 id, pwd를 복호화
+            String dc_id = ec.decrypt(ec_id);
+            String dc_pwd = ec.decrypt(ec_pwd);
+
+            // 복호화된 login 정보를 가지고 login
+            ApiConnetClass acc = new ApiConnetClass(dc_id, dc_pwd);
+            acc.start();
+            try {
+                acc.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            return true;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public String getKey(){
+        try {
+            SharedPreferences pref = getSharedPreferences("key",MODE_PRIVATE);
+
+            String key = pref.getString("key", "");
+
+            System.out.println(key);
+
+            // 만약 저장되어 있는 키가 없다면 키를 랜덤으로 만든다.
+            // 그리고 저장한다.
+            if(key.equals(""))
+            {
+                Random rand = new Random();
+                key = "";
+                for(int i = 0; i < 16; i++)
+                {
+                    key += rand.nextInt(10);
+                }
+
+                SharedPreferences.Editor editor = pref.edit();
+
+                editor.putString("key", key);
+
+                editor.commit();
+            }
+
+            return key;
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-
-        /*
-        if (check(idTyped,idCorrect) && check(psTyped,psCorrect)) {
-            setContentView(R.layout.afterlog);
-
-
-            TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-            tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-                @Override
-                public void onTabSelected(TabLayout.Tab tab) {
-                    // tab의 상태가 선택 상태로 변경
-                    int pos = tab.getPosition();
-                    changeView(pos);
-                }
-
-                @Override
-                public void onTabUnselected(TabLayout.Tab tab) {
-                    // tab의 상태가 선택되지 않음으로 변경
-                }
-
-                @Override
-                public void onTabReselected(TabLayout.Tab tab) {
-                    // 이미 선택된 상태의 tab이 사용자에 의해 다시 선택됨
-                }
-            });
-
-        } else {
-            Toast.makeText(this, "로그인에 실패했습니다.\n 아이디와 패스워드를 다시 확인해주세요"
-                    , Toast.LENGTH_LONG).show();
-        }
-         */
+        return null;
     }
 
     public void onCalenderBtnClick(View view) {
         setContentView(R.layout.calender);
-    }
-
-
-    boolean check(String test, String correct) {
-        if (test.equals(correct) ) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     public void onTabSelected(TabLayout.Tab tab) {
