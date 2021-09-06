@@ -43,15 +43,12 @@ public class ApiConnetClass extends Thread{
 
         Response response;
 
-        while(true)
-        {
-            try {
-                response = client.newCall(request).execute();
-                result = response.body().string();
-                break;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        try {
+            response = client.newCall(request).execute();
+            result = response.body().string();
+            return;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

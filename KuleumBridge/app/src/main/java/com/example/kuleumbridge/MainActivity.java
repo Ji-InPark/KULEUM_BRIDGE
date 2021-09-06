@@ -18,7 +18,7 @@ import org.json.JSONObject;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-    // User의 정보들을 저장할 객체
+     // User의 정보들을 저장할 객체
     UserInfoClass uic;
 
 
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             System.out.println(res_string);
 
             // 로그인 실패했는지 판단
-            if(res_string.contains("로그인 실패하였습니다."))
+            if(res_string.contains("로그인 실패하였습니다.") || res_string.contains("비밀번호를 변경해주세요."))
             {
                 // json으로 받은 에러메세지에서 원하는 부분만 파싱하는 과정
                 JSONObject err_json = new JSONObject(res_string);
