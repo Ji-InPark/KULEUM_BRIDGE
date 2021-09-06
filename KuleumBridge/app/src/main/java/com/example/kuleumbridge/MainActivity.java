@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         if(autoLogin())
         {
             System.out.println("auto login success");
-            // 유저 정보 저장 함수 콜
             // 뷰 전환 코드
         }
     }
@@ -249,7 +248,5 @@ public class MainActivity extends AppCompatActivity {
                 break ;
         }
     }
-
-
 
 }
