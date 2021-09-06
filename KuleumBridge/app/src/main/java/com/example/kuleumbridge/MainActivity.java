@@ -26,6 +26,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import java.util.Stack;
+
 public class MainActivity extends AppCompatActivity {
 
     Response response;
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         uic = new UserInfoClass();
     }
 
-    public void onLoginBtnClick(View view) {
+    public void onLoginBtnClick(View view) throws IOException {
         EditText et_id = findViewById(R.id.idInput);
         EditText et_pwd = findViewById(R.id.passwordInput);
         input_id = String.valueOf(et_id.getText());
@@ -78,8 +80,10 @@ public class MainActivity extends AppCompatActivity {
                         .build();
 
                 try {
-                    response = client.newCall(request).execute();
+                    response = client.newCall(request).execute(); // JSON 형태의 정보는 response에 담긴다.
+                    System.out.println(response.body().string());
                 } catch (IOException e) {
+                    System.err.println("response가 출력되지 않음.");
                     e.printStackTrace();
                 }
             }
@@ -92,9 +96,9 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        try {
+        /*try {
 
-            System.out.println(response.body().string());
+            //System.out.println(response.body().string());
 
             // 로그인 실패했는지 판단하는 방법 생각해야됨
             // String.contains 메소드는 여기서 사용 불가능한듯
@@ -115,44 +119,40 @@ public class MainActivity extends AppCompatActivity {
 
                 그다음 자동 로그인을 위한 암호화된 아이디 비밀번호 저장을 구현     -   지인
 
+
                 최종적으로 뷰 전환      -   민규
-                */
+                /*
+                //setContentView(R.layout.afterlog);
+                //System.out.println(response.body().string());
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
+
+        setContentView(R.layout.afterlog);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                // tab의 상태가 선택 상태로 변경
+                int pos = tab.getPosition();
+                changeView(pos);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                // tab의 상태가 선택되지 않음으로 변경
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                // 이미 선택된 상태의 tab이 사용자에 의해 다시 선택됨
+            }
+        });
 
 
-        /*
-        if (check(idTyped,idCorrect) && check(psTyped,psCorrect)) {
-            setContentView(R.layout.afterlog);
 
-
-            TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-            tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-                @Override
-                public void onTabSelected(TabLayout.Tab tab) {
-                    // tab의 상태가 선택 상태로 변경
-                    int pos = tab.getPosition();
-                    changeView(pos);
-                }
-
-                @Override
-                public void onTabUnselected(TabLayout.Tab tab) {
-                    // tab의 상태가 선택되지 않음으로 변경
-                }
-
-                @Override
-                public void onTabReselected(TabLayout.Tab tab) {
-                    // 이미 선택된 상태의 tab이 사용자에 의해 다시 선택됨
-                }
-            });
-
-        } else {
-            Toast.makeText(this, "로그인에 실패했습니다.\n 아이디와 패스워드를 다시 확인해주세요"
-                    , Toast.LENGTH_LONG).show();
-        }
-         */
     }
 
     public void onCalenderBtnClick(View view) {

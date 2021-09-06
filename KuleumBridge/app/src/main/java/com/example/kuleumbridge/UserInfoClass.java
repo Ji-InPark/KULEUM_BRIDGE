@@ -6,22 +6,13 @@ public class UserInfoClass {
 
     }
 
-    public void saveLoginRes(String input_string)
+    public void saveLoginRes(String input_string) // 학생증에 들어갈 정보
     {
 
     }
 
-    public void saveUserInfoRes(String input_string)
-    {
 
-    }
-
-    public void saveGraduSimulRes(String input_string)
-    {
-
-    }
-
-    public void saveGradeAllRes(String input_string)
+    public void saveGradeAllRes(String input_string) // 성적조회에 들어갈 정보
     {
 
     }
