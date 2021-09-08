@@ -107,9 +107,27 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString("pwd", ec_pwd);
 
                 editor.commit();
-
                 // 뷰 전환 부분
+                setContentView(R.layout.afterlog);
+                TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+                tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
+                        // tab의 상태가 선택 상태로 변경
+                        int pos = tab.getPosition();
+                        changeView(pos);
+                    }
 
+                    @Override
+                    public void onTabUnselected(TabLayout.Tab tab) {
+                        // tab의 상태가 선택되지 않음으로 변경
+                    }
+
+                    @Override
+                    public void onTabReselected(TabLayout.Tab tab) {
+                        // 이미 선택된 상태의 tab이 사용자에 의해 다시 선택됨
+                    }
+                });
             }
         }
         catch (Exception e)
