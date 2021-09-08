@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.Toast;
@@ -107,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString("pwd", ec_pwd);
 
                 editor.commit();
+
                 // 뷰 전환 부분
                 setContentView(R.layout.afterlog);
                 TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
@@ -178,8 +178,6 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences pref = getSharedPreferences("key",MODE_PRIVATE);
 
             String key = pref.getString("key", "");
-
-            System.out.println(key);
 
             // 만약 저장되어 있는 키가 없다면 키를 랜덤으로 만든다.
             // 그리고 저장한다.
