@@ -45,10 +45,10 @@ public class MainActivity extends AppCompatActivity {
         // 인터넷 연결은 스레드를 통해서 백그라운드로 돌아가야 하므로(안드로이드 정책) 스레드를 하나 만듦
         // 그 스레드를 상속한 ApiConnetClass 클래스를 만들어서 객체로 사용하기로 함
         // 생성자의 파라매터로 id, pwd 를 받는다.
-        ApiConnetClass acc = new ApiConnetClass(input_id, input_pwd);
-        acc.start();
+        ApiLoginClass alc = new ApiLoginClass(input_id, input_pwd);
+        alc.start();
         try {
-            acc.join();
+            alc.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         // 로그인 성공 실패 여부 반환
         try
         {
-            String res_string = acc.getResult();
+            String res_string = alc.getResult();
 
             System.out.println(res_string);
 
@@ -138,10 +138,10 @@ public class MainActivity extends AppCompatActivity {
             String dc_pwd = ec.decrypt(ec_pwd);
 
             // 복호화된 login 정보를 가지고 login
-            ApiConnetClass acc = new ApiConnetClass(dc_id, dc_pwd);
-            acc.start();
+            ApiLoginClass alc = new ApiLoginClass(dc_id, dc_pwd);
+            alc.start();
             try {
-                acc.join();
+                alc.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

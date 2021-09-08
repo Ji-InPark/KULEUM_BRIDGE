@@ -9,11 +9,10 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class ApiConnetClass extends Thread{
-
+public class ApiLoginClass extends Thread{
     private String id, pwd, result;
 
-    public ApiConnetClass(String id, String pwd)
+    public ApiLoginClass(String id, String pwd)
     {
         this.id = id;
         this.pwd = pwd;
