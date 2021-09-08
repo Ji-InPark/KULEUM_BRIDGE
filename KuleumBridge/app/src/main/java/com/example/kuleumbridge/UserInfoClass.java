@@ -18,19 +18,7 @@ public class UserInfoClass {
 
 
 
-    public void saveLoginRes(String input_string) // 학생증에 들어갈 정보
-    {
-
-
-    }
-
-
-    public void saveGradeAllRes(String input_string) // 성적조회에 들어갈 정보
-    {
-
-    }
-
-    public void setInfo(String response_string) {
+    public void setLoginInfo(String response_string) {
         try {
             JSONObject temp = new JSONObject(response_string);
             JSONObject dmUserInfo = temp.getJSONObject("dmUserInfo");
@@ -41,4 +29,9 @@ public class UserInfoClass {
             e.printStackTrace();
         }
     }
+
+    public void setGradeAllInfo(String response_string) {
+
+    }
+
 }
