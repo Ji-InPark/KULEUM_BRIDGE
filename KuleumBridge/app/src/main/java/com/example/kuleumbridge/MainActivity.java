@@ -90,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
                 */
 
                 // 유저 정보 저장하는 부분
+                //uic.setInfo(res_string);
+
                 // 유저 정보 저장하는 부분도 자동 로그인에 사용되니 함수화할 필요 있음.
 
                 // 자동 로그인을 위한 로그인 정보 암호화 부분
@@ -107,6 +109,9 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString("pwd", ec_pwd);
 
                 editor.commit();
+
+
+                uic.setInfo(res_string);
                 // 뷰 전환 부분
                 setContentView(R.layout.afterlog);
                 TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
