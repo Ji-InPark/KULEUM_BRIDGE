@@ -219,52 +219,22 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     private void changeView(int index) {
-        FrameLayout frameLayout1 = (FrameLayout) findViewById(R.id.frame);
+        LinearLayout[] layouts = {
+                (LinearLayout) findViewById(R.id.frag1),
+                (TableLayout) findViewById(R.id.frag2),
+                (LinearLayout) findViewById(R.id.frag3),
+                (LinearLayout) findViewById(R.id.frag4),
+                (TableLayout) findViewById(R.id.frag5)
+        };
 
-        LinearLayout notice = (LinearLayout) findViewById(R.id.frag1);
-        TableLayout tastePlace = (TableLayout) findViewById(R.id.frag2);
-        LinearLayout gradeCheck = (LinearLayout) findViewById(R.id.frag3);
-        LinearLayout studentCard = (LinearLayout) findViewById(R.id.frag4);
-        TableLayout relatedLinks = (TableLayout) findViewById(R.id.frag5);
-
-        switch (index) {
-            case 0 :
-                notice.setVisibility(View.VISIBLE);
-                tastePlace.setVisibility(View.GONE);
-                gradeCheck.setVisibility(View.GONE);
-                studentCard.setVisibility(View.GONE);
-                relatedLinks.setVisibility(View.GONE);
-                break ;
-            case 1 :
-                notice.setVisibility(View.GONE);
-                tastePlace.setVisibility(View.VISIBLE);
-                gradeCheck.setVisibility(View.GONE);
-                studentCard.setVisibility(View.GONE);
-                relatedLinks.setVisibility(View.GONE);
-                break ;
-            case 2 :
-                notice.setVisibility(View.GONE);
-                tastePlace.setVisibility(View.GONE);
-                gradeCheck.setVisibility(View.VISIBLE);
-                studentCard.setVisibility(View.GONE);
-                relatedLinks.setVisibility(View.GONE);
-                break ;
-            case 3 :
-                notice.setVisibility(View.GONE);
-                tastePlace.setVisibility(View.GONE);
-                gradeCheck.setVisibility(View.GONE);
-                studentCard.setVisibility(View.VISIBLE);
-                relatedLinks.setVisibility(View.GONE);
-                break ;
-            case 4 :
-                notice.setVisibility(View.GONE);
-                tastePlace.setVisibility(View.GONE);
-                gradeCheck.setVisibility(View.GONE);
-                studentCard.setVisibility(View.GONE);
-                relatedLinks.setVisibility(View.VISIBLE);
-                break ;
+        for(int i = 0; i < 5; i++)
+        {
+            if(index == i)
+                layouts[i].setVisibility(View.VISIBLE);
+            else
+                layouts[i].setVisibility(View.GONE);
         }
     }
-
 }
