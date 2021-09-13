@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         {
             System.out.println("auto login success");
             // 뷰 전환 코드
+            // 유저 정보 저장 코드
         }
     }
 
@@ -75,23 +76,10 @@ public class MainActivity extends AppCompatActivity {
             else
             {
                 /*
-                여기는 로그인 성공부분
+                유저 정보 저장 - 학번 필요함
 
-                autoLogin 부분과 겹치므로 함수화 할 필요 있음
-
-                유저 정보 싹다 긁어모아서 만들어둔 UserInfoClass 클래스에 저장할것
-                현재 클래스 메소드만 구현되어있음
-                클래스 필드는 하나도 구현안했으니 필요한 필드 구현해서 사용할 것    -   민규
-
-                그다음 자동 로그인을 위한 암호화된 아이디 비밀번호 저장을 구현     -   지인
-
-                최종적으로 뷰 전환      -   민규
+                뷰 전환 후 뒤로가기 기능 구현을 위해서 뷰 전환 방식을 바꿀 필요 있음
                 */
-
-                // 유저 정보 저장하는 부분
-                //uic.setInfo(res_string);
-
-                // 유저 정보 저장하는 부분도 자동 로그인에 사용되니 함수화할 필요 있음.
 
                 // 자동 로그인을 위한 로그인 정보 암호화 부분
                 EncryptClass ec = new EncryptClass(getKey());
@@ -109,8 +97,9 @@ public class MainActivity extends AppCompatActivity {
 
                 editor.commit();
 
-
+                // 유저 정보 저장하는 부분
                 uic.setLoginInfo(res_string);
+
                 // 뷰 전환 부분
                 setContentView(R.layout.afterlog);
                 TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
