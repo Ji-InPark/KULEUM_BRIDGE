@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.commit();
 
 
-                uic.setInfo(res_string);
+                uic.setLoginInfo(res_string);
                 // 뷰 전환 부분
                 setContentView(R.layout.afterlog);
                 TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
