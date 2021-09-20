@@ -75,19 +75,19 @@ public class MainActivity extends AppCompatActivity {
             }
             else
             {
-                /*
-                ★★★★★로그인 성공부분★★★★★
 
-                유저 정보 싹다 긁어모아서 만들어둔 UserInfoClass 클래스에 저장
-                */
+                //★★★★★로그인 성공부분★★★★★
+
 
                 UserInfoClass loginUserInfo = new UserInfoClass();
                 loginUserInfo.setLoginInfo(res_string);
 
+                /*
                 System.out.println("생년월일"+loginUserInfo.getRESNO());
                 System.out.println("소속학과"+loginUserInfo.getDEPT_TTNM());
                 System.out.println("이름"+loginUserInfo.getUSER_NM());
                 System.out.println("학번"+loginUserInfo.getUSER_ID());
+                 */
 
 
                 /*
