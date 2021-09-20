@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         {
             String res_string = alc.getResult();
 
-            System.out.println(res_string);
+            //System.out.println(res_string);
 
             // 로그인 실패했는지 판단
             if(res_string.contains("로그인 실패하였습니다.") || res_string.contains("비밀번호를 변경해주세요."))
@@ -76,14 +76,21 @@ public class MainActivity extends AppCompatActivity {
             else
             {
                 /*
-                여기는 로그인 성공부분
+                ★★★★★로그인 성공부분★★★★★
 
-                autoLogin 부분과 겹치므로 함수화 할 필요 있음
+                유저 정보 싹다 긁어모아서 만들어둔 UserInfoClass 클래스에 저장
+                */
 
-                유저 정보 싹다 긁어모아서 만들어둔 UserInfoClass 클래스에 저장할것
-                현재 클래스 메소드만 구현되어있음
-                클래스 필드는 하나도 구현안했으니 필요한 필드 구현해서 사용할 것    -   민규
+                UserInfoClass loginUserInfo = new UserInfoClass();
+                loginUserInfo.setLoginInfo(res_string);
 
+                System.out.println("생년월일"+loginUserInfo.getRESNO());
+                System.out.println("소속학과"+loginUserInfo.getDEPT_TTNM());
+                System.out.println("이름"+loginUserInfo.getUSER_NM());
+                System.out.println("학번"+loginUserInfo.getUSER_ID());
+
+
+                /*
                 그다음 자동 로그인을 위한 암호화된 아이디 비밀번호 저장을 구현     -   지인
 
                 최종적으로 뷰 전환      -   민규

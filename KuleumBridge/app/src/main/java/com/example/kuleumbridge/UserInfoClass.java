@@ -11,6 +11,7 @@ public class UserInfoClass {
     String RESNO;       // 생년월일
     String DEPT_TTNM;   // 소속단과대 및 학과
     String USER_NM;     // 이름
+    String USER_ID;     // 학번
 
     GradeAllClass[] grade = new GradeAllClass[100];
     //Stack<GradeAllClass> gradeStack = new Stack<GradeAllClass>();
@@ -24,6 +25,7 @@ public class UserInfoClass {
             RESNO = dmUserInfo.getString("RESNO");
             DEPT_TTNM = dmUserInfo.getString("DEPT_TTNM");
             USER_NM = dmUserInfo.getString("USER_NM");
+            USER_ID = dmUserInfo.getString("USER_ID");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -61,5 +63,20 @@ public class UserInfoClass {
         }
     }
 
+    public String getRESNO() {
+        return RESNO;
+    }
+
+    public String getDEPT_TTNM() {
+        return DEPT_TTNM;
+    }
+
+    public String getUSER_NM() {
+        return USER_NM;
+    }
+
+    public String getUSER_ID() {
+        return USER_ID;
+    }
 
 }
