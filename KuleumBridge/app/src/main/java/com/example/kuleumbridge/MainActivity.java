@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         {
             String res_string = alc.getResult();
 
-            System.out.println(res_string);
+            //System.out.println(res_string);
 
             // 로그인 실패했는지 판단
             if(res_string.contains("ERRMSGINFO"))
@@ -76,9 +76,24 @@ public class MainActivity extends AppCompatActivity {
             else
             {
                 /*
-                유저 정보 저장 - 학번 필요함
+                ★★★★★로그인 성공부분★★★★★
 
-                뷰 전환 후 뒤로가기 기능 구현을 위해서 뷰 전환 방식을 바꿀 필요 있음
+                유저 정보 싹다 긁어모아서 만들어둔 UserInfoClass 클래스에 저장
+                */
+
+                UserInfoClass loginUserInfo = new UserInfoClass();
+                loginUserInfo.setLoginInfo(res_string);
+
+                System.out.println("생년월일"+loginUserInfo.getRESNO());
+                System.out.println("소속학과"+loginUserInfo.getDEPT_TTNM());
+                System.out.println("이름"+loginUserInfo.getUSER_NM());
+                System.out.println("학번"+loginUserInfo.getUSER_ID());
+
+
+                /*
+                그다음 자동 로그인을 위한 암호화된 아이디 비밀번호 저장을 구현     -   지인
+
+                최종적으로 뷰 전환      -   민규
                 */
 
                 // 자동 로그인을 위한 로그인 정보 암호화 부분
