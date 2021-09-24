@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.Toast;
@@ -143,6 +144,20 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    // 학생증 정보 수정
+    public void editStudentID()
+    {
+        ImageView img = findViewById(R.id.photo);
+        EditText name = findViewById(R.id.user_nm);
+        EditText birth = findViewById(R.id.resno);
+        EditText major = findViewById(R.id.dpet_ttnm);
+
+        //img.setImageResource("anything");
+        name.setText(uic.USER_NM);
+        birth.setText(uic.RESNO);
+        major.setText(uic.DEPT_TTNM);
     }
 
     // 자동 로그인 함수
