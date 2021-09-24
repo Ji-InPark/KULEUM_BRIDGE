@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
@@ -48,8 +49,7 @@ public class MainActivity extends AppCompatActivity {
         // 인터넷 연결은 스레드를 통해서 백그라운드로 돌아가야 하므로(안드로이드 정책) 스레드를 하나 만듦
         // 그 스레드를 상속한 ApiConnetClass 클래스를 만들어서 객체로 사용하기로 함
         // 생성자의 파라매터로 id, pwd 를 받는다.
-        ApiLoginClass alc = null;
-        alc = new ApiLoginClass(input_id, input_pwd, this, new CallBack() {
+        ApiLoginClass alc = alc = new ApiLoginClass(input_id, input_pwd, this, new CallBack() {
             @Override
             public void callback(String result) {
                 // 유저 정보 저장하는 부분
@@ -108,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         alc.execute();
-        // 로그인 성공 실패 여부 반환
 
     }
 
@@ -116,9 +115,9 @@ public class MainActivity extends AppCompatActivity {
     public void editStudentID()
     {
         ImageView img = findViewById(R.id.photo);
-        EditText name = findViewById(R.id.user_nm);
-        EditText birth = findViewById(R.id.resno);
-        EditText major = findViewById(R.id.dpet_ttnm);
+        TextView name = findViewById(R.id.user_nm);
+        TextView birth = findViewById(R.id.resno);
+        TextView major = findViewById(R.id.dpet_ttnm);
 
         //img.setImageResource("anything");
         name.setText(uic.getUSER_NM());

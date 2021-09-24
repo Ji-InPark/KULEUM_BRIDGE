@@ -261,7 +261,7 @@
 
             </ImageView>
 
-            <EditText
+            <TextView
                 android:id="@+id/user_nm"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
@@ -270,7 +270,7 @@
                 android:gravity="center"
                 android:text="김호준" />
 
-            <EditText
+            <TextView
                 android:id="@+id/resno"
                 android:layout_width="250dp"
                 android:layout_height="50dp"
@@ -279,7 +279,7 @@
                 android:gravity="center"
                 android:text="생년월일 : 2000년 12월 6일" />
 
-            <EditText
+            <TextView
                 android:id="@+id/dpet_ttnm"
                 android:layout_width="250dp"
                 android:layout_height="50dp"
