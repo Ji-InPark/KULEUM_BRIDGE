@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         // 생성자의 파라매터로 id, pwd 를 받는다.
         ApiLoginClass alc = alc = new ApiLoginClass(input_id, input_pwd, this, new CallBack() {
             @Override
-            public void callback(String result) {
+            public void callback_login(String result) {
                 // 유저 정보 저장하는 부분
                 uic.setLoginInfo(result);
 
@@ -103,8 +103,10 @@ public class MainActivity extends AppCompatActivity {
                 {
                     return;
                 }
+            }
 
-
+            @Override
+            public void callback_grade(String result) {
             }
         });
         alc.execute();
