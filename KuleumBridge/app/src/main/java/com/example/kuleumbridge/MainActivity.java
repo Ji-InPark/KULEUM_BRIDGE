@@ -57,10 +57,6 @@ public class MainActivity extends AppCompatActivity {
             public void callback_login(String result) {
                 // 유저 정보 저장하는 부분
                 uic.setLoginInfo(result);
-                System.out.println(uic.getUSER_NM());
-                System.out.println(uic.getUSER_ID());
-                System.out.println(uic.getRESNO());
-                System.out.println(uic.getDEPT_TTNM());
 
                 // GradeAll 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask를 상속한 클래스를 활용해 값을 얻어온다.
                 ApiGradeAllClass agac = new ApiGradeAllClass(uic.getUSER_ID(), new CallBack() {
