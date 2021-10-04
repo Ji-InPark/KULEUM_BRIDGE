@@ -68,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void callback_grade(String result) {
                         uic.setGradeAllInfo(result);
+
+                        // 학생증 정보 수정
+                        editStudentID();
                     }
                 });
                 agac.execute();
@@ -113,8 +116,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
 
-                    // 학생증 정보 수정
-                    editStudentID();
                 }
                 catch (Exception e)
                 {
