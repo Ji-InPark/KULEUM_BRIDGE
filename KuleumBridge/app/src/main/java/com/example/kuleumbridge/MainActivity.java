@@ -6,8 +6,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
@@ -28,12 +30,14 @@ public class MainActivity extends AppCompatActivity {
         uic = new UserInfoClass();
         
         // 자동 로그인 가능할 경우 바로 뷰전환
+        /*
         if(autoLogin())
         {
             System.out.println("auto login success");
             // 뷰 전환 코드
             // 유저 정보 저장 코드
         }
+        */
     }
 
     public void onLoginBtnClick(View view){
@@ -45,115 +49,82 @@ public class MainActivity extends AppCompatActivity {
         // 인터넷 연결은 스레드를 통해서 백그라운드로 돌아가야 하므로(안드로이드 정책) 스레드를 하나 만듦
         // 그 스레드를 상속한 ApiConnetClass 클래스를 만들어서 객체로 사용하기로 함
         // 생성자의 파라매터로 id, pwd 를 받는다.
-        ApiLoginClass alc = new ApiLoginClass(input_id, input_pwd);
-        alc.start();
-        try {
-            alc.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // 로그인 성공 실패 여부 반환
-        try
-        {
-            String res_string = alc.getResult();
-
-            //System.out.println(res_string);
-
-            // 로그인 실패했는지 판단
-            if(res_string.contains("ERRMSGINFO"))
-            {
-                // json으로 받은 에러메세지에서 원하는 부분만 파싱하는 과정
-                JSONObject err_json = new JSONObject(res_string);
-
-                err_json = err_json.getJSONObject("ERRMSGINFO");
-
-                String msg = err_json.getString("ERRMSG");
-
-                // 토스트로 에러메세지 출력
-                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-            }
-            else
-            {
-
-                //★★★★★로그인 성공부분★★★★★
-
-
-                uic.setLoginInfo(res_string);
-
-                /*
-                System.out.println("생년월일: "+loginUserInfo.getRESNO());
-                System.out.println("소속학과: "+loginUserInfo.getDEPT_TTNM());
-                System.out.println("이름: "+loginUserInfo.getUSER_NM());
-                System.out.println("학번: "+loginUserInfo.getUSER_ID());
-                */
-
-                ApiGradeAllClass agac = new ApiGradeAllClass(uic.getUSER_ID());
-                agac.start();
+        ApiLoginClass alc = alc = new ApiLoginClass(input_id, input_pwd, this, new CallBack() {
+            @Override
+            public void callback_login(String result) {
+                // 유저 정보 저장하는 부분
+                uic.setLoginInfo(result);
 
                 try {
-                    agac.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    // 자동 로그인을 위한 로그인 정보 암호화 부분
+                    EncryptClass ec = new EncryptClass(getKey());
+
+                    String ec_id = ec.encrypt(input_id);
+                    String ec_pwd = ec.encrypt(input_pwd);
+
+                    // 암호화된 로그인 정보 저장 부분
+                    SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
+
+                    SharedPreferences.Editor editor = pref.edit();
+
+                    editor.putString("id", ec_id);
+                    editor.putString("pwd", ec_pwd);
+
+                    editor.commit();
+
+                    System.out.println(ec_id);
+
+                    // 뷰 전환 부분
+                    setContentView(R.layout.afterlog);
+                    TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+                    tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                        @Override
+                        public void onTabSelected(TabLayout.Tab tab) {
+                            // tab의 상태가 선택 상태로 변경
+                            int pos = tab.getPosition();
+                            changeView(pos);
+                        }
+
+                        @Override
+                        public void onTabUnselected(TabLayout.Tab tab) {
+                            // tab의 상태가 선택되지 않음으로 변경
+                        }
+
+                        @Override
+                        public void onTabReselected(TabLayout.Tab tab) {
+                            // 이미 선택된 상태의 tab이 사용자에 의해 다시 선택됨
+                        }
+                    });
+
+                    // 학생증 정보 수정
+                    editStudentID();
                 }
-                    String res_string_grade = agac.getResult();
-                    uic.setGradeAllInfo(res_string_grade);
-
-
-
-                /*
-                그다음 자동 로그인을 위한 암호화된 아이디 비밀번호 저장을 구현     -   지인
-
-                최종적으로 뷰 전환      -   민규
-                */
-
-                // 자동 로그인을 위한 로그인 정보 암호화 부분
-                EncryptClass ec = new EncryptClass(getKey());
-
-                String ec_id = ec.encrypt(input_id);
-                String ec_pwd = ec.encrypt(input_pwd);
-
-                // 암호화된 로그인 정보 저장 부분
-                SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
-
-                SharedPreferences.Editor editor = pref.edit();
-
-                editor.putString("id", ec_id);
-                editor.putString("pwd", ec_pwd);
-
-                editor.commit();
-
-                // 유저 정보 저장하는 부분
-                uic.setLoginInfo(res_string);
-
-                // 뷰 전환 부분
-                setContentView(R.layout.afterlog);
-                TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-                tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-                    @Override
-                    public void onTabSelected(TabLayout.Tab tab) {
-                        // tab의 상태가 선택 상태로 변경
-                        int pos = tab.getPosition();
-                        changeView(pos);
-                    }
-
-                    @Override
-                    public void onTabUnselected(TabLayout.Tab tab) {
-                        // tab의 상태가 선택되지 않음으로 변경
-                    }
-
-                    @Override
-                    public void onTabReselected(TabLayout.Tab tab) {
-                        // 이미 선택된 상태의 tab이 사용자에 의해 다시 선택됨
-                    }
-                });
+                catch (Exception e)
+                {
+                    return;
+                }
             }
-        }
-        catch (Exception e)
-        {
 
-        }
+            @Override
+            public void callback_grade(String result) {
+            }
+        });
+        alc.execute();
 
+    }
+
+    // 학생증 정보 수정
+    public void editStudentID()
+    {
+        ImageView img = findViewById(R.id.photo);
+        TextView name = findViewById(R.id.user_nm);
+        TextView birth = findViewById(R.id.resno);
+        TextView major = findViewById(R.id.dpet_ttnm);
+
+        //img.setImageResource("anything");
+        name.setText(uic.getUSER_NM());
+        birth.setText("생년월일: " + uic.getRESNO());
+        major.setText("소속: " + uic.getDEPT_TTNM());
     }
 
     // 자동 로그인 함수
@@ -175,13 +146,8 @@ public class MainActivity extends AppCompatActivity {
             String dc_pwd = ec.decrypt(ec_pwd);
 
             // 복호화된 login 정보를 가지고 login
-            ApiLoginClass alc = new ApiLoginClass(dc_id, dc_pwd);
-            alc.start();
-            try {
-                alc.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            //ApiLoginClass alc = new ApiLoginClass(dc_id, dc_pwd, this);
+            //alc.execute();
 
             return true;
         }

@@ -100,7 +100,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <EditText
                 android:layout_width="300dp"
@@ -249,9 +249,10 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <ImageView
+                android:id="@+id/photo"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_gravity="center"
@@ -260,7 +261,7 @@
 
             </ImageView>
 
-            <EditText
+            <TextView
                 android:id="@+id/user_nm"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
@@ -269,7 +270,7 @@
                 android:gravity="center"
                 android:text="김호준" />
 
-            <EditText
+            <TextView
                 android:id="@+id/resno"
                 android:layout_width="250dp"
                 android:layout_height="50dp"
@@ -278,7 +279,7 @@
                 android:gravity="center"
                 android:text="생년월일 : 2000년 12월 6일" />
 
-            <EditText
+            <TextView
                 android:id="@+id/dpet_ttnm"
                 android:layout_width="250dp"
                 android:layout_height="50dp"

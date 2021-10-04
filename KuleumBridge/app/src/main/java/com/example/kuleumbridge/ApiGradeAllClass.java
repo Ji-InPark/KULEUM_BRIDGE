@@ -1,5 +1,8 @@
 package com.example.kuleumbridge;
 
+import android.os.AsyncTask;
+import android.widget.Toast;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -9,16 +12,33 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class ApiGradeAllClass extends Thread{
+public class ApiGradeAllClass extends AsyncTask<String, String, Boolean> {
     private String std_num, result;
+    private CallBack cb;
 
-    public ApiGradeAllClass(String std_num)
+    public ApiGradeAllClass(String std_num, CallBack cb)
     {
         this.std_num = std_num;
+        this.cb = cb;
     }
 
     @Override
-    public void run() {
+    protected void onPostExecute(Boolean success) {
+        super.onPostExecute(success);
+
+        if(success)
+        {
+            cb.callback_grade(result);
+        }
+        else
+        {
+            return;
+        }
+
+    }
+
+    @Override
+    protected Boolean doInBackground(String... strings) {
         final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
         OkHttpClient client = new OkHttpClient();
@@ -43,10 +63,17 @@ public class ApiGradeAllClass extends Thread{
         try {
             response = client.newCall(request).execute();
             result = response.body().string();
-            return;
+
+            if (result.contains("ERRMSGINFO")) {
+                return false;
+            } else {
+                return true;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        return true;
     }
 
     public String getResult() {
