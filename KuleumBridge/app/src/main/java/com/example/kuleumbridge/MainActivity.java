@@ -138,13 +138,12 @@ public class MainActivity extends AppCompatActivity {
         TextView birth = findViewById(R.id.resno);
         TextView major = findViewById(R.id.dpet_ttnm);
 
-        //img.setImageResource("anything");
         try {
             byte[] encodeByte = Base64.decode(uic.getPHOTO(), Base64.DEFAULT);
             Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
             img.setImageBitmap(bitmap);
         } catch (Exception e) {
-            e.getMessage();
+            e.printStackTrace();
         }
         name.setText(uic.getUSER_NM());
         birth.setText("생년월일: " + uic.getRESNO());
