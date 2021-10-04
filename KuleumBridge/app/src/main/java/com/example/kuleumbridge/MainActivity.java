@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         // 인터넷 연결은 스레드를 통해서 백그라운드로 돌아가야 하므로(안드로이드 정책) 스레드를 하나 만듦
         // 그 스레드를 상속한 ApiConnetClass 클래스를 만들어서 객체로 사용하기로 함
         // 생성자의 파라매터로 id, pwd 를 받는다.
-        ApiLoginClass alc = alc = new ApiLoginClass(input_id, input_pwd, this, new CallBack() {
+        ApiLoginClass alc = new ApiLoginClass(input_id, input_pwd, this, new CallBack() {
             @Override
             public void callback_login(String result) {
                 // 유저 정보 저장하는 부분
