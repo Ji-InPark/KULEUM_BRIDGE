@@ -55,6 +55,19 @@ public class MainActivity extends AppCompatActivity {
                 // 유저 정보 저장하는 부분
                 uic.setLoginInfo(result);
 
+                ApiGradeAllClass agac = new ApiGradeAllClass(uic.getUSER_ID(), new CallBack() {
+                    @Override
+                    public void callback_login(String result) {
+
+                    }
+
+                    @Override
+                    public void callback_grade(String result) {
+                        uic.setGradeAllInfo(result);
+                    }
+                });
+                agac.execute();
+
                 try {
                     // 자동 로그인을 위한 로그인 정보 암호화 부분
                     EncryptClass ec = new EncryptClass(getKey());
