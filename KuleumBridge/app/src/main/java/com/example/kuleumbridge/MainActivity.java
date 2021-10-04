@@ -3,7 +3,10 @@ package com.example.kuleumbridge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -46,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
         String input_id = String.valueOf(et_id.getText());
         String input_pwd = String.valueOf(et_pwd.getText());
 
-        // 인터넷 연결은 스레드를 통해서 백그라운드로 돌아가야 하므로(안드로이드 정책) 스레드를 하나 만듦
-        // 그 스레드를 상속한 ApiConnetClass 클래스를 만들어서 객체로 사용하기로 함
+        // 인터넷 연결은 스레드를 통해서 백그라운드로 돌아가야 하므로(안드로이드 정책) AsyncTask를 사용한다.
+        // 그 AsyncTask를 상속한 ApiConnetClass 클래스를 만들어서 객체로 사용하기로 함
         // 생성자의 파라매터로 id, pwd 를 받는다.
         ApiLoginClass alc = new ApiLoginClass(input_id, input_pwd, this, new CallBack() {
             @Override
@@ -59,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(uic.getRESNO());
                 System.out.println(uic.getDEPT_TTNM());
 
+                // GradeAll 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask를 상속한 클래스를 활용해 값을 얻어온다.
                 ApiGradeAllClass agac = new ApiGradeAllClass(uic.getUSER_ID(), new CallBack() {
                     @Override
                     public void callback_login(String result) {
@@ -139,6 +143,13 @@ public class MainActivity extends AppCompatActivity {
         TextView major = findViewById(R.id.dpet_ttnm);
 
         //img.setImageResource("anything");
+        try {
+            byte[] encodeByte = Base64.decode(uic.getPHOTO(), Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            img.setImageBitmap(bitmap);
+        } catch (Exception e) {
+            e.getMessage();
+        }
         name.setText(uic.getUSER_NM());
         birth.setText("생년월일: " + uic.getRESNO());
         major.setText("소속: " + uic.getDEPT_TTNM());

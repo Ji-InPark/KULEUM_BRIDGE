@@ -60,17 +60,20 @@ public class ApiGradeAllClass extends AsyncTask<String, String, Boolean> {
 
         Response response;
 
-        try {
-            response = client.newCall(request).execute();
-            result = response.body().string();
+        for(int i = 0; i < 5; i++)
+        {
+            try {
+                response = client.newCall(request).execute();
+                result = response.body().string();
 
-            if (result.contains("ERRMSGINFO")) {
-                return false;
-            } else {
-                return true;
+                if (result.contains("ERRMSGINFO")) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
         return true;
