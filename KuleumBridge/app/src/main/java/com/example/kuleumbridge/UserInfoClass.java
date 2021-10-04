@@ -36,9 +36,10 @@ public class UserInfoClass {
         try {
             JSONObject temp = new JSONObject(response_string_grade);
             JSONArray DS_GRAD = temp.getJSONArray("DS_GRAD");
-            System.out.println("길이: " + DS_GRAD.length());
+            System.out.println("JSON배열 DS_GRAD의 길이: " + DS_GRAD.length());
             for (int i = 0; i < DS_GRAD.length(); i++) {
                 JSONObject subject = DS_GRAD.getJSONObject(i);
+
                 grade[i].setYY(subject.getString("YY"));
                 grade[i].setHAKSU_NM(subject.getString("HAKSU_NM"));
                 grade[i].setPOBT_DIV(subject.getString("POBT_DIV"));
@@ -46,6 +47,9 @@ public class UserInfoClass {
                 grade[i].setPNT(subject.getString("PNT"));
                 grade[i].setGRD(subject.getString("GRD"));
                 grade[i].setDETM_CD(subject.getString("DETM_CD"));
+
+
+                //System.out.println("과목 이름 : " + grade[i+1].getHAKSU_NM());
                 /* 세부성적조회 대비해서 일단 학기평균, 전체평균 이외에 모든과목 정보들도 다 끌어오는 형태,
                    학기평균, 전체평균만 쓸 경우 HAKSU_NM 값에 따라 해당 정보들만 끌어오도록 할 예정.*/
             }

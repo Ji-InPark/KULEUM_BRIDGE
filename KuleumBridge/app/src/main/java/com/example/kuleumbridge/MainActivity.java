@@ -54,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
             public void callback_login(String result) {
                 // 유저 정보 저장하는 부분
                 uic.setLoginInfo(result);
+                System.out.println(uic.getUSER_NM());
+                System.out.println(uic.getUSER_ID());
+                System.out.println(uic.getRESNO());
+                System.out.println(uic.getDEPT_TTNM());
 
                 ApiGradeAllClass agac = new ApiGradeAllClass(uic.getUSER_ID(), new CallBack() {
                     @Override
