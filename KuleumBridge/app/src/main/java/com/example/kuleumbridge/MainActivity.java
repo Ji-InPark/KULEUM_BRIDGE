@@ -3,7 +3,10 @@ package com.example.kuleumbridge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -136,6 +139,13 @@ public class MainActivity extends AppCompatActivity {
         TextView major = findViewById(R.id.dpet_ttnm);
 
         //img.setImageResource("anything");
+        try {
+            byte[] encodeByte = Base64.decode(uic.getPHOTO(), Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            img.setImageBitmap(bitmap);
+        } catch (Exception e) {
+            e.getMessage();
+        }
         name.setText(uic.getUSER_NM());
         birth.setText("생년월일: " + uic.getRESNO());
         major.setText("소속: " + uic.getDEPT_TTNM());
