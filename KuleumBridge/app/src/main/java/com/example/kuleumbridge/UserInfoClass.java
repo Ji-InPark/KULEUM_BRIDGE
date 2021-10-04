@@ -14,10 +14,13 @@ public class UserInfoClass {
     String USER_ID;     // 학번
     String PHOTO;       // 사진 URL,
 
-    GradeAllClass[] grade = new GradeAllClass[100];
+    GradeAllClass[] grade;
     //Stack<GradeAllClass> gradeStack = new Stack<GradeAllClass>();
 
-
+    public UserInfoClass()
+    {
+        grade = new GradeAllClass[100];
+    }
 
     public void setLoginInfo(String response_string) {
         try {
@@ -39,6 +42,7 @@ public class UserInfoClass {
             System.out.println("길이: " + DS_GRAD.length());
             for (int i = 0; i < DS_GRAD.length(); i++) {
                 JSONObject subject = DS_GRAD.getJSONObject(i);
+                grade[i] = new GradeAllClass();
                 grade[i].setYY(subject.getString("YY"));
                 grade[i].setHAKSU_NM(subject.getString("HAKSU_NM"));
                 grade[i].setPOBT_DIV(subject.getString("POBT_DIV"));
