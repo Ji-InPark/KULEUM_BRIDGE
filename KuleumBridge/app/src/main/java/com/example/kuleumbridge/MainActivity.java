@@ -79,15 +79,26 @@ public class MainActivity extends AppCompatActivity {
                 //★★★★★로그인 성공부분★★★★★
 
 
-                UserInfoClass loginUserInfo = new UserInfoClass();
-                loginUserInfo.setLoginInfo(res_string);
+                uic.setLoginInfo(res_string);
 
                 /*
-                System.out.println("생년월일"+loginUserInfo.getRESNO());
-                System.out.println("소속학과"+loginUserInfo.getDEPT_TTNM());
-                System.out.println("이름"+loginUserInfo.getUSER_NM());
-                System.out.println("학번"+loginUserInfo.getUSER_ID());
-                 */
+                System.out.println("생년월일: "+loginUserInfo.getRESNO());
+                System.out.println("소속학과: "+loginUserInfo.getDEPT_TTNM());
+                System.out.println("이름: "+loginUserInfo.getUSER_NM());
+                System.out.println("학번: "+loginUserInfo.getUSER_ID());
+                */
+
+                ApiGradeAllClass agac = new ApiGradeAllClass(uic.getUSER_ID());
+                agac.start();
+
+                try {
+                    agac.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                    String res_string_grade = agac.getResult();
+                    uic.setGradeAllInfo(res_string_grade);
+
 
 
                 /*
@@ -179,6 +190,12 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public String getTime() {
+        long mNow;
+        String Day = "";
+        return Day;
     }
 
     public String getKey(){
