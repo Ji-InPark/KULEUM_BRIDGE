@@ -15,6 +15,7 @@ public class UserInfoClass {
     String PHOTO;       // 사진 URL,
 
     GradeAllClass[] grade;
+    int DS_GRAD_length;
     //Stack<GradeAllClass> gradeStack = new Stack<GradeAllClass>();
 
     public UserInfoClass()
@@ -39,7 +40,9 @@ public class UserInfoClass {
         try {
             JSONObject temp = new JSONObject(response_string_grade);
             JSONArray DS_GRAD = temp.getJSONArray("DS_GRAD");
-            System.out.println("길이: " + DS_GRAD.length());
+            setDS_GRAD_length(DS_GRAD.length());
+
+
             for (int i = 0; i < DS_GRAD.length(); i++) {
                 JSONObject subject = DS_GRAD.getJSONObject(i);
                 grade[i] = new GradeAllClass();
@@ -50,10 +53,14 @@ public class UserInfoClass {
                 grade[i].setPNT(subject.getString("PNT"));
                 grade[i].setGRD(subject.getString("GRD"));
                 grade[i].setDETM_CD(subject.getString("DETM_CD"));
+                //System.out.println("과목 이름 : " + grade[i].getHAKSU_NM());
                 /* 세부성적조회 대비해서 일단 학기평균, 전체평균 이외에 모든과목 정보들도 다 끌어오는 형태,
                    학기평균, 전체평균만 쓸 경우 HAKSU_NM 값에 따라 해당 정보들만 끌어오도록 할 예정.*/
             }
             JSONObject dmPhoto = temp.getJSONObject("dmPhoto");
+            setPHOTO(dmPhoto.getString("PHOTO"));
+            System.out.println(PHOTO);
+
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -89,6 +96,10 @@ public class UserInfoClass {
         PHOTO = photo;
     }
 
+    public void setDS_GRAD_length(int ds_grad_length) {
+        DS_GRAD_length = ds_grad_length;
+    }
+
     public String getRESNO() {
         return RESNO;
     }
@@ -107,5 +118,9 @@ public class UserInfoClass {
 
     public String getPHOTO() {
         return PHOTO;
+    }
+
+    public int getDS_GRAD_length() {
+        return DS_GRAD_length;
     }
 }
