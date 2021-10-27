@@ -25,22 +25,18 @@ public class MainActivity extends AppCompatActivity {
      // User의 정보들을 저장할 객체
     UserInfoClass uic;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         uic = new UserInfoClass();
-        
-        // 자동 로그인 가능할 경우 바로 뷰전환
-        /*
+
+        // 자동로그인이 가능하다면
+        // 자동로그인 중에 로딩화면이 돌아야함
         if(autoLogin())
         {
-            System.out.println("auto login success");
-            // 뷰 전환 코드
-            // 유저 정보 저장 코드
+
         }
-        */
     }
 
     public void onLoginBtnClick(View view){
@@ -49,6 +45,13 @@ public class MainActivity extends AppCompatActivity {
         String input_id = String.valueOf(et_id.getText());
         String input_pwd = String.valueOf(et_pwd.getText());
 
+        // 로그인 함수
+        Login(input_id, input_pwd);
+    }
+
+    // 로그인 함수
+    public void Login(String input_id, String input_pwd)
+    {
         // 인터넷 연결은 스레드를 통해서 백그라운드로 돌아가야 하므로(안드로이드 정책) AsyncTask를 사용한다.
         // 그 AsyncTask를 상속한 ApiConnetClass 클래스를 만들어서 객체로 사용하기로 함
         // 생성자의 파라매터로 id, pwd 를 받는다.
@@ -67,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void callback_grade(String result) {
+                        // uic에 얻어온 정보 저장
                         uic.setGradeAllInfo(result);
 
                         // 학생증 정보 수정
@@ -76,6 +80,10 @@ public class MainActivity extends AppCompatActivity {
                 agac.execute();
 
                 try {
+                    //
+                    //  자동로그인 부분은 로그아웃 후 지우는 기능이 추가되어야 함
+                    //
+
                     // 자동 로그인을 위한 로그인 정보 암호화 부분
                     EncryptClass ec = new EncryptClass(getKey());
 
@@ -83,16 +91,19 @@ public class MainActivity extends AppCompatActivity {
                     String ec_pwd = ec.encrypt(input_pwd);
 
                     // 암호화된 로그인 정보 저장 부분
+                    // 이미 암호화된 정보가 있다면 저장 X
                     SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
 
-                    SharedPreferences.Editor editor = pref.edit();
+                    if(!pref.getString("id", "").equals(""))
+                    {
 
-                    editor.putString("id", ec_id);
-                    editor.putString("pwd", ec_pwd);
+                        SharedPreferences.Editor editor = pref.edit();
 
-                    editor.commit();
+                        editor.putString("id", ec_id);
+                        editor.putString("pwd", ec_pwd);
 
-                    System.out.println(ec_id);
+                        editor.commit();
+                    }
 
                     // 뷰 전환 부분
                     setContentView(R.layout.afterlog);
@@ -128,7 +139,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         alc.execute();
-
     }
 
     // 학생증 정보 수정
@@ -170,8 +180,7 @@ public class MainActivity extends AppCompatActivity {
             String dc_pwd = ec.decrypt(ec_pwd);
 
             // 복호화된 login 정보를 가지고 login
-            //ApiLoginClass alc = new ApiLoginClass(dc_id, dc_pwd, this);
-            //alc.execute();
+            Login(dc_id, dc_pwd);
 
             return true;
         }
