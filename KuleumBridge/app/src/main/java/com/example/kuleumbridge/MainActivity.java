@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.login);
         uic = new UserInfoClass();
 
         // 자동로그인이 가능하다면
@@ -35,11 +36,6 @@ public class MainActivity extends AppCompatActivity {
         if(autoLogin())
         {
             // 그냥 넘김
-        }
-        else
-        {
-            // 로그인 화면으로 전환
-            setContentView(R.layout.login);
         }
     }
 
@@ -81,6 +77,13 @@ public class MainActivity extends AppCompatActivity {
 
                         // 학생증 정보 수정
                         editStudentID();
+                    }
+
+                    @Override
+                    public void callback_fail() {
+                        // 연결 실패시 작동
+                        // 애니메이션 동작 중단
+                        // 적정한 화면으로 전환
                     }
                 });
                 agac.execute();
@@ -142,6 +145,13 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void callback_grade(String result) {
+            }
+
+            @Override
+            public void callback_fail() {
+                // 연결 실패시 작동
+                // 애니메이션 동작 중단
+                // 적정한 화면으로 전환
             }
         });
         alc.execute();
