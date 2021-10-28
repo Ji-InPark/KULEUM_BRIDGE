@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         autoLogin();
     }
 
+    // 로그인 버튼이 눌렸을 때
     public void onLoginBtnClick(View view){
         EditText et_id = findViewById(R.id.idInput);
         EditText et_pwd = findViewById(R.id.passwordInput);
@@ -97,9 +98,10 @@ public class MainActivity extends AppCompatActivity {
                     // 이미 암호화된 정보가 있다면 저장 X
                     SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
 
-                    if(!pref.getString("id", "").equals(""))
-                    {
+                    System.out.println(pref.getString("id", "").equals(""));
 
+                    if(pref.getString("id", "").equals(""))
+                    {
                         SharedPreferences.Editor editor = pref.edit();
 
                         editor.putString("id", ec_id);
@@ -167,6 +169,8 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         name.setText(uic.getUSER_NM());
+
+        // 경고를 지우기 위해 string.xml 파일을 만든후 string 처리
         birth.setText(getString(R.string.birth, uic.getRESNO()));
         major.setText(getString(R.string.dept, uic.getDEPT_TTNM()));
 
@@ -180,9 +184,12 @@ public class MainActivity extends AppCompatActivity {
             String ec_id = pref.getString("id", "");
             String ec_pwd = pref.getString("pwd", "");
 
-            // login 파일에 저장된 정보가 없다면 false 리턴
+            // login 파일에 저장된 정보가 없다면 함수 종료
             if(ec_id.equals(""))
+            {
+                System.out.println("로그인 정보가 없다");
                 return;
+            }
 
             EncryptClass ec = new EncryptClass(getKey());
 
@@ -192,7 +199,6 @@ public class MainActivity extends AppCompatActivity {
 
             // 복호화된 login 정보를 가지고 login
             Login(dc_id, dc_pwd);
-
         }
         catch (Exception e)
         {
@@ -213,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 Random rand = new Random();
                 StringBuilder sb = new StringBuilder(key);
+
                 for(int i = 0; i < 16; i++)
                 {
                     sb.append(rand.nextInt(10));
@@ -240,7 +247,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.calender);
     }
 
-
     private void changeView(int index) {
         LinearLayout[] layouts = {
                 (LinearLayout) findViewById(R.id.frag1),
@@ -257,5 +263,6 @@ public class MainActivity extends AppCompatActivity {
             else
                 layouts[i].setVisibility(View.GONE);
         }
+
     }
 }
