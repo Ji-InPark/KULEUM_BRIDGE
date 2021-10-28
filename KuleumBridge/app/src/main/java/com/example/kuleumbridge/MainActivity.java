@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.Calendar;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -250,6 +251,23 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    // 무슨 이유에서인지 모르겠으나 TastePlaceActivity, GradeCheckActivity 클래스를 불러오면 앱이 종료됨
+    // 일단 임시로 캘린더 3개 때려박아놓음. xml파일의 문제는 없음.
+    public void onTastePlaceBtnClick(View view) {
+        //onTastePlaceActivity 실행, 기존 창은 유지.
+        Intent intent = new Intent(this, CalendarActivity.class);
+        startActivity(intent);
+    }
+
+    public void onGradeCheckAcBtnClick(View view) {
+        //GradeCheckActivity 실행, 기존 창은 유지.
+        Intent intent = new Intent(this, CalendarActivity.class);
+        startActivity(intent);
+    }
+
+
+
 
     private void changeView(int index) {
         LinearLayout[] layouts = {
