@@ -37,6 +37,12 @@ public class ApiLoginClass extends AsyncTask<String, String, Boolean> {
 
     @Override
     protected void onPostExecute(Boolean success) {
+        if(success == null)
+        {
+            Toast.makeText(context, "네트워크가 불안정합니다. 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         super.onPostExecute(success);
 
         if(success)

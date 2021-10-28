@@ -59,8 +59,6 @@ public class UserInfoClass {
             }
             JSONObject dmPhoto = temp.getJSONObject("dmPhoto");
             setPHOTO(dmPhoto.getString("PHOTO"));
-            System.out.println(PHOTO);
-
         }catch (Exception e) {
             e.printStackTrace();
         }

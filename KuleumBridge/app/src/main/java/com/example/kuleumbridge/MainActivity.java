@@ -14,11 +14,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
-
-import org.json.JSONObject;
 
 import java.util.Random;
 
@@ -26,34 +23,36 @@ public class MainActivity extends AppCompatActivity {
      // User의 정보들을 저장할 객체
     UserInfoClass uic;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         uic = new UserInfoClass();
-        
-        // 자동 로그인 가능할 경우 바로 뷰전환
-        /*
-        if(autoLogin())
-        {
-            System.out.println("auto login success");
-            // 뷰 전환 코드
-            // 유저 정보 저장 코드
-        }
-        */
+
+        // 자동로그인이 가능하다면
+        // 자동로그인 중에 로딩화면이 돌아야함
+        autoLogin();
     }
 
+    // 로그인 버튼이 눌렸을 때
     public void onLoginBtnClick(View view){
         EditText et_id = findViewById(R.id.idInput);
         EditText et_pwd = findViewById(R.id.passwordInput);
         String input_id = String.valueOf(et_id.getText());
         String input_pwd = String.valueOf(et_pwd.getText());
 
+        // 로그인 함수
+        Login(input_id, input_pwd);
+    }
+
+    // 로그인 함수
+    public void Login(String input_id, String input_pwd)
+    {
         // 인터넷 연결은 스레드를 통해서 백그라운드로 돌아가야 하므로(안드로이드 정책) AsyncTask를 사용한다.
         // 그 AsyncTask를 상속한 ApiConnetClass 클래스를 만들어서 객체로 사용하기로 함
         // 생성자의 파라매터로 id, pwd 를 받는다.
         ApiLoginClass alc = new ApiLoginClass(input_id, input_pwd, this, new CallBack() {
+            // 로그인 과정이 끝나고 실행할 부분
             @Override
             public void callback_login(String result) {
                 // 유저 정보 저장하는 부분
@@ -61,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // GradeAll 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask를 상속한 클래스를 활용해 값을 얻어온다.
                 ApiGradeAllClass agac = new ApiGradeAllClass(uic.getUSER_ID(), new CallBack() {
+                    // 정보를 얻어오는 과정이 끝나고 실행할 부분
                     @Override
                     public void callback_login(String result) {
 
@@ -68,15 +68,27 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void callback_grade(String result) {
+                        // uic에 얻어온 정보 저장
                         uic.setGradeAllInfo(result);
 
                         // 학생증 정보 수정
                         editStudentID();
                     }
+
+                    @Override
+                    public void callback_fail() {
+                        // 연결 실패시 작동
+                        // 애니메이션 동작 중단
+                        // 적정한 화면으로 전환
+                    }
                 });
                 agac.execute();
 
                 try {
+                    //
+                    //  자동로그인 정보는 로그아웃 후 지우는 기능이 추가되어야 함
+                    //
+
                     // 자동 로그인을 위한 로그인 정보 암호화 부분
                     EncryptClass ec = new EncryptClass(getKey());
 
@@ -84,16 +96,20 @@ public class MainActivity extends AppCompatActivity {
                     String ec_pwd = ec.encrypt(input_pwd);
 
                     // 암호화된 로그인 정보 저장 부분
+                    // 이미 암호화된 정보가 있다면 저장 X
                     SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
 
-                    SharedPreferences.Editor editor = pref.edit();
+                    System.out.println(pref.getString("id", "").equals(""));
 
-                    editor.putString("id", ec_id);
-                    editor.putString("pwd", ec_pwd);
+                    if(pref.getString("id", "").equals(""))
+                    {
+                        SharedPreferences.Editor editor = pref.edit();
 
-                    editor.commit();
+                        editor.putString("id", ec_id);
+                        editor.putString("pwd", ec_pwd);
 
-                    System.out.println(ec_id);
+                        editor.apply();
+                    }
 
                     // 뷰 전환 부분
                     setContentView(R.layout.afterlog);
@@ -120,16 +136,22 @@ public class MainActivity extends AppCompatActivity {
                 }
                 catch (Exception e)
                 {
-                    return;
+                    e.printStackTrace();
                 }
             }
 
             @Override
             public void callback_grade(String result) {
             }
+
+            @Override
+            public void callback_fail() {
+                // 연결 실패시 작동
+                // 애니메이션 동작 중단
+                // 적정한 화면으로 전환
+            }
         });
         alc.execute();
-
     }
 
     // 학생증 정보 수정
@@ -148,21 +170,27 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         name.setText(uic.getUSER_NM());
-        birth.setText("생년월일: " + uic.getRESNO());
-        major.setText("소속: " + uic.getDEPT_TTNM());
+
+        // 경고를 지우기 위해 string.xml 파일을 만든후 string 처리
+        birth.setText(getString(R.string.birth, uic.getRESNO()));
+        major.setText(getString(R.string.dept, uic.getDEPT_TTNM()));
+
     }
 
     // 자동 로그인 함수
-    public boolean autoLogin(){
+    public void autoLogin(){
         try {
             SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
 
             String ec_id = pref.getString("id", "");
             String ec_pwd = pref.getString("pwd", "");
 
-            // login 파일에 저장된 정보가 없다면 false 리턴
+            // login 파일에 저장된 정보가 없다면 함수 종료
             if(ec_id.equals(""))
-                return false;
+            {
+                System.out.println("로그인 정보가 없다");
+                return;
+            }
 
             EncryptClass ec = new EncryptClass(getKey());
 
@@ -171,23 +199,14 @@ public class MainActivity extends AppCompatActivity {
             String dc_pwd = ec.decrypt(ec_pwd);
 
             // 복호화된 login 정보를 가지고 login
-            //ApiLoginClass alc = new ApiLoginClass(dc_id, dc_pwd, this);
-            //alc.execute();
-
-            return true;
+            Login(dc_id, dc_pwd);
         }
         catch (Exception e)
         {
             e.printStackTrace();
-            return false;
         }
     }
 
-    public String getTime() {
-        long mNow;
-        String Day = "";
-        return Day;
-    }
 
     public String getKey(){
         try {
@@ -200,17 +219,20 @@ public class MainActivity extends AppCompatActivity {
             if(key.equals(""))
             {
                 Random rand = new Random();
-                key = "";
+                StringBuilder sb = new StringBuilder(key);
+
                 for(int i = 0; i < 16; i++)
                 {
-                    key += rand.nextInt(10);
+                    sb.append(rand.nextInt(10));
                 }
+
+                key = sb.toString();
 
                 SharedPreferences.Editor editor = pref.edit();
 
                 editor.putString("key", key);
 
-                editor.commit();
+                editor.apply();
             }
 
             return key;
@@ -229,14 +251,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onTabSelected(TabLayout.Tab tab) {
-        int pos = tab.getPosition();
-        if (pos == 0) { // 첫 번째 탭 선택.
-
-        }
-    }
-
-
     private void changeView(int index) {
         LinearLayout[] layouts = {
                 (LinearLayout) findViewById(R.id.frag1),
@@ -253,5 +267,6 @@ public class MainActivity extends AppCompatActivity {
             else
                 layouts[i].setVisibility(View.GONE);
         }
+
     }
 }
