@@ -13,11 +13,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
-
-import org.json.JSONObject;
 
 import java.util.Random;
 
@@ -33,10 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         // 자동로그인이 가능하다면
         // 자동로그인 중에 로딩화면이 돌아야함
-        if(autoLogin())
-        {
-            // 그냥 넘김
-        }
+        autoLogin();
     }
 
     public void onLoginBtnClick(View view){
@@ -111,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                         editor.putString("id", ec_id);
                         editor.putString("pwd", ec_pwd);
 
-                        editor.commit();
+                        editor.apply();
                     }
 
                     // 뷰 전환 부분
@@ -139,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 catch (Exception e)
                 {
-                    return;
+                    e.printStackTrace();
                 }
             }
 
@@ -173,12 +167,13 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         name.setText(uic.getUSER_NM());
-        birth.setText("생년월일: " + uic.getRESNO());
-        major.setText("소속: " + uic.getDEPT_TTNM());
+        birth.setText(getString(R.string.birth, uic.getRESNO()));
+        major.setText(getString(R.string.dept, uic.getDEPT_TTNM()));
+
     }
 
     // 자동 로그인 함수
-    public boolean autoLogin(){
+    public void autoLogin(){
         try {
             SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
 
@@ -187,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
 
             // login 파일에 저장된 정보가 없다면 false 리턴
             if(ec_id.equals(""))
-                return false;
+                return;
 
             EncryptClass ec = new EncryptClass(getKey());
 
@@ -198,20 +193,13 @@ public class MainActivity extends AppCompatActivity {
             // 복호화된 login 정보를 가지고 login
             Login(dc_id, dc_pwd);
 
-            return true;
         }
         catch (Exception e)
         {
             e.printStackTrace();
-            return false;
         }
     }
 
-    public String getTime() {
-        long mNow;
-        String Day = "";
-        return Day;
-    }
 
     public String getKey(){
         try {
@@ -224,17 +212,19 @@ public class MainActivity extends AppCompatActivity {
             if(key.equals(""))
             {
                 Random rand = new Random();
-                key = "";
+                StringBuilder sb = new StringBuilder(key);
                 for(int i = 0; i < 16; i++)
                 {
-                    key += rand.nextInt(10);
+                    sb.append(rand.nextInt(10));
                 }
+
+                key = sb.toString();
 
                 SharedPreferences.Editor editor = pref.edit();
 
                 editor.putString("key", key);
 
-                editor.commit();
+                editor.apply();
             }
 
             return key;
@@ -248,13 +238,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void onCalenderBtnClick(View view) {
         setContentView(R.layout.calender);
-    }
-
-    public void onTabSelected(TabLayout.Tab tab) {
-        int pos = tab.getPosition();
-        if (pos == 0) { // 첫 번째 탭 선택.
-
-        }
     }
 
 
