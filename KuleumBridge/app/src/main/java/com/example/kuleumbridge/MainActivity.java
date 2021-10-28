@@ -28,14 +28,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
         uic = new UserInfoClass();
 
         // 자동로그인이 가능하다면
         // 자동로그인 중에 로딩화면이 돌아야함
         if(autoLogin())
         {
-
+            // 그냥 넘김
+        }
+        else
+        {
+            // 로그인 화면으로 전환
+            setContentView(R.layout.login);
         }
     }
 
@@ -56,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         // 그 AsyncTask를 상속한 ApiConnetClass 클래스를 만들어서 객체로 사용하기로 함
         // 생성자의 파라매터로 id, pwd 를 받는다.
         ApiLoginClass alc = new ApiLoginClass(input_id, input_pwd, this, new CallBack() {
+            // 로그인 과정이 끝나고 실행할 부분
             @Override
             public void callback_login(String result) {
                 // 유저 정보 저장하는 부분
@@ -63,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // GradeAll 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask를 상속한 클래스를 활용해 값을 얻어온다.
                 ApiGradeAllClass agac = new ApiGradeAllClass(uic.getUSER_ID(), new CallBack() {
+                    // 정보를 얻어오는 과정이 끝나고 실행할 부분
                     @Override
                     public void callback_login(String result) {
 
@@ -81,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
                     //
-                    //  자동로그인 부분은 로그아웃 후 지우는 기능이 추가되어야 함
+                    //  자동로그인 정보는 로그아웃 후 지우는 기능이 추가되어야 함
                     //
 
                     // 자동 로그인을 위한 로그인 정보 암호화 부분
