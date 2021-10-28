@@ -2,6 +2,7 @@ package com.example.kuleumbridge;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -222,7 +223,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onCalenderBtnClick(View view) {
-        setContentView(R.layout.calender);
+        //CalenderActivity 실행, 기존 창은 유지.
+        Intent intent = new Intent(this, CalendarActivity.class);
+        startActivity(intent);
+
     }
 
     public void onTabSelected(TabLayout.Tab tab) {
