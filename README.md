@@ -41,6 +41,8 @@
 역할 : 개발 총괄, API 개발 및 배포, 자동로그인 기능 구현
 ```
 
+<br/>
+
 <a href="https://github.com/Mingyu0626" target="_blank"><img src="https://img.shields.io/badge/최민규-black?style=flat-square&logo=github&logoColor=white"/></a>
 
 ```swift
@@ -48,12 +50,16 @@
 역할 : 인앱 데이터 처리, 편의성 UX 담당
 ```
 
+<br/>
+
 <a href="https://github.com/wonniiii" target="_blank"><img src="https://img.shields.io/badge/최효원-black?style=flat-square&logo=github&logoColor=white"/></a>
 
 ```swift
 이메일 : sim7480@naver.com
 역할 : 구글 지도 API를 통한 맛집 리스트업 담당
 ```
+
+<br/>
 
 <a href="https://github.com/Kimhojoon1" target="_blank"><img src="https://img.shields.io/badge/김호준-black?style=flat-square&logo=github&logoColor=white"/></a>
 
