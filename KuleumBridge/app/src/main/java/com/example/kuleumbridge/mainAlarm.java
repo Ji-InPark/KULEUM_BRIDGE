@@ -12,7 +12,6 @@ import java.util.Date;
 public class mainAlarm extends Calendar{
     TextView whattodo;
 
-
     public String getTime() {
         long mNow;
         mNow = System.currentTimeMillis();
@@ -22,6 +21,7 @@ public class mainAlarm extends Calendar{
         String Day = mFormat.format(mDate);
         return Day;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         String today = getTime();
@@ -31,8 +31,6 @@ public class mainAlarm extends Calendar{
             setContentView(R.layout.afterlog);
 
             whattodo=(TextView)findViewById(R.id.whattodo);
-
-
 
             String todayfile = "" + userID + today + ".txt";
             String filedata = null;
