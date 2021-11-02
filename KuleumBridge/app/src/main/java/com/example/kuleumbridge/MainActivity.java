@@ -30,8 +30,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.login);
         uic = new UserInfoClass();
 
-        // 자동로그인이 가능하다면
         // 자동로그인 중에 로딩화면이 돌아야함
+        // 자동로그인이 가능하다면 알아서 로딩화면에서 화면전환 될 것이고
+        // 자동로그인이 안된다고하면 로딩화면만 없앰
         autoLogin();
     }
 
