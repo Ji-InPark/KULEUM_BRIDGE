@@ -3,7 +3,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="#23B14D"
-    android:orientation="vertical">
+    android:orientation="vertical" >
+
 
 
     <ImageView
@@ -20,27 +21,30 @@
         android:layout_gravity="center">
 
         <TextView
-            android:id="@+id/calendarView"
+            android:id="@+id/calendarview"
+            android:background="@drawable/calendarview"
             android:layout_width="330dp"
             android:layout_height="170dp"
             android:layout_gravity="center"
-            android:background="@color/white"
             android:gravity="center"
             android:text="@+id/whattodo"
             android:textColor="@color/black"
             android:textSize="20dp"
-        />
+            android:bottomLeftRadius="12dp"
+            android:bottomRightRadius="12dp"
+            android:topLeftRadius="12dp"
+            android:topRightRadius="50dp"/>
+
 
         <Button
-            android:id="@+id/zoomCalendar"
+            android:id="@+id/zoomcalendar"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="300dp"
-            android:layout_marginTop="140dp"
-            android:background="@color/white"
+            android:layout_marginLeft="290dp"
+            android:layout_marginTop="135dp"
+            android:background="@drawable/zoomcalendar"
             android:gravity="center"
             android:onClick="onCalenderBtnClick"
-            android:text="+"
             android:textColor="@color/black" />
 
 
@@ -130,18 +134,18 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/food" />
+                    android:src="@drawable/hansik" />
 
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/food" />
+                    android:src="@drawable/bunsik" />
 
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/food" />
+                    android:src="@drawable/dessert" />
             </TableRow>
 
             <TableRow
@@ -154,18 +158,18 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/food" />
+                    android:src="@drawable/sushi" />
 
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/food" />
+                    android:src="@drawable/hamburger" />
 
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/food" />
+                    android:src="@drawable/asian" />
             </TableRow>
 
             <TableRow
@@ -178,18 +182,18 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/food" />
+                    android:src="@drawable/jjang" />
 
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/food" />
+                    android:src="@drawable/meat" />
 
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/food" />
+                    android:src="@drawable/alchol" />
             </TableRow>
 
 
