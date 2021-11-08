@@ -57,7 +57,7 @@
     <TableLayout
         android:layout_width="380dp"
         android:layout_height="330dp"
-        android:padding="15dp"
+        android:padding="5dp"
         android:layout_gravity="center"
         android:layout_marginTop="15dp">
 
@@ -67,19 +67,41 @@
             android:layout_height="100dp">
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_marginRight="30dp"
-                android:src="@drawable/food"/>
+                android:src="@drawable/hansik"
+                android:text="한식" />
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_marginRight="30dp"
-                android:src="@drawable/food"/>
+                android:src="@drawable/bunsik"/>
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/food"/>
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:src="@drawable/dessert"/>
+       </TableRow>
+        <TableRow
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="30dp">
+
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/sushi"/>
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/hamburger"/>
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:src="@drawable/asian"/>
         </TableRow>
 
         <TableRow
@@ -89,41 +111,19 @@
             android:layout_marginTop="30dp">
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_marginRight="30dp"
-                android:src="@drawable/food"/>
+                android:src="@drawable/jjang"/>
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_marginRight="30dp"
-                android:src="@drawable/food"/>
+                android:src="@drawable/meat"/>
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/food"/>
-        </TableRow>
-
-        <TableRow
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="30dp">
-
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginRight="30dp"
-                android:src="@drawable/food"/>
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginRight="30dp"
-                android:src="@drawable/food"/>
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/food"/>
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:src="@drawable/alchol"/>
         </TableRow>
 
     </TableLayout>

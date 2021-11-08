@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    // 암호화를 위한 key를 불러오는 함수
     public String getKey(){
         try {
             SharedPreferences pref = getSharedPreferences("key",MODE_PRIVATE);
@@ -263,6 +263,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // 성적 보기 버튼 상호작용 함수
     public void onGradeCheckAcBtnClick(View view) {
         //GradeCheckActivity 실행, 기존 창은 유지.
         Intent intent = new Intent(this, GradeCheckActivity.class);
@@ -270,8 +271,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
+    // 탭바 상호작용 함수
     private void changeView(int index) {
         LinearLayout[] layouts = {
                 (LinearLayout) findViewById(R.id.frag1),

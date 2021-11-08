@@ -19,9 +19,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 public class Calendar extends AppCompatActivity{
-
-
-
         public String fname=null;
         public String str=null;
         public CalendarView calendarView;
