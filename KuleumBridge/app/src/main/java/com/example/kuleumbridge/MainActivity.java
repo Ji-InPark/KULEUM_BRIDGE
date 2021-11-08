@@ -20,6 +20,8 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.Calendar;
 import java.util.Random;
 
+// test
+
 public class MainActivity extends AppCompatActivity {
      // User의 정보들을 저장할 객체
     UserInfoClass uic;
