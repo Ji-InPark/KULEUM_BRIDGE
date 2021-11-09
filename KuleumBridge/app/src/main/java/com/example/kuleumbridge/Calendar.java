@@ -75,6 +75,10 @@ public class Calendar extends AppCompatActivity{
             });
         }
 
+        public String sendID(){
+            return this.userID;
+        }
+
         public void  checkDay(int cYear,int cMonth,int cDay,String userID){
             fname=""+userID+cYear+"-"+(cMonth+1)+""+"-"+cDay+".txt";//저장할 파일 이름설정
             FileInputStream fis=null;//FileStream fis 변수

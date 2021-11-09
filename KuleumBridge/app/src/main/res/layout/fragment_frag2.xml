@@ -13,14 +13,21 @@
         android:layout_marginLeft="15dp"
         android:src="@drawable/konkuk_small"/>
 
-    <EditText
+
+    <TextView
+        android:id="@+id/calendarview"
+        android:background="@drawable/calendarview"
         android:layout_width="330dp"
         android:layout_height="170dp"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:background="@color/white"
         android:gravity="center"
-        android:hint="캘린더 창"/>
+        android:text="@+id/whattodo"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:bottomLeftRadius="12dp"
+        android:bottomRightRadius="12dp"
+        android:topLeftRadius="12dp"
+        android:topRightRadius="50dp"/>
 
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
@@ -72,6 +79,7 @@
                 android:layout_marginRight="30dp"
                 android:src="@drawable/hansik"
                 android:text="한식" />
+
             <ImageView
                 android:layout_width="65dp"
                 android:layout_height="65dp"
@@ -82,6 +90,28 @@
                 android:layout_height="65dp"
                 android:src="@drawable/dessert"/>
        </TableRow>
+
+        <TableRow
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:text="한식"
+                android:src="@drawable/gocal"/>
+
+            <ImageView
+                android:layout_height="65px"
+                android:src="@drawable/chicken" />
+
+            <TextView
+                android:text="das"
+                android:textSize="6pt"/>
+        </TableRow>
+
+
         <TableRow
             android:gravity="center"
             android:layout_width="match_parent"
@@ -125,6 +155,9 @@
                 android:layout_height="65dp"
                 android:src="@drawable/alchol"/>
         </TableRow>
+        <TextView>
+            android:text="dldldld"
+        </TextView>
 
     </TableLayout>
 

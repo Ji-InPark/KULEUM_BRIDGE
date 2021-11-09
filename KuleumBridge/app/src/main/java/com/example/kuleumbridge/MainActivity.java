@@ -17,12 +17,16 @@ import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.Calendar;
+import java.io.FileInputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
      // User의 정보들을 저장할 객체
     UserInfoClass uic;
+    TextView whattodo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,8 +117,33 @@ public class MainActivity extends AppCompatActivity {
                         editor.apply();
                     }
 
+
                     // 뷰 전환 부분
                     setContentView(R.layout.afterlog);
+
+
+                    String today=getTime();
+                    whattodo=findViewById(R.id.whattodo); //메인 알림창 텍스트 파일 호출
+                    whattodo.setText("123");
+
+                    Calendar Calendar=new Calendar();
+                    String userID=Calendar.sendID();
+                    String todayfile = "" + userID + today + ".txt";
+                    String filedata = null;
+                    FileInputStream fis = null;//FileStream fis 변수
+                    fis = openFileInput(todayfile);
+
+
+                    byte[] fileData = new byte[fis.available()];
+                    fis.read(fileData);
+                    fis.close();
+
+                    filedata = new String(fileData); //텍스트 파일 판정
+
+
+
+
+
                     TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
                     tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                         @Override
@@ -140,6 +169,15 @@ public class MainActivity extends AppCompatActivity {
                 {
                     e.printStackTrace();
                 }
+            }
+            public String getTime() {//현재 시간 따오기
+                long mNow;
+                mNow = System.currentTimeMillis();
+                Date mDate;
+                mDate = new Date(mNow);
+                SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String Day = mFormat.format(mDate);
+                return Day;
             }
 
             @Override
