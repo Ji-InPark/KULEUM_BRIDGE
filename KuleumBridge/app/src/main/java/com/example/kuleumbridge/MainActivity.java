@@ -22,6 +22,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
+// test
+
 public class MainActivity extends AppCompatActivity {
      // User의 정보들을 저장할 객체
     UserInfoClass uic;
