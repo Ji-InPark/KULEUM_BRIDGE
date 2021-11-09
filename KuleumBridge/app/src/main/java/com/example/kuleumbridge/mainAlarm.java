@@ -12,7 +12,7 @@ import java.util.Date;
 public class mainAlarm extends Calendar{
     TextView whattodo;
 
-    public String getTime() {
+    public static String getTime() {
         long mNow;
         mNow = System.currentTimeMillis();
         Date mDate;

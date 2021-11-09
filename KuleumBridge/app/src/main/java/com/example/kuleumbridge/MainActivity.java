@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,7 +28,7 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
      // User의 정보들을 저장할 객체
     UserInfoClass uic;
-    TextView whattodo;
+    TextView calenderTV;
     CustomProgress customProgress;
 
 
@@ -153,28 +154,32 @@ public class MainActivity extends AppCompatActivity {
 
                     customProgress.dismiss();
 
-                    String today = getTime();
-                    whattodo = findViewById(R.id.whattodo); //메인 알림창 텍스트 파일 호출
-                    whattodo.setText("123");
-
-                    Calendar Calendar = new Calendar();
-                    String userID = Calendar.sendID();
-                    String todayfile = "" + userID + today + ".txt";
+                    calenderTV = findViewById(R.id.calendarview);
+                    mainAlarm mA = new mainAlarm();
+                    String today = mA.getTime();
+                    System.out.println(today);
+                    String userID = mA.sendID(); // sendID()가 null값을 가져옴
+                    String todayfile = "" + userID + today + ".txt"; // "null2021-11-09.txt" 이렇게 저장됨
                     String filedata = null;
                     FileInputStream fis = null;//FileStream fis 변수
-                    fis = openFileInput(todayfile);
+                    fis = openFileInput(todayfile); // todayfile 값이 위처럼 생겼다보니 당연히 안열림.
 
-
+                    /* 당연히 이부분은 파일 오픈에 실패했으므로 정상적으로 수행되지 않음.*/
                     byte[] fileData = new byte[fis.available()];
                     fis.read(fileData);
+                    for (int i = 0; i<fileData.length; i++) {
+                        System.out.print(fileData[i]);
+                    }
                     fis.close();
-
-                    filedata = new String(fileData); //텍스트 파일 판정
+                    filedata = new String(fileData);
+                    //calenderTV.setText(today+"/n"+filedata);
 
                 }
                 catch (Exception e)
                 {
-                    e.printStackTrace();
+                    /* 당일 캘린더 탭에서 저장해놓은 오늘의 할 일이 없을 때 */
+                    mainAlarm temp = new mainAlarm();
+                    calenderTV.setText(temp.getTime()+"\n오늘의 할 일이 존재하지 않습니다.");
                 }
             }
 
@@ -193,16 +198,7 @@ public class MainActivity extends AppCompatActivity {
         alc.execute();
     }
 
-    //현재 시간 가져오기
-    public String getTime() {
-        long mNow;
-        mNow = System.currentTimeMillis();
-        Date mDate;
-        mDate = new Date(mNow);
-        SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String Day = mFormat.format(mDate);
-        return Day;
-    }
+
 
     // 학생증 정보 수정
     public void editStudentID()
