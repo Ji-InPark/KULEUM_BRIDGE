@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
      // User의 정보들을 저장할 객체
     UserInfoClass uic;
     TextView whattodo;
+    CustomProgress customProgress;
 
 
     @Override
@@ -35,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         uic = new UserInfoClass();
+
+        customProgress = new CustomProgress(MainActivity.this);
+
+        customProgress.show();
 
         // 자동로그인 중에 로딩화면이 돌아야함
         // 자동로그인이 가능하다면 알아서 로딩화면에서 화면전환 될 것이고
@@ -48,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         EditText et_pwd = findViewById(R.id.passwordInput);
         String input_id = String.valueOf(et_id.getText());
         String input_pwd = String.valueOf(et_pwd.getText());
+
+        customProgress.show();
 
         // 로그인 함수
         Login(input_id, input_pwd);
@@ -88,6 +95,8 @@ public class MainActivity extends AppCompatActivity {
                         // 연결 실패시 작동
                         // 애니메이션 동작 중단
                         // 적정한 화면으로 전환
+
+                        customProgress.dismiss();
                     }
                 });
                 agac.execute();
@@ -119,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
                         editor.apply();
                     }
 
-
                     // 뷰 전환 부분
                     setContentView(R.layout.afterlog);
 
@@ -143,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
 
-
+                    customProgress.dismiss();
 
                     String today = getTime();
                     whattodo = findViewById(R.id.whattodo); //메인 알림창 텍스트 파일 호출
@@ -179,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
                 // 연결 실패시 작동
                 // 애니메이션 동작 중단
                 // 적정한 화면으로 전환
+                customProgress.dismiss();
             }
         });
         alc.execute();
@@ -230,6 +239,7 @@ public class MainActivity extends AppCompatActivity {
             if(ec_id.equals(""))
             {
                 System.out.println("로그인 정보가 없다");
+                customProgress.dismiss();
                 return;
             }
 
