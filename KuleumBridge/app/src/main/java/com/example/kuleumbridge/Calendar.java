@@ -19,9 +19,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 public class Calendar extends AppCompatActivity{
-
-
-
         public String fname=null;
         public String str=null;
         public CalendarView calendarView;
@@ -76,6 +73,10 @@ public class Calendar extends AppCompatActivity{
 
                 }
             });
+        }
+
+        public String sendID(){
+            return this.userID;
         }
 
         public void  checkDay(int cYear,int cMonth,int cDay,String userID){
