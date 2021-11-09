@@ -27,7 +27,7 @@
             android:layout_height="170dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="@+id/whattodo"
+            android:text="아무것도 없음"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:bottomLeftRadius="12dp"
@@ -148,11 +148,43 @@
                     android:src="@drawable/dessert" />
             </TableRow>
 
+
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="3dp"
                 android:gravity="center">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="30dp"
+                    android:src="@drawable/chicken">
+
+                </ImageView>
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="30dp"
+                    android:src="@drawable/chicken">
+
+                </ImageView>
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/chicken">
+
+                </ImageView>
+            </TableRow>
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="center"
+                android:layout_marginTop="3dp">
 
                 <ImageView
                     android:layout_width="80dp"
@@ -175,7 +207,38 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="3dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="30dp"
+                    android:src="@drawable/chicken">
+
+                </ImageView>
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="30dp"
+                    android:src="@drawable/chicken">
+
+                </ImageView>
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/chicken">
+
+                </ImageView>
+            </TableRow>
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="3dp"
                 android:gravity="center">
 
                 <ImageView
@@ -196,6 +259,35 @@
                     android:src="@drawable/alchol" />
             </TableRow>
 
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="3dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="30dp"
+                    android:src="@drawable/chicken">
+
+                </ImageView>
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="30dp"
+                    android:src="@drawable/chicken">
+
+                </ImageView>
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/chicken">
+
+                </ImageView>
+            </TableRow>
 
             <TableRow
                 android:layout_marginTop="15dp"
