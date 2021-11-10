@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         customProgress = new CustomProgress(MainActivity.this);
 
+        // 로딩 화면 시작
         customProgress.show();
 
         // 자동로그인 중에 로딩화면이 돌아야함
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         String input_id = String.valueOf(et_id.getText());
         String input_pwd = String.valueOf(et_pwd.getText());
 
+        // 로딩 화면 시작
         customProgress.show();
 
         // 로그인 함수
@@ -235,6 +237,7 @@ public class MainActivity extends AppCompatActivity {
             if(ec_id.equals(""))
             {
                 System.out.println("로그인 정보가 없다");
+                // 로딩 화면 중단
                 customProgress.dismiss();
                 return;
             }
