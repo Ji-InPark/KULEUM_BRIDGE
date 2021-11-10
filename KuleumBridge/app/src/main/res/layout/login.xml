@@ -9,12 +9,11 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:src="@drawable/konkuk_biglogo"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        />
+        android:src="@drawable/kuleum" />
 
     <TextView
         android:id="@+id/Konkuk"
@@ -22,17 +21,17 @@
         android:layout_height="30dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="Konkuk University" />
+        android:text="학교생활의 연결, KU:LEUM BRIDGE" />
 
     <EditText
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:id="@+id/idInput"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:textColor="#ff000000"
         android:textColorHint="#808080"
-        android:hint="   ID"
+        android:hint="   PORTAL ID"
         android:windowSoftInputMode="adjustPan"
         android:background="@drawable/edittext_border"
         />

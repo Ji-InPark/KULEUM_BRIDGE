@@ -201,7 +201,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     // 학생증 정보 수정
     public void editStudentID()
     {
@@ -209,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
         TextView name = findViewById(R.id.user_nm);
         TextView birth = findViewById(R.id.resno);
         TextView major = findViewById(R.id.dpet_ttnm);
+
 
         try {
             byte[] encodeByte = Base64.decode(uic.getPHOTO(), Base64.DEFAULT);
