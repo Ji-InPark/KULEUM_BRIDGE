@@ -9,20 +9,19 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:src="@drawable/konkuk"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        />
+        android:src="@drawable/kuleum" />
 
     <TextView
         android:id="@+id/Konkuk"
         android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_height="30dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="Konkuk University" />
+        android:text="학교생활의 연결, KU:LEUM BRIDGE" />
 
     <EditText
         android:layout_marginTop="50dp"
@@ -32,8 +31,10 @@
         android:layout_gravity="center"
         android:textColor="#ff000000"
         android:textColorHint="#808080"
-        android:hint="   ID"
-        android:background="@color/white" />
+        android:hint="   PORTAL ID"
+        android:windowSoftInputMode="adjustPan"
+        android:background="@drawable/edittext_border"
+        />
 
     <EditText
         android:id="@+id/passwordInput"
@@ -44,11 +45,13 @@
         android:textColorHint="#808080"
         android:hint="   Password"
         android:inputType="textPassword"
-        android:background="@color/white" />
+        android:windowSoftInputMode="adjustPan"
+        android:background="@drawable/edittext_border" />
 
     <Button
+        android:layout_marginTop="15dp"
         android:id="@+id/loginButton"
-        android:layout_width="294dp"
+        android:layout_width="280dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
         android:text="Log in"

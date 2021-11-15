@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,18 +18,29 @@ import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.Calendar;
+import java.io.FileInputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
+
+// test
 
 public class MainActivity extends AppCompatActivity {
      // User의 정보들을 저장할 객체
     UserInfoClass uic;
+    TextView calenderTV;
+    CustomProgress customProgress;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         uic = new UserInfoClass();
+
+        customProgress = new CustomProgress(MainActivity.this);
+
+        customProgress.show();
 
         // 자동로그인 중에 로딩화면이 돌아야함
         // 자동로그인이 가능하다면 알아서 로딩화면에서 화면전환 될 것이고
@@ -42,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         EditText et_pwd = findViewById(R.id.passwordInput);
         String input_id = String.valueOf(et_id.getText());
         String input_pwd = String.valueOf(et_pwd.getText());
+
+        customProgress.show();
 
         // 로그인 함수
         Login(input_id, input_pwd);
@@ -82,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
                         // 연결 실패시 작동
                         // 애니메이션 동작 중단
                         // 적정한 화면으로 전환
+
+                        customProgress.dismiss();
                     }
                 });
                 agac.execute();
@@ -115,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // 뷰 전환 부분
                     setContentView(R.layout.afterlog);
+
                     TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
                     tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                         @Override
@@ -135,10 +152,34 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
 
+                    customProgress.dismiss();
+
+                    calenderTV = findViewById(R.id.calendarview);
+                    mainAlarm mA = new mainAlarm();
+                    String today = mA.getTime();
+                    System.out.println(today);
+                    String userID = mA.sendID(); // sendID()가 null값을 가져옴
+                    String todayfile = "" + userID + today + ".txt"; // "null2021-11-09.txt" 이렇게 저장됨
+                    String filedata = null;
+                    FileInputStream fis = null;//FileStream fis 변수
+                    fis = openFileInput(todayfile); // todayfile 값이 위처럼 생겼다보니 당연히 안열림.
+
+                    /* 당연히 이부분은 파일 오픈에 실패했으므로 정상적으로 수행되지 않음.*/
+                    byte[] fileData = new byte[fis.available()];
+                    fis.read(fileData);
+                    for (int i = 0; i<fileData.length; i++) {
+                        System.out.print(fileData[i]);
+                    }
+                    fis.close();
+                    filedata = new String(fileData);
+                    //calenderTV.setText(today+"/n"+filedata);
+
                 }
                 catch (Exception e)
                 {
-                    e.printStackTrace();
+                    /* 당일 캘린더 탭에서 저장해놓은 오늘의 할 일이 없을 때 */
+                    mainAlarm temp = new mainAlarm();
+                    calenderTV.setText(temp.getTime()+"\n오늘의 할 일이 존재하지 않습니다.");
                 }
             }
 
@@ -151,10 +192,12 @@ public class MainActivity extends AppCompatActivity {
                 // 연결 실패시 작동
                 // 애니메이션 동작 중단
                 // 적정한 화면으로 전환
+                customProgress.dismiss();
             }
         });
         alc.execute();
     }
+
 
     // 학생증 정보 수정
     public void editStudentID()
@@ -163,6 +206,7 @@ public class MainActivity extends AppCompatActivity {
         TextView name = findViewById(R.id.user_nm);
         TextView birth = findViewById(R.id.resno);
         TextView major = findViewById(R.id.dpet_ttnm);
+
 
         try {
             byte[] encodeByte = Base64.decode(uic.getPHOTO(), Base64.DEFAULT);
@@ -191,6 +235,7 @@ public class MainActivity extends AppCompatActivity {
             if(ec_id.equals(""))
             {
                 System.out.println("로그인 정보가 없다");
+                customProgress.dismiss();
                 return;
             }
 
@@ -209,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    // 암호화를 위한 key를 불러오는 함수
     public String getKey(){
         try {
             SharedPreferences pref = getSharedPreferences("key",MODE_PRIVATE);
@@ -261,6 +306,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // 성적 보기 버튼 상호작용 함수
     public void onGradeCheckAcBtnClick(View view) {
         //GradeCheckActivity 실행, 기존 창은 유지.
         Intent intent = new Intent(this, GradeCheckActivity.class);
@@ -268,8 +314,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
+    // 탭바 상호작용 함수
     private void changeView(int index) {
         LinearLayout[] layouts = {
                 (LinearLayout) findViewById(R.id.frag1),

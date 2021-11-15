@@ -13,14 +13,21 @@
         android:layout_marginLeft="15dp"
         android:src="@drawable/konkuk_small"/>
 
-    <EditText
+
+    <TextView
+        android:id="@+id/calendarview"
+        android:background="@drawable/calendarview"
         android:layout_width="330dp"
         android:layout_height="170dp"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:background="@color/white"
         android:gravity="center"
-        android:hint="캘린더 창"/>
+        android:text="@+id/whattodo"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:bottomLeftRadius="12dp"
+        android:bottomRightRadius="12dp"
+        android:topLeftRadius="12dp"
+        android:topRightRadius="50dp"/>
 
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
@@ -57,7 +64,7 @@
     <TableLayout
         android:layout_width="380dp"
         android:layout_height="330dp"
-        android:padding="15dp"
+        android:padding="5dp"
         android:layout_gravity="center"
         android:layout_marginTop="15dp">
 
@@ -67,22 +74,64 @@
             android:layout_height="100dp">
 
             <ImageView
-                android:id="@+id/HanSik"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_marginRight="30dp"
-                android:src="@drawable/food"/>
+                android:src="@drawable/hansik"
+                android:text="한식" />
+
             <ImageView
-                android:id="@+id/BunSik"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_marginRight="30dp"
-                android:src="@drawable/food"/>
+                android:src="@drawable/bunsik"/>
             <ImageView
-                android:id="@+id/Cafe"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/food"/>
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:src="@drawable/dessert"/>
+       </TableRow>
+
+        <TableRow
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:text="한식"
+                android:src="@drawable/gocal"/>
+
+            <ImageView
+                android:layout_height="65px"
+                android:src="@drawable/chicken" />
+
+            <TextView
+                android:text="das"
+                android:textSize="6pt"/>
+        </TableRow>
+
+
+        <TableRow
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="30dp">
+
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/sushi"/>
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/hamburger"/>
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:src="@drawable/asian"/>
         </TableRow>
 
         <TableRow
@@ -92,48 +141,23 @@
             android:layout_marginTop="30dp">
 
             <ImageView
-                android:id="@+id/IlSik"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_marginRight="30dp"
-                android:src="@drawable/food"/>
+                android:src="@drawable/jjang"/>
             <ImageView
-                android:id="@+id/FastFood"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_marginRight="30dp"
-                android:src="@drawable/food"/>
+                android:src="@drawable/meat"/>
             <ImageView
-                android:id="@+id/YangSik"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/food"/>
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:src="@drawable/alchol"/>
         </TableRow>
-
-        <TableRow
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="30dp">
-
-            <ImageView
-                android:id="@+id/JungSik"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginRight="30dp"
-                android:src="@drawable/food"/>
-            <ImageView
-                android:id="@+id/Meat"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginRight="30dp"
-                android:src="@drawable/food"/>
-            <ImageView
-                android:id="@+id/Alchol"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/food"/>
-        </TableRow>
+        <TextView>
+            android:text="dldldld"
+        </TextView>
 
     </TableLayout>
 
