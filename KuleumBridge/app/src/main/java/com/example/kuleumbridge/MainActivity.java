@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
@@ -298,8 +299,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    // 무슨 이유에서인지 모르겠으나 TastePlaceActivity, GradeCheckActivity 클래스를 불러오면 앱이 종료됨
-    // 일단 임시로 캘린더 3개 때려박아놓음. xml파일의 문제는 없음.
     public void onTastePlaceBtnClick(View view) {
         //onTastePlaceActivity 실행, 기존 창은 유지.
         Intent intent = new Intent(this, TastePlaceActivity.class);
@@ -311,6 +310,40 @@ public class MainActivity extends AppCompatActivity {
         //GradeCheckActivity 실행, 기존 창은 유지.
         Intent intent = new Intent(this, GradeCheckActivity.class);
         startActivity(intent);
+    }
+
+    public void onSiteBtnClick(View view) {
+        int siteBtnId = view.getId();
+        System.out.println(siteBtnId);
+        switch (siteBtnId) {
+            case 2131230958:
+                Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.kosaf.go.kr/ko/main.do"));
+                startActivity(intent1);
+            case 2131230824:
+                Intent intent2 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.campuz.net/"));
+                startActivity(intent2);
+            case 2131230876:
+                Intent intent3 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.detizen.com/"));
+                startActivity(intent3);
+            case 2131231222:
+                Intent intent4 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://cafe.naver.com/dokchi/485362"));
+                startActivity(intent4);
+            case 2131231223:
+                Intent intent5 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.dreamspon.com/"));
+                startActivity(intent5);
+            case 2131231224:
+                Intent intent6 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://linkareer.com/"));
+                startActivity(intent6);
+            case 2131231225:
+                Intent intent7 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.thinkcontest.com/"));
+                startActivity(intent7);
+            case 2131231226:
+                Intent intent8 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://cafe.naver.com/specup"));
+                startActivity(intent8);
+            case 2131231227:
+                Intent intent9 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.wevity.com/"));
+                startActivity(intent9);
+        }
     }
 
 

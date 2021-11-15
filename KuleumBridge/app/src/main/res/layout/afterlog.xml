@@ -104,7 +104,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <EditText
                 android:layout_width="300dp"
@@ -393,29 +393,39 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp"
                 android:gravity="center">
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/kosaf"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/janghak" />
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/janghak"
+                    android:onClick="onSiteBtnClick"/>
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/campuz"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/campuz" />
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/campuz"
+                    android:onClick="onSiteBtnClick"/>
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/detizen"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/detizen" />
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/detizen"
+                    android:onClick="onSiteBtnClick"/>
             </TableRow>
 
             <TableRow
@@ -424,22 +434,31 @@
                 android:layout_marginTop="30dp"
                 android:gravity="center">
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/dok"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/dok" />
+                    android:src="@drawable/dok"
+                    android:scaleType="fitCenter"
+                    android:onClick="onSiteBtnClick"/>
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/dreamspawn"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/dreamspawn" />
+                    android:src="@drawable/dreamspawn"
+                    android:scaleType="fitCenter"
+                    android:onClick="onSiteBtnClick"/>
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/lingcar"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/lingcar" />
+                    android:src="@drawable/lingcar"
+                    android:scaleType="fitCenter"
+                    android:onClick="onSiteBtnClick"/>
             </TableRow>
 
             <TableRow
@@ -448,22 +467,31 @@
                 android:layout_marginTop="30dp"
                 android:gravity="center">
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/singgood"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/singgood" />
+                    android:src="@drawable/singgood"
+                    android:scaleType="fitCenter"
+                    android:onClick="onSiteBtnClick"/>
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/specup"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/specup" />
+                    android:src="@drawable/specup"
+                    android:scaleType="fitCenter"
+                    android:onClick="onSiteBtnClick"/>
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/webiti"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/webiti" />
+                    android:src="@drawable/webiti"
+                    android:scaleType="fitCenter"
+                    android:onClick="onSiteBtnClick"/>
             </TableRow>
 
         </TableLayout>
