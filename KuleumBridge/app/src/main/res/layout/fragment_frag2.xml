@@ -67,16 +67,19 @@
             android:layout_height="100dp">
 
             <ImageView
+                android:id="@+id/HanSik"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginRight="30dp"
                 android:src="@drawable/food"/>
             <ImageView
+                android:id="@+id/BunSik"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginRight="30dp"
                 android:src="@drawable/food"/>
             <ImageView
+                android:id="@+id/Cafe"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/food"/>
@@ -89,16 +92,19 @@
             android:layout_marginTop="30dp">
 
             <ImageView
+                android:id="@+id/IlSik"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginRight="30dp"
                 android:src="@drawable/food"/>
             <ImageView
+                android:id="@+id/FastFood"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginRight="30dp"
                 android:src="@drawable/food"/>
             <ImageView
+                android:id="@+id/YangSik"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/food"/>
@@ -111,16 +117,19 @@
             android:layout_marginTop="30dp">
 
             <ImageView
+                android:id="@+id/JungSik"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginRight="30dp"
                 android:src="@drawable/food"/>
             <ImageView
+                android:id="@+id/Meat"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginRight="30dp"
                 android:src="@drawable/food"/>
             <ImageView
+                android:id="@+id/Alchol"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/food"/>
