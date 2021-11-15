@@ -64,10 +64,10 @@ public class ApiLoginClass extends AsyncTask<String, String, Boolean> {
                 // 토스트로 에러메세지 출력
                 Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 
+                cb.callback_fail();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
 
         }
     }

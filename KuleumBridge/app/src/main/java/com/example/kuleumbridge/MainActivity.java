@@ -153,18 +153,30 @@ public class MainActivity extends AppCompatActivity {
                     // 로딩 애니메이션 종료
                     customProgress.dismiss();
 
-                    // 작은 캘린더에 출력하는 부분
                     calenderTV = findViewById(R.id.calendarview);
                     mainAlarm mA = new mainAlarm();
                     String today = mA.getTime();
                     System.out.println(today);
+                    String todayfile = today + ".txt"; // "2021-11-09.txt" 이렇게 저장됨
 
-                    pref = getSharedPreferences(today ,MODE_PRIVATE); // 날짜를 기준으로 여는 것
+                    pref = getSharedPreferences("login",MODE_PRIVATE);
 
-                    String fileData = pref.getString("input", "오늘 할 일이 존재하지 않습니다."); // fileData 변수에 저장된 것을 저장
 
-                    calenderTV.setText(today + "\n" + fileData); // 로그인 후 작은 캘린더 화면에 출력
 
+                    /*
+                    String filedata = null;
+                    FileInputStream fis = null;//FileStream fis 변수
+                    fis = openFileInput(todayfile); // todayfile 값이 위처럼 생겼다보니 당연히 안열림.
+
+                    // 당연히 이부분은 파일 오픈에 실패했으므로 정상적으로 수행되지 않음.
+                    byte[] fileData = new byte[fis.available()];
+                    fis.read(fileData);
+                    for (int i = 0; i<fileData.length; i++) {
+                        System.out.print(fileData[i]);
+                    }
+                    fis.close();
+                    //calenderTV.setText(today+"/n"+filedata);
+                    */
                 }
                 catch (Exception e)
                 {
@@ -303,37 +315,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSiteBtnClick(View view) {
-        int siteBtnId = view.getId();
-        System.out.println(siteBtnId);
-        switch (siteBtnId) {
-            case 2131230958:
-                Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.kosaf.go.kr/ko/main.do"));
-                startActivity(intent1);
-            case 2131230824:
-                Intent intent2 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.campuz.net/"));
-                startActivity(intent2);
-            case 2131230876:
-                Intent intent3 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.detizen.com/"));
-                startActivity(intent3);
-            case 2131231222:
-                Intent intent4 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://cafe.naver.com/dokchi/485362"));
-                startActivity(intent4);
-            case 2131231223:
-                Intent intent5 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.dreamspon.com/"));
-                startActivity(intent5);
-            case 2131231224:
-                Intent intent6 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://linkareer.com/"));
-                startActivity(intent6);
-            case 2131231225:
-                Intent intent7 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.thinkcontest.com/"));
-                startActivity(intent7);
-            case 2131231226:
-                Intent intent8 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://cafe.naver.com/specup"));
-                startActivity(intent8);
-            case 2131231227:
-                Intent intent9 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.wevity.com/"));
-                startActivity(intent9);
-        }
     }
 
 
