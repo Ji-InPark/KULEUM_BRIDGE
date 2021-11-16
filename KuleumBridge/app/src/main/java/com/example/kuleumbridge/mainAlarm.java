@@ -1,10 +1,8 @@
 package com.example.kuleumbridge;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,7 +10,7 @@ import java.util.Date;
 public class mainAlarm extends Calendar{
     TextView whattodo;
 
-    public static String getTime() {
+    public String getTime() {
         long mNow;
         mNow = System.currentTimeMillis();
         Date mDate;
@@ -30,7 +28,7 @@ public class mainAlarm extends Calendar{
             super.onCreate(savedInstanceState);
             setContentView(R.layout.afterlog);
 
-            whattodo=(TextView)findViewById(R.id.whattodo);
+            whattodo=(TextView)findViewById(R.id.calendarView);
 
             String todayfile = "" + userID + today + ".txt";
             String filedata = null;

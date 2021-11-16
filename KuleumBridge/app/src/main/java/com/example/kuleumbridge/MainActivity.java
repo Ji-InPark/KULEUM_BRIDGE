@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -19,7 +18,6 @@ import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 
-import java.io.FileInputStream;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -131,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
                     // 뷰 전환 부분
                     setContentView(R.layout.afterlog);
 
-                    TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+                    TabLayout tabLayout = findViewById(R.id.tab_layout);
                     tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                         @Override
                         public void onTabSelected(TabLayout.Tab tab) {
@@ -303,57 +301,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSiteBtnClick(View view) {
-        int siteBtnId = view.getId();
-        System.out.println(siteBtnId);
-        Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.kosaf.go.kr/ko/main.do"));
-        Intent intent2 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.campuz.net/"));
-        Intent intent3 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.detizen.com/"));
-        Intent intent4 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://cafe.naver.com/dokchi/485362"));
-        Intent intent5 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.dreamspon.com/"));
-        Intent intent6 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://linkareer.com/"));
-        Intent intent7 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.thinkcontest.com/"));
-        Intent intent8 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://cafe.naver.com/specup"));
-        Intent intent9 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.wevity.com/"));
-        switch (siteBtnId) {
-            case 2131230960:
-                startActivity(intent1);
-                break;
-            case 2131230824:
-                startActivity(intent2);
-                break;
-            case 2131230876:
-                startActivity(intent3);
-                break;
-            case 2131230886:
-                startActivity(intent4);
-                break;
-            case 2131230896:
-                startActivity(intent5);
-                break;
-            case 2131230969:
-                startActivity(intent6);
-                break;
-            case 2131231112:
-                startActivity(intent7);
-                break;
-            case 2131231123:
-                startActivity(intent8);
-                break;
-            case 2131231216:
-                startActivity(intent9);
-                break;
-        }
+        String uri = view.getResources().getResourceEntryName(view.getId());    // id의 String을 그대로 가져오는 구문
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));         // intent 만들고
+        startActivity(intent);                                                  // 실행
     }
 
 
     // 탭바 상호작용 함수
     private void changeView(int index) {
         LinearLayout[] layouts = {
-                (LinearLayout) findViewById(R.id.frag1),
-                (TableLayout) findViewById(R.id.frag2),
-                (LinearLayout) findViewById(R.id.frag3),
-                (LinearLayout) findViewById(R.id.frag4),
-                (TableLayout) findViewById(R.id.frag5)
+                findViewById(R.id.frag1),
+                findViewById(R.id.frag2),
+                findViewById(R.id.frag3),
+                findViewById(R.id.frag4),
+                findViewById(R.id.frag5)
         };
 
         for(int i = 0; i < 5; i++)
