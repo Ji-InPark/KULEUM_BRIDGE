@@ -10,6 +10,7 @@ import java.util.Date;
 public class mainAlarm extends Calendar{
     TextView whattodo;
 
+    // 시간을 불러오는 함수
     public String getTime() {
         long mNow;
         mNow = System.currentTimeMillis();

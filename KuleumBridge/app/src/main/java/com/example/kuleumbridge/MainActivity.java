@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
@@ -33,14 +32,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.login);
         uic = new UserInfoClass();
 
+        // 로딩화면을 위한 객체
         customProgress = new CustomProgress(MainActivity.this);
 
         // 로딩 화면 시작
         customProgress.show();
 
-        // 자동로그인 중에 로딩화면이 돌아야함
-        // 자동로그인이 가능하다면 알아서 로딩화면에서 화면전환 될 것이고
-        // 자동로그인이 안된다고하면 로딩화면만 없앰
+        // 자동로그인
         autoLogin();
     }
 
@@ -152,16 +150,8 @@ public class MainActivity extends AppCompatActivity {
                     // 로딩 애니메이션 종료
                     customProgress.dismiss();
 
-                    calenderTV = findViewById(R.id.calendarview);
-                    mainAlarm mA = new mainAlarm();
-                    String today = mA.getTime();
-                    System.out.println(today);
-
-                    pref = getSharedPreferences(today ,MODE_PRIVATE); // 날짜를 기준으로 여는 것
-
-                    String fileData = pref.getString("input", "오늘 할 일이 존재하지 않습니다."); // fileData 변수에 저장된 것을 저장
-
-                    calenderTV.setText(today + "\n" + fileData); // 로그인 후 작은 캘린더 화면에 출력
+                    // 작은 캘린더 글 불러오기 함수
+                    setCalenderText();
 
                 }
                 catch (Exception e)
@@ -186,6 +176,20 @@ public class MainActivity extends AppCompatActivity {
         alc.execute();
     }
 
+    // 작은 캘린더 화면 글 불러오기 함수
+    public void setCalenderText()
+    {
+        calenderTV = findViewById(R.id.calendarview);
+        mainAlarm mA = new mainAlarm();
+        String today = mA.getTime();
+        System.out.println(today);
+
+        SharedPreferences pref = getSharedPreferences(today ,MODE_PRIVATE); // 날짜를 기준으로 여는 것
+
+        String fileData = pref.getString("input", "오늘 할 일이 존재하지 않습니다."); // fileData 변수에 저장된 것을 저장
+
+        calenderTV.setText(today + "\n" + fileData); // 로그인 후 작은 캘린더 화면에 출력
+    }
 
     // 학생증 정보 수정
     public void editStudentID()
@@ -205,8 +209,10 @@ public class MainActivity extends AppCompatActivity {
         }
         name.setText(uic.getUSER_NM());
 
+
+
         // 경고를 지우기 위해 string.xml 파일을 만든후 string 처리
-        birth.setText(getString(R.string.birth, uic.getRESNO()));
+        birth.setText(getString(R.string.userid, uic.getUSER_ID()));
         major.setText(getString(R.string.dept, uic.getDEPT_TTNM()));
 
     }
@@ -280,6 +286,7 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
+    // 캘린더 버튼 상호작용 함수
     public void onCalenderBtnClick(View view) {
         //CalenderActivity 실행, 기존 창은 유지.
         Intent intent = new Intent(this, CalendarActivity.class);
@@ -287,6 +294,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // 맛 버튼 상호작용 함수
     public void onTastePlaceBtnClick(View view) {
         //onTastePlaceActivity 실행, 기존 창은 유지.
         Intent intent = new Intent(this, TastePlaceActivity.class);
@@ -300,6 +308,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // 관련 링크 버튼 상호작용 함수
     public void onSiteBtnClick(View view) {
         String uri = view.getResources().getResourceEntryName(view.getId());    // id의 String을 그대로 가져오는 구문
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));         // intent 만들고
