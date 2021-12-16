@@ -97,6 +97,30 @@ public class MainActivity extends AppCompatActivity {
                 });
                 agac.execute();
 
+                // GradeNow 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask를 상속한 클래스를 활요해 값을 얻어온다.
+                ApiGradeNowClass agnc = new ApiGradeNowClass(uic.getUSER_ID(), new CallBack() {
+                    @Override
+                    public void callback_login(String result) {
+
+                    }
+
+                    @Override
+                    public void callback_grade(String result) {
+                        // uic에 얻어온 정보 저장
+                        uic.setGradeNowInfo(result);
+                    }
+
+                    @Override
+                    public void callback_fail() {
+                        // 연결 실패시 작동
+                        // 애니메이션 동작 중단
+                        // 적정한 화면으로 전환
+
+                        customProgress.dismiss();
+                    }
+                });
+                agnc.execute();
+
                 try {
                     //
                     //  자동로그인 정보는 로그아웃 후 지우는 기능이 추가되어야 함

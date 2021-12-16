@@ -67,6 +67,32 @@ public class UserInfoClass {
         }
     }
 
+    public void setGradeNowInfo(String response_string_grade) {
+        try {
+            JSONObject temp = new JSONObject(response_string_grade);
+            JSONArray DS_GRADEOFSTUDENT = temp.getJSONArray("DS_GRADEOFSTUDENT");
+            setDS_GRAD_length(DS_GRADEOFSTUDENT.length());
+
+            for (int i = 0; i < DS_GRADEOFSTUDENT.length(); i++) {
+                JSONObject subject = DS_GRADEOFSTUDENT.getJSONObject(i);
+                grade_now[i] = new Grade();
+                grade_now[i].setYY(subject.getString("YY"));
+                grade_now[i].setHAKSU_NM(subject.getString("HAKSU_NM"));
+                grade_now[i].setPOBT_DIV(subject.getString("POBT_DIV"));
+                grade_now[i].setSHTM_NM(subject.getString("SHTM_NM"));
+                grade_now[i].setPNT(subject.getString("PNT"));
+                grade_now[i].setGRD(subject.getString("GRD"));
+                grade_now[i].setDETM_CD(subject.getString("DETM_CD"));
+                grade_now[i].setSHTM(subject.getString("SHTM"));
+                //System.out.println("과목 이름 : " + grade[i].getHAKSU_NM());
+                /* 세부성적조회 대비해서 일단 학기평균, 전체평균 이외에 모든과목 정보들도 다 끌어오는 형태,
+                   학기평균, 전체평균만 쓸 경우 HAKSU_NM 값에 따라 해당 정보들만 끌어오도록 할 예정.*/
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void checkSemesterGrade(Grade[] grc) {
         for (int i = 0; i < grade_all.length; i++) {
             if (grade_all[i].getHAKSU_NM().equals("평점평균")) {
