@@ -156,9 +156,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 catch (Exception e)
                 {
-                    /* 당일 캘린더 탭에서 저장해놓은 오늘의 할 일이 없을 때 */
-                    mainAlarm temp = new mainAlarm();
-                    calenderTV.setText(temp.getTime()+"\n오늘의 할 일이 존재하지 않습니다.");
                 }
             }
 
@@ -184,11 +181,11 @@ public class MainActivity extends AppCompatActivity {
         String today = mA.getTime();
         System.out.println(today);
 
-        SharedPreferences pref = getSharedPreferences(today ,MODE_PRIVATE); // 날짜를 기준으로 여는 것
+        SharedPreferences pref = getSharedPreferences(today ,MODE_PRIVATE);                 // 날짜를 기준으로 여는 것
 
-        String fileData = pref.getString("input", "오늘 할 일이 존재하지 않습니다."); // fileData 변수에 저장된 것을 저장
+        String fileData = pref.getString("input", "오늘 할 일이 존재하지 않습니다.");      // fileData 변수에 저장된 것을 저장
 
-        calenderTV.setText(today + "\n" + fileData); // 로그인 후 작은 캘린더 화면에 출력
+        calenderTV.setText(getString(R.string.calender, today, fileData));                  // 로그인 후 작은 캘린더 화면에 출력
     }
 
     // 학생증 정보 수정
@@ -196,10 +193,10 @@ public class MainActivity extends AppCompatActivity {
     {
         ImageView img = findViewById(R.id.photo);
         TextView name = findViewById(R.id.user_nm);
-        TextView birth = findViewById(R.id.resno);
+        TextView user_id = findViewById(R.id.user_id);
         TextView major = findViewById(R.id.dpet_ttnm);
 
-
+        // base64로 인코딩 된 이미지 파일을 디코딩 하는 과정
         try {
             byte[] encodeByte = Base64.decode(uic.getPHOTO(), Base64.DEFAULT);
             Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
@@ -209,10 +206,8 @@ public class MainActivity extends AppCompatActivity {
         }
         name.setText(uic.getUSER_NM());
 
-
-
         // 경고를 지우기 위해 string.xml 파일을 만든후 string 처리
-        birth.setText(getString(R.string.userid, uic.getUSER_ID()));
+        user_id.setText(getString(R.string.userid, uic.getUSER_ID()));
         major.setText(getString(R.string.dept, uic.getDEPT_TTNM()));
 
     }

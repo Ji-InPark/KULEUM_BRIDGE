@@ -2,4 +2,5 @@
 <resources>
     <string name="userid">학번: %s</string>
     <string name="dept">소속: %s</string>
+    <string name="calender">%s\n%s</string>
 </resources>
