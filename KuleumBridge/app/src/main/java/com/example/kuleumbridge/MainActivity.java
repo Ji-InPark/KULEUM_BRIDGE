@@ -303,9 +303,19 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onSiteBtnClick(View view) {
-        int siteBtnId = view.getId();
-        System.out.println(siteBtnId);
+    public void onSiteBtnClick(int index) {
+        ImageButton[] imgBtn = {
+                (ImageButton)findViewById(R.id.kosaf),
+                (ImageButton)findViewById(R.id.campuz),
+                (ImageButton)findViewById(R.id.detizen),
+                (ImageButton)findViewById(R.id.dok),
+                (ImageButton)findViewById(R.id.dreamspawn),
+                (ImageButton)findViewById(R.id.lingcar),
+                (ImageButton)findViewById(R.id.singgood),
+                (ImageButton)findViewById(R.id.specup),
+                (ImageButton)findViewById(R.id.webiti)
+        };
+
         Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.kosaf.go.kr/ko/main.do"));
         Intent intent2 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.campuz.net/"));
         Intent intent3 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.detizen.com/"));
@@ -315,35 +325,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent7 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.thinkcontest.com/"));
         Intent intent8 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://cafe.naver.com/specup"));
         Intent intent9 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.wevity.com/"));
-        switch (siteBtnId) {
-            case 2131230960:
-                startActivity(intent1);
-                break;
-            case 2131230824:
-                startActivity(intent2);
-                break;
-            case 2131230876:
-                startActivity(intent3);
-                break;
-            case 2131230886:
-                startActivity(intent4);
-                break;
-            case 2131230896:
-                startActivity(intent5);
-                break;
-            case 2131230969:
-                startActivity(intent6);
-                break;
-            case 2131231112:
-                startActivity(intent7);
-                break;
-            case 2131231123:
-                startActivity(intent8);
-                break;
-            case 2131231216:
-                startActivity(intent9);
-                break;
-        }
     }
 
 
