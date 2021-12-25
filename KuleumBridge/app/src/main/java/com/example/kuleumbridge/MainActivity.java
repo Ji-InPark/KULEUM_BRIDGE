@@ -6,24 +6,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 
-import java.io.FileInputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Random;
-
-// test
 
 public class MainActivity extends AppCompatActivity {
      // User의 정보들을 저장할 객체
@@ -38,13 +32,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.login);
         uic = new UserInfoClass();
 
+        // 로딩화면을 위한 객체
         customProgress = new CustomProgress(MainActivity.this);
 
+        // 로딩 화면 시작
         customProgress.show();
 
-        // 자동로그인 중에 로딩화면이 돌아야함
-        // 자동로그인이 가능하다면 알아서 로딩화면에서 화면전환 될 것이고
-        // 자동로그인이 안된다고하면 로딩화면만 없앰
+        // 자동로그인
         autoLogin();
     }
 
@@ -55,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         String input_id = String.valueOf(et_id.getText());
         String input_pwd = String.valueOf(et_pwd.getText());
 
+        // 로딩 화면 시작
         customProgress.show();
 
         // 로그인 함수
@@ -102,6 +97,30 @@ public class MainActivity extends AppCompatActivity {
                 });
                 agac.execute();
 
+                // GradeNow 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask를 상속한 클래스를 활요해 값을 얻어온다.
+                ApiGradeNowClass agnc = new ApiGradeNowClass(uic.getUSER_ID(), new CallBack() {
+                    @Override
+                    public void callback_login(String result) {
+
+                    }
+
+                    @Override
+                    public void callback_grade(String result) {
+                        // uic에 얻어온 정보 저장
+                        uic.setGradeNowInfo(result);
+                    }
+
+                    @Override
+                    public void callback_fail() {
+                        // 연결 실패시 작동
+                        // 애니메이션 동작 중단
+                        // 적정한 화면으로 전환
+
+                        customProgress.dismiss();
+                    }
+                });
+                agnc.execute();
+
                 try {
                     //
                     //  자동로그인 정보는 로그아웃 후 지우는 기능이 추가되어야 함
@@ -132,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                     // 뷰 전환 부분
                     setContentView(R.layout.afterlog);
 
-                    TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+                    TabLayout tabLayout = findViewById(R.id.tab_layout);
                     tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                         @Override
                         public void onTabSelected(TabLayout.Tab tab) {
@@ -152,34 +171,15 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
 
+                    // 로딩 애니메이션 종료
                     customProgress.dismiss();
 
-                    calenderTV = findViewById(R.id.calendarview);
-                    mainAlarm mA = new mainAlarm();
-                    String today = mA.getTime();
-                    System.out.println(today);
-                    String userID = mA.sendID(); // sendID()가 null값을 가져옴
-                    String todayfile = "" + userID + today + ".txt"; // "null2021-11-09.txt" 이렇게 저장됨
-                    String filedata = null;
-                    FileInputStream fis = null;//FileStream fis 변수
-                    fis = openFileInput(todayfile); // todayfile 값이 위처럼 생겼다보니 당연히 안열림.
-
-                    /* 당연히 이부분은 파일 오픈에 실패했으므로 정상적으로 수행되지 않음.*/
-                    byte[] fileData = new byte[fis.available()];
-                    fis.read(fileData);
-                    for (int i = 0; i<fileData.length; i++) {
-                        System.out.print(fileData[i]);
-                    }
-                    fis.close();
-                    filedata = new String(fileData);
-                    //calenderTV.setText(today+"/n"+filedata);
+                    // 작은 캘린더 글 불러오기 함수
+                    setCalenderText();
 
                 }
                 catch (Exception e)
                 {
-                    /* 당일 캘린더 탭에서 저장해놓은 오늘의 할 일이 없을 때 */
-                    mainAlarm temp = new mainAlarm();
-                    calenderTV.setText(temp.getTime()+"\n오늘의 할 일이 존재하지 않습니다.");
                 }
             }
 
@@ -191,23 +191,36 @@ public class MainActivity extends AppCompatActivity {
             public void callback_fail() {
                 // 연결 실패시 작동
                 // 애니메이션 동작 중단
-                // 적정한 화면으로 전환
                 customProgress.dismiss();
             }
         });
         alc.execute();
     }
 
+    // 작은 캘린더 화면 글 불러오기 함수
+    public void setCalenderText()
+    {
+        calenderTV = findViewById(R.id.calendarview);
+        mainAlarm mA = new mainAlarm();
+        String today = mA.getTime();
+        System.out.println(today);
+
+        SharedPreferences pref = getSharedPreferences(today ,MODE_PRIVATE);                 // 날짜를 기준으로 여는 것
+
+        String fileData = pref.getString("input", "오늘 할 일이 존재하지 않습니다.");      // fileData 변수에 저장된 것을 저장
+
+        calenderTV.setText(getString(R.string.calender, today, fileData));                  // 로그인 후 작은 캘린더 화면에 출력
+    }
 
     // 학생증 정보 수정
     public void editStudentID()
     {
         ImageView img = findViewById(R.id.photo);
         TextView name = findViewById(R.id.user_nm);
-        TextView birth = findViewById(R.id.resno);
+        TextView user_id = findViewById(R.id.user_id);
         TextView major = findViewById(R.id.dpet_ttnm);
 
-
+        // base64로 인코딩 된 이미지 파일을 디코딩 하는 과정
         try {
             byte[] encodeByte = Base64.decode(uic.getPHOTO(), Base64.DEFAULT);
             Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
@@ -218,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
         name.setText(uic.getUSER_NM());
 
         // 경고를 지우기 위해 string.xml 파일을 만든후 string 처리
-        birth.setText(getString(R.string.birth, uic.getRESNO()));
+        user_id.setText(getString(R.string.userid, uic.getUSER_ID()));
         major.setText(getString(R.string.dept, uic.getDEPT_TTNM()));
 
     }
@@ -235,6 +248,7 @@ public class MainActivity extends AppCompatActivity {
             if(ec_id.equals(""))
             {
                 System.out.println("로그인 정보가 없다");
+                // 로딩 화면 중단
                 customProgress.dismiss();
                 return;
             }
@@ -291,6 +305,7 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
+    // 캘린더 버튼 상호작용 함수
     public void onCalenderBtnClick(View view) {
         //CalenderActivity 실행, 기존 창은 유지.
         Intent intent = new Intent(this, CalendarActivity.class);
@@ -298,8 +313,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    // 무슨 이유에서인지 모르겠으나 TastePlaceActivity, GradeCheckActivity 클래스를 불러오면 앱이 종료됨
-    // 일단 임시로 캘린더 3개 때려박아놓음. xml파일의 문제는 없음.
+    // 맛 버튼 상호작용 함수
     public void onTastePlaceBtnClick(View view) {
         //onTastePlaceActivity 실행, 기존 창은 유지.
         Intent intent = new Intent(this, TastePlaceActivity.class);
@@ -313,15 +327,22 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // 관련 링크 버튼 상호작용 함수
+    public void onSiteBtnClick(View view) {
+        String uri = view.getResources().getResourceEntryName(view.getId());    // id의 String을 그대로 가져오는 구문
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));         // intent 만들고
+        startActivity(intent);                                                  // 실행
+    }
+
 
     // 탭바 상호작용 함수
     private void changeView(int index) {
         LinearLayout[] layouts = {
-                (LinearLayout) findViewById(R.id.frag1),
-                (TableLayout) findViewById(R.id.frag2),
-                (LinearLayout) findViewById(R.id.frag3),
-                (LinearLayout) findViewById(R.id.frag4),
-                (TableLayout) findViewById(R.id.frag5)
+                findViewById(R.id.frag1),
+                findViewById(R.id.frag2),
+                findViewById(R.id.frag3),
+                findViewById(R.id.frag4),
+                findViewById(R.id.frag5)
         };
 
         for(int i = 0; i < 5; i++)
