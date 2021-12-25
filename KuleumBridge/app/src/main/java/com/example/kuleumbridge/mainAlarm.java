@@ -27,7 +27,7 @@ public class mainAlarm extends Calendar{
 
         try {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.afterlog);
+            setContentView(R.layout.after_log);
 
             whattodo=(TextView)findViewById(R.id.calendarView);
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="#23B14D"
@@ -22,7 +23,7 @@
 
         <TextView
             android:id="@+id/calendarview"
-            android:background="@drawable/calendarview"
+            android:background="@drawable/calendar_view"
             android:layout_width="330dp"
             android:layout_height="170dp"
             android:layout_gravity="center"
@@ -42,10 +43,11 @@
             android:layout_height="30dp"
             android:layout_marginLeft="295dp"
             android:layout_marginTop="140dp"
-            android:background="@drawable/zoomcalendar"
+            android:background="@drawable/zoom_calendar"
             android:gravity="center"
             android:onClick="onCalenderBtnClick"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
 
     </FrameLayout>

@@ -20,7 +20,7 @@ public class GradeCheckActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.gradecheck);
+        setContentView(R.layout.grade_check);
         levelBtn = (Button)findViewById(R.id.levelBtn);
         registerForContextMenu(levelBtn);
     }
@@ -28,7 +28,7 @@ public class GradeCheckActivity extends AppCompatActivity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         MenuInflater inflater1 = getMenuInflater();
-        inflater1.inflate(R.menu.levelsemestermenu, menu);
+        inflater1.inflate(R.menu.level_semester_menu, menu);
 
     }
 

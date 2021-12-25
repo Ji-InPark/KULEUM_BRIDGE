@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -19,7 +18,6 @@ import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 
-import java.io.FileInputStream;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -153,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     // 뷰 전환 부분
-                    setContentView(R.layout.afterlog);
+                    setContentView(R.layout.after_log);
 
                     TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
                     tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -233,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
     {
         ImageView img = findViewById(R.id.photo);
         TextView name = findViewById(R.id.user_nm);
-        TextView birth = findViewById(R.id.user_id);
+        TextView user_id = findViewById(R.id.user_id);
         TextView major = findViewById(R.id.dpet_ttnm);
 
 
@@ -247,7 +245,7 @@ public class MainActivity extends AppCompatActivity {
         name.setText(uic.getUSER_NM());
 
         // 경고를 지우기 위해 string.xml 파일을 만든후 string 처리
-        user_id.setText(getString(R.string.userid, uic.getRESNO()));
+        user_id.setText(getString(R.string.userid, uic.getUSER_ID()));
         major.setText(getString(R.string.dept, uic.getDEPT_TTNM()));
 
     }
