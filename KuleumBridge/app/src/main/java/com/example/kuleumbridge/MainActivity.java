@@ -101,6 +101,30 @@ public class MainActivity extends AppCompatActivity {
                 });
                 agac.execute();
 
+                // GradeNow 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask를 상속한 클래스를 활요해 값을 얻어온다.
+                ApiGradeNowClass agnc = new ApiGradeNowClass(uic.getUSER_ID(), new CallBack() {
+                    @Override
+                    public void callback_login(String result) {
+
+                    }
+
+                    @Override
+                    public void callback_grade(String result) {
+                        // uic에 얻어온 정보 저장
+                        uic.setGradeNowInfo(result);
+                    }
+
+                    @Override
+                    public void callback_fail() {
+                        // 연결 실패시 작동
+                        // 애니메이션 동작 중단
+                        // 적정한 화면으로 전환
+
+                        customProgress.dismiss();
+                    }
+                });
+                agnc.execute();
+
                 try {
                     //
                     //  자동로그인 정보는 로그아웃 후 지우는 기능이 추가되어야 함
@@ -189,13 +213,27 @@ public class MainActivity extends AppCompatActivity {
         alc.execute();
     }
 
+    // 작은 캘린더 화면 글 불러오기 함수
+    public void setCalenderText()
+    {
+        calenderTV = findViewById(R.id.calendarview);
+        mainAlarm mA = new mainAlarm();
+        String today = mA.getTime();
+        System.out.println(today);
+
+        SharedPreferences pref = getSharedPreferences(today ,MODE_PRIVATE);                 // 날짜를 기준으로 여는 것
+
+        String fileData = pref.getString("input", "오늘 할 일이 존재하지 않습니다.");      // fileData 변수에 저장된 것을 저장
+
+        calenderTV.setText(getString(R.string.calender, today, fileData));                  // 로그인 후 작은 캘린더 화면에 출력
+    }
 
     // 학생증 정보 수정
     public void editStudentID()
     {
         ImageView img = findViewById(R.id.photo);
         TextView name = findViewById(R.id.user_nm);
-        TextView birth = findViewById(R.id.resno);
+        TextView birth = findViewById(R.id.user_id);
         TextView major = findViewById(R.id.dpet_ttnm);
 
 
@@ -209,7 +247,7 @@ public class MainActivity extends AppCompatActivity {
         name.setText(uic.getUSER_NM());
 
         // 경고를 지우기 위해 string.xml 파일을 만든후 string 처리
-        birth.setText(getString(R.string.birth, uic.getRESNO()));
+        user_id.setText(getString(R.string.userid, uic.getRESNO()));
         major.setText(getString(R.string.dept, uic.getDEPT_TTNM()));
 
     }
@@ -283,6 +321,7 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
+    // 캘린더 버튼 상호작용 함수
     public void onCalenderBtnClick(View view) {
         //CalenderActivity 실행, 기존 창은 유지.
         Intent intent = new Intent(this, CalendarActivity.class);
@@ -290,6 +329,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // 맛 버튼 상호작용 함수
     public void onTastePlaceBtnClick(View view) {
         //onTastePlaceActivity 실행, 기존 창은 유지.
         Intent intent = new Intent(this, TastePlaceActivity.class);
@@ -303,28 +343,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onSiteBtnClick(int index) {
-        ImageButton[] imgBtn = {
-                (ImageButton)findViewById(R.id.kosaf),
-                (ImageButton)findViewById(R.id.campuz),
-                (ImageButton)findViewById(R.id.detizen),
-                (ImageButton)findViewById(R.id.dok),
-                (ImageButton)findViewById(R.id.dreamspawn),
-                (ImageButton)findViewById(R.id.lingcar),
-                (ImageButton)findViewById(R.id.singgood),
-                (ImageButton)findViewById(R.id.specup),
-                (ImageButton)findViewById(R.id.webiti)
-        };
-
-        Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.kosaf.go.kr/ko/main.do"));
-        Intent intent2 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.campuz.net/"));
-        Intent intent3 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.detizen.com/"));
-        Intent intent4 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://cafe.naver.com/dokchi/485362"));
-        Intent intent5 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.dreamspon.com/"));
-        Intent intent6 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://linkareer.com/"));
-        Intent intent7 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.thinkcontest.com/"));
-        Intent intent8 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://cafe.naver.com/specup"));
-        Intent intent9 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.wevity.com/"));
+    // 관련 링크 버튼 상호작용 함수
+    public void onSiteBtnClick(View view) {
+        String uri = view.getResources().getResourceEntryName(view.getId());    // id의 String을 그대로 가져오는 구문
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));         // intent 만들고
+        startActivity(intent);                                                  // 실행
     }
 
 

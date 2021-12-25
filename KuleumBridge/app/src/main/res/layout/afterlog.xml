@@ -33,7 +33,7 @@
             android:bottomLeftRadius="12dp"
             android:bottomRightRadius="12dp"
             android:topLeftRadius="12dp"
-            android:topRightRadius="50dp"/>
+            android:topRightRadius="50dp" />
 
 
         <Button
@@ -369,7 +369,7 @@
                 android:text="김호준" />
 
             <TextView
-                android:id="@+id/resno"
+                android:id="@+id/user_id"
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"

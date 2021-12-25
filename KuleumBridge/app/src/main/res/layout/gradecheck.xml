@@ -6,24 +6,41 @@
     android:padding="15dp"
     android:background="#23B14D">
 
+
+
     <ImageView
         android:layout_width="100dp"
         android:layout_height="35dp"
         android:src="@drawable/konkuk_small"
         android:layout_marginRight="35dp"/>
 
+
+    <TableRow
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+    <Button
+        android:id="@+id/levelBtn"
+        android:layout_width="220dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="ㅁ학년 ㅁ학기"
+        android:textSize="25dp" />
+    </TableRow>
+
     <TextView
-        android:id="@+id/DGText"
-        android:layout_width="330dp"
-        android:layout_height="170dp"
+        android:layout_width="300dp"
+        android:layout_height="500dp"
         android:layout_gravity="center"
         android:background="@color/white"
+        android:layout_marginTop="20dp"
         android:gravity="center"
-        android:layout_marginTop="15dp"
-        android:text="어떻게 보여줄까"
-        android:textColor="@color/black"
-        android:textSize="20dp" />
-
-
+        android:text="성적 정보"
+        android:textSize="30dp">
+    </TextView>
 
 </LinearLayout>
