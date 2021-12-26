@@ -81,11 +81,10 @@ public class Calendar extends AppCompatActivity{
         }
 
         public void  checkDay(int cYear,int cMonth,int cDay,String userID){
-            fname=""+userID+cYear+"-"+(cMonth+1)+""+"-"+cDay+".txt";//저장할 파일 이름설정
-            FileInputStream fis=null;//FileStream fis 변수
-            SharedPreferences pref = getSharedPreferences(fname, MODE_PRIVATE);
+            fname=""+userID+cYear+"-"+(cMonth+1)+""+"-"+cDay+".txt";            //저장할 파일 이름설정
+            SharedPreferences pref = getSharedPreferences(fname, MODE_PRIVATE); // 안드로이드 내장 데이터 저장 장소 - 앱 외부에서는 접근 불가
             try{
-                str = pref.getString("input", "오늘 할 일이 존재하지 않습니다.");
+                str = pref.getString("input", "오늘 할 일이 존재하지 않습니다."); // map과 같은 형식으로 구현됨
 
                 contextEditText.setVisibility(View.INVISIBLE);
                 textView2.setVisibility(View.VISIBLE);
@@ -136,27 +135,30 @@ public class Calendar extends AppCompatActivity{
         }
         @SuppressLint("WrongConstant")
         public void removeDiary(String readDay){
-            FileOutputStream fos=null;
+            SharedPreferences pref = getSharedPreferences(readDay, MODE_PRIVATE);   // 안드로이드 내장 데이터 저장 장소 - 앱 외부에서는 접근 불가
+
+            SharedPreferences.Editor editor = pref.edit();                          // 데이터 저장을 위한 변수
 
             try{
-                fos=openFileOutput(readDay,MODE_NO_LOCALIZED_COLLATORS);
-                String content="";
-                fos.write((content).getBytes());
-                fos.close();
+                editor.putString("input", null);                              // map과 같이 사용
 
+                editor.apply();
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
         @SuppressLint("WrongConstant")
         public void saveDiary(String readDay){
-            FileOutputStream fos=null;
+            SharedPreferences pref = getSharedPreferences(readDay, MODE_PRIVATE);   // 안드로이드 내장 데이터 저장 장소 - 앱 외부에서는 접근 불가
+
+            SharedPreferences.Editor editor = pref.edit();                          // 데이터 저장을 위한 변수
 
             try{
-                fos=openFileOutput(readDay,MODE_NO_LOCALIZED_COLLATORS);
                 String content=contextEditText.getText().toString();
-                fos.write((content).getBytes());
-                fos.close();
+
+                editor.putString("input", content);                              // map과 같이 사용
+
+                editor.apply();                                                     // 모든 변경 사항을 저장했으면 이 구문을 적어줘야 함
             }catch (Exception e){
                 e.printStackTrace();
             }
