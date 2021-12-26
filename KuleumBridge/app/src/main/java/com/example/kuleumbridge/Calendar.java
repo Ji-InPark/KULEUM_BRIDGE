@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -82,14 +83,9 @@ public class Calendar extends AppCompatActivity{
         public void  checkDay(int cYear,int cMonth,int cDay,String userID){
             fname=""+userID+cYear+"-"+(cMonth+1)+""+"-"+cDay+".txt";//저장할 파일 이름설정
             FileInputStream fis=null;//FileStream fis 변수
+            SharedPreferences pref = getSharedPreferences(fname, MODE_PRIVATE);
             try{
-                fis=openFileInput(fname);
-
-                byte[] fileData=new byte[fis.available()];
-                fis.read(fileData);
-                fis.close();
-
-                str=new String(fileData);
+                str = pref.getString("input", "오늘 할 일이 존재하지 않습니다.");
 
                 contextEditText.setVisibility(View.INVISIBLE);
                 textView2.setVisibility(View.VISIBLE);

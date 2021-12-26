@@ -38,6 +38,7 @@ public class UserInfoClass {
         }
     }
 
+    // ApiGradeAllClass를 통해서 얻어온 데이터를 저장하는 메소드
     public void setGradeAllInfo(String response_string_grade) {
         try {
             JSONObject temp = new JSONObject(response_string_grade);
@@ -67,6 +68,7 @@ public class UserInfoClass {
         }
     }
 
+    // ApiGradeNowClass를 통해서 얻어온 데이터를 저장하는 메소드
     public void setGradeNowInfo(String response_string_grade) {
         try {
             JSONObject temp = new JSONObject(response_string_grade);
