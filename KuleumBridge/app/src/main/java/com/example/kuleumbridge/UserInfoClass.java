@@ -16,7 +16,13 @@ public class UserInfoClass {
 
     private Grade[] grade_all;  // 전체 성적 저장
     private Grade[] grade_now;  // 금학기 성적 저장
-    private int DS_GRAD_length;
+
+    private int DS_GRAD_length; // grade_all 배열에서 실질적으로 정보가 들어있는 칸의 개수
+    private int DS_GRADOFSTUDENT_length; // grade_now 배열에서 실질적으로 정보가 들어있는 칸의 개수
+
+    private String grade_all_txt = ""; // 화면 상에서 보여지는 전체 성적 텍스트
+    private String grade_now_txt = ""; // 화면 상에서 보여지는 금학기 성적 텍스트
+
     //Stack<GradeAllClass> gradeStack = new Stack<GradeAllClass>();
 
     public UserInfoClass()
@@ -57,7 +63,7 @@ public class UserInfoClass {
                 grade_all[i].setGRD(subject.getString("GRD"));
                 grade_all[i].setDETM_CD(subject.getString("DETM_CD"));
                 grade_all[i].setSHTM(subject.getString("SHTM"));
-                //System.out.println("과목 이름 : " + grade[i].getHAKSU_NM());
+                //System.out.println("과목 이름 : " + grade_all[i].getHAKSU_NM());
                 /* 세부성적조회 대비해서 일단 학기평균, 전체평균 이외에 모든과목 정보들도 다 끌어오는 형태,
                    학기평균, 전체평균만 쓸 경우 HAKSU_NM 값에 따라 해당 정보들만 끌어오도록 할 예정.*/
             }
@@ -69,24 +75,24 @@ public class UserInfoClass {
     }
 
     // ApiGradeNowClass를 통해서 얻어온 데이터를 저장하는 메소드
+    // Grade.java에 설명되어있는 3가지의 ELEMENTS중 첫번째인 이수(중인) 과목에 해당.
+    // 전체성적을 가져올때랑 JSON배열 내 ELEMENTS의 변수 이름이 대부분 다르다.
     public void setGradeNowInfo(String response_string_grade) {
         try {
             JSONObject temp = new JSONObject(response_string_grade);
             JSONArray DS_GRADEOFSTUDENT = temp.getJSONArray("DS_GRADEOFSTUDENT");
-            setDS_GRAD_length(DS_GRADEOFSTUDENT.length());
+            setDS_GRADOFSTUDENT_length(DS_GRADEOFSTUDENT.length());
 
             for (int i = 0; i < DS_GRADEOFSTUDENT.length(); i++) {
                 JSONObject subject = DS_GRADEOFSTUDENT.getJSONObject(i);
                 grade_now[i] = new Grade();
-                grade_now[i].setYY(subject.getString("YY"));
-                grade_now[i].setHAKSU_NM(subject.getString("HAKSU_NM"));
-                grade_now[i].setPOBT_DIV(subject.getString("POBT_DIV"));
-                grade_now[i].setSHTM_NM(subject.getString("SHTM_NM"));
-                grade_now[i].setPNT(subject.getString("PNT"));
-                grade_now[i].setGRD(subject.getString("GRD"));
-                grade_now[i].setDETM_CD(subject.getString("DETM_CD"));
-                grade_now[i].setSHTM(subject.getString("SHTM"));
-                //System.out.println("과목 이름 : " + grade[i].getHAKSU_NM());
+                grade_now[i].setYY(subject.getString("LT_YY"));             // 이수년도
+                grade_now[i].setHAKSU_NM(subject.getString("TYPL_KOR_NM")); // 과목이름
+                grade_now[i].setPOBT_DIV(subject.getString("POBT_NM"));     // 이수구분
+                grade_now[i].setSHTM_NM(subject.getString("COMM_NM"));      // 학기
+                grade_now[i].setPNT(subject.getString("PNT"));              // 학점 수
+                grade_now[i].setGRD(subject.getString("CALCU_GRD"));        // 등급
+                grade_now[i].setSHTM(subject.getString("LT_SHTM"));         // 학기 코드
                 /* 세부성적조회 대비해서 일단 학기평균, 전체평균 이외에 모든과목 정보들도 다 끌어오는 형태,
                    학기평균, 전체평균만 쓸 경우 HAKSU_NM 값에 따라 해당 정보들만 끌어오도록 할 예정.*/
             }
@@ -129,6 +135,10 @@ public class UserInfoClass {
         DS_GRAD_length = ds_grad_length;
     }
 
+    public void setDS_GRADOFSTUDENT_length(int ds_gradOfStudent_length) {
+        DS_GRADOFSTUDENT_length = ds_gradOfStudent_length;
+    }
+
     public String getRESNO() {
         return RESNO;
     }
@@ -152,4 +162,28 @@ public class UserInfoClass {
     public int getDS_GRAD_length() {
         return DS_GRAD_length;
     }
+
+    public int getDS_GRADOFSTUDENT_length() {
+        return DS_GRADOFSTUDENT_length;
+    }
+
+    public String getGrade_all_txt() {
+        for (int i = 0; i<DS_GRAD_length; i++) {
+            if (!(grade_all[i].getHAKSU_NM().equals("평점평균")) && !(grade_all[i].getHAKSU_NM().equals("총평점평균"))) {
+                //System.out.println(grade_all[i].toString());
+                grade_all_txt += grade_all[i].toString();
+                //System.out.println("if문 걸림");
+            }
+        }
+        return grade_all_txt;
+    }
+
+
+    public String getGrade_now_txt() {
+        for (int i = 0; i<DS_GRADOFSTUDENT_length; i++) {
+            grade_now_txt += grade_now[i].toString();
+        }
+        return grade_now_txt;
+    }
+
 }

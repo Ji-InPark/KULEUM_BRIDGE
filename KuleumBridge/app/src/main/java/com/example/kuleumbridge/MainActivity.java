@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 
+import org.w3c.dom.Text;
+
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     UserInfoClass uic;
     TextView calenderTV;
     CustomProgress customProgress;
-
+    String gradeAT = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +83,14 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void callback_grade(String result) {
-                        // uic에 얻어온 정보 저장
+                        // uic에 얻어온 정보 저장 - 전체성적
                         uic.setGradeAllInfo(result);
+                        TextView gradeAll = findViewById(R.id.gradeAllText);
+                        gradeAT = uic.getGrade_all_txt();
+                        System.out.println(gradeAT);
 
+                        //gradeAll.setText(gradeAT);
+                        //※새로운 창에서 생성되는 TextView 객체에 setText를 진행할경우 앱이 비정상종료되는 문제 발생※
                         // 학생증 정보 수정
                         editStudentID();
                     }
@@ -93,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
                         // 연결 실패시 작동
                         // 애니메이션 동작 중단
                         // 적정한 화면으로 전환
-
                         customProgress.dismiss();
                     }
                 });
@@ -108,8 +114,13 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void callback_grade(String result) {
-                        // uic에 얻어온 정보 저장
+                        // uic에 얻어온 정보 저장 - 금학기성적
                         uic.setGradeNowInfo(result);
+                        TextView gradeNow = findViewById(R.id.gradeNowText);
+                        String txt = uic.getGrade_now_txt();
+                        //System.out.println(txt);
+                        gradeNow.setText(txt);
+
                     }
 
                     @Override

@@ -321,14 +321,16 @@
             android:orientation="vertical"
             android:visibility="gone">
 
-            <EditText
-                android:layout_width="300dp"
-                android:layout_height="200dp"
+            <TextView
+                android:id="@+id/gradeNowText"
+                android:layout_width="340dp"
+                android:layout_height="300dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
                 android:background="@color/white"
                 android:gravity="center"
-                android:hint="성적조회" />
+                android:text="grade_now"/>
 
             <Button
                 android:id="@+id/checkDGBtn"
