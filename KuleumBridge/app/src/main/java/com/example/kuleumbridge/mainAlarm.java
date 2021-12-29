@@ -1,6 +1,9 @@
 package com.example.kuleumbridge;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.FileInputStream;
@@ -50,7 +53,11 @@ public class mainAlarm extends Calendar{
             whattodo.setText(today+"/n"+"오늘의 할 일이 존재하지 않습니다.");
 
         }
+
+
+
     }
+
 
 
 }

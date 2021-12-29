@@ -133,18 +133,24 @@
                 android:gravity="center">
 
                 <ImageView
+                    android:id="@+id/HanSik"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/hansik" />
+                    android:src="@drawable/hansik"
+                    android:onClick="OnHanSikBtnClick"/>
 
                 <ImageView
+                    android:id="@+id/BunSik"
+                    android:onClick="showBunSik"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
                     android:src="@drawable/bunsik" />
 
                 <ImageView
+                    android:id="@+id/Caffe"
+                    android:onClick="showCaffe"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@drawable/dessert" />
@@ -189,12 +195,16 @@
                 android:layout_marginTop="3dp">
 
                 <ImageView
+                    android:id="@+id/IlSik"
+                    android:onClick="showIlSik"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
                     android:src="@drawable/sushi" />
 
                 <ImageView
+                    android:id="@+id/FastFood"
+                    android:onClick="showFastFood"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
@@ -229,6 +239,8 @@
                 </ImageView>
 
                 <ImageView
+                    android:id="@+id/YangSik"
+                    android:onClick="showYangSik"
                     android:layout_width="80dp"
                     android:layout_height="24dp"
                     android:src="@drawable/yangki">
@@ -244,18 +256,24 @@
                 android:gravity="center">
 
                 <ImageView
+                    android:id="@+id/JungSik"
+                    android:onClick="showJungSik"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
                     android:src="@drawable/jjang" />
 
                 <ImageView
+                    android:id="@+id/Meat"
+                    android:onClick="showMeat"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
                     android:src="@drawable/meat" />
 
                 <ImageView
+                    android:id="@+id/Alchol"
+                    android:onClick="showAlchol"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@drawable/alchol" />
