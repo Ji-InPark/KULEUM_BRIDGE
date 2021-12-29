@@ -23,6 +23,8 @@ public class GradeCheckActivity extends AppCompatActivity {
         setContentView(R.layout.grade_check);
         levelBtn = (Button)findViewById(R.id.levelBtn);
         registerForContextMenu(levelBtn);
+
+
     }
 
     @Override
