@@ -4,9 +4,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
 
+import java.io.Serializable;
 import java.util.Stack;
 
-public class UserInfoClass {
+public class UserInfoClass implements Serializable {
 
     private String RESNO;       // 생년월일
     private String DEPT_TTNM;   // 소속단과대 및 학과

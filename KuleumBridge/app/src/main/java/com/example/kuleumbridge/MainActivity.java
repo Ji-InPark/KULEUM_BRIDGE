@@ -23,6 +23,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import org.w3c.dom.Text;
 
+import java.io.Serializable;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -362,6 +363,7 @@ public class MainActivity extends AppCompatActivity {
     public void onGradeCheckAcBtnClick(View view) {
         //GradeCheckActivity 실행, 기존 창은 유지.
         Intent intent = new Intent(this, GradeCheckActivity.class);
+        intent.putExtra("uic", uic);
         startActivity(intent);
     }
 

@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class GradeCheckActivity extends AppCompatActivity {
-
+    UserInfoClass uic;
     Button levelBtn;
     Button semesterBtn;
     LinearLayout base;
@@ -23,8 +23,7 @@ public class GradeCheckActivity extends AppCompatActivity {
         setContentView(R.layout.grade_check);
         levelBtn = (Button)findViewById(R.id.levelBtn);
         registerForContextMenu(levelBtn);
-
-
+        uic = (UserInfoClass) getIntent().getSerializableExtra("uic");
     }
 
     @Override

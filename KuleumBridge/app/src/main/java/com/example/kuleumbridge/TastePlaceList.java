@@ -40,15 +40,15 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
             InputStream inputStream = getBaseContext().getResources().getAssets().open("place.xls");
             workbook = Workbook.getWorkbook(inputStream);
             sheet = workbook.getSheet(0);
-            int  RowEnd = sheet.getColumn(0).length -1;
+            int  RowEnd = sheet.getColumn(0).length - 1;
 
             for(int row = 1;row <= RowEnd;row++) {
 //                kinds[row]=sheet.getCell(0, row).getContents();
 //                if(kinds[row].equals("한식")) {
 //                    String excelload = kinds[row];
-                    String excelload = sheet.getCell(1, row).getContents();
-                    arrayAdapter.add(excelload);
-                }
+                String excelload = sheet.getCell(1, row).getContents();
+                arrayAdapter.add(excelload);
+            }
 
 
 
