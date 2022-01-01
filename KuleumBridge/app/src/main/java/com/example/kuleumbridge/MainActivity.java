@@ -362,9 +362,9 @@ public class MainActivity extends AppCompatActivity {
     // 성적 보기 버튼 상호작용 함수
     public void onGradeCheckAcBtnClick(View view) {
         //GradeCheckActivity 실행, 기존 창은 유지.
-        Intent intent = new Intent(this, GradeCheckActivity.class);
-        intent.putExtra("uic", uic);
-        startActivity(intent);
+        Intent intent2 = new Intent(this, GradeCheckActivity.class);
+        intent2.putExtra("gradeAll", gradeAT);
+        startActivity(intent2);
     }
 
     // 관련 링크 버튼 상호작용 함수
