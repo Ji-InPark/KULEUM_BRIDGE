@@ -138,22 +138,22 @@
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
                     android:src="@drawable/hansik"
-                    android:onClick="OnHanSikBtnClick"/>
+                    android:onClick="OnTasteBtnClick"/>
 
                 <ImageView
                     android:id="@+id/BunSik"
-                    android:onClick="showBunSik"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/bunsik" />
+                    android:src="@drawable/bunsik"
+                    android:onClick="OnTasteBtnClick"/>
 
                 <ImageView
                     android:id="@+id/Caffe"
-                    android:onClick="showCaffe"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/dessert" />
+                    android:src="@drawable/dessert"
+                    android:onClick="OnTasteBtnClick"/>
             </TableRow>
 
 
@@ -196,24 +196,26 @@
 
                 <ImageView
                     android:id="@+id/IlSik"
-                    android:onClick="showIlSik"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/sushi" />
+                    android:src="@drawable/sushi"
+                    android:onClick="OnTasteBtnClick"/>
 
                 <ImageView
                     android:id="@+id/FastFood"
-                    android:onClick="showFastFood"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/hamburger" />
+                    android:src="@drawable/hamburger"
+                    android:onClick="OnTasteBtnClick"/>
 
                 <ImageView
+                    android:id="@+id/Asian"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/asian" />
+                    android:src="@drawable/asian"
+                    android:onClick="OnTasteBtnClick"/>
             </TableRow>
 
             <TableRow
@@ -257,26 +259,26 @@
 
                 <ImageView
                     android:id="@+id/JungSik"
-                    android:onClick="showJungSik"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/jjang" />
+                    android:src="@drawable/jjang"
+                    android:onClick="OnTasteBtnClick"/>
 
                 <ImageView
                     android:id="@+id/Meat"
-                    android:onClick="showMeat"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/meat" />
+                    android:src="@drawable/meat"
+                    android:onClick="OnTasteBtnClick"/>
 
                 <ImageView
                     android:id="@+id/Alchol"
-                    android:onClick="showAlchol"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/alchol" />
+                    android:src="@drawable/alchol"
+                    android:onClick="OnTasteBtnClick"/>
             </TableRow>
 
             <TableRow

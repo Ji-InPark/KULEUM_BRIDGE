@@ -353,8 +353,41 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void OnHanSikBtnClick(View view) {
+    // 맛집 장르별 버튼 상호작용 함수
+    public void OnTasteBtnClick(View view) {
+        String parameter = "";
+        switch(view.getId())
+        {
+            case R.id.HanSik:
+                parameter = "한식";
+                break;
+            case R.id.BunSik:
+                parameter = "분식";
+                break;
+            case R.id.Caffe:
+                parameter = "디저트";
+                break;
+            case R.id.IlSik:
+                parameter = "일식";
+                break;
+            case R.id.Asian:
+                parameter = "아시안";
+                break;
+            case R.id.FastFood:
+                parameter = "패스트푸트";
+                break;
+            case R.id.JungSik:
+                parameter = "정식";
+                break;
+            case R.id.Meat:
+                parameter = "고기";
+                break;
+            case R.id.Alchol:
+                parameter = "술집";
+                break;
+        }
         Intent intent = new Intent(this,TastePlaceList.class);
+        intent.putExtra("parameter", parameter);
         startActivity(intent);
     }
 

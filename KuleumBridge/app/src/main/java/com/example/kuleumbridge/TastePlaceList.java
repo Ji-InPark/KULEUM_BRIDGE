@@ -22,6 +22,7 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
     ListView list_excel;
     ArrayAdapter<String> arrayAdapter;
     String kinds[]= new String[200];
+    String Taste_Button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,9 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         Excel();
 
+        // 어떤 버튼을 눌렀는지 받아서 저장 (ex: 한식)
+        Taste_Button = getIntent().getStringExtra("parameter");
+        System.out.println(Taste_Button);
     }
     public void Excel() {
         Workbook workbook = null;
