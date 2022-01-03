@@ -72,4 +72,9 @@ public class Grade {
     public String getDETM_CD() {
         return DETM_CD;
     }
+
+    public String toString() {
+        return YY + " " + SHTM_NM + " " + HAKSU_NM + " " + PNT + " " + POBT_DIV + " " + GRD + "\n";
+    }
+
 }

@@ -6,17 +6,24 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 
+import org.w3c.dom.Text;
+
+import java.io.Serializable;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     UserInfoClass uic;
     TextView calenderTV;
     CustomProgress customProgress;
+    String gradeAT = "";
 
 
     @Override
@@ -32,14 +40,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.login);
         uic = new UserInfoClass();
 
-        // 로딩화면을 위한 객체
         customProgress = new CustomProgress(MainActivity.this);
 
         // 로딩 화면 시작
         customProgress.show();
 
-        // 자동로그인
+        // 자동로그인 중에 로딩화면이 돌아야함
+        // 자동로그인이 가능하다면 알아서 로딩화면에서 화면전환 될 것이고
+        // 자동로그인이 안된다고하면 로딩화면만 없앰
         autoLogin();
+
     }
 
     // 로그인 버튼이 눌렸을 때
@@ -79,9 +89,14 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void callback_grade(String result) {
-                        // uic에 얻어온 정보 저장
+                        // uic에 얻어온 정보 저장 - 전체성적
                         uic.setGradeAllInfo(result);
+                        TextView gradeAll = findViewById(R.id.gradeAllText);
+                        gradeAT = uic.getGrade_all_txt();
+                        System.out.println(gradeAT);
 
+                        //gradeAll.setText(gradeAT);
+                        //※새로운 창에서 생성되는 TextView 객체에 setText를 진행할경우 앱이 비정상종료되는 문제 발생※
                         // 학생증 정보 수정
                         editStudentID();
                     }
@@ -91,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
                         // 연결 실패시 작동
                         // 애니메이션 동작 중단
                         // 적정한 화면으로 전환
-
                         customProgress.dismiss();
                     }
                 });
@@ -106,8 +120,13 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void callback_grade(String result) {
-                        // uic에 얻어온 정보 저장
+                        // uic에 얻어온 정보 저장 - 금학기성적
                         uic.setGradeNowInfo(result);
+                        TextView gradeNow = findViewById(R.id.gradeNowText);
+                        String txt = uic.getGrade_now_txt();
+                        //System.out.println(txt);
+                        gradeNow.setText(txt);
+
                     }
 
                     @Override
@@ -149,9 +168,9 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     // 뷰 전환 부분
-                    setContentView(R.layout.afterlog);
+                    setContentView(R.layout.after_log);
 
-                    TabLayout tabLayout = findViewById(R.id.tab_layout);
+                    TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
                     tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                         @Override
                         public void onTabSelected(TabLayout.Tab tab) {
@@ -174,12 +193,24 @@ public class MainActivity extends AppCompatActivity {
                     // 로딩 애니메이션 종료
                     customProgress.dismiss();
 
-                    // 작은 캘린더 글 불러오기 함수
-                    setCalenderText();
+                    // 작은 캘린더에 출력하는 부분
+                    calenderTV = findViewById(R.id.calendarview);
+                    mainAlarm mA = new mainAlarm();
+                    String today = mA.getTime();
+                    System.out.println(today);
+
+                    pref = getSharedPreferences(today ,MODE_PRIVATE); // 날짜를 기준으로 여는 것
+
+                    String fileData = pref.getString("input", "오늘 할 일이 존재하지 않습니다."); // fileData 변수에 저장된 것을 저장
+
+                    calenderTV.setText(today + "\n" + fileData); // 로그인 후 작은 캘린더 화면에 출력
 
                 }
                 catch (Exception e)
                 {
+                    /* 당일 캘린더 탭에서 저장해놓은 오늘의 할 일이 없을 때 */
+                    mainAlarm temp = new mainAlarm();
+                    calenderTV.setText(temp.getTime()+"\n오늘의 할 일이 존재하지 않습니다.");
                 }
             }
 
@@ -220,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
         TextView user_id = findViewById(R.id.user_id);
         TextView major = findViewById(R.id.dpet_ttnm);
 
-        // base64로 인코딩 된 이미지 파일을 디코딩 하는 과정
+
         try {
             byte[] encodeByte = Base64.decode(uic.getPHOTO(), Base64.DEFAULT);
             Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
@@ -315,16 +346,58 @@ public class MainActivity extends AppCompatActivity {
 
     // 맛 버튼 상호작용 함수
     public void onTastePlaceBtnClick(View view) {
+
         //onTastePlaceActivity 실행, 기존 창은 유지.
         Intent intent = new Intent(this, TastePlaceActivity.class);
         startActivity(intent);
+
     }
+
+    // 맛집 장르별 버튼 상호작용 함수
+    public void OnTasteBtnClick(View view) {
+        String parameter = "";
+        switch(view.getId())
+        {
+            case R.id.HanSik:
+                parameter = "한식";
+                break;
+            case R.id.BunSik:
+                parameter = "분식";
+                break;
+            case R.id.Caffe:
+                parameter = "디저트";
+                break;
+            case R.id.IlSik:
+                parameter = "일식";
+                break;
+            case R.id.Asian:
+                parameter = "아시안";
+                break;
+            case R.id.FastFood:
+                parameter = "패스트푸트";
+                break;
+            case R.id.JungSik:
+                parameter = "정식";
+                break;
+            case R.id.Meat:
+                parameter = "고기";
+                break;
+            case R.id.Alchol:
+                parameter = "술집";
+                break;
+        }
+        Intent intent = new Intent(this,TastePlaceList.class);
+        intent.putExtra("parameter", parameter);
+        startActivity(intent);
+    }
+
 
     // 성적 보기 버튼 상호작용 함수
     public void onGradeCheckAcBtnClick(View view) {
         //GradeCheckActivity 실행, 기존 창은 유지.
-        Intent intent = new Intent(this, GradeCheckActivity.class);
-        startActivity(intent);
+        Intent intent2 = new Intent(this, GradeCheckActivity.class);
+        intent2.putExtra("gradeAll", gradeAT);
+        startActivity(intent2);
     }
 
     // 관련 링크 버튼 상호작용 함수
@@ -338,11 +411,11 @@ public class MainActivity extends AppCompatActivity {
     // 탭바 상호작용 함수
     private void changeView(int index) {
         LinearLayout[] layouts = {
-                findViewById(R.id.frag1),
-                findViewById(R.id.frag2),
-                findViewById(R.id.frag3),
-                findViewById(R.id.frag4),
-                findViewById(R.id.frag5)
+                (LinearLayout) findViewById(R.id.frag1),
+                (TableLayout) findViewById(R.id.frag2),
+                (LinearLayout) findViewById(R.id.frag3),
+                (LinearLayout) findViewById(R.id.frag4),
+                (TableLayout) findViewById(R.id.frag5)
         };
 
         for(int i = 0; i < 5; i++)

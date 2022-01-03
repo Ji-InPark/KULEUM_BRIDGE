@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="#23B14D"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical" >
 
 
 
@@ -15,87 +15,27 @@
         android:layout_marginTop="15dp"
         android:src="@drawable/konkuk_small" />
 
-    <TextView
-        android:id="@+id/hi_"
-        android:layout_width="137dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:gravity="top"
-        android:letterSpacing="0.03"
-        android:text="반가워, __!"
-        android:textColor="#000000"
-        android:textSize="22.74sp"
-
-        />
-
-    <RelativeLayout
-        android:id="@+id/frame_34252"
-        android:layout_width="309.56dp"
-        android:layout_height="106.68dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="70.83dp"
-        android:background="@drawable/frame_square"
-        android:clipToOutline="true">
-
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/goodday"
-        android:layout_width="225.61dp"
-        android:layout_height="16.61dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="29.73dp"
-        android:gravity="top"
-        android:letterSpacing="0.03"
-        android:text="오늘도 좋은 하루 보내:)"
-        android:textColor="#000000"
-        android:textSize="13.99sp"
-
-        />
-
-    <View
-        android:id="@+id/rectangle_7"
-        android:layout_width="309.56dp"
-        android:layout_height="181.01dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/rectangle_7" />
 
     <FrameLayout
         android:layout_width="330dp"
         android:layout_height="170dp"
         android:layout_gravity="center">
 
-
         <TextView
             android:id="@+id/calendarview"
+            android:background="@drawable/calendar_view"
             android:layout_width="330dp"
             android:layout_height="170dp"
             android:layout_gravity="center"
-            android:background="@drawable/calendarview"
-            android:bottomLeftRadius="12dp"
-            android:bottomRightRadius="12dp"
             android:gravity="center"
             android:text="아무것도 없음"
             android:textColor="@color/black"
             android:textSize="20dp"
+            android:bottomLeftRadius="12dp"
+            android:bottomRightRadius="12dp"
             android:topLeftRadius="12dp"
-
             android:topRightRadius="50dp" />
 
-        <TextView
-            android:id="@+id/subjects"
-            android:layout_width="61.21dp"
-            android:layout_height="18.36dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:text="메뉴"
-            android:textSize="15.74sp"
-            android:gravity="top"
-            />
 
         <Button
             android:id="@+id/zoomcalendar"
@@ -103,13 +43,53 @@
             android:layout_height="30dp"
             android:layout_marginLeft="295dp"
             android:layout_marginTop="140dp"
-            android:background="@drawable/zoomcalendar"
+            android:background="@drawable/zoom_calendar"
             android:gravity="center"
             android:onClick="onCalenderBtnClick"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
 
     </FrameLayout>
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItem1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="공지사항" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItem2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="맛집" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItem3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="성적조회" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItem4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="학생증" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItem5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="관련 링크" />
+
+    </com.google.android.material.tabs.TabLayout>
 
 
     <FrameLayout
@@ -120,9 +100,6 @@
         android:layout_marginTop="15dp">
 
         <!-- 공지사항 레이아웃 -->
-
-        <!-- 맛집 레이아웃 -->
-
         <LinearLayout
             android:id="@+id/frag1"
             android:layout_width="match_parent"
@@ -131,40 +108,18 @@
             android:orientation="vertical"
             android:visibility="visible">
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tab_layout"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp">
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="25dp"
+                android:background="@color/white"
+                android:gravity="center"
+                android:hint="공지사항" />
 
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tabItem1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="공지사항" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tabItem2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="맛집" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tabItem3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="성적조회" />
-
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tabItem5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="관련 링크" />
-
-            </com.google.android.material.tabs.TabLayout>
         </LinearLayout>
 
+        <!-- 맛집 레이아웃 -->
         <TableLayout
             android:id="@+id/frag2"
             android:layout_width="match_parent"
@@ -178,21 +133,27 @@
                 android:gravity="center">
 
                 <ImageView
+                    android:id="@+id/HanSik"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/hansik" />
+                    android:src="@drawable/hansik"
+                    android:onClick="OnTasteBtnClick"/>
 
                 <ImageView
+                    android:id="@+id/BunSik"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/bunsik" />
+                    android:src="@drawable/bunsik"
+                    android:onClick="OnTasteBtnClick"/>
 
                 <ImageView
+                    android:id="@+id/Caffe"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/dessert" />
+                    android:src="@drawable/dessert"
+                    android:onClick="OnTasteBtnClick"/>
             </TableRow>
 
 
@@ -230,25 +191,31 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_marginTop="3dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:layout_marginTop="3dp">
 
                 <ImageView
+                    android:id="@+id/IlSik"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/sushi" />
+                    android:src="@drawable/sushi"
+                    android:onClick="OnTasteBtnClick"/>
 
                 <ImageView
+                    android:id="@+id/FastFood"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/hamburger" />
+                    android:src="@drawable/hamburger"
+                    android:onClick="OnTasteBtnClick"/>
 
                 <ImageView
+                    android:id="@+id/Asian"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/asian" />
+                    android:src="@drawable/asian"
+                    android:onClick="OnTasteBtnClick"/>
             </TableRow>
 
             <TableRow
@@ -274,6 +241,8 @@
                 </ImageView>
 
                 <ImageView
+                    android:id="@+id/YangSik"
+                    android:onClick="showYangSik"
                     android:layout_width="80dp"
                     android:layout_height="24dp"
                     android:src="@drawable/yangki">
@@ -289,21 +258,27 @@
                 android:gravity="center">
 
                 <ImageView
+                    android:id="@+id/JungSik"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/jjang" />
+                    android:src="@drawable/jjang"
+                    android:onClick="OnTasteBtnClick"/>
 
                 <ImageView
+                    android:id="@+id/Meat"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/meat" />
+                    android:src="@drawable/meat"
+                    android:onClick="OnTasteBtnClick"/>
 
                 <ImageView
+                    android:id="@+id/Alchol"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/alchol" />
+                    android:src="@drawable/alchol"
+                    android:onClick="OnTasteBtnClick"/>
             </TableRow>
 
             <TableRow
@@ -344,8 +319,8 @@
                     android:layout_width="110dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
-                    android:onClick="onTastePlaceBtnClick"
                     android:text="↗지도로 보기"
+                    android:onClick="onTastePlaceBtnClick"
                     android:textSize="12sp"
                     android:textStyle="bold">
 
@@ -366,14 +341,16 @@
             android:orientation="vertical"
             android:visibility="gone">
 
-            <EditText
-                android:layout_width="300dp"
-                android:layout_height="200dp"
+            <TextView
+                android:id="@+id/gradeNowText"
+                android:layout_width="340dp"
+                android:layout_height="300dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
                 android:background="@color/white"
                 android:gravity="center"
-                android:hint="성적조회" />
+                android:text="grade_now"/>
 
             <Button
                 android:id="@+id/checkDGBtn"
@@ -453,26 +430,26 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:onClick="onSiteBtnClick"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/janghak" />
+                    android:src="@drawable/janghak"
+                    android:onClick="onSiteBtnClick"/>
 
                 <ImageButton
                     android:id="@+id/campuz"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:onClick="onSiteBtnClick"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/campuz" />
+                    android:src="@drawable/campuz"
+                    android:onClick="onSiteBtnClick"/>
 
                 <ImageButton
                     android:id="@+id/detizen"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:onClick="onSiteBtnClick"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/detizen" />
+                    android:src="@drawable/detizen"
+                    android:onClick="onSiteBtnClick"/>
             </TableRow>
 
             <TableRow
@@ -486,26 +463,26 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:onClick="onSiteBtnClick"
+                    android:src="@drawable/dok"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/dok" />
+                    android:onClick="onSiteBtnClick"/>
 
                 <ImageButton
                     android:id="@+id/dreamspawn"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:onClick="onSiteBtnClick"
+                    android:src="@drawable/dreamspawn"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/dreamspawn" />
+                    android:onClick="onSiteBtnClick"/>
 
                 <ImageButton
                     android:id="@+id/lingcar"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:onClick="onSiteBtnClick"
+                    android:src="@drawable/lingcar"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/lingcar" />
+                    android:onClick="onSiteBtnClick"/>
             </TableRow>
 
             <TableRow
@@ -519,48 +496,31 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:onClick="onSiteBtnClick"
+                    android:src="@drawable/singgood"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/singgood" />
+                    android:onClick="onSiteBtnClick"/>
 
                 <ImageButton
                     android:id="@+id/specup"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginRight="30dp"
-                    android:onClick="onSiteBtnClick"
+                    android:src="@drawable/specup"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/specup" />
+                    android:onClick="onSiteBtnClick"/>
 
                 <ImageButton
                     android:id="@+id/webiti"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:onClick="onSiteBtnClick"
+                    android:src="@drawable/webiti"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/webiti" />
+                    android:onClick="onSiteBtnClick"/>
             </TableRow>
 
         </TableLayout>
 
     </FrameLayout>
-
-    <RelativeLayout
-        android:id="@+id/frame_34254"
-        android:layout_width="150.41dp"
-        android:layout_height="54.22dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/frame_34254" />
-
-    <View
-        android:id="@+id/ellipse_6"
-        android:layout_width="261.4dp"
-        android:layout_height="180.13dp"
-        android:layout_marginLeft="107dp"
-        android:layout_marginTop="6dp"
-        android:alpha="0.3"
-        android:background="@drawable/ellipse_6" />
 
 
 </LinearLayout>

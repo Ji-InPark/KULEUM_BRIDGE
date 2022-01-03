@@ -15,32 +15,30 @@
         android:layout_marginRight="35dp"/>
 
 
-    <TableRow
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="40dp"
-        android:layout_gravity="center"
-        android:gravity="center">
 
     <Button
+        android:visibility="gone"
         android:id="@+id/levelBtn"
         android:layout_width="220dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
         android:gravity="center"
         android:text="ㅁ학년 ㅁ학기"
-        android:textSize="25dp" />
-    </TableRow>
+        android:textSize="25dp"
+        android:layout_marginTop="30dp"/>
+
 
     <TextView
-        android:layout_width="300dp"
-        android:layout_height="500dp"
+        android:id="@+id/gradeAllText"
+        android:layout_width="340dp"
+        android:layout_height="600dp"
         android:layout_gravity="center"
         android:background="@color/white"
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="성적 정보"
-        android:textSize="30dp">
+        android:textColor="@color/black"
+        android:textSize="10dp">
     </TextView>
 
 </LinearLayout>

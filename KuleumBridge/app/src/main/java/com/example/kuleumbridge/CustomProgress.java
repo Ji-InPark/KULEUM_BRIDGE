@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.Window;
 import android.widget.ImageView;
 
+// 애니메이션 담당 클래스
 public class CustomProgress extends Dialog {
     Context mContext;
     ImageView imageView;
@@ -17,7 +18,7 @@ public class CustomProgress extends Dialog {
         mContext = activity;
         InitProgress();
     }
-
+    
     public void InitProgress(){
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
