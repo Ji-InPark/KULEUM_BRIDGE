@@ -29,7 +29,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="90dp"
             android:layout_marginTop="6dp"
-            android:fontFamily="@font/EliceDigitalBaeumOTF_Bold"
+            android:fontFamily="@font/elice_digital_baeum_otf_bold"
             android:gravity="top"
             android:text="안녕, 김호준!"
             android:textColor="#000000"
@@ -43,7 +43,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="90dp"
             android:layout_marginTop="36dp"
-            android:fontFamily="@font/EliceDigitalBaeumOTF_Bold"
+            android:fontFamily="@font/elice_digital_baeum_otf_bold"
             android:gravity="top"
             android:letterSpacing="0.03"
             android:text="너의 학교 생활을 이어줄게:)"
@@ -70,7 +70,7 @@
         android:background="@drawable/calendar_view"
         android:bottomLeftRadius="12dp"
         android:bottomRightRadius="12dp"
-        android:fontFamily="@font/EliceDigitalBaeumOTF_Bold"
+        android:fontFamily="@font/elice_digital_baeum_otf_bold"
         android:gravity="center"
         android:text="아무것도 없음"
         android:textColor="@color/black"
@@ -119,7 +119,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/EliceDigitalBaeumOTF_Bold"
+                android:fontFamily="@font/elice_digital_baeum_otf_bold"
                 android:gravity="center"
                 android:text="공지사항"
                 android:textColor="@color/white"
@@ -140,7 +140,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/EliceDigitalBaeumOTF_Bold"
+                android:fontFamily="@font/elice_digital_baeum_otf_bold"
                 android:gravity="center"
                 android:text="맛집"
                 android:textColor="@color/white"
@@ -161,7 +161,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/EliceDigitalBaeumOTF_Bold"
+                android:fontFamily="@font/elice_digital_baeum_otf_bold"
                 android:gravity="center"
                 android:text="관련 링크"
                 android:textColor="@color/white"
@@ -186,7 +186,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/EliceDigitalBaeumOTF_Bold"
+                android:fontFamily="@font/elice_digital_baeum_otf_bold"
                 android:gravity="center"
                 android:text="성적 조회"
                 android:textColor="@color/white"
@@ -202,7 +202,7 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
-            android:fontFamily="@font/EliceDigitalBaeumOTF_Bold"
+            android:fontFamily="@font/elice_digital_baeum_otf_bold"
             android:gravity="top"
             android:text="간편메뉴"
             android:textColor="#000000"
@@ -227,7 +227,7 @@
             android:layout_height="wrap_content"
             android:icon="@drawable/selector1"
             android:text="홈"
-            app:tabBackground="#00FFFFFF"/>
+            app:tabBackground= "#00FFFFFF" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem2"
