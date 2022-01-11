@@ -3,9 +3,7 @@ package com.example.kuleumbridge;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
-
 import java.io.Serializable;
-import java.util.Stack;
 
 public class UserInfoClass implements Serializable {
 
