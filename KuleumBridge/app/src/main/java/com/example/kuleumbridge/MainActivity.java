@@ -377,7 +377,7 @@ public class MainActivity extends AppCompatActivity {
                 parameter = "패스트푸트";
                 break;
             case R.id.JungSik:
-                parameter = "정식";
+                parameter = "중식";
                 break;
             case R.id.Meat:
                 parameter = "고기";

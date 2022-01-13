@@ -45,7 +45,7 @@ public class TastePlaceActivity extends AppCompatActivity implements OnMapReadyC
             InputStream inputStream = getBaseContext().getResources().getAssets().open("place.xls");
             workbook = Workbook.getWorkbook(inputStream);
             sheet = workbook.getSheet(0);
-            int  RowEnd = sheet.getColumn(0).length-1;
+            int  RowEnd = sheet.getRows()-1;
 
             for(int row = 1;row <= RowEnd;row++) {
 
