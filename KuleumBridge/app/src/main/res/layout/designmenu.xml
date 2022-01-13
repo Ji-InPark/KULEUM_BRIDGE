@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/background1">
 
-
     <Button
         android:id="@+id/notification"
         android:layout_width="30dp"
@@ -19,18 +18,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="64dp"
         android:src="@drawable/hojoon"
         app:civ_border_color="@color/design_default_color_primary_dark"
         app:civ_border_width="1dp"
         app:civ_fill_color="#23f22f"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="355dp"
+        tools:layout_editor_absoluteY="16dp"
+        tools:ignore="MissingConstraints" />
+
 
     <RelativeLayout
         android:id="@+id/rectangle_1"
@@ -81,6 +79,7 @@
             android:text="맛집"
             android:textColor="@color/white"
             android:textSize="30sp" />
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -147,27 +146,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/selector1"
-            android:text="홈"
-            app:tabBackground="#00FFFFFF" />
+            android:text="홈" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/selector2"
-            android:text="메뉴"
-            app:tabBackground="#00FFFFFF" />
+            android:text="메뉴" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/selector3"
-            android:text="설정"
-            app:tabBackground="#00FFFFFF" />
+            android:text="설정" />
 
 
     </com.google.android.material.tabs.TabLayout>
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:src="@drawable/kuleum_mark"
+        tools:layout_editor_absoluteX="-20dp"
+        tools:layout_editor_absoluteY="4dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

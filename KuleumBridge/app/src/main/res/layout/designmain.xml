@@ -20,19 +20,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="64dp"
-        android:src="@drawable/hojoon"
-        app:civ_border_color="@color/design_default_color_primary_dark"
-        app:civ_border_width="1dp"
-        app:civ_fill_color="#23f22f"
-        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
-        app:layout_constraintEnd_toEndOf="100dp"
-        app:layout_constraintTop_toTopOf="5dp" />
-
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
@@ -41,7 +28,6 @@
         app:layout_constraintBottom_toTopOf="@+id/zoomcalendar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="30dp"
         app:layout_constraintTop_toBottomOf="@+id/notification">
 
         <TextView
@@ -95,7 +81,6 @@
         android:topLeftRadius="12dp"
         android:topRightRadius="50dp"
         app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
-        app:layout_constraintEnd_toEndOf="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
         app:layout_constraintVertical_bias="0.0"/>
@@ -127,7 +112,7 @@
         <RelativeLayout
             android:id="@+id/frame_34254"
             android:layout_width="170dp"
-            android:layout_height="65dp"
+            android:layout_height="70dp"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="30dp"
             android:layout_marginBottom="105dp"
@@ -148,7 +133,7 @@
         <RelativeLayout
             android:id="@+id/frame_34255"
             android:layout_width="170dp"
-            android:layout_height="65dp"
+            android:layout_height="70dp"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="30dp"
             android:layout_marginBottom="20dp"
@@ -167,7 +152,7 @@
         <RelativeLayout
             android:id="@+id/frame_34256"
             android:layout_width="170dp"
-            android:layout_height="65dp"
+            android:layout_height="70dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_marginRight="30dp"
@@ -230,24 +215,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/selector1"
-            android:text="홈"
-            app:tabBackground="#00FFFFFF" />
+            android:text="홈"/>
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/selector2"
-            android:text="메뉴"
-            app:tabBackground="#00FFFFFF" />
+            android:text="메뉴" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/selector3"
-            android:text="설정"
-            app:tabBackground="#00FFFFFF" />
+            android:text="설정" />
 
 
     </com.google.android.material.tabs.TabLayout>
@@ -273,6 +255,17 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="25dp"
         tools:layout_editor_absoluteY="365dp" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/hojoon"
+        app:civ_border_color="@color/design_default_color_primary_dark"
+        app:civ_border_width="1dp"
+        app:civ_fill_color="#23f22f"
+        tools:layout_editor_absoluteX="355dp"
+        tools:layout_editor_absoluteY="16dp"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
