@@ -6,20 +6,29 @@
     android:layout_height="match_parent"
     android:background="@drawable/background1">
 
+
     <Button
         android:id="@+id/notification"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="64dp"
         android:background="@drawable/notification"
         android:gravity="center"
         android:onClick="onCalenderBtnClick"
-        tools:layout_editor_absoluteX="365dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        tools:layout_editor_absoluteY="60dp">
+        android:layout_height="65dp"
+        android:layout_marginBottom="250dp"
+        app:layout_constraintBottom_toTopOf="@+id/zoomcalendar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/notification">
 
         <TextView
             android:id="@+id/hi_"
@@ -27,8 +36,8 @@
             android:layout_height="26.23dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="90dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="9dp"
             android:fontFamily="@font/elice_digital_baeum_otf_bold"
             android:gravity="top"
             android:text="안녕, 김호준!"
@@ -38,35 +47,29 @@
         <TextView
             android:id="@+id/you_have_4_"
             android:layout_width="225.61dp"
-            android:layout_height="16.61dp"
+            android:layout_height="19dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="90dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="38dp"
             android:fontFamily="@font/elice_digital_baeum_otf_bold"
             android:gravity="top"
             android:letterSpacing="0.03"
             android:text="너의 학교 생활을 이어줄게:)"
             android:textSize="15sp" />
 
-        <ImageButton
-            android:id="@+id/profile_image"
-            android:layout_width="54dp"
-            android:layout_height="54dp"
-            android:layout_marginLeft="30dp"
-            android:src="@drawable/hojoon"
-            android:background="@drawable/round"
 
-            android:scaleType="centerCrop"
-   />
     </RelativeLayout>
-
 
     <TextView
         android:id="@+id/calendarview"
-        android:layout_width="348dp"
-        android:layout_height="230dp"
+        android:layout_width="360dp"
+        android:layout_height="170dp"
         android:layout_gravity="center"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="43dp"
         android:background="@drawable/calendar_view"
         android:bottomLeftRadius="12dp"
         android:bottomRightRadius="12dp"
@@ -77,44 +80,43 @@
         android:textSize="20dp"
         android:topLeftRadius="12dp"
         android:topRightRadius="50dp"
-        tools:layout_editor_absoluteX="31dp"
-        tools:layout_editor_absoluteY="120dp" />
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.0"/>
+
 
     <Button
         android:id="@+id/zoomcalendar"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_marginTop="144dp"
+        android:layout_marginEnd="36dp"
         android:background="@drawable/plus"
-        android:gravity="center"
         android:onClick="onCalenderBtnClick"
-        android:textColor="@color/black"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
-        tools:layout_editor_absoluteX="340dp"
-        tools:layout_editor_absoluteY="315dp" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
     <RelativeLayout
-        android:layout_width="411dp"
-        android:layout_height="250dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="354dp">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/line" />
-
+        android:id="@+id/relativeLayout2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="21dp"
+        app:layout_constraintBottom_toTopOf="@+id/tab_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/simplemenu">
 
 
         <RelativeLayout
             android:id="@+id/frame_34254"
             android:layout_width="170dp"
             android:layout_height="70dp"
-            android:background="@drawable/frame_34254"
-            android:layout_marginLeft="30dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="105dp">
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="105dp"
+            android:background="@drawable/frame_34254">
 
             <TextView
                 android:layout_width="match_parent"
@@ -132,10 +134,10 @@
             android:id="@+id/frame_34255"
             android:layout_width="170dp"
             android:layout_height="70dp"
-            android:background="@drawable/frame_34255"
+            android:layout_alignParentBottom="true"
             android:layout_marginLeft="30dp"
-            android:layout_marginBottom="15dp"
-            android:layout_alignParentBottom="true">
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/frame_34255">
 
             <TextView
                 android:layout_width="match_parent"
@@ -154,9 +156,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_marginRight="30dp"
-            android:layout_marginBottom="15dp"
-            android:background="@drawable/frame_34256"
->
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/frame_34256">
 
             <TextView
                 android:layout_width="match_parent"
@@ -168,20 +169,18 @@
                 android:textSize="30sp" />
 
 
-
-
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/frame_34259"
             android:layout_width="170dp"
             android:layout_height="70dp"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:background="@drawable/frame_34259"
-            android:layout_marginRight="30dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="105dp">
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="105dp"
+            android:background="@drawable/frame_34259">
 
             <TextView
                 android:layout_width="match_parent"
@@ -195,58 +194,78 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/simplemenu"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/elice_digital_baeum_otf_bold"
-            android:gravity="top"
-            android:text="간편메뉴"
-            android:textColor="#000000"
-            android:textSize="30dp"
-
-            />
-
 
     </RelativeLayout>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="380dp"
-        android:layout_height="80dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="26dp"
         android:background="@drawable/round"
-        tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="625dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/selector1"
-            android:text="홈"
-            app:tabBackground= "#00FFFFFF" />
+            android:text="홈"/>
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/selector2"
-            android:text="메뉴"
-            app:tabBackground="#00FFFFFF"/>
+            android:text="메뉴" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/selector3"
-            android:text="설정"
-            app:tabBackground="#00FFFFFF"/>
+            android:text="설정" />
 
 
     </com.google.android.material.tabs.TabLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@drawable/line"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="326dp"
+        android:id="@+id/imageView"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/simplemenu"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:fontFamily="@font/elice_digital_baeum_otf_bold"
+        android:gravity="top"
+        android:text="간편메뉴"
+        android:textColor="#000000"
+        android:textSize="30dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="365dp" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/hojoon"
+        app:civ_border_color="@color/design_default_color_primary_dark"
+        app:civ_border_width="1dp"
+        app:civ_fill_color="#23f22f"
+        tools:layout_editor_absoluteX="355dp"
+        tools:layout_editor_absoluteY="16dp"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
