@@ -2,6 +2,7 @@ package com.example.kuleumbridge;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -25,27 +26,31 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class TastePlaceInfo extends AppCompatActivity { //리스트 클릭시 나타나는 맛집 세부 정보
+/* 리스트 클릭시 나타나는 맛집 세부 정보(미완성)
+   주소와 버튼 사이에 지도 추가할 예정
+ */
+
+public class TastePlaceInfo extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.taste_info);
+        setContentView(R.layout.taste_info_content);
 
-        if (savedInstanceState == null) {
+        Intent intent = getIntent();
+        TextView name = (TextView) findViewById(R.id.info_name);
+        TextView address = (TextView) findViewById(R.id.info_address);
 
-            TasteInfoContent mainFragment = new TasteInfoContent();
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.mainFragment, mainFragment, "main")
-                    .commit();
-        }
+        name.setText(intent.getStringExtra("name"));
+        address.setText(intent.getStringExtra("address"));
+
 
 
     }
 
-    public void CopyClick(View view) {
+    public void CopyClick(View view) { //주소 복사하기 버튼
 
-        TextView textView= (TextView)findViewById(R.id.address); //텍스트뷰
+        TextView textView= (TextView)findViewById(R.id.info_address); //텍스트뷰
         String address_copy= textView.getText().toString(); // 텍스트뷰 글자 가져옴
         ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("Copy", address_copy);

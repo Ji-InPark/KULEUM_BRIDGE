@@ -78,8 +78,10 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
 
             list_excel.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Intent intent = new Intent(TastePlaceList.this,TastePlaceInfo.class);
+                public void onItemClick(AdapterView parent, View v, int position, long id) {
+                    Intent intent = new Intent(getApplicationContext(),TastePlaceInfo.class);
+                    intent.putExtra("name",listViewData.get(position).name);
+                    intent.putExtra("address",listViewData.get(position).address);
                     startActivity(intent);
                 }
             });
