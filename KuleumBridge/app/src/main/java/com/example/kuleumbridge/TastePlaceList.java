@@ -57,6 +57,9 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
                     listData.name = sheet.getCell(1, row).getContents();
                     listData.address = sheet.getCell(2,row).getContents();
                     listData.mention = sheet.getCell(5,row).getContents();
+                    listData.latitude = Double.parseDouble(sheet.getCell(3,row).getContents());
+                    listData.longitude = Double.parseDouble(sheet.getCell(4,row).getContents());
+
 
                     listViewData.add(listData);
 
@@ -82,7 +85,12 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
                     Intent intent = new Intent(getApplicationContext(),TastePlaceInfo.class);
                     intent.putExtra("name",listViewData.get(position).name);
                     intent.putExtra("address",listViewData.get(position).address);
+                    intent.putExtra("latitude",listViewData.get(position).latitude);
+                    intent.putExtra("longitude",listViewData.get(position).longitude);
                     startActivity(intent);
+
+
+
                 }
             });
         }

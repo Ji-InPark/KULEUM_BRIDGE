@@ -3,6 +3,7 @@ package com.example.kuleumbridge;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -35,14 +36,31 @@ public class TastePlaceInfo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.taste_info_content);
+        setContentView(R.layout.taste_info_main);
 
         Intent intent = getIntent();
-        TextView name = (TextView) findViewById(R.id.info_name);
-        TextView address = (TextView) findViewById(R.id.info_address);
 
-        name.setText(intent.getStringExtra("name"));
-        address.setText(intent.getStringExtra("address"));
+        String name = intent.getStringExtra("name");
+        String address = intent.getStringExtra("address");
+        Double latitude = intent.getDoubleExtra("latitude",0);
+        Double longitude = intent.getDoubleExtra("longitude",0);
+
+
+        if(savedInstanceState == null) {
+            TastePlaceInfoMap mainFragment = new TastePlaceInfoMap();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.mainFragment, mainFragment,"main").commit();
+
+            Bundle bundle = new Bundle();
+            bundle.putString("name",name);
+            bundle.putString("address",address);
+            bundle.putDouble("latitude",latitude);
+            bundle.putDouble("longitude",longitude);
+            mainFragment.setArguments(bundle);
+
+        }
+
+
 
 
 
@@ -59,6 +77,12 @@ public class TastePlaceInfo extends AppCompatActivity {
         Toast myToast = Toast.makeText(this.getApplicationContext(), "주소가 복사되었습니다.", Toast.LENGTH_SHORT);
         myToast.setGravity(Gravity.BOTTOM, 0, 10);
         myToast.show();
+
+    }
+
+    public void MapClick(View view) {
+       Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.google.co.kr/maps/@37.5425241,127.073699,15z"));
+       startActivity(intent);
 
     }
 }
