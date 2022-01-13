@@ -2,6 +2,7 @@ package com.example.kuleumbridge;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -46,6 +47,8 @@ public class TastePlaceActivity extends AppCompatActivity implements OnMapReadyC
             workbook = Workbook.getWorkbook(inputStream);
             sheet = workbook.getSheet(0);
             int  RowEnd = sheet.getRows()-1;
+            System.out.println(RowEnd);
+
 
             for(int row = 1;row <= RowEnd;row++) {
 

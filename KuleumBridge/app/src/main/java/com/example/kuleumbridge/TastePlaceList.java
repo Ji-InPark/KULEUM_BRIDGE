@@ -2,16 +2,18 @@ package com.example.kuleumbridge;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import jxl.Sheet;
 import jxl.Workbook;
@@ -20,25 +22,27 @@ import jxl.read.biff.BiffException;
 public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출력
 
     ListView list_excel;
-    ArrayAdapter<String> arrayAdapter;
-    String kinds[]= new String[200];
-    String Taste_Button;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.taste_list);
+        setContentView(R.layout.taste_list_main);
         list_excel = (ListView)findViewById(R.id.list_excel);
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+
         Excel();
 
-        // 어떤 버튼을 눌렀는지 받아서 저장 (ex: 한식)
-        Taste_Button = getIntent().getStringExtra("parameter");
-        System.out.println(Taste_Button);
+
+
     }
-    public void Excel() {
+    public void Excel() { //엑셀 값 읽어들이는 과정
+        ArrayList<TastePlaceListData> listViewData = new ArrayList<>();
         Workbook workbook = null;
         Sheet sheet = null;
+        // 어떤 버튼을 눌렀는지 받아서 저장 (ex: 한식)
+        String Taste_Button = getIntent().getStringExtra("parameter");
 
         try {
             InputStream inputStream = getBaseContext().getResources().getAssets().open("place.xls");
@@ -46,12 +50,18 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
             sheet = workbook.getSheet(0);
             int  RowEnd = sheet.getColumn(0).length - 1;
 
-            for(int row = 1;row <= RowEnd;row++) {
-//                kinds[row]=sheet.getCell(0, row).getContents();
-//                if(kinds[row].equals("한식")) {
-//                    String excelload = kinds[row];
-                String excelload = sheet.getCell(1, row).getContents();
-                arrayAdapter.add(excelload);
+            for (int row = 1; row <= RowEnd; row++) {
+                TastePlaceListData listData = new TastePlaceListData();
+                String kinds = sheet.getCell(0, row).getContents();
+                if (kinds.contains(Taste_Button)) {
+                    listData.name = sheet.getCell(1, row).getContents();
+                    listData.address = sheet.getCell(2,row).getContents();
+                    listData.mention = sheet.getCell(5,row).getContents();
+
+                    listViewData.add(listData);
+
+                }
+
             }
 
 
@@ -61,7 +71,8 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
         } catch (BiffException e) {
             e.printStackTrace();
         } finally {
-            list_excel.setAdapter(arrayAdapter);
+            ListAdapter oAdapter = new TastePlaceListAdapter(listViewData);
+            list_excel.setAdapter(oAdapter);
 
             workbook.close();
 
