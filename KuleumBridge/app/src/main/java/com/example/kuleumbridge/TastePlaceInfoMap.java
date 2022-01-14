@@ -22,6 +22,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+/* 맛집 리스트 중 한 개 클릭 시, 나타나는 세부 화면에서
+   지도를 구성하는 클래스
+ */
 public class TastePlaceInfoMap extends Fragment implements OnMapReadyCallback {
 
     View rootView;
@@ -50,6 +53,7 @@ public class TastePlaceInfoMap extends Fragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         rootView = (ViewGroup)inflater.inflate(R.layout.taste_info_content, container, false);
         mapView = (MapView) rootView.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
@@ -58,6 +62,7 @@ public class TastePlaceInfoMap extends Fragment implements OnMapReadyCallback {
         TextView address = (TextView) rootView.findViewById(R.id.info_address);
 
 
+        //TastePlaceInfo(Activity)의 값을 받아오는 과정
         Bundle bundle = getArguments();
         name2 = bundle.getString("name");
         String address2 = bundle.getString("address");
@@ -72,7 +77,6 @@ public class TastePlaceInfoMap extends Fragment implements OnMapReadyCallback {
 
         return rootView;
     }
-
 
 
     @Override
@@ -98,7 +102,8 @@ public class TastePlaceInfoMap extends Fragment implements OnMapReadyCallback {
 
         MapsInitializer.initialize(this.getActivity());
 
-        // Updates the location and zoom of the MapView
+
+        //해당 맛집 위도, 경도 마커로 표시하는 과정
       CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 16);
 
         googleMap.animateCamera(cameraUpdate);

@@ -23,9 +23,6 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
 
     ListView list_excel;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,9 +32,10 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
         Excel();
 
 
-
     }
-    public void Excel() { //엑셀 값 읽어들이는 과정
+
+    //엑셀 값 읽어들이는 과정
+    public void Excel() {
         ArrayList<TastePlaceListData> listViewData = new ArrayList<>();
         Workbook workbook = null;
         Sheet sheet = null;
@@ -52,13 +50,14 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
 
             for (int row = 1; row <= RowEnd; row++) {
                 TastePlaceListData listData = new TastePlaceListData();
-                String kinds = sheet.getCell(0, row).getContents();
+                String kinds = sheet.getCell(0, row).getContents(); //종류(ex: 한식, 중식..)
+
                 if (kinds.contains(Taste_Button)) {
-                    listData.name = sheet.getCell(1, row).getContents();
-                    listData.address = sheet.getCell(2,row).getContents();
-                    listData.mention = sheet.getCell(5,row).getContents();
-                    listData.latitude = Double.parseDouble(sheet.getCell(3,row).getContents());
-                    listData.longitude = Double.parseDouble(sheet.getCell(4,row).getContents());
+                    listData.name = sheet.getCell(1, row).getContents(); //상호명
+                    listData.address = sheet.getCell(2,row).getContents(); //주소
+                    listData.mention = sheet.getCell(5,row).getContents(); //한줄평
+                    listData.latitude = Double.parseDouble(sheet.getCell(3,row).getContents()); //위도
+                    listData.longitude = Double.parseDouble(sheet.getCell(4,row).getContents()); //경도
 
 
                     listViewData.add(listData);
@@ -80,6 +79,9 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
             workbook.close();
 
             list_excel.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                /* 리스트 중 한개 클릭 시, 해당 값(상호명, 주소, 위도, 경도)을
+                 TastePlaceList(Activity) -> TastePlaceInfo(Activity)로 전달하는 과정 */
                 @Override
                 public void onItemClick(AdapterView parent, View v, int position, long id) {
                     Intent intent = new Intent(getApplicationContext(),TastePlaceInfo.class);
@@ -88,8 +90,6 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
                     intent.putExtra("latitude",listViewData.get(position).latitude);
                     intent.putExtra("longitude",listViewData.get(position).longitude);
                     startActivity(intent);
-
-
 
                 }
             });

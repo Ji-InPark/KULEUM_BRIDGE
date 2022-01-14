@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class TastePlaceListAdapter extends BaseAdapter { //맛집 리스트 어댑터
+/* 맛집 리스트 어댑터 */
+
+public class TastePlaceListAdapter extends BaseAdapter {
 
 
     LayoutInflater layoutInflater = null;
