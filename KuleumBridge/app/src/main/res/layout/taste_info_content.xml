@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:padding="10dp"
-        android:textSize="50sp"
+        android:textSize="40sp"
         android:textStyle="bold" />
 
 
@@ -27,7 +27,7 @@
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="wrap_content"
-        android:layout_height="500dp"
+        android:layout_height="470dp"
         android:layout_gravity="center"
         android:padding="10dp"
         />
@@ -36,6 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
         <Button
