@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 public class TastePlaceListAdapter extends BaseAdapter { //맛집 리스트 어댑터
 
-
     LayoutInflater layoutInflater = null;
     private ArrayList<TastePlaceListData> listViewData = null;
     private int count = 0;
@@ -21,6 +20,7 @@ public class TastePlaceListAdapter extends BaseAdapter { //맛집 리스트 어�
         listViewData = listData;
         count = listViewData.size();
     }
+
     @Override
     public int getCount() {
         return count;
@@ -47,20 +47,18 @@ public class TastePlaceListAdapter extends BaseAdapter { //맛집 리스트 어�
             convertView = layoutInflater.inflate(R.layout.taste_list_content, parent, false);
         }
 
-
-
         TextView name = convertView.findViewById(R.id.list_name);
         TextView address = convertView.findViewById(R.id.list_address);
         TextView mention = convertView.findViewById(R.id.list_mention);
-
 
         name.setText(listViewData.get(position).name);
         address.setText(listViewData.get(position).address);
         mention.setText(listViewData.get(position).mention);
 
         return convertView;
-        }
+
     }
+}
 
 
 

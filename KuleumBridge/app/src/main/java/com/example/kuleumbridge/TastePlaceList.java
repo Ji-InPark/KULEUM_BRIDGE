@@ -23,9 +23,6 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
 
     ListView list_excel;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,14 +30,13 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
         list_excel = (ListView)findViewById(R.id.list_excel);
 
         Excel();
-
-
-
     }
+
     public void Excel() { //엑셀 값 읽어들이는 과정
         ArrayList<TastePlaceListData> listViewData = new ArrayList<>();
         Workbook workbook = null;
         Sheet sheet = null;
+
         // 어떤 버튼을 눌렀는지 받아서 저장 (ex: 한식)
         String Taste_Button = getIntent().getStringExtra("parameter");
 
@@ -62,12 +58,8 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
 
 
                     listViewData.add(listData);
-
                 }
-
             }
-
-
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -88,9 +80,6 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
                     intent.putExtra("latitude",listViewData.get(position).latitude);
                     intent.putExtra("longitude",listViewData.get(position).longitude);
                     startActivity(intent);
-
-
-
                 }
             });
         }

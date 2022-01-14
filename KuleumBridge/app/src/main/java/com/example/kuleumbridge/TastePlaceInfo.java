@@ -60,10 +60,6 @@ public class TastePlaceInfo extends AppCompatActivity {
 
         }
 
-
-
-
-
     }
 
     public void CopyClick(View view) { //주소 복사하기 버튼

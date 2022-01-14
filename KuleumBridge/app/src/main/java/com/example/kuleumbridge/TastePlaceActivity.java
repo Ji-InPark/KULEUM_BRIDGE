@@ -70,9 +70,6 @@ public class TastePlaceActivity extends AppCompatActivity implements OnMapReadyC
                 longitude2.getNumberFormat().setMaximumFractionDigits(5);
                 longitude[row] = Double.parseDouble(longitude2.getContents()); //경도
 
-
-
-
             }
 
         } catch (IOException e) {
@@ -137,7 +134,7 @@ public class TastePlaceActivity extends AppCompatActivity implements OnMapReadyC
 
     }
 
-    }
+}
 
 
 
