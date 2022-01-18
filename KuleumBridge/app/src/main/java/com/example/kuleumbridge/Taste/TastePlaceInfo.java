@@ -14,8 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.kuleumbridge.R;
 
-/* 리스트 클릭시 나타나는 맛집 세부 정보(미완성)
-   주소와 버튼 사이에 지도 추가할 예정
+/* 리스트 클릭시 나타나는 맛집 세부 정보
+   상호명 - 주소 - 지도 - 주소 복사하기 버튼 - 지도 앱에서 확인하기 버튼 으로 구성
  */
 
 public class TastePlaceInfo extends AppCompatActivity {
@@ -27,6 +27,7 @@ public class TastePlaceInfo extends AppCompatActivity {
 
         Intent intent = getIntent();
 
+        //TastePlaceList의 값 받아오는 과정
         String name = intent.getStringExtra("name");
         String address = intent.getStringExtra("address");
         Double latitude = intent.getDoubleExtra("latitude",0);
@@ -38,6 +39,7 @@ public class TastePlaceInfo extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.mainFragment, mainFragment,"main").commit();
 
+            //TastePlaceInfo(Activity) -> TastePlaceInfoMap(fragment)로 값 전달하는 과정
             Bundle bundle = new Bundle();
             bundle.putString("name",name);
             bundle.putString("address",address);

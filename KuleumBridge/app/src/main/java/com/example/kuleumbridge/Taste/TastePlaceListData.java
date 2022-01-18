@@ -1,6 +1,9 @@
 package com.example.kuleumbridge.Taste;
 
-public class TastePlaceListData { //맛집 리스트 데이터 값
+/*
+   맛집 리스트 데이터 값
+ */
+public class TastePlaceListData {
 
     public String name = ""; //상호명
     public String address = ""; //주소
