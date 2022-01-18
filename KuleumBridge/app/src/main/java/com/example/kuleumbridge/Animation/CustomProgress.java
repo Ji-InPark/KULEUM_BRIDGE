@@ -1,4 +1,4 @@
-package com.example.kuleumbridge;
+package com.example.kuleumbridge.Animation;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -6,6 +6,8 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Window;
 import android.widget.ImageView;
+
+import com.example.kuleumbridge.R;
 
 // 애니메이션 담당 클래스
 public class CustomProgress extends Dialog {

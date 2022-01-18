@@ -1,4 +1,4 @@
-package com.example.kuleumbridge;
+package com.example.kuleumbridge.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,24 +6,29 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.kuleumbridge.API.ApiGradeAllClass;
+import com.example.kuleumbridge.API.ApiGradeNowClass;
+import com.example.kuleumbridge.API.ApiLoginClass;
+import com.example.kuleumbridge.Animation.CustomProgress;
+import com.example.kuleumbridge.Common.CallBack;
+import com.example.kuleumbridge.Common.EncryptClass;
+import com.example.kuleumbridge.Data.UserInfoClass;
+import com.example.kuleumbridge.R;
+import com.example.kuleumbridge.Taste.TastePlaceActivity;
+import com.example.kuleumbridge.Taste.TastePlaceList;
+import com.example.kuleumbridge.Calendar.mainAlarm;
 import com.google.android.material.tabs.TabLayout;
 
-import org.w3c.dom.Text;
-
-import java.io.Serializable;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -393,7 +398,7 @@ public class MainActivity extends AppCompatActivity {
                 parameter = "술집";
                 break;
         }
-        Intent intent = new Intent(this,TastePlaceList.class);
+        Intent intent = new Intent(this, TastePlaceList.class);
         intent.putExtra("parameter", parameter);
         startActivity(intent);
     }

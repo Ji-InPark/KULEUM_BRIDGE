@@ -1,4 +1,4 @@
-package com.example.kuleumbridge;
+package com.example.kuleumbridge.Taste;
 
 public class TastePlaceListData { //맛집 리스트 데이터 값
 

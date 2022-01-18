@@ -1,6 +1,8 @@
-package com.example.kuleumbridge;
+package com.example.kuleumbridge.API;
 
 import android.os.AsyncTask;
+
+import com.example.kuleumbridge.Common.CallBack;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,11 +13,11 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class ApiGradeNowClass extends AsyncTask<String, String, Boolean> {
+public class ApiGradeAllClass extends AsyncTask<String, String, Boolean> {
     private String std_num, result;
     private CallBack cb;
 
-    public ApiGradeNowClass(String std_num, CallBack cb)
+    public ApiGradeAllClass(String std_num, CallBack cb)
     {
         this.std_num = std_num;
         this.cb = cb;
@@ -52,7 +54,7 @@ public class ApiGradeNowClass extends AsyncTask<String, String, Boolean> {
         // rest api 로그인 post로 보냄
         RequestBody body = RequestBody.create(JSON, json.toString());
         Request request = new Request.Builder()
-                .url("http://3.37.235.212:5000/grade/now")
+                .url("http://3.37.235.212:5000/grade/all")
                 .addHeader("Connection", "close")
                 .post(body)
                 .build();

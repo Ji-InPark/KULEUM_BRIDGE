@@ -1,8 +1,10 @@
-package com.example.kuleumbridge;
+package com.example.kuleumbridge.Data;
+
+import com.example.kuleumbridge.Data.Notice;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONException;
+
 import java.io.Serializable;
 
 public class NoticeInfoClass implements Serializable {

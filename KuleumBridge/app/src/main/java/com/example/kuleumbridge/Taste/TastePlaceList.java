@@ -1,15 +1,15 @@
-package com.example.kuleumbridge;
+package com.example.kuleumbridge.Taste;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.kuleumbridge.R;
 
 import java.io.IOException;
 import java.io.InputStream;

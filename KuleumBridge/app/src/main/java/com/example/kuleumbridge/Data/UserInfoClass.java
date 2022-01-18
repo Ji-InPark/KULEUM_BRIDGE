@@ -1,4 +1,4 @@
-package com.example.kuleumbridge;
+package com.example.kuleumbridge.Data;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

@@ -1,4 +1,4 @@
-package com.example.kuleumbridge;
+package com.example.kuleumbridge.Activity;
 
 import android.os.Bundle;
 import android.view.View;

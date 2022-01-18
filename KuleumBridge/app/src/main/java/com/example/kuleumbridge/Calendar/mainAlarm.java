@@ -1,16 +1,16 @@
-package com.example.kuleumbridge;
+package com.example.kuleumbridge.Calendar;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.kuleumbridge.Calendar.Calendar;
+import com.example.kuleumbridge.R;
 
 import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class mainAlarm extends Calendar{
+public class mainAlarm extends Calendar {
     TextView whattodo;
 
     // 시간을 불러오는 함수
