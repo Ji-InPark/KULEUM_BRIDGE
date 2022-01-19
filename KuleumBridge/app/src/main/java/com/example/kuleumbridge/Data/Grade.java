@@ -1,4 +1,4 @@
-package com.example.kuleumbridge;
+package com.example.kuleumbridge.Data;
 
 public class Grade {
     /* JSON배열안에 들어있는 ELEMENTS는 크게 3가지로 나뉨.

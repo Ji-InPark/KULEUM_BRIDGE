@@ -1,4 +1,4 @@
-package com.example.kuleumbridge;
+package com.example.kuleumbridge.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,24 +6,29 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.kuleumbridge.API.ApiGradeAllClass;
+import com.example.kuleumbridge.API.ApiGradeNowClass;
+import com.example.kuleumbridge.API.ApiLoginClass;
+import com.example.kuleumbridge.Animation.CustomProgress;
+import com.example.kuleumbridge.Common.CallBack;
+import com.example.kuleumbridge.Common.EncryptClass;
+import com.example.kuleumbridge.Data.UserInfoClass;
+import com.example.kuleumbridge.R;
+import com.example.kuleumbridge.Taste.TastePlaceActivity;
+import com.example.kuleumbridge.Taste.TastePlaceList;
+import com.example.kuleumbridge.Calendar.mainAlarm;
 import com.google.android.material.tabs.TabLayout;
 
-import org.w3c.dom.Text;
-
-import java.io.Serializable;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -45,11 +50,8 @@ public class MainActivity extends AppCompatActivity {
         // 로딩 화면 시작
         customProgress.show();
 
-        // 자동로그인 중에 로딩화면이 돌아야함
-        // 자동로그인이 가능하다면 알아서 로딩화면에서 화면전환 될 것이고
-        // 자동로그인이 안된다고하면 로딩화면만 없앰
+        // 자동로그인
         autoLogin();
-
     }
 
     // 로그인 버튼이 눌렸을 때
@@ -91,9 +93,9 @@ public class MainActivity extends AppCompatActivity {
                     public void callback_grade(String result) {
                         // uic에 얻어온 정보 저장 - 전체성적
                         uic.setGradeAllInfo(result);
+
                         TextView gradeAll = findViewById(R.id.gradeAllText);
                         gradeAT = uic.getGrade_all_txt();
-                        System.out.println(gradeAT);
 
                         //gradeAll.setText(gradeAT);
                         //※새로운 창에서 생성되는 TextView 객체에 setText를 진행할경우 앱이 비정상종료되는 문제 발생※
@@ -122,11 +124,12 @@ public class MainActivity extends AppCompatActivity {
                     public void callback_grade(String result) {
                         // uic에 얻어온 정보 저장 - 금학기성적
                         uic.setGradeNowInfo(result);
-                        TextView gradeNow = findViewById(R.id.gradeNowText);
-                        String txt = uic.getGrade_now_txt();
-                        //System.out.println(txt);
-                        gradeNow.setText(txt);
 
+                        TextView gradeNow = findViewById(R.id.gradeNowText);
+
+                        String txt = uic.getGrade_now_txt();
+
+                        gradeNow.setText(txt);
                     }
 
                     @Override
@@ -145,27 +148,7 @@ public class MainActivity extends AppCompatActivity {
                     //  자동로그인 정보는 로그아웃 후 지우는 기능이 추가되어야 함
                     //
 
-                    // 자동 로그인을 위한 로그인 정보 암호화 부분
-                    EncryptClass ec = new EncryptClass(getKey());
-
-                    String ec_id = ec.encrypt(input_id);
-                    String ec_pwd = ec.encrypt(input_pwd);
-
-                    // 암호화된 로그인 정보 저장 부분
-                    // 이미 암호화된 정보가 있다면 저장 X
-                    SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
-
-                    System.out.println(pref.getString("id", "").equals(""));
-
-                    if(pref.getString("id", "").equals(""))
-                    {
-                        SharedPreferences.Editor editor = pref.edit();
-
-                        editor.putString("id", ec_id);
-                        editor.putString("pwd", ec_pwd);
-
-                        editor.apply();
-                    }
+                    saveLoginInfo(input_id, input_pwd);
 
                     // 뷰 전환 부분
                     setContentView(R.layout.after_log);
@@ -197,9 +180,8 @@ public class MainActivity extends AppCompatActivity {
                     calenderTV = findViewById(R.id.calendarview);
                     mainAlarm mA = new mainAlarm();
                     String today = mA.getTime();
-                    System.out.println(today);
 
-                    pref = getSharedPreferences(today ,MODE_PRIVATE); // 날짜를 기준으로 여는 것
+                    SharedPreferences pref = getSharedPreferences(today ,MODE_PRIVATE); // 날짜를 기준으로 여는 것
 
                     String fileData = pref.getString("input", "오늘 할 일이 존재하지 않습니다."); // fileData 변수에 저장된 것을 저장
 
@@ -228,13 +210,41 @@ public class MainActivity extends AppCompatActivity {
         alc.execute();
     }
 
+    public void saveLoginInfo(String input_id, String input_pwd)
+    {
+        // 자동 로그인을 위한 로그인 정보 암호화 부분
+        EncryptClass ec = new EncryptClass(getKey());
+
+        try {
+            String ec_id = ec.encrypt(input_id);
+            String ec_pwd = ec.encrypt(input_pwd);
+
+            // 암호화된 로그인 정보 저장 부분
+            // 이미 암호화된 정보가 있다면 저장 X
+            SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
+
+            if(pref.getString("id", "").equals(""))
+            {
+                SharedPreferences.Editor editor = pref.edit();
+
+                editor.putString("id", ec_id);
+                editor.putString("pwd", ec_pwd);
+
+                editor.apply();
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     // 작은 캘린더 화면 글 불러오기 함수
     public void setCalenderText()
     {
         calenderTV = findViewById(R.id.calendarview);
         mainAlarm mA = new mainAlarm();
         String today = mA.getTime();
-        System.out.println(today);
 
         SharedPreferences pref = getSharedPreferences(today ,MODE_PRIVATE);                 // 날짜를 기준으로 여는 것
 
@@ -251,20 +261,23 @@ public class MainActivity extends AppCompatActivity {
         TextView user_id = findViewById(R.id.user_id);
         TextView major = findViewById(R.id.dpet_ttnm);
 
-
         try {
+            // 학생 사진 세팅
             byte[] encodeByte = Base64.decode(uic.getPHOTO(), Base64.DEFAULT);
             Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
             img.setImageBitmap(bitmap);
+
+            // 학생 이름 세팅
+            name.setText(uic.getUSER_NM());
+
+            // 학생 학번 세팅
+            user_id.setText(getString(R.string.userid, uic.getUSER_ID()));
+
+            // 학생 학과 세팅
+            major.setText(getString(R.string.dept, uic.getDEPT_TTNM()));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        name.setText(uic.getUSER_NM());
-
-        // 경고를 지우기 위해 string.xml 파일을 만든후 string 처리
-        user_id.setText(getString(R.string.userid, uic.getUSER_ID()));
-        major.setText(getString(R.string.dept, uic.getDEPT_TTNM()));
-
     }
 
     // 자동 로그인 함수
@@ -278,7 +291,6 @@ public class MainActivity extends AppCompatActivity {
             // login 파일에 저장된 정보가 없다면 함수 종료
             if(ec_id.equals(""))
             {
-                System.out.println("로그인 정보가 없다");
                 // 로딩 화면 중단
                 customProgress.dismiss();
                 return;
@@ -377,7 +389,7 @@ public class MainActivity extends AppCompatActivity {
                 parameter = "패스트푸트";
                 break;
             case R.id.JungSik:
-                parameter = "정식";
+                parameter = "중식";
                 break;
             case R.id.Meat:
                 parameter = "고기";
@@ -386,7 +398,7 @@ public class MainActivity extends AppCompatActivity {
                 parameter = "술집";
                 break;
         }
-        Intent intent = new Intent(this,TastePlaceList.class);
+        Intent intent = new Intent(this, TastePlaceList.class);
         intent.putExtra("parameter", parameter);
         startActivity(intent);
     }

@@ -1,8 +1,7 @@
-package com.example.kuleumbridge;
+package com.example.kuleumbridge.Data;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONException;
 import java.io.Serializable;
 
 public class UserInfoClass implements Serializable {
@@ -19,10 +18,8 @@ public class UserInfoClass implements Serializable {
     private int DS_GRAD_length; // grade_all 배열에서 실질적으로 정보가 들어있는 칸의 개수
     private int DS_GRADOFSTUDENT_length; // grade_now 배열에서 실질적으로 정보가 들어있는 칸의 개수
 
-    private String grade_all_txt = ""; // 화면 상에서 보여지는 전체 성적 텍스트
-    private String grade_now_txt = ""; // 화면 상에서 보여지는 금학기 성적 텍스트
-
-    //Stack<GradeAllClass> gradeStack = new Stack<GradeAllClass>();
+    private StringBuilder grade_all_txt = new StringBuilder(); // 화면 상에서 보여지는 전체 성적 텍스트
+    private StringBuilder grade_now_txt = new StringBuilder(); // 화면 상에서 보여지는 금학기 성적 텍스트
 
     public UserInfoClass()
     {
@@ -100,16 +97,6 @@ public class UserInfoClass implements Serializable {
         }
     }
 
-    public void checkSemesterGrade(Grade[] grc) {
-        for (int i = 0; i < grade_all.length; i++) {
-            if (grade_all[i].getHAKSU_NM().equals("평점평균")) {
-                System.out.println("학기평균학점 :" + grade_all[i].getPOBT_DIV());
-            } else if (grade_all[i].getHAKSU_NM().equals("총평점평균")) {
-                System.out.println("총평균학점 :" + grade_all[i].getPOBT_DIV());
-            }
-        }
-    }
-
     public void setRESNO(String resno) {
         RESNO = resno;
     }
@@ -169,20 +156,20 @@ public class UserInfoClass implements Serializable {
     public String getGrade_all_txt() {
         for (int i = 0; i<DS_GRAD_length; i++) {
             if (!(grade_all[i].getHAKSU_NM().equals("평점평균")) && !(grade_all[i].getHAKSU_NM().equals("총평점평균"))) {
-                //System.out.println(grade_all[i].toString());
-                grade_all_txt += grade_all[i].toString();
-                //System.out.println("if문 걸림");
+
+                grade_all_txt.append(grade_all[i].toString());
             }
         }
-        return grade_all_txt;
+        return grade_all_txt.toString();
     }
 
 
     public String getGrade_now_txt() {
         for (int i = 0; i<DS_GRADOFSTUDENT_length; i++) {
-            grade_now_txt += grade_now[i].toString();
+
+            grade_now_txt.append(grade_now[i].toString());
         }
-        return grade_now_txt;
+        return grade_now_txt.toString();
     }
 
 }
