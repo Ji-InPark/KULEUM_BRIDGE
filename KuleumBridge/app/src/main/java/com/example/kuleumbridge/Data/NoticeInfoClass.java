@@ -28,19 +28,19 @@ public class NoticeInfoClass implements Serializable {
 
 
     public NoticeInfoClass() {
-        /* 주석 숫자만큼의 게시글을 띄워줄 예정(공지사항 종류별 글 게시 빈도 고려) */
-        notice_Haksa = new Notice[100]; // 15
-        notice_Janghak = new Notice[100]; // 30
-        notice_Chwichangup = new Notice[100]; // 30
-        notice_Gukje = new Notice[100]; // 10
+        /* 5개씩 게시글 띄워주기로 일단은 통일 */
+        notice_Haksa = new Notice[100]; // 5
+        notice_Janghak = new Notice[100]; // 5
+        notice_Chwichangup = new Notice[100]; // 5
+        notice_Gukje = new Notice[100]; // 5
         notice_Haksaeng = new Notice[100]; // 5
-        notice_Sanhak = new Notice[100]; // 20~30
-        notice_Ilban = new Notice[100]; // 20~30
+        notice_Sanhak = new Notice[100]; // 5
+        notice_Ilban = new Notice[100]; // 5
     }
 
     /* POSTED_DT는 공지글 게시일자
-       SUBJECT는 게시글 제목
-       ARTICLE_ID는 아직 어디에 쓰이는 변수인지 파악 안됨. 일단 가져와봄 */
+       SUBJECT는 글 제목
+       ARTICLE_ID는 각 게시글 URL에 들어있는 게시글 고유의 ID */
     public void setNoticeInfo(String response_string_notice, String notice_category) {
 
         try {
@@ -48,72 +48,93 @@ public class NoticeInfoClass implements Serializable {
             JSONArray DS_LIST = temp.getJSONArray("DS_LIST");
             if (notice_category.equals("Haksa")) {
                 setDS_LIST_length_Haksa(DS_LIST.length());
-                for (int i = 0; i < DS_LIST.length(); i++) {
+                for (int i = 0; i < 5; i++) {
                     JSONObject notice = DS_LIST.getJSONObject(i);
                     notice_Haksa[i] = new Notice();
                     notice_Haksa[i].setPOSTED_DT(notice.getString("POSTED_DT"));
                     notice_Haksa[i].setSUBJECT(notice.getString("SUBJECT"));
                     notice_Haksa[i].setARTICLE_ID(notice.getString("ARTICLE_ID"));
+                    notice_Haksa[i].setURL
+                            ("http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=notice?&sort=6&id="
+                                    +notice_Haksa[i].getARTICLE_ID()+"&cat=0000300001");
                 }
             }
             else if (notice_category.equals("Janghak")) {
                 setDS_LIST_length_Janghak(DS_LIST.length());
-                for (int i = 0; i < DS_LIST.length(); i++) {
+                for (int i = 0; i < 5; i++) {
                     JSONObject notice = DS_LIST.getJSONObject(i);
                     notice_Janghak[i] = new Notice();
                     notice_Janghak[i].setPOSTED_DT(notice.getString("POSTED_DT"));
                     notice_Janghak[i].setSUBJECT(notice.getString("SUBJECT"));
                     notice_Janghak[i].setARTICLE_ID(notice.getString("ARTICLE_ID"));
+                    notice_Janghak[i].setURL(
+                            "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=11688412?&sort=6&id="
+                                    +notice_Janghak[i].getARTICLE_ID()+"&cat=");
                 }
             }
             else if (notice_category.equals("Chwichangup")) {
                 setDS_LIST_length_Chwichangup(DS_LIST.length());
-                for (int i = 0; i < DS_LIST.length(); i++) {
+                for (int i = 0; i < 5; i++) {
                     JSONObject notice = DS_LIST.getJSONObject(i);
                     notice_Chwichangup[i] = new Notice();
                     notice_Chwichangup[i].setPOSTED_DT(notice.getString("POSTED_DT"));
                     notice_Chwichangup[i].setSUBJECT(notice.getString("SUBJECT"));
                     notice_Chwichangup[i].setARTICLE_ID(notice.getString("ARTICLE_ID"));
+                    notice_Chwichangup[i].setURL(
+                            "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=11731332?&sort=6&id="
+                                    +notice_Chwichangup[i].getARTICLE_ID()+"&cat=");
                 }
             }
             else if (notice_category.equals("Gukje")) {
                 setDS_LIST_length_Gukje(DS_LIST.length());
-                for (int i = 0; i < DS_LIST.length(); i++) {
+                for (int i = 0; i < 5; i++) {
                     JSONObject notice = DS_LIST.getJSONObject(i);
                     notice_Gukje[i] = new Notice();
                     notice_Gukje[i].setPOSTED_DT(notice.getString("POSTED_DT"));
                     notice_Gukje[i].setSUBJECT(notice.getString("SUBJECT"));
                     notice_Gukje[i].setARTICLE_ID(notice.getString("ARTICLE_ID"));
+                    notice_Gukje[i].setURL(
+                            "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=notice?&sort=6&id="
+                                    +notice_Gukje[i].getARTICLE_ID()+"&cat=0000300002");
                 }
             }
             else if (notice_category.equals("Haksaeng")) {
                 setDS_LIST_length_Haksaeng(DS_LIST.length());
-                for (int i = 0; i < DS_LIST.length(); i++) {
+                for (int i = 0; i < 5; i++) {
                     JSONObject notice = DS_LIST.getJSONObject(i);
                     notice_Haksaeng[i] = new Notice();
                     notice_Haksaeng[i].setPOSTED_DT(notice.getString("POSTED_DT"));
                     notice_Haksaeng[i].setSUBJECT(notice.getString("SUBJECT"));
                     notice_Haksaeng[i].setARTICLE_ID(notice.getString("ARTICLE_ID"));
+                    notice_Haksaeng[i].setURL(
+                            "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=notice?&sort=6&id="
+                                    +notice_Haksaeng[i].getARTICLE_ID()+"&cat=0000300003");
                 }
             }
             else if (notice_category.equals("Sanhak")) {
                 setDS_LIST_length_Sanhak(DS_LIST.length());
-                for (int i = 0; i < DS_LIST.length(); i++) {
+                for (int i = 0; i < 5; i++) {
                     JSONObject notice = DS_LIST.getJSONObject(i);
                     notice_Sanhak[i] = new Notice();
                     notice_Sanhak[i].setPOSTED_DT(notice.getString("POSTED_DT"));
                     notice_Sanhak[i].setSUBJECT(notice.getString("SUBJECT"));
                     notice_Sanhak[i].setARTICLE_ID(notice.getString("ARTICLE_ID"));
+                    notice_Sanhak[i].setURL(
+                            "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=65659?&sort=6&id="
+                                    +notice_Sanhak[i].getARTICLE_ID()+"&cat=");
                 }
             }
             else if (notice_category.equals("Ilban")) {
                 setDS_LIST_length_Ilban(DS_LIST.length());
-                for (int i = 0; i < DS_LIST.length(); i++) {
+                for (int i = 0; i < 5; i++) {
                     JSONObject notice = DS_LIST.getJSONObject(i);
                     notice_Ilban[i] = new Notice();
                     notice_Ilban[i].setPOSTED_DT(notice.getString("POSTED_DT"));
                     notice_Ilban[i].setSUBJECT(notice.getString("SUBJECT"));
                     notice_Ilban[i].setARTICLE_ID(notice.getString("ARTICLE_ID"));
+                    notice_Ilban[i].setURL(
+                            "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=notice?&sort=6&id="
+                                    +notice_Ilban[i].getARTICLE_ID()+"&cat=0000300006");
                 }
             }
             else {
