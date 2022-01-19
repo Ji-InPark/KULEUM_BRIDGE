@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceCategory
+        android:title="시스템 설정"
+        >
+
+    <SwitchPreference
+        android:key="vibrate"
+        android:title="진동알림"/>
+
+    <CheckBoxPreference
+        android:key="message"
+        android:title="소리 알림"/>
+
+
+
+
+
+    <MultiSelectListPreference
+        android:key="favor"
+        android:title="배경화면 선택"
+        android:entries="@array/favors"
+        android:entryValues="@array/favors"/>
+</PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="개인 / 보안"
+        >
+
+
+    <CheckBoxPreference
+        android:key="message"
+        android:title="자동 로그인"/>
+
+    <PreferenceScreen
+        android:title="로그아웃">
+        <intent android:targetPackage="com.lcw.ex88preferencefragment"
+            android:targetClass="com.lcw.ex88preferencefragment.ImageActivity"/>
+
+    </PreferenceScreen>
+    </PreferenceCategory>
+
+</PreferenceScreen>
