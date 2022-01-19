@@ -75,22 +75,17 @@ public class MainActivity extends AppCompatActivity {
         // 그 AsyncTask를 상속한 ApiConnetClass 클래스를 만들어서 객체로 사용하기로 함
         // 생성자의 파라매터로 id, pwd 를 받는다.
         ApiLoginClass alc = new ApiLoginClass(input_id, input_pwd, this, new CallBack() {
-            // 로그인 과정이 끝나고 실행할 부분
+
             @Override
-            public void callback_login(String result) {
+            public void callback_success(String result) {
                 // 유저 정보 저장하는 부분
                 uic.setLoginInfo(result);
 
                 // GradeAll 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask를 상속한 클래스를 활용해 값을 얻어온다.
                 ApiGradeAllClass agac = new ApiGradeAllClass(uic.getUSER_ID(), new CallBack() {
-                    // 정보를 얻어오는 과정이 끝나고 실행할 부분
-                    @Override
-                    public void callback_login(String result) {
-
-                    }
 
                     @Override
-                    public void callback_grade(String result) {
+                    public void callback_success(String result) {
                         // uic에 얻어온 정보 저장 - 전체성적
                         uic.setGradeAllInfo(result);
 
@@ -115,13 +110,9 @@ public class MainActivity extends AppCompatActivity {
 
                 // GradeNow 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask를 상속한 클래스를 활요해 값을 얻어온다.
                 ApiGradeNowClass agnc = new ApiGradeNowClass(uic.getUSER_ID(), new CallBack() {
-                    @Override
-                    public void callback_login(String result) {
-
-                    }
 
                     @Override
-                    public void callback_grade(String result) {
+                    public void callback_success(String result) {
                         // uic에 얻어온 정보 저장 - 금학기성적
                         uic.setGradeNowInfo(result);
 
@@ -194,10 +185,7 @@ public class MainActivity extends AppCompatActivity {
                     mainAlarm temp = new mainAlarm();
                     calenderTV.setText(temp.getTime()+"\n오늘의 할 일이 존재하지 않습니다.");
                 }
-            }
 
-            @Override
-            public void callback_grade(String result) {
             }
 
             @Override
