@@ -22,6 +22,7 @@ import com.example.kuleumbridge.API.ApiLoginClass;
 import com.example.kuleumbridge.Animation.CustomProgress;
 import com.example.kuleumbridge.Common.CallBack;
 import com.example.kuleumbridge.Common.EncryptClass;
+import com.example.kuleumbridge.Data.Grade;
 import com.example.kuleumbridge.Data.UserInfoClass;
 import com.example.kuleumbridge.R;
 import com.example.kuleumbridge.Taste.TasteHandler;
@@ -45,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         uic = new UserInfoClass();
-
         customProgress = new CustomProgress(MainActivity.this);
 
         // 로딩 화면 시작
