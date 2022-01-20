@@ -12,9 +12,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.kuleumbridge.Data.UserInfoClass;
 import com.example.kuleumbridge.R;
 
 public class GradeCheckActivity extends AppCompatActivity {
+    UserInfoClass uic;
     String gradeAT;
     LinearLayout base;
 
@@ -22,9 +24,8 @@ public class GradeCheckActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.grade_check);
-        gradeAT = getIntent().getStringExtra("gradeAll");
+        uic = getIntent().getParcelableExtra("UIC"); // 넘어온 UIC객체
         TextView gradeAll = findViewById(R.id.gradeAllText);
-        gradeAll.setText(gradeAT);
     }
 
 }

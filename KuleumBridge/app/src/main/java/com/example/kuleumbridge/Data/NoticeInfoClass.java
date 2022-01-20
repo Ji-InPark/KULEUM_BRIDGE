@@ -1,5 +1,8 @@
 package com.example.kuleumbridge.Data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.example.kuleumbridge.Data.Notice;
 
 import org.json.JSONArray;
@@ -7,7 +10,7 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
-public class NoticeInfoClass implements Serializable {
+public class NoticeInfoClass implements Parcelable {
 
     private Notice[] notice_Haksa; // 학사 공지사항 저장
     private Notice[] notice_Janghak; // 장학 공지사항 저장
@@ -38,9 +41,31 @@ public class NoticeInfoClass implements Serializable {
         notice_Ilban = new Notice[100]; // 5
     }
 
+    protected NoticeInfoClass(Parcel in) {
+        DS_LIST_length_Haksa = in.readInt();
+        DS_LIST_length_Janghak = in.readInt();
+        DS_LIST_length_Chwichangup = in.readInt();
+        DS_LIST_length_Gukje = in.readInt();
+        DS_LIST_length_Haksaeng = in.readInt();
+        DS_LIST_length_Sanhak = in.readInt();
+        DS_LIST_length_Ilban = in.readInt();
+    }
+
+    public static final Creator<NoticeInfoClass> CREATOR = new Creator<NoticeInfoClass>() {
+        @Override
+        public NoticeInfoClass createFromParcel(Parcel in) {
+            return new NoticeInfoClass(in);
+        }
+
+        @Override
+        public NoticeInfoClass[] newArray(int size) {
+            return new NoticeInfoClass[size];
+        }
+    };
+
     /* POSTED_DT는 공지글 게시일자
-       SUBJECT는 글 제목
-       ARTICLE_ID는 각 게시글 URL에 들어있는 게시글 고유의 ID */
+           SUBJECT는 글 제목
+           ARTICLE_ID는 각 게시글 URL에 들어있는 게시글 고유의 ID */
     public void setNoticeInfo(String response_string_notice, String notice_category) {
 
         try {
@@ -172,5 +197,21 @@ public class NoticeInfoClass implements Serializable {
 
     public void setDS_LIST_length_Ilban(int DS_LIST_length_Ilban) {
         this.DS_LIST_length_Ilban = DS_LIST_length_Ilban;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(DS_LIST_length_Haksa);
+        parcel.writeInt(DS_LIST_length_Janghak);
+        parcel.writeInt(DS_LIST_length_Chwichangup);
+        parcel.writeInt(DS_LIST_length_Gukje);
+        parcel.writeInt(DS_LIST_length_Haksaeng);
+        parcel.writeInt(DS_LIST_length_Sanhak);
+        parcel.writeInt(DS_LIST_length_Ilban);
     }
 }
