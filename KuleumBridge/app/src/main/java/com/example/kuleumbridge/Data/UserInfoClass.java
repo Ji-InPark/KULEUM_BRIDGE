@@ -1,10 +1,13 @@
 package com.example.kuleumbridge.Data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.Serializable;
 
-public class UserInfoClass implements Serializable {
+public class UserInfoClass implements Parcelable{
 
     private String RESNO;       // 생년월일
     private String DEPT_TTNM;   // 소속단과대 및 학과
@@ -26,6 +29,28 @@ public class UserInfoClass implements Serializable {
         grade_all = new Grade[100];
         grade_now = new Grade[10];
     }
+
+    protected UserInfoClass(Parcel in) {
+        RESNO = in.readString();
+        DEPT_TTNM = in.readString();
+        USER_NM = in.readString();
+        USER_ID = in.readString();
+        PHOTO = in.readString();
+        DS_GRAD_length = in.readInt();
+        DS_GRADOFSTUDENT_length = in.readInt();
+    }
+
+    public static final Creator<UserInfoClass> CREATOR = new Creator<UserInfoClass>() {
+        @Override
+        public UserInfoClass createFromParcel(Parcel in) {
+            return new UserInfoClass(in);
+        }
+
+        @Override
+        public UserInfoClass[] newArray(int size) {
+            return new UserInfoClass[size];
+        }
+    };
 
     public void setLoginInfo(String response_string) {
         try {
@@ -172,4 +197,19 @@ public class UserInfoClass implements Serializable {
         return grade_now_txt.toString();
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(RESNO);
+        parcel.writeString(DEPT_TTNM);
+        parcel.writeString(USER_NM);
+        parcel.writeString(USER_ID);
+        parcel.writeString(PHOTO);
+        parcel.writeInt(DS_GRAD_length);
+        parcel.writeInt(DS_GRADOFSTUDENT_length);
+    }
 }
