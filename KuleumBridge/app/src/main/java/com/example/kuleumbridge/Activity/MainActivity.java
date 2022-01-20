@@ -405,7 +405,7 @@ public class MainActivity extends AppCompatActivity {
     public void onGradeCheckAcBtnClick(View view) {
         //GradeCheckActivity 실행, 기존 창은 유지.
         Intent intent2 = new Intent(this, GradeCheckActivity.class);
-        intent2.putExtra("UIC", uic); // uic 객체를 UIC라는 이름으로 포장해서 GradeCheckActivity로 보낸다.
+        intent2.putParcelableArrayListExtra("GAA", uic.getGrade_all()); // uic 객체를 UIC라는 이름으로 포장해서 GradeCheckActivity로 보낸다.
         startActivity(intent2);
     }
 

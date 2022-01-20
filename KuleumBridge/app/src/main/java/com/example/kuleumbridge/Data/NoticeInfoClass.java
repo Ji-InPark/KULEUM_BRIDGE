@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class NoticeInfoClass implements Parcelable {
 
@@ -75,7 +76,7 @@ public class NoticeInfoClass implements Parcelable {
                 setDS_LIST_length_Haksa(DS_LIST.length());
                 for (int i = 0; i < 5; i++) {
                     JSONObject notice = DS_LIST.getJSONObject(i);
-                    notice_Haksa[i] = new Notice();
+                    notice_Haksa[i] = new Notice("","","","");
                     notice_Haksa[i].setPOSTED_DT(notice.getString("POSTED_DT"));
                     notice_Haksa[i].setSUBJECT(notice.getString("SUBJECT"));
                     notice_Haksa[i].setARTICLE_ID(notice.getString("ARTICLE_ID"));
@@ -88,7 +89,7 @@ public class NoticeInfoClass implements Parcelable {
                 setDS_LIST_length_Janghak(DS_LIST.length());
                 for (int i = 0; i < 5; i++) {
                     JSONObject notice = DS_LIST.getJSONObject(i);
-                    notice_Janghak[i] = new Notice();
+                    notice_Janghak[i] = new Notice("","","","");
                     notice_Janghak[i].setPOSTED_DT(notice.getString("POSTED_DT"));
                     notice_Janghak[i].setSUBJECT(notice.getString("SUBJECT"));
                     notice_Janghak[i].setARTICLE_ID(notice.getString("ARTICLE_ID"));
@@ -101,7 +102,7 @@ public class NoticeInfoClass implements Parcelable {
                 setDS_LIST_length_Chwichangup(DS_LIST.length());
                 for (int i = 0; i < 5; i++) {
                     JSONObject notice = DS_LIST.getJSONObject(i);
-                    notice_Chwichangup[i] = new Notice();
+                    notice_Chwichangup[i] = new Notice("","","","");
                     notice_Chwichangup[i].setPOSTED_DT(notice.getString("POSTED_DT"));
                     notice_Chwichangup[i].setSUBJECT(notice.getString("SUBJECT"));
                     notice_Chwichangup[i].setARTICLE_ID(notice.getString("ARTICLE_ID"));
@@ -114,7 +115,7 @@ public class NoticeInfoClass implements Parcelable {
                 setDS_LIST_length_Gukje(DS_LIST.length());
                 for (int i = 0; i < 5; i++) {
                     JSONObject notice = DS_LIST.getJSONObject(i);
-                    notice_Gukje[i] = new Notice();
+                    notice_Gukje[i] = new Notice("","","","");
                     notice_Gukje[i].setPOSTED_DT(notice.getString("POSTED_DT"));
                     notice_Gukje[i].setSUBJECT(notice.getString("SUBJECT"));
                     notice_Gukje[i].setARTICLE_ID(notice.getString("ARTICLE_ID"));
@@ -127,7 +128,7 @@ public class NoticeInfoClass implements Parcelable {
                 setDS_LIST_length_Haksaeng(DS_LIST.length());
                 for (int i = 0; i < 5; i++) {
                     JSONObject notice = DS_LIST.getJSONObject(i);
-                    notice_Haksaeng[i] = new Notice();
+                    notice_Haksaeng[i] = new Notice("","","","");
                     notice_Haksaeng[i].setPOSTED_DT(notice.getString("POSTED_DT"));
                     notice_Haksaeng[i].setSUBJECT(notice.getString("SUBJECT"));
                     notice_Haksaeng[i].setARTICLE_ID(notice.getString("ARTICLE_ID"));
@@ -140,7 +141,7 @@ public class NoticeInfoClass implements Parcelable {
                 setDS_LIST_length_Sanhak(DS_LIST.length());
                 for (int i = 0; i < 5; i++) {
                     JSONObject notice = DS_LIST.getJSONObject(i);
-                    notice_Sanhak[i] = new Notice();
+                    notice_Sanhak[i] = new Notice("","","","");
                     notice_Sanhak[i].setPOSTED_DT(notice.getString("POSTED_DT"));
                     notice_Sanhak[i].setSUBJECT(notice.getString("SUBJECT"));
                     notice_Sanhak[i].setARTICLE_ID(notice.getString("ARTICLE_ID"));
@@ -153,7 +154,7 @@ public class NoticeInfoClass implements Parcelable {
                 setDS_LIST_length_Ilban(DS_LIST.length());
                 for (int i = 0; i < 5; i++) {
                     JSONObject notice = DS_LIST.getJSONObject(i);
-                    notice_Ilban[i] = new Notice();
+                    notice_Ilban[i] = new Notice("","","","");
                     notice_Ilban[i].setPOSTED_DT(notice.getString("POSTED_DT"));
                     notice_Ilban[i].setSUBJECT(notice.getString("SUBJECT"));
                     notice_Ilban[i].setARTICLE_ID(notice.getString("ARTICLE_ID"));
