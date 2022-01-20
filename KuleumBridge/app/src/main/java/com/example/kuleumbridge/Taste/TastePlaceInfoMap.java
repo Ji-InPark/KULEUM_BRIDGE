@@ -55,7 +55,7 @@ public class TastePlaceInfoMap extends Fragment implements OnMapReadyCallback {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        rootView = (ViewGroup)inflater.inflate(R.layout.taste_info_content, container, false);
+        rootView = (ViewGroup)inflater.inflate(R.layout.taste_info_item, container, false);
         mapView = (MapView) rootView.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
 

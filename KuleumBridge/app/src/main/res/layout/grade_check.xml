@@ -16,18 +16,6 @@
 
 
 
-    <Button
-        android:visibility="gone"
-        android:id="@+id/levelBtn"
-        android:layout_width="220dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="ㅁ학년 ㅁ학기"
-        android:textSize="25dp"
-        android:layout_marginTop="30dp"/>
-
-
     <TextView
         android:id="@+id/gradeAllText"
         android:layout_width="340dp"

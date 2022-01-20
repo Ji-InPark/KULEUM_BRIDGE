@@ -28,7 +28,7 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.taste_list_main);
+        setContentView(R.layout.taste_list);
         list_excel = (ListView)findViewById(R.id.list_excel);
 
         Excel();

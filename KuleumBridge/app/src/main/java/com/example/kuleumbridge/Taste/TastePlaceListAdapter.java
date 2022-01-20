@@ -48,7 +48,7 @@ public class TastePlaceListAdapter extends BaseAdapter {
                 layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             }
-            convertView = layoutInflater.inflate(R.layout.taste_list_content, parent, false);
+            convertView = layoutInflater.inflate(R.layout.taste_list_item, parent, false);
         }
 
         TextView name = convertView.findViewById(R.id.list_name);

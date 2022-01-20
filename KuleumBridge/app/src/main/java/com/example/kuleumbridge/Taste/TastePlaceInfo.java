@@ -23,7 +23,7 @@ public class TastePlaceInfo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.taste_info_main);
+        setContentView(R.layout.taste_info);
 
         Intent intent = getIntent();
 

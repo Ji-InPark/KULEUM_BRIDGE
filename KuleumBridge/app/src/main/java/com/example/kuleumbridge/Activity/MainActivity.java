@@ -401,7 +401,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    // 성적 보기 버튼 상호작용 함수
+    // 세부성적 보기 버튼 상호작용 함수
     public void onGradeCheckAcBtnClick(View view) {
         //GradeCheckActivity 실행, 기존 창은 유지.
         Intent intent2 = new Intent(this, GradeCheckActivity.class);
