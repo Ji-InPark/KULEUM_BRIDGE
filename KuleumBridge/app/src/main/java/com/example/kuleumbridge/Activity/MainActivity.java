@@ -24,6 +24,7 @@ import com.example.kuleumbridge.Common.CallBack;
 import com.example.kuleumbridge.Common.EncryptClass;
 import com.example.kuleumbridge.Data.UserInfoClass;
 import com.example.kuleumbridge.R;
+import com.example.kuleumbridge.Taste.TasteHandler;
 import com.example.kuleumbridge.Taste.TastePlaceActivity;
 import com.example.kuleumbridge.Taste.TastePlaceList;
 import com.example.kuleumbridge.Calendar.mainAlarm;
@@ -61,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
         String input_id = String.valueOf(et_id.getText());
         String input_pwd = String.valueOf(et_pwd.getText());
 
-        // 로딩 화면 시작
-        customProgress.show();
+        // 로딩 애니메이션 시작
+        startLoadingAnimation();
 
         // 로그인 함수
         Login(input_id, input_pwd);
@@ -75,145 +76,166 @@ public class MainActivity extends AppCompatActivity {
         // 그 AsyncTask를 상속한 ApiConnetClass 클래스를 만들어서 객체로 사용하기로 함
         // 생성자의 파라매터로 id, pwd 를 받는다.
         ApiLoginClass alc = new ApiLoginClass(input_id, input_pwd, this, new CallBack() {
-            // 로그인 과정이 끝나고 실행할 부분
+
             @Override
-            public void callback_login(String result) {
-                // 유저 정보 저장하는 부분
-                uic.setLoginInfo(result);
-
-                // GradeAll 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask를 상속한 클래스를 활용해 값을 얻어온다.
-                ApiGradeAllClass agac = new ApiGradeAllClass(uic.getUSER_ID(), new CallBack() {
-                    // 정보를 얻어오는 과정이 끝나고 실행할 부분
-                    @Override
-                    public void callback_login(String result) {
-
-                    }
-
-                    @Override
-                    public void callback_grade(String result) {
-                        // uic에 얻어온 정보 저장 - 전체성적
-                        uic.setGradeAllInfo(result);
-
-                        TextView gradeAll = findViewById(R.id.gradeAllText);
-                        gradeAT = uic.getGrade_all_txt();
-
-                        //gradeAll.setText(gradeAT);
-                        //※새로운 창에서 생성되는 TextView 객체에 setText를 진행할경우 앱이 비정상종료되는 문제 발생※
-                        // 학생증 정보 수정
-                        editStudentID();
-                    }
-
-                    @Override
-                    public void callback_fail() {
-                        // 연결 실패시 작동
-                        // 애니메이션 동작 중단
-                        // 적정한 화면으로 전환
-                        customProgress.dismiss();
-                    }
-                });
-                agac.execute();
-
-                // GradeNow 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask를 상속한 클래스를 활요해 값을 얻어온다.
-                ApiGradeNowClass agnc = new ApiGradeNowClass(uic.getUSER_ID(), new CallBack() {
-                    @Override
-                    public void callback_login(String result) {
-
-                    }
-
-                    @Override
-                    public void callback_grade(String result) {
-                        // uic에 얻어온 정보 저장 - 금학기성적
-                        uic.setGradeNowInfo(result);
-
-                        TextView gradeNow = findViewById(R.id.gradeNowText);
-
-                        String txt = uic.getGrade_now_txt();
-
-                        gradeNow.setText(txt);
-                    }
-
-                    @Override
-                    public void callback_fail() {
-                        // 연결 실패시 작동
-                        // 애니메이션 동작 중단
-                        // 적정한 화면으로 전환
-
-                        customProgress.dismiss();
-                    }
-                });
-                agnc.execute();
-
-                try {
-                    //
-                    //  자동로그인 정보는 로그아웃 후 지우는 기능이 추가되어야 함
-                    //
-
-                    saveLoginInfo(input_id, input_pwd);
-
-                    // 뷰 전환 부분
-                    setContentView(R.layout.after_log);
-
-                    TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-                    tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-                        @Override
-                        public void onTabSelected(TabLayout.Tab tab) {
-                            // tab의 상태가 선택 상태로 변경
-                            int pos = tab.getPosition();
-                            changeView(pos);
-                        }
-
-                        @Override
-                        public void onTabUnselected(TabLayout.Tab tab) {
-                            // tab의 상태가 선택되지 않음으로 변경
-                        }
-
-                        @Override
-                        public void onTabReselected(TabLayout.Tab tab) {
-                            // 이미 선택된 상태의 tab이 사용자에 의해 다시 선택됨
-                        }
-                    });
-
-                    // 로딩 애니메이션 종료
-                    customProgress.dismiss();
-
-                    // 작은 캘린더에 출력하는 부분
-                    calenderTV = findViewById(R.id.calendarview);
-                    mainAlarm mA = new mainAlarm();
-                    String today = mA.getTime();
-
-                    SharedPreferences pref = getSharedPreferences(today ,MODE_PRIVATE); // 날짜를 기준으로 여는 것
-
-                    String fileData = pref.getString("input", "오늘 할 일이 존재하지 않습니다."); // fileData 변수에 저장된 것을 저장
-
-                    calenderTV.setText(today + "\n" + fileData); // 로그인 후 작은 캘린더 화면에 출력
-
-                }
-                catch (Exception e)
-                {
-                    /* 당일 캘린더 탭에서 저장해놓은 오늘의 할 일이 없을 때 */
-                    mainAlarm temp = new mainAlarm();
-                    calenderTV.setText(temp.getTime()+"\n오늘의 할 일이 존재하지 않습니다.");
-                }
+            public void callback_success(String result) {
+                loginSuccess(result);
+                saveLoginInfo(input_id, input_pwd);
             }
 
             @Override
-            public void callback_grade(String result) {
+            public void callback_fail() {
+                // 연결 실패시 작동
+                // 로딩 애니메이션 종료
+                stopLoadingAnimation();
+            }
+        });
+        alc.execute();
+    }
+
+    // 로그인 성공시
+    public void loginSuccess(String result)
+    {
+        // 유저 정보 저장하는 부분
+        uic.setLoginInfo(result);
+
+        // GradeAll 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask를 상속한 클래스를 활용해 값을 얻어온다.
+        ApiGradeAllClass agac = new ApiGradeAllClass(uic.getUSER_ID(), new CallBack() {
+
+            @Override
+            public void callback_success(String result) {
+                gradeAllSuccess(result);
             }
 
             @Override
             public void callback_fail() {
                 // 연결 실패시 작동
                 // 애니메이션 동작 중단
-                customProgress.dismiss();
+                // 적정한 화면으로 전환
+                stopLoadingAnimation();
             }
         });
-        alc.execute();
+        agac.execute();
+
+        // GradeNow 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask를 상속한 클래스를 활요해 값을 얻어온다.
+        ApiGradeNowClass agnc = new ApiGradeNowClass(uic.getUSER_ID(), new CallBack() {
+
+            @Override
+            public void callback_success(String result) {
+                gradeNowSuccess(result);
+            }
+
+            @Override
+            public void callback_fail() {
+                // 연결 실패시 작동
+                // 애니메이션 동작 중단
+                // 적정한 화면으로 전환
+
+                stopLoadingAnimation();
+            }
+        });
+        agnc.execute();
+
+        try {
+            // 뷰 전환
+            viewTransform();
+
+            // 로딩 애니메이션 종료
+            stopLoadingAnimation();
+
+            // 작은 캘린더에 출력하는 부분
+            calenderTV = findViewById(R.id.calendarview);
+            mainAlarm mA = new mainAlarm();
+            String today = mA.getTime();
+
+            SharedPreferences pref = getSharedPreferences(today ,MODE_PRIVATE); // 날짜를 기준으로 여는 것
+
+            String fileData = pref.getString("input", "오늘 할 일이 존재하지 않습니다."); // fileData 변수에 저장된 것을 저장
+
+            calenderTV.setText(today + "\n" + fileData); // 로그인 후 작은 캘린더 화면에 출력
+
+        }
+        catch (Exception e)
+        {
+            /* 당일 캘린더 탭에서 저장해놓은 오늘의 할 일이 없을 때 */
+            mainAlarm temp = new mainAlarm();
+            calenderTV.setText(temp.getTime()+"\n오늘의 할 일이 존재하지 않습니다.");
+        }
+
     }
 
+    // 전체 성적 조회 성공시
+    public void gradeAllSuccess(String result)
+    {
+        // uic에 얻어온 정보 저장 - 전체성적
+        uic.setGradeAllInfo(result);
+
+        TextView gradeAll = findViewById(R.id.gradeAllText);
+        gradeAT = uic.getGrade_all_txt();
+
+        //gradeAll.setText(gradeAT);
+        //※새로운 창에서 생성되는 TextView 객체에 setText를 진행할경우 앱이 비정상종료되는 문제 발생※
+        // 학생증 정보 수정
+        editStudentID();
+    }
+
+    // 현재 성적 조회 성공시
+    public void gradeNowSuccess(String result)
+    {
+        // uic에 얻어온 정보 저장 - 금학기성적
+        uic.setGradeNowInfo(result);
+
+        TextView gradeNow = findViewById(R.id.gradeNowText);
+
+        String txt = uic.getGrade_now_txt();
+
+        gradeNow.setText(txt);
+    }
+
+    // 뷰 전환 및 tablayout 세팅
+    public void viewTransform()
+    {
+        setContentView(R.layout.after_log);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                // tab의 상태가 선택 상태로 변경
+                int pos = tab.getPosition();
+                changeView(pos);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                // tab의 상태가 선택되지 않음으로 변경
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                // 이미 선택된 상태의 tab이 사용자에 의해 다시 선택됨
+            }
+        });
+    }
+
+    // 로딩 화면 시작
+    public void startLoadingAnimation()
+    {
+        customProgress.show();
+    }
+
+    // 로딩 애니메이션 종료
+    public void stopLoadingAnimation()
+    {
+        customProgress.dismiss();
+    }
+
+
+    // 로그인 정보 저장
     public void saveLoginInfo(String input_id, String input_pwd)
     {
         // 자동 로그인을 위한 로그인 정보 암호화 부분
-        EncryptClass ec = new EncryptClass(getKey());
+        EncryptClass ec = new EncryptClass(getEncryptKey());
 
         try {
             String ec_id = ec.encrypt(input_id);
@@ -263,9 +285,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             // 학생 사진 세팅
-            byte[] encodeByte = Base64.decode(uic.getPHOTO(), Base64.DEFAULT);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-            img.setImageBitmap(bitmap);
+            img.setImageBitmap(getImageBitMap());
 
             // 학생 이름 세팅
             name.setText(uic.getUSER_NM());
@@ -278,6 +298,15 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    // 이미지 비트맵 반환
+    public Bitmap getImageBitMap()
+    {
+        byte[] encodeByte = Base64.decode(uic.getPHOTO(), Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+
+        return bitmap;
     }
 
     // 자동 로그인 함수
@@ -296,7 +325,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
-            EncryptClass ec = new EncryptClass(getKey());
+            EncryptClass ec = new EncryptClass(getEncryptKey());
 
             // 암호화된 id, pwd를 복호화
             String dc_id = ec.decrypt(ec_id);
@@ -312,7 +341,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // 암호화를 위한 key를 불러오는 함수
-    public String getKey(){
+    public String getEncryptKey(){
         try {
             SharedPreferences pref = getSharedPreferences("key",MODE_PRIVATE);
 
@@ -353,51 +382,19 @@ public class MainActivity extends AppCompatActivity {
         //CalenderActivity 실행, 기존 창은 유지.
         Intent intent = new Intent(this, CalendarActivity.class);
         startActivity(intent);
-
     }
 
     // 맛 버튼 상호작용 함수
     public void onTastePlaceBtnClick(View view) {
-
         //onTastePlaceActivity 실행, 기존 창은 유지.
         Intent intent = new Intent(this, TastePlaceActivity.class);
         startActivity(intent);
-
     }
 
     // 맛집 장르별 버튼 상호작용 함수
     public void OnTasteBtnClick(View view) {
-        String parameter = "";
-        switch(view.getId())
-        {
-            case R.id.HanSik:
-                parameter = "한식";
-                break;
-            case R.id.BunSik:
-                parameter = "분식";
-                break;
-            case R.id.Caffe:
-                parameter = "디저트";
-                break;
-            case R.id.IlSik:
-                parameter = "일식";
-                break;
-            case R.id.Asian:
-                parameter = "아시안";
-                break;
-            case R.id.FastFood:
-                parameter = "패스트푸트";
-                break;
-            case R.id.JungSik:
-                parameter = "중식";
-                break;
-            case R.id.Meat:
-                parameter = "고기";
-                break;
-            case R.id.Alchol:
-                parameter = "술집";
-                break;
-        }
+        String parameter = TasteHandler.getValue(view.getId());
+
         Intent intent = new Intent(this, TastePlaceList.class);
         intent.putExtra("parameter", parameter);
         startActivity(intent);
@@ -408,7 +405,7 @@ public class MainActivity extends AppCompatActivity {
     public void onGradeCheckAcBtnClick(View view) {
         //GradeCheckActivity 실행, 기존 창은 유지.
         Intent intent2 = new Intent(this, GradeCheckActivity.class);
-        intent2.putExtra("gradeAll", gradeAT);
+        intent2.putParcelableArrayListExtra("GAA", uic.getGrade_all()); // uic 객체를 UIC라는 이름으로 포장해서 GradeCheckActivity로 보낸다.
         startActivity(intent2);
     }
 

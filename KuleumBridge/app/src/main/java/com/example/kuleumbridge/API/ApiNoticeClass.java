@@ -13,13 +13,14 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class ApiGradeNowClass extends AsyncTask<String, String, Boolean> {
-    private String std_num, result;
+public class ApiNoticeClass extends AsyncTask<String, String, Boolean> {
+    private String std_num, menu, result;
     private CallBack cb;
 
-    public ApiGradeNowClass(String std_num, CallBack cb)
+    public ApiNoticeClass(String std_num, String menu, CallBack cb)
     {
         this.std_num = std_num;
+        this.menu = menu;
         this.cb = cb;
     }
 
@@ -47,6 +48,7 @@ public class ApiGradeNowClass extends AsyncTask<String, String, Boolean> {
         JSONObject json = new JSONObject();
         try {
             json.put("std_num", std_num);
+            json.put("menu", menu);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -54,7 +56,7 @@ public class ApiGradeNowClass extends AsyncTask<String, String, Boolean> {
         // rest api 로그인 post로 보냄
         RequestBody body = RequestBody.create(JSON, json.toString());
         Request request = new Request.Builder()
-                .url("http://3.37.235.212:5000/grade/now")
+                .url("http://3.37.235.212:5000/notice")
                 .addHeader("Connection", "close")
                 .post(body)
                 .build();

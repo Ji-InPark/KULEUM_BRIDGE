@@ -1,6 +1,11 @@
 package com.example.kuleumbridge.Data;
 
-public class Grade {
+import android.os.Parcel;
+import android.os.Parcelable;
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Grade implements Parcelable {
     /* JSON배열안에 들어있는 ELEMENTS는 크게 3가지로 나뉨.
     이수했던 과목 OR 해당학기의 평점(학점)평균 OR 전체학기를 합산한 총평점(학점)평균 */
     private String YY = "";          // 이수년도 | 해당년도 | 0000
@@ -12,6 +17,40 @@ public class Grade {
     private String GRD = "";         // 등급    | 취득학점  | 총취득학점
     private String DETM_CD = "";     // null   | 이수학점  | 총이수학점
 
+
+    public Grade(String yy,  String haksu_nm, String pobt_div, String shtm_nm, String shtm, String pnt, String grd, String detm_cd) {
+        this.YY = yy;
+        this.HAKSU_NM = haksu_nm;
+        this.POBT_DIV = pobt_div;
+        this.SHTM_NM = shtm_nm;
+        this.SHTM = shtm;
+        this.PNT = pnt;
+        this.GRD = grd;
+        this.DETM_CD = detm_cd;
+    }
+
+    protected Grade(Parcel in) {
+        YY = in.readString();
+        HAKSU_NM = in.readString();
+        POBT_DIV = in.readString();
+        SHTM_NM = in.readString();
+        SHTM = in.readString();
+        PNT = in.readString();
+        GRD = in.readString();
+        DETM_CD = in.readString();
+    }
+
+    public static final Creator<Grade> CREATOR = new Creator<Grade>() {
+        @Override
+        public Grade createFromParcel(Parcel in) {
+            return new Grade(in);
+        }
+
+        @Override
+        public Grade[] newArray(int size) {
+            return new Grade[size];
+        }
+    };
 
     public void setYY(String yy) {
         YY = yy;
@@ -77,4 +116,20 @@ public class Grade {
         return YY + " " + SHTM_NM + " " + HAKSU_NM + " " + PNT + " " + POBT_DIV + " " + GRD + "\n";
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(YY);
+        parcel.writeString(HAKSU_NM);
+        parcel.writeString(POBT_DIV);
+        parcel.writeString(SHTM_NM);
+        parcel.writeString(SHTM);
+        parcel.writeString(PNT);
+        parcel.writeString(GRD);
+        parcel.writeString(DETM_CD);
+    }
 }

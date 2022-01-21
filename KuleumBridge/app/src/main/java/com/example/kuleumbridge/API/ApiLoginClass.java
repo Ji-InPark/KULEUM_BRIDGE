@@ -50,7 +50,7 @@ public class ApiLoginClass extends AsyncTask<String, String, Boolean> {
 
         if(success)
         {
-            cb.callback_login(result);
+            cb.callback_success(result);
         }
         else
         {

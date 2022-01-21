@@ -29,7 +29,7 @@ public class ApiGradeAllClass extends AsyncTask<String, String, Boolean> {
 
         if(success)
         {
-            cb.callback_grade(result);
+            cb.callback_success(result);
         }
         else
         {
