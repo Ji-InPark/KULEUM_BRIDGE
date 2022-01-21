@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background1">
+
+    <Button
+        android:id="@+id/notification"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="64dp"
+        android:background="@drawable/notification"
+        android:gravity="center"
+        android:onClick="onCalenderBtnClick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/hojoon"
+        app:civ_border_color="@color/design_default_color_primary_dark"
+        app:civ_border_width="1dp"
+        app:civ_fill_color="#23f22f"
+        tools:layout_editor_absoluteX="355dp"
+        tools:layout_editor_absoluteY="16dp"
+        tools:ignore="MissingConstraints" />
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@drawable/kuleum"
+        tools:layout_editor_absoluteX="105dp"
+        tools:layout_editor_absoluteY="56dp" />
+
+    <RelativeLayout
+        android:layout_width="380dp"
+        android:layout_height="310dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@xml/setting"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="283dp">
+
+
+    </RelativeLayout>
+
+    <TableLayout
+        android:id="@+id/frag5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="40dp"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/kosaf"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginRight="30dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/janghak"
+                android:onClick="onSiteBtnClick"/>
+
+            <ImageButton
+                android:id="@+id/campuz"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginRight="30dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/campuz"
+                android:onClick="onSiteBtnClick"/>
+
+            <ImageButton
+                android:id="@+id/detizen"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/detizen"
+                android:onClick="onSiteBtnClick"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/dok"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/dok"
+                android:scaleType="fitCenter"
+                android:onClick="onSiteBtnClick"/>
+
+            <ImageButton
+                android:id="@+id/dreamspawn"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/dreamspawn"
+                android:scaleType="fitCenter"
+                android:onClick="onSiteBtnClick"/>
+
+            <ImageButton
+                android:id="@+id/lingcar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/lingcar"
+                android:scaleType="fitCenter"
+                android:onClick="onSiteBtnClick"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/singgood"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/singgood"
+                android:scaleType="fitCenter"
+                android:onClick="onSiteBtnClick"/>
+
+            <ImageButton
+                android:id="@+id/specup"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/specup"
+                android:scaleType="fitCenter"
+                android:onClick="onSiteBtnClick"/>
+
+            <ImageButton
+                android:id="@+id/webiti"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/webiti"
+                android:scaleType="fitCenter"
+                android:onClick="onSiteBtnClick"/>
+        </TableRow>
+
+    </TableLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="380dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="26dp"
+        android:background="@drawable/round"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItem1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/selector1"
+            android:text="홈" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItem2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/selector2"
+            android:text="메뉴" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItem3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/selector3"
+            android:text="설정" />
+
+
+    </com.google.android.material.tabs.TabLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

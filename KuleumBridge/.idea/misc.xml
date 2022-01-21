@@ -61,6 +61,16 @@
         <entry key="..\:/Users/hj/Desktop/Git/KuleumBridge/app/src/main/res/layout/calendar.xml" value="0.2" />
         <entry key="..\:/Users/hj/Desktop/Git/KuleumBridge/app/src/main/res/layout/calender.xml" value="0.2" />
         <entry key="..\:/Users/hj/Desktop/Git/KuleumBridge/app/src/main/res/layout/fragment_frag1.xml" value="0.1" />
+<<<<<<< HEAD
+        <entry key="..\:/Users/hj/Desktop/github/KuleumBridge/app/src/main/res/drawable/frame_34254.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/hj/Desktop/github/KuleumBridge/app/src/main/res/drawable/setting.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/hj/Desktop/github/KuleumBridge/app/src/main/res/drawable/settingsquare.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/hj/Desktop/github/KuleumBridge/app/src/main/res/layout/designmain.xml" value="0.264" />
+        <entry key="..\:/Users/hj/Desktop/github/KuleumBridge/app/src/main/res/layout/designmenu.xml" value="0.264" />
+        <entry key="..\:/Users/hj/Desktop/github/KuleumBridge/app/src/main/res/layout/designsetting.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/hj/Desktop/github/KuleumBridge/app/src/main/res/layout/login.xml" value="0.3605128205128205" />
+=======
+>>>>>>> 69b0361b65795183901d4c076ddd7c1058d7211a
         <entry key="..\:/Users/kapsu/Documents/KULEUM_BRIDGE/KuleumBridge/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.31354166666666666" />
         <entry key="..\:/Users/kapsu/Documents/KULEUM_BRIDGE/KuleumBridge/app/src/main/res/drawable/ic_launcher_background.xml" value="0.31354166666666666" />
         <entry key="..\:/Users/kapsu/Documents/KULEUM_BRIDGE/KuleumBridge/app/src/main/res/drawable/loading.xml" value="0.403125" />

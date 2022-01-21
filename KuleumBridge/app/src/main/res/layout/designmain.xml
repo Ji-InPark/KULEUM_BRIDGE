@@ -236,7 +236,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="8dp"
         android:background="@drawable/line"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="326dp"
