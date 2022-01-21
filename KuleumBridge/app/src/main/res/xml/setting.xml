@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 <PreferenceCategory
@@ -18,9 +19,7 @@
 
     <MultiSelectListPreference
         android:key="favor"
-        android:title="배경화면 선택"
-        android:entries="@array/favors"
-        android:entryValues="@array/favors"/>
+        android:title="배경화면 선택" />
 </PreferenceCategory>
 
     <PreferenceCategory
@@ -28,9 +27,6 @@
         >
 
 
-    <CheckBoxPreference
-        android:key="message"
-        android:title="자동 로그인"/>
 
     <PreferenceScreen
         android:title="로그아웃">

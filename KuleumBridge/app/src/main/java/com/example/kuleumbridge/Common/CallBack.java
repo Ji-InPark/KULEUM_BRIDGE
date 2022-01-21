@@ -1,4 +1,4 @@
-package com.example.kuleumbridge;
+package com.example.kuleumbridge.Common;
 
 public interface CallBack {
     void callback_login(String result);

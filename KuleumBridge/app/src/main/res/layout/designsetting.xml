@@ -43,15 +43,9 @@
         android:layout_height="310dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="@xml/setting"
+        android:background="@drawable/settingsquare"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="283dp">
-
-        <RelativeLayout
-            android:layout_width=""
-            android:layout_height="">
-
-        </RelativeLayout>
     </RelativeLayout>
 
     <com.google.android.material.tabs.TabLayout
@@ -64,8 +58,7 @@
         android:background="@drawable/round"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rectangle_4">
+        app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem1"

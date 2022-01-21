@@ -28,7 +28,7 @@
             android:name="org.apache.http.legacy"
             android:required="false"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,19 +37,23 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".CalendarActivity">
+        <activity android:name=".Activity.CalendarActivity">
         </activity>
 
-        <activity android:name=".GradeCheckActivity">
+        <activity android:name=".Activity.GradeCheckActivity">
         </activity>
 
-        <activity android:name=".TastePlaceActivity">
+        <activity android:name=".Taste.TastePlaceActivity">
         </activity>
 
-        <activity android:name=".TastePlaceList">
+        <activity android:name=".Taste.TastePlaceList">
         </activity>
 
-        <activity android:name=".NoticeActivity">
+        <activity android:name=".Activity.NoticeActivity">
+
+        </activity>
+
+        <activity android:name=".Taste.TastePlaceInfo">
 
         </activity>
 

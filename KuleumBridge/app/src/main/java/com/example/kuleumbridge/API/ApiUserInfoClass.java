@@ -1,4 +1,4 @@
-package com.example.kuleumbridge;
+package com.example.kuleumbridge.API;
 
 import org.json.JSONException;
 import org.json.JSONObject;

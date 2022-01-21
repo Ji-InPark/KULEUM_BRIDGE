@@ -1,4 +1,4 @@
-package com.example.kuleumbridge;
+package com.example.kuleumbridge.Data;
 
 public class Notice {
     private String POSTED_DT = ""; // 공지글 게시일
