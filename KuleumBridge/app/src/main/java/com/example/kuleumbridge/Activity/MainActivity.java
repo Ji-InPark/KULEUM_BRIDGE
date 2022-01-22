@@ -184,12 +184,8 @@ public class MainActivity extends AppCompatActivity {
     {
         // uic에 얻어온 정보 저장 - 금학기성적
         uic.setGradeNowInfo(result);
-
         TextView gradeNow = findViewById(R.id.gradeNowText);
-
-        String txt = uic.getGrade_now_txt();
-
-        gradeNow.setText(txt);
+        gradeNow.setText(uic.getGrade_now_txt());
     }
 
     // 뷰 전환 및 tablayout 세팅
