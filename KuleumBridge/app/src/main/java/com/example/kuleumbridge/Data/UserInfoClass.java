@@ -18,7 +18,7 @@ public class UserInfoClass implements Parcelable{
     private String PHOTO;       // 사진 URL,
 
     private ArrayList<Grade> grade_all;  // 전체 성적 저장
-    private Grade[] grade_now;  // 금학기 성적 저장
+    private ArrayList<Grade> grade_now;  // 금학기 성적 저장
 
     private int DS_GRAD_length; // grade_all 배열에서 실질적으로 정보가 들어있는 칸의 개수
     private int DS_GRADOFSTUDENT_length; // grade_now 배열에서 실질적으로 정보가 들어있는 칸의 개수
@@ -29,7 +29,7 @@ public class UserInfoClass implements Parcelable{
     public UserInfoClass()
     {
         grade_all = new ArrayList<>();
-        grade_now = new Grade[100];
+        grade_now = new ArrayList<>();
     }
 
     protected UserInfoClass(Parcel in) {
@@ -118,14 +118,27 @@ public class UserInfoClass implements Parcelable{
 
             for (int i = 0; i < DS_GRADEOFSTUDENT.length(); i++) {
                 JSONObject subject = DS_GRADEOFSTUDENT.getJSONObject(i);
-                grade_now[i] = new Grade("","","","","","","","");
+                grade_now.add(new Grade(subject.getString("LT_YY"),
+                        subject.getString("TYPL_KOR_NM"),
+                        subject.getString("POBT_NM"),
+                        subject.getString("COMM_NM"),
+                        subject.getString("LT_SHTM"),
+                        subject.getString("PNT"),
+                        subject.getString("CALCU_GRD"),
+                        ""));
+
+
+
+                /*
                 grade_now[i].setYY(subject.getString("LT_YY"));             // 이수년도
                 grade_now[i].setHAKSU_NM(subject.getString("TYPL_KOR_NM")); // 과목이름
                 grade_now[i].setPOBT_DIV(subject.getString("POBT_NM"));     // 이수구분
                 grade_now[i].setSHTM_NM(subject.getString("COMM_NM"));      // 학기
+                grade_now[i].setSHTM(subject.getString("LT_SHTM"));         // 학기 코드
                 grade_now[i].setPNT(subject.getString("PNT"));              // 학점 수
                 grade_now[i].setGRD(subject.getString("CALCU_GRD"));        // 등급
-                grade_now[i].setSHTM(subject.getString("LT_SHTM"));         // 학기 코드
+                */
+
                 /* 세부성적조회 대비해서 일단 학기평균, 전체평균 이외에 모든과목 정보들도 다 끌어오는 형태,
                    학기평균, 전체평균만 쓸 경우 HAKSU_NM 값에 따라 해당 정보들만 끌어오도록 할 예정.*/
             }
@@ -190,10 +203,17 @@ public class UserInfoClass implements Parcelable{
         return DS_GRADOFSTUDENT_length;
     }
 
+    // 전체 성적 ArrayList 리턴
     public ArrayList<Grade> getGrade_all() {
         return grade_all;
     }
 
+    // 금학기 성적 ArrayList 리턴
+    public ArrayList<Grade> getGrade_now() {
+        return grade_now;
+    }
+
+    // 전체 성적 하나의 문자열로 리턴
     public String getGrade_all_txt() {
         for (int i = 0; i<DS_GRAD_length; i++) {
             if (!(grade_all.get(i).getHAKSU_NM().equals("평점평균")) && !(grade_all.get(i).getHAKSU_NM().equals("총평점평균"))) {
@@ -204,11 +224,12 @@ public class UserInfoClass implements Parcelable{
         return grade_all_txt.toString();
     }
 
-
+    // 금학기 성적 하나의 문자열로 리턴
     public String getGrade_now_txt() {
         for (int i = 0; i<DS_GRADOFSTUDENT_length; i++) {
 
-            grade_now_txt.append(grade_now[i].toString());
+            grade_now_txt.append(grade_now.get(i).toString());
+            System.out.println(grade_now.get(i).toString());
         }
         return grade_now_txt.toString();
     }
