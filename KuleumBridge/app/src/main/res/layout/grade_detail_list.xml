@@ -6,7 +6,7 @@
     tools:context=".GradeDetailList">
 
 
-        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <TableLayout
             android:id="@+id/tablelayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
