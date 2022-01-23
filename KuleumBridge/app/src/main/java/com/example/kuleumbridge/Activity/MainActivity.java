@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -192,7 +193,9 @@ public class MainActivity extends AppCompatActivity {
         // uic에 얻어온 정보 저장 - 금학기성적
         uic.setGradeNowInfo(result);
         TableLayout tableLayout = (TableLayout) findViewById(R.id.grade_now_tablelayout);
-//        ScrollView scroll = (ScrollView) findViewById(R.id.grade_now_Scroll);
+
+        LinearLayout linear = (LinearLayout) findViewById(R.id.frag3);
+
 //        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 //        View view = inflater.inflate(R.layout.after_log,null);
 //        scroll.addView(view);
@@ -219,12 +222,12 @@ public class MainActivity extends AppCompatActivity {
 
             for (int h = 0; h < 4; h++) {
                 TextView textView = new TextView(this);
-                textView.setTextSize(17);
+                textView.setTextSize(15);
                 textView.setWidth(0);
                 textView.setPadding(10, 10, 10, 25);
                 textView.setGravity(Gravity.CENTER);
-//                textView.setSingleLine(true);
-//                textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+                textView.setSingleLine(true);
+                textView.setEllipsize(TextUtils.TruncateAt.END);
                 textView.setSelected(true);
 
                 switch (h) {
