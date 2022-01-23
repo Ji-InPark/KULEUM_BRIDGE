@@ -1,4 +1,4 @@
-package com.example.kuleumbridge;
+package com.example.kuleumbridge.Data;
 
 import android.os.Bundle;
 
@@ -13,6 +13,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.kuleumbridge.Data.Grade;
+import com.example.kuleumbridge.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;

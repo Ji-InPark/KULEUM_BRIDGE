@@ -1,18 +1,11 @@
 package com.example.kuleumbridge.Activity;
 
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
 
 import com.example.kuleumbridge.Data.Grade;
-import com.example.kuleumbridge.GradeDetailList;
+import com.example.kuleumbridge.Data.GradeDetailList;
 import com.example.kuleumbridge.R;
 import com.google.android.material.tabs.TabLayout;
 
