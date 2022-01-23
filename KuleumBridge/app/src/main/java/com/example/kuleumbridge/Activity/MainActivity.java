@@ -186,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
         uic.setGradeNowInfo(result);
         TextView gradeNow = findViewById(R.id.gradeNowText);
         gradeNow.setText(uic.getGrade_now_txt());
+
     }
 
     // 뷰 전환 및 tablayout 세팅
