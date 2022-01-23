@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/grade_now_Scroll"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:scrollbars="none"
+    android:layout_weight = "1">
+
+<LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="#23B14D"
@@ -333,6 +342,7 @@
         </TableLayout>
 
         <!-- 성적 조회 레이아웃 -->
+
         <LinearLayout
             android:id="@+id/frag3"
             android:layout_width="match_parent"
@@ -341,28 +351,76 @@
             android:orientation="vertical"
             android:visibility="gone">
 
-            <TextView
-                android:id="@+id/gradeNowText"
-                android:layout_width="340dp"
-                android:layout_height="300dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/black"
+
+            <TableLayout
+                android:id="@+id/grade_now_tablelayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*"
                 android:background="@color/white"
-                android:gravity="center"
-                android:text="grade_now"/>
+                android:isScrollContainer="true">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp">
+
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="이수구분"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="과목명"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="학점"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="성적"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+                </TableRow>
+
+
+            </TableLayout>
+
 
             <Button
                 android:id="@+id/checkDGBtn"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="10dp"
                 android:onClick="onGradeCheckAcBtnClick"
                 android:text="세부 성적 조회" />
 
 
         </LinearLayout>
+
+
+
 
         <!-- 학생증 레이아웃 -->
         <LinearLayout
@@ -524,3 +582,4 @@
 
 
 </LinearLayout>
+</ScrollView>

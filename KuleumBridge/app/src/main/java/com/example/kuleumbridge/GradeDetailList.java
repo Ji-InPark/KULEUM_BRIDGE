@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -110,9 +111,13 @@ public class GradeDetailList extends Fragment {
                 for (int h = 0; h < 4; h++) {
 
                     textView = new TextView(getActivity());
-                    textView.setTextSize(20);
-                    textView.setPadding(5,5,5,5);
+                    textView.setTextSize(17);
+                    textView.setWidth(0);
+                    textView.setPadding(10,10,10,30);
                     textView.setGravity(Gravity.CENTER);
+//                    textView.setSingleLine(true);
+//                    textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+                    textView.setSelected(true);
 
                     switch (h) {
                         case 0:

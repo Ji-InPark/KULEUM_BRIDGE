@@ -2,18 +2,25 @@ package com.example.kuleumbridge.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Base64;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.kuleumbridge.API.ApiGradeAllClass;
@@ -31,6 +38,7 @@ import com.example.kuleumbridge.Taste.TastePlaceList;
 import com.example.kuleumbridge.Calendar.mainAlarm;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     TextView calenderTV;
     CustomProgress customProgress;
     String gradeAT = "";
+
 
 
     @Override
@@ -184,8 +193,65 @@ public class MainActivity extends AppCompatActivity {
     {
         // uic에 얻어온 정보 저장 - 금학기성적
         uic.setGradeNowInfo(result);
-        TextView gradeNow = findViewById(R.id.gradeNowText);
-        gradeNow.setText(uic.getGrade_now_txt());
+        TableLayout tableLayout = (TableLayout) findViewById(R.id.grade_now_tablelayout);
+//        ScrollView scroll = (ScrollView) findViewById(R.id.grade_now_Scroll);
+//        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        View view = inflater.inflate(R.layout.after_log,null);
+//        scroll.addView(view);
+
+        ArrayList<Grade> gradeNow= uic.getGrade_now();
+        ArrayList<String> a_div = new ArrayList<>();
+        ArrayList<String> a_name= new ArrayList<>();
+        ArrayList<String> a_hak= new ArrayList<>();
+        ArrayList<String> a_grd= new ArrayList<>();
+        for(int i=0; i<gradeNow.size(); i++) {
+            a_div.add(gradeNow.get(i).getPOBT_DIV());
+            a_name.add(gradeNow.get(i).getHAKSU_NM());
+            a_hak.add(gradeNow.get(i).getPNT());
+            a_grd.add(gradeNow.get(i).getGRD());
+
+
+        }
+
+        for(int j=0; j<a_div.size(); j++) {
+            TableRow tableRow = new TableRow(this);
+            tableRow.setLayoutParams(new TableRow.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT));
+
+            for (int h = 0; h < 4; h++) {
+                TextView textView = new TextView(this);
+                textView.setTextSize(17);
+                textView.setWidth(0);
+                textView.setPadding(10, 10, 10, 25);
+                textView.setGravity(Gravity.CENTER);
+//                textView.setSingleLine(true);
+//                textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+                textView.setSelected(true);
+
+                switch (h) {
+                    case 0:
+                        textView.setText(a_div.get(j));
+                        break;
+                    case 1:
+                        textView.setText(a_name.get(j));
+                        break;
+                    case 2:
+                        textView.setText(a_hak.get(j));
+                        break;
+                    case 3:
+                        textView.setText(a_grd.get(j));
+                        break;
+                }
+                tableRow.addView(textView);
+            }
+            tableLayout.addView(tableRow);
+
+
+
+        }
+
+
     }
 
     // 뷰 전환 및 tablayout 세팅
