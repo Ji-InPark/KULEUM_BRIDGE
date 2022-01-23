@@ -18,7 +18,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -47,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     TextView calenderTV;
     CustomProgress customProgress;
     String gradeAT = "";
-
 
 
     @Override
