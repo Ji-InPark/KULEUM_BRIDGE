@@ -78,11 +78,11 @@ public class NoticeInfoClass implements Parcelable {
                 setDS_LIST_length_Haksa(DS_LIST.length());
                 for (int i = 0; i < 5; i++) {
                     JSONObject notice = DS_LIST.getJSONObject(i);
+                    String article_id = notice.getString("ARTICLE_ID");
                     notice_Haksa.add(new Notice(notice.getString("POSTED_DT"),
-                            notice.getString("SUBJECT"),
-                            notice.getString("ARTICLE_ID"),
+                            notice.getString("SUBJECT"), article_id,
                             "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=notice?&sort=6&id="
-                                    +notice_Haksa.get(i).getARTICLE_ID()+"&cat=0000300001"));
+                                    +article_id+"&cat=0000300001"));
                     /*notice_Haksa[i].setURL
                             ("http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=notice?&sort=6&id="
                                     +notice_Haksa[i].getARTICLE_ID()+"&cat=0000300001");*/
@@ -92,11 +92,11 @@ public class NoticeInfoClass implements Parcelable {
                 setDS_LIST_length_Janghak(DS_LIST.length());
                 for (int i = 0; i < 5; i++) {
                     JSONObject notice = DS_LIST.getJSONObject(i);
+                    String article_id = notice.getString("ARTICLE_ID");
                     notice_Janghak.add(new Notice(notice.getString("POSTED_DT"),
-                            notice.getString("SUBJECT"),
-                            notice.getString("ARTICLE_ID"),
+                            notice.getString("SUBJECT"), article_id,
                             "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=11688412?&sort=6&id="
-                                    +notice_Janghak.get(i).getARTICLE_ID()+"&cat="));
+                                    +article_id+"&cat="));
 
                     /*notice_Janghak[i].setURL(
                             "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=11688412?&sort=6&id="
@@ -107,11 +107,11 @@ public class NoticeInfoClass implements Parcelable {
                 setDS_LIST_length_Chwichangup(DS_LIST.length());
                 for (int i = 0; i < 5; i++) {
                     JSONObject notice = DS_LIST.getJSONObject(i);
+                    String article_id = notice.getString("ARTICLE_ID");
                     notice_Chwichangup.add(new Notice(notice.getString("POSTED_DT"),
-                            notice.getString("SUBJECT"),
-                            notice.getString("ARTICLE_ID"),
+                            notice.getString("SUBJECT"), article_id,
                             "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=11731332?&sort=6&id="
-                                    +notice_Chwichangup.get(i).getARTICLE_ID()+"&cat="));
+                                    +article_id+"&cat="));
 
                     /*notice_Chwichangup[i].setURL(
                             "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=11731332?&sort=6&id="
@@ -122,11 +122,11 @@ public class NoticeInfoClass implements Parcelable {
                 setDS_LIST_length_Gukje(DS_LIST.length());
                 for (int i = 0; i < 5; i++) {
                     JSONObject notice = DS_LIST.getJSONObject(i);
+                    String article_id = notice.getString("ARTICLE_ID");
                     notice_Gukje.add(new Notice(notice.getString("POSTED_DT"),
-                            notice.getString("SUBJECT"),
-                            notice.getString("ARTICLE_ID"),
+                            notice.getString("SUBJECT"), article_id,
                             "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=notice?&sort=6&id="
-                                    +notice_Gukje.get(i).getARTICLE_ID()+"&cat=0000300002"));
+                                    +article_id+"&cat=0000300002"));
 
                     /*notice_Gukje[i].setURL(
                             "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=notice?&sort=6&id="
@@ -137,11 +137,11 @@ public class NoticeInfoClass implements Parcelable {
                 setDS_LIST_length_Haksaeng(DS_LIST.length());
                 for (int i = 0; i < 5; i++) {
                     JSONObject notice = DS_LIST.getJSONObject(i);
+                    String article_id = notice.getString("ARTICLE_ID");
                     notice_Haksaeng.add(new Notice(notice.getString("POSTED_DT"),
-                            notice.getString("SUBJECT"),
-                            notice.getString("ARTICLE_ID"),
+                            notice.getString("SUBJECT"), article_id,
                             "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=notice?&sort=6&id="
-                                    +notice_Haksaeng.get(i).getARTICLE_ID()+"&cat=0000300003"));
+                                    +article_id+"&cat=0000300003"));
 
                     /*notice_Haksaeng[i].setURL(
                             "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=notice?&sort=6&id="
@@ -152,11 +152,11 @@ public class NoticeInfoClass implements Parcelable {
                 setDS_LIST_length_Sanhak(DS_LIST.length());
                 for (int i = 0; i < 5; i++) {
                     JSONObject notice = DS_LIST.getJSONObject(i);
+                    String article_id = notice.getString("ARTICLE_ID");
                     notice_Sanhak.add(new Notice(notice.getString("POSTED_DT"),
-                            notice.getString("SUBJECT"),
-                            notice.getString("ARTICLE_ID"),
+                            notice.getString("SUBJECT"), article_id,
                             "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=65659?&sort=6&id="
-                                    +notice_Sanhak.get(i).getARTICLE_ID()+"&cat="));
+                                    +article_id+"&cat="));
 
                     /*notice_Sanhak[i].setURL(
                             "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=65659?&sort=6&id="
@@ -167,11 +167,11 @@ public class NoticeInfoClass implements Parcelable {
                 setDS_LIST_length_Ilban(DS_LIST.length());
                 for (int i = 0; i < 5; i++) {
                     JSONObject notice = DS_LIST.getJSONObject(i);
+                    String article_id = notice.getString("ARTICLE_ID");
                     notice_Ilban.add(new Notice(notice.getString("POSTED_DT"),
-                            notice.getString("SUBJECT"),
-                            notice.getString("ARTICLE_ID"),
+                            notice.getString("SUBJECT"), article_id,
                             "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=notice?&sort=6&id="
-                                    +notice_Ilban.get(i).getARTICLE_ID()+"&cat=0000300006"));
+                                    +article_id+"&cat=0000300006"));
 
                     /*notice_Ilban[i].setURL(
                             "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=notice?&sort=6&id="
