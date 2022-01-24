@@ -66,12 +66,12 @@
 
         <TextView
             android:id="@+id/studentCard_name"
-            android:layout_width="50dp"
+            android:layout_width="100dp"
             android:layout_height="20dp"
             android:layout_marginLeft="140dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/elice_digital_baeum_otf_bold"
-            android:text="홍길동"
+            android:text="이름 : 홍길동"
             android:textColor="#000000" />
 
         <TextView
