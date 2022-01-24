@@ -178,16 +178,15 @@ public class MainActivity extends AppCompatActivity {
         // uic에 얻어온 정보 저장 - 전체성적
         uic.setGradeAllInfo(result);
 
-        TextView gradeAll = findViewById(R.id.gradeAllText);
         gradeAT = uic.getGrade_all_txt();
 
-        //gradeAll.setText(gradeAT);
+
         //※새로운 창에서 생성되는 TextView 객체에 setText를 진행할경우 앱이 비정상종료되는 문제 발생※
         // 학생증 정보 수정
         editStudentID();
     }
 
-    // 현재 성적 조회 성공시
+    // 현재 성적 조회 성공시 -> 현재 성적 출력
     public void gradeNowSuccess(String result)
     {
         // uic에 얻어온 정보 저장 - 금학기성적
@@ -196,22 +195,19 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayout linear = (LinearLayout) findViewById(R.id.frag3);
 
-//        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        View view = inflater.inflate(R.layout.after_log,null);
-//        scroll.addView(view);
 
         ArrayList<Grade> gradeNow= uic.getGrade_now();
-        ArrayList<String> a_div = new ArrayList<>();
-        ArrayList<String> a_name= new ArrayList<>();
-        ArrayList<String> a_hak= new ArrayList<>();
-        ArrayList<String> a_grd= new ArrayList<>();
+        ArrayList<String> a_div = new ArrayList<>(); //이수구분
+        ArrayList<String> a_name= new ArrayList<>(); //과목명
+        ArrayList<String> a_hak= new ArrayList<>(); //학점
+        ArrayList<String> a_grd= new ArrayList<>(); //등급
+
+
         for(int i=0; i<gradeNow.size(); i++) {
             a_div.add(gradeNow.get(i).getPOBT_DIV());
             a_name.add(gradeNow.get(i).getHAKSU_NM());
             a_hak.add(gradeNow.get(i).getPNT());
             a_grd.add(gradeNow.get(i).getGRD());
-
-
         }
 
         for(int j=0; j<a_div.size(); j++) {
@@ -226,6 +222,8 @@ public class MainActivity extends AppCompatActivity {
                 textView.setWidth(0);
                 textView.setPadding(10, 10, 10, 25);
                 textView.setGravity(Gravity.CENTER);
+
+                //글자 수 많으면 ... 으로 처리
                 textView.setSingleLine(true);
                 textView.setEllipsize(TextUtils.TruncateAt.END);
                 textView.setSelected(true);
@@ -247,8 +245,6 @@ public class MainActivity extends AppCompatActivity {
                 tableRow.addView(textView);
             }
             tableLayout.addView(tableRow);
-
-
 
         }
 

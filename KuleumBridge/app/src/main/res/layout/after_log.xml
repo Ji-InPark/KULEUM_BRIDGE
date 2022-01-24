@@ -423,8 +423,6 @@
                 </LinearLayout>
 
 
-
-
         <!-- 학생증 레이아웃 -->
         <LinearLayout
             android:id="@+id/frag4"
