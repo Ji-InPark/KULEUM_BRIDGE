@@ -229,7 +229,7 @@ public class UserInfoClass implements Parcelable{
         for (int i = 0; i<DS_GRADOFSTUDENT_length; i++) {
 
             grade_now_txt.append(grade_now.get(i).toString());
-            System.out.println(grade_now.get(i).toString());
+//            System.out.println(grade_now.get(i).toString());
         }
         return grade_now_txt.toString();
     }

@@ -32,100 +32,25 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:background="@drawable/kuleum"
-        tools:layout_editor_absoluteX="105dp"
+        tools:layout_editor_absoluteX="130dp"
         tools:layout_editor_absoluteY="56dp" />
 
     <RelativeLayout
-        android:layout_width="380dp"
-        android:layout_height="310dp"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="@xml/setting"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="283dp">
+        tools:layout_editor_absoluteY="205dp">
 
-
-    </RelativeLayout>
-
-    <TableLayout
-        android:id="@+id/frag5"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="40dp"
-            android:gravity="center">
-
-            <ImageButton
-                android:id="@+id/kosaf"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginRight="30dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/janghak"
-                android:onClick="onSiteBtnClick"/>
-
-            <ImageButton
-                android:id="@+id/campuz"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginRight="30dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/campuz"
-                android:onClick="onSiteBtnClick"/>
-
-            <ImageButton
-                android:id="@+id/detizen"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/detizen"
-                android:onClick="onSiteBtnClick"/>
-        </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_marginTop="30dp"
-            android:gravity="center">
-
-            <ImageButton
-                android:id="@+id/dok"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginRight="30dp"
-                android:src="@drawable/dok"
-                android:scaleType="fitCenter"
-                android:onClick="onSiteBtnClick"/>
-
-            <ImageButton
-                android:id="@+id/dreamspawn"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginRight="30dp"
-                android:src="@drawable/dreamspawn"
-                android:scaleType="fitCenter"
-                android:onClick="onSiteBtnClick"/>
-
-            <ImageButton
-                android:id="@+id/lingcar"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/lingcar"
-                android:scaleType="fitCenter"
-                android:onClick="onSiteBtnClick"/>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="280dp"
             android:gravity="center">
 
             <ImageButton
@@ -133,29 +58,103 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginRight="30dp"
-                android:src="@drawable/singgood"
+                android:onClick="onSiteBtnClick"
                 android:scaleType="fitCenter"
-                android:onClick="onSiteBtnClick"/>
+                android:src="@drawable/singgood" />
 
             <ImageButton
                 android:id="@+id/specup"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginRight="30dp"
-                android:src="@drawable/specup"
+                android:onClick="onSiteBtnClick"
                 android:scaleType="fitCenter"
-                android:onClick="onSiteBtnClick"/>
+                android:src="@drawable/specup" />
 
             <ImageButton
                 android:id="@+id/webiti"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/webiti"
+                android:onClick="onSiteBtnClick"
                 android:scaleType="fitCenter"
-                android:onClick="onSiteBtnClick"/>
+                android:src="@drawable/webiti" />
+
         </TableRow>
 
-    </TableLayout>
+        <TableLayout
+            android:id="@+id/frag5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/kosaf"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginRight="30dp"
+                    android:onClick="onSiteBtnClick"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/janghak" />
+
+                <ImageButton
+                    android:id="@+id/campuz"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginRight="30dp"
+                    android:onClick="onSiteBtnClick"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/campuz" />
+
+                <ImageButton
+                    android:id="@+id/detizen"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:onClick="onSiteBtnClick"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/detizen" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/dok"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginRight="30dp"
+                    android:onClick="onSiteBtnClick"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/dok" />
+
+                <ImageButton
+                    android:id="@+id/dreamspawn"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginRight="30dp"
+                    android:onClick="onSiteBtnClick"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/dreamspawn" />
+
+                <ImageButton
+                    android:id="@+id/lingcar"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:onClick="onSiteBtnClick"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/lingcar" />
+            </TableRow>
+
+        </TableLayout>
+    </RelativeLayout>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
@@ -192,7 +191,6 @@
 
 
     </com.google.android.material.tabs.TabLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

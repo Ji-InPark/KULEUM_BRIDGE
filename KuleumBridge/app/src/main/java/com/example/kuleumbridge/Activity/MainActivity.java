@@ -2,18 +2,25 @@ package com.example.kuleumbridge.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Base64;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.kuleumbridge.API.ApiGradeAllClass;
@@ -31,6 +38,7 @@ import com.example.kuleumbridge.Taste.TastePlaceList;
 import com.example.kuleumbridge.Calendar.mainAlarm;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -170,22 +178,76 @@ public class MainActivity extends AppCompatActivity {
         // uic에 얻어온 정보 저장 - 전체성적
         uic.setGradeAllInfo(result);
 
-        TextView gradeAll = findViewById(R.id.gradeAllText);
         gradeAT = uic.getGrade_all_txt();
 
-        //gradeAll.setText(gradeAT);
+
         //※새로운 창에서 생성되는 TextView 객체에 setText를 진행할경우 앱이 비정상종료되는 문제 발생※
         // 학생증 정보 수정
         editStudentID();
     }
 
-    // 현재 성적 조회 성공시
+    // 현재 성적 조회 성공시 -> 현재 성적 출력
     public void gradeNowSuccess(String result)
     {
         // uic에 얻어온 정보 저장 - 금학기성적
         uic.setGradeNowInfo(result);
-        TextView gradeNow = findViewById(R.id.gradeNowText);
-        gradeNow.setText(uic.getGrade_now_txt());
+        TableLayout tableLayout = (TableLayout) findViewById(R.id.grade_now_tablelayout);
+
+        LinearLayout linear = (LinearLayout) findViewById(R.id.frag3);
+
+
+        ArrayList<Grade> gradeNow= uic.getGrade_now();
+        ArrayList<String> a_div = new ArrayList<>(); //이수구분
+        ArrayList<String> a_name= new ArrayList<>(); //과목명
+        ArrayList<String> a_hak= new ArrayList<>(); //학점
+        ArrayList<String> a_grd= new ArrayList<>(); //등급
+
+
+        for(int i=0; i<gradeNow.size(); i++) {
+            a_div.add(gradeNow.get(i).getPOBT_DIV());
+            a_name.add(gradeNow.get(i).getHAKSU_NM());
+            a_hak.add(gradeNow.get(i).getPNT());
+            a_grd.add(gradeNow.get(i).getGRD());
+        }
+
+        for(int j=0; j<a_div.size(); j++) {
+            TableRow tableRow = new TableRow(this);
+            tableRow.setLayoutParams(new TableRow.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT));
+
+            for (int h = 0; h < 4; h++) {
+                TextView textView = new TextView(this);
+                textView.setTextSize(15);
+                textView.setWidth(0);
+                textView.setPadding(10, 10, 10, 25);
+                textView.setGravity(Gravity.CENTER);
+
+                //글자 수 많으면 ... 으로 처리
+                textView.setSingleLine(true);
+                textView.setEllipsize(TextUtils.TruncateAt.END);
+                textView.setSelected(true);
+
+                switch (h) {
+                    case 0:
+                        textView.setText(a_div.get(j));
+                        break;
+                    case 1:
+                        textView.setText(a_name.get(j));
+                        break;
+                    case 2:
+                        textView.setText(a_hak.get(j));
+                        break;
+                    case 3:
+                        textView.setText(a_grd.get(j));
+                        break;
+                }
+                tableRow.addView(textView);
+            }
+            tableLayout.addView(tableRow);
+
+        }
+
 
     }
 

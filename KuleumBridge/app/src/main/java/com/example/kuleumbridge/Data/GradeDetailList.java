@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +23,7 @@ import java.util.Arrays;
 public class GradeDetailList extends Fragment {
     View rootView;
     ArrayList<Grade> gradeAllArr2;
-    ArrayList<String> a_yy;
+    ArrayList<String> a_yy; //년도 + 학기
     ArrayList<String> a_div;  //이수구분
     ArrayList<String> a_name; //이름
     ArrayList<String> a_hak; //학점
@@ -60,7 +61,7 @@ public class GradeDetailList extends Fragment {
         tableLayout = (TableLayout) rootView.findViewById(R.id.tablelayout);
         if (getArguments() != null) {
             gradeAllArr2 = getArguments().getParcelableArrayList("gaa");
-            flag= getArguments().getString("tabb");
+            flag= getArguments().getString("tabb"); //클릭한 탭 내용 받아옴(ex. 2021년 1학기)
         }
 
         for (int i = 0; i < gradeAllArr2.size(); i++) {
@@ -77,6 +78,7 @@ public class GradeDetailList extends Fragment {
         a_hak = new ArrayList<String>(Arrays.asList(s_hak.split(",")));
         a_grd = new ArrayList<String>(Arrays.asList(s_grd.split(",")));
 
+        //Arraylist에서 불필요한 요소들 없애주는 과정
         a_yy.remove(a_yy.size() - 1);
         a_div.remove(a_div.size() - 1);
         a_name.remove(a_name.size() - 1);
@@ -92,15 +94,13 @@ public class GradeDetailList extends Fragment {
                 a_grd.remove(j);
             }
 
-
-//            System.out.println(a_yy.get(j)+" "+a_div.get(j)+" "+a_name.get(j)+" "+a_hak.get(j)+" "+a_grd.get(j));
-
         }
 
 
 
         for (int k = 0; k < a_yy.size() - 1; k++) {
 
+            //클릭한 탭내용과 일치하는 성적만 불러오는 과정(ex. 2021년 2학기 클릭시, 해당 학기 성적만 불러옴)
             if (a_yy.get(k).contains(flag)) {
 
                 TableRow tableRow = new TableRow(getActivity());
@@ -111,9 +111,11 @@ public class GradeDetailList extends Fragment {
                 for (int h = 0; h < 4; h++) {
 
                     textView = new TextView(getActivity());
-                    textView.setTextSize(20);
-                    textView.setPadding(5,5,5,5);
+                    textView.setTextSize(17);
+                    textView.setWidth(0);
+                    textView.setPadding(10,10,10,30);
                     textView.setGravity(Gravity.CENTER);
+                    textView.setSelected(true);
 
                     switch (h) {
                         case 0:
