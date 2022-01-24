@@ -460,7 +460,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
     // 세부성적 보기 버튼 상호작용 함수
     public void onGradeCheckAcBtnClick(View view) {
         //GradeCheckActivity 실행, 기존 창은 유지.
@@ -486,7 +485,7 @@ public class MainActivity extends AppCompatActivity {
                 (TableLayout) findViewById(R.id.frag4)
         };
 
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < 4; i++)
         {
             if(index == i)
                 layouts[i].setVisibility(View.VISIBLE);
