@@ -344,83 +344,89 @@
 
         <!-- 성적 조회 레이아웃 -->
 
-                <LinearLayout
-                    android:id="@+id/frag3"
+        <LinearLayout
+            android:id="@+id/frag3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+
+            <TableLayout
+                android:id="@+id/grade_now_tablelayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:isScrollContainer="true"
+                android:stretchColumns="*">
+
+                <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:orientation="vertical"
-                    android:visibility="gone">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp">
 
 
-                    <TableLayout
-                        android:id="@+id/grade_now_tablelayout"
-                        android:layout_width="match_parent"
+                    <TextView
+
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:isScrollContainer="true"
-                        android:stretchColumns="*">
 
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="20dp">
+                        android:gravity="center"
+                        android:layout_weight="1.0"
+                       android:layout_marginLeft="5dp"
+                        android:text="이수구분"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
+                    <TextView
 
-                            <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
 
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="이수구분"
-                                android:textSize="20sp"
-                                android:textStyle="bold" />
+                        android:gravity="center"
+                        android:layout_weight="2.0"
+                        android:text="과목명"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-                            <TextView
+                    <TextView
 
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:text="과목명"
-                                android:textSize="20sp"
-                                android:textStyle="bold" />
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:gravity="center"
+                        android:text="학점"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-                            <TextView
+                    <TextView
 
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="학점"
-                                android:textSize="20sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="성적"
-                                android:textSize="20sp"
-                                android:textStyle="bold" />
-                        </TableRow>
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:gravity="center"
+                        android:layout_weight="0.7"
+                        android:text="성적"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </TableRow>
 
 
-                    </TableLayout>
+            </TableLayout>
 
 
-
-                    <Button
-                        android:id="@+id/checkDGBtn"
-                        android:layout_width="150dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:onClick="onGradeCheckAcBtnClick"
-                        android:text="세부 성적 조회" />
-
+            <Button
+                android:id="@+id/checkDGBtn"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:onClick="onGradeCheckAcBtnClick"
+                android:text="세부 성적 조회" />
 
 
-                </LinearLayout>
+        </LinearLayout>
 
 
         <!-- 학생증 레이아웃 -->

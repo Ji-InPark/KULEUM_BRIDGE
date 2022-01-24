@@ -2,6 +2,7 @@ package com.example.kuleumbridge;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 
 import android.text.TextUtils;
@@ -110,24 +111,32 @@ public class GradeDetailList extends Fragment {
                 for (int h = 0; h < 4; h++) {
 
                     textView = new TextView(getActivity());
-                    textView.setTextSize(17);
+                    textView.setTextSize(19);
                     textView.setWidth(0);
-                    textView.setPadding(10,10,10,30);
-                    textView.setGravity(Gravity.CENTER);
+                    textView.setPadding(0,0,10,70);
+
                     textView.setSelected(true);
 
                     switch (h) {
                         case 0:
                             textView.setText(a_div.get(k));
+                            textView.setGravity(Gravity.CENTER);
+                            textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,1.0f));
                             break;
                         case 1:
                             textView.setText(a_name.get(k));
+                            textView.setGravity(Gravity.LEFT);
+                            textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,2.5f));
                             break;
                         case 2:
                             textView.setText(a_hak.get(k));
+                            textView.setGravity(Gravity.CENTER);
+                            textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.6f));
                             break;
                         case 3:
                             textView.setText(a_grd.get(k));
+                            textView.setGravity(Gravity.CENTER);
+                            textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.6f));
                             break;
                     }
 

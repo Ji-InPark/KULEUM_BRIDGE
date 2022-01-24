@@ -218,10 +218,10 @@ public class MainActivity extends AppCompatActivity {
 
             for (int h = 0; h < 4; h++) {
                 TextView textView = new TextView(this);
-                textView.setTextSize(15);
+                textView.setTextSize(16);
+                textView.setPadding(10,0,20,50);
                 textView.setWidth(0);
-                textView.setPadding(10, 10, 10, 25);
-                textView.setGravity(Gravity.CENTER);
+
 
                 //글자 수 많으면 ... 으로 처리
                 textView.setSingleLine(true);
@@ -231,15 +231,27 @@ public class MainActivity extends AppCompatActivity {
                 switch (h) {
                     case 0:
                         textView.setText(a_div.get(j));
+                        textView.setGravity(Gravity.CENTER);
+
+                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,1.0f));
+
                         break;
                     case 1:
                         textView.setText(a_name.get(j));
+                        textView.setGravity(Gravity.LEFT);
+                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,2.0f));
+
                         break;
                     case 2:
                         textView.setText(a_hak.get(j));
+                        textView.setGravity(Gravity.CENTER);
+                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.5f));
+
                         break;
                     case 3:
                         textView.setText(a_grd.get(j));
+                        textView.setGravity(Gravity.CENTER);
+                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.7f));
                         break;
                 }
                 tableRow.addView(textView);
