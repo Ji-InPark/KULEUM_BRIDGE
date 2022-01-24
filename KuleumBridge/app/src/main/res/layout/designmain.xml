@@ -36,7 +36,7 @@
             android:layout_height="26.23dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="35dp"
+            android:layout_marginLeft="33dp"
             android:layout_marginTop="9dp"
             android:fontFamily="@font/elice_digital_baeum_otf_bold"
             android:gravity="top"
