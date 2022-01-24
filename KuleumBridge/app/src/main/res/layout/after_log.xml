@@ -13,99 +13,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#23B14D"
+    android:background="@drawable/background1"
     android:orientation="vertical" >
 
-
-
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="35dp"
-        android:layout_marginLeft="15dp"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/menu_img"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:src="@drawable/hojoon"
         android:layout_marginTop="15dp"
-        android:src="@drawable/konkuk_small" />
+        android:layout_marginLeft="335dp"/>
+
+    <TextView
+        android:id="@+id/menu_name"
+        android:layout_width="150dp"
+        android:layout_height="26dp"
+        android:layout_marginLeft="25dp"
+
+        android:gravity="top"
+        android:fontFamily="@font/elice_digital_baeum_otf_bold"
+        android:text="안녕, 홍길동!"
+        android:textColor="#000000"
+        android:textSize="22.74sp" />
+
+    <TextView
+        android:id="@+id/you_have_4_"
+        android:layout_width="170dp"
+        android:layout_height="19dp"
+        android:layout_marginLeft="25dp"
+
+        android:fontFamily="@font/elice_digital_baeum_otf_bold"
+        android:gravity="top"
+        android:text="너의 학교 생활을 이어줄게:)"
+        android:textSize="15sp" />
 
 
     <FrameLayout
-        android:layout_width="330dp"
+        android:layout_width="380dp"
         android:layout_height="170dp"
-        android:layout_gravity="center">
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:background="@drawable/calendar_view">
+
+        <ImageView
+            android:id="@+id/studentCard_photo"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="25dp"
+            android:src="@drawable/hojoon">
+        </ImageView>
 
         <TextView
-            android:id="@+id/calendarview"
-            android:background="@drawable/calendar_view"
-            android:layout_width="330dp"
-            android:layout_height="170dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="아무것도 없음"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:bottomLeftRadius="12dp"
-            android:bottomRightRadius="12dp"
-            android:topLeftRadius="12dp"
-            android:topRightRadius="50dp" />
+            android:id="@+id/studentCard_name"
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="140dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/elice_digital_baeum_otf_bold"
+            android:text="이름 : 홍길동"
+            android:textColor="#000000" />
 
+        <TextView
+            android:id="@+id/studentCard_stdNum"
+            android:layout_width="130dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="55dp"
+            android:layout_marginLeft="140dp"
+            android:fontFamily="@font/elice_digital_baeum_otf_bold"
+            android:text="학번 : 202000000"
+            android:textColor="#000000"/>
 
-        <Button
-            android:id="@+id/zoomcalendar"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="295dp"
-            android:layout_marginTop="140dp"
-            android:background="@drawable/zoom_calendar"
-            android:gravity="center"
-            android:onClick="onCalenderBtnClick"
-            android:textColor="@color/black"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        <TextView
+            android:id="@+id/studentCard_birthday"
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="90dp"
+            android:layout_marginLeft="140dp"
+            android:fontFamily="@font/elice_digital_baeum_otf_bold"
+            android:text="생년월일 : 2000년 00월 00일"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/studentCard_major"
+            android:layout_width="230dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="125dp"
+            android:layout_marginLeft="140dp"
+            android:fontFamily="@font/elice_digital_baeum_otf_bold"
+            android:text="소속 : 공과대학 컴퓨터공학부"
+            android:textColor="#000000"/>
 
 
     </FrameLayout>
 
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp">
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabItem1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="공지사항" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabItem2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="맛집" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabItem3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="성적조회" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabItem4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="학생증" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabItem5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="관련 링크" />
-
-    </com.google.android.material.tabs.TabLayout>
-
 
     <FrameLayout
         android:id="@+id/frame"
         android:layout_width="410dp"
-        android:layout_height="510dp"
+        android:layout_height="385dp"
         android:layout_gravity="center"
         android:layout_marginTop="15dp">
 
@@ -428,57 +435,9 @@
 
         </LinearLayout>
 
-
-        <!-- 학생증 레이아웃 -->
-        <LinearLayout
-            android:id="@+id/frag4"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <ImageView
-                android:id="@+id/photo"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="50dp"
-                android:src="@drawable/hojoon">
-
-            </ImageView>
-
-            <TextView
-                android:id="@+id/user_nm"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:gravity="center"
-                android:text="김호준" />
-
-            <TextView
-                android:id="@+id/user_id"
-                android:layout_width="250dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:gravity="center"
-                android:text="생년월일 : 2000년 12월 6일" />
-
-            <TextView
-                android:id="@+id/dpet_ttnm"
-                android:layout_width="250dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:gravity="center"
-                android:text="소속 : 공과대학 컴퓨터공학부" />
-        </LinearLayout>
-
         <!-- 관련 링크 레이아웃 -->
         <TableLayout
-            android:id="@+id/frag5"
+            android:id="@+id/frag4"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -587,5 +546,42 @@
 
     </FrameLayout>
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItem1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="공지사항" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItem2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="맛집" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItem3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="성적조회" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItem4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="학생증" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItem5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="관련 링크" />
+
+    </com.google.android.material.tabs.TabLayout>
 
 </LinearLayout>
