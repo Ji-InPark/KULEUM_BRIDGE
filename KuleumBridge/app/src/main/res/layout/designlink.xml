@@ -8,26 +8,28 @@
 
     <Button
         android:id="@+id/notification"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="64dp"
         android:background="@drawable/notification"
         android:gravity="center"
         android:onClick="onCalenderBtnClick"
+        android:hint="alarm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="5dp"
         android:src="@drawable/hojoon"
         app:civ_border_color="@color/design_default_color_primary_dark"
         app:civ_border_width="1dp"
         app:civ_fill_color="#23f22f"
-        tools:layout_editor_absoluteX="355dp"
-        tools:layout_editor_absoluteY="16dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <ImageView
@@ -36,15 +38,21 @@
         android:layout_height="150dp"
         android:background="@drawable/kuleum"
         tools:layout_editor_absoluteX="130dp"
-        tools:layout_editor_absoluteY="56dp" />
+        tools:layout_editor_absoluteY="56dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="130dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="205dp">
+        android:layout_marginTop="190dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
 
 
         <TableRow
@@ -60,6 +68,7 @@
                 android:layout_marginRight="30dp"
                 android:onClick="onSiteBtnClick"
                 android:scaleType="fitCenter"
+                android:contentDescription="singgod"
                 android:src="@drawable/singgood" />
 
             <ImageButton
@@ -69,6 +78,8 @@
                 android:layout_marginRight="30dp"
                 android:onClick="onSiteBtnClick"
                 android:scaleType="fitCenter"
+
+                android:contentDescription="specup"
                 android:src="@drawable/specup" />
 
             <ImageButton
@@ -77,7 +88,8 @@
                 android:layout_height="100dp"
                 android:onClick="onSiteBtnClick"
                 android:scaleType="fitCenter"
-                android:src="@drawable/webiti" />
+                android:src="@drawable/webiti"
+                android:contentDescription="webiti"/>
 
         </TableRow>
 
@@ -85,20 +97,27 @@
             android:id="@+id/frag5"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
-                android:gravity="center">
+
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <ImageButton
                     android:id="@+id/kosaf"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginRight="30dp"
+                    android:contentDescription="janghak"
                     android:onClick="onSiteBtnClick"
+
                     android:scaleType="fitCenter"
                     android:src="@drawable/janghak" />
 
@@ -107,7 +126,9 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginRight="30dp"
+                    android:contentDescription="campuz"
                     android:onClick="onSiteBtnClick"
+
                     android:scaleType="fitCenter"
                     android:src="@drawable/campuz" />
 
@@ -115,7 +136,9 @@
                     android:id="@+id/detizen"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
+                    android:contentDescription="detizen"
                     android:onClick="onSiteBtnClick"
+
                     android:scaleType="fitCenter"
                     android:src="@drawable/detizen" />
             </TableRow>
@@ -131,7 +154,9 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginRight="30dp"
+                    android:contentDescription="dok"
                     android:onClick="onSiteBtnClick"
+
                     android:scaleType="fitCenter"
                     android:src="@drawable/dok" />
 
@@ -140,6 +165,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginRight="30dp"
+                    android:contentDescription="dreamspawn"
                     android:onClick="onSiteBtnClick"
                     android:scaleType="fitCenter"
                     android:src="@drawable/dreamspawn" />
@@ -148,12 +174,14 @@
                     android:id="@+id/lingcar"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
+                    android:contentDescription="lingcar"
                     android:onClick="onSiteBtnClick"
                     android:scaleType="fitCenter"
                     android:src="@drawable/lingcar" />
             </TableRow>
 
         </TableLayout>
+
     </RelativeLayout>
 
     <com.google.android.material.tabs.TabLayout
