@@ -4,8 +4,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.kuleumbridge.Data.Grade;
-import com.example.kuleumbridge.Data.GradeDetailList;
+import com.example.kuleumbridge.Grade.Grade;
+import com.example.kuleumbridge.Grade.GradeDetailList;
 import com.example.kuleumbridge.R;
 import com.google.android.material.tabs.TabLayout;
 

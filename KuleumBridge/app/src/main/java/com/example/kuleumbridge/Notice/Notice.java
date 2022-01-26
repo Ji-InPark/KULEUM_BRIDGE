@@ -1,9 +1,7 @@
-package com.example.kuleumbridge.Data;
+package com.example.kuleumbridge.Notice;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Notice implements Parcelable {
     private String POSTED_DT = ""; // 공지글 게시일

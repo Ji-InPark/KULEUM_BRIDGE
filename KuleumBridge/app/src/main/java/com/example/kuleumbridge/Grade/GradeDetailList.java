@@ -1,11 +1,9 @@
-package com.example.kuleumbridge.Data;
+package com.example.kuleumbridge.Grade;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +12,6 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.example.kuleumbridge.Data.Grade;
 import com.example.kuleumbridge.R;
 
 import java.util.ArrayList;

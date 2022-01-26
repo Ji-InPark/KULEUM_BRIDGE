@@ -3,11 +3,11 @@ package com.example.kuleumbridge.Data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.kuleumbridge.Grade.Grade;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.ArrayList;
-import java.io.Serializable;
-import java.util.Locale;
 
 public class UserInfoClass implements Parcelable{
 

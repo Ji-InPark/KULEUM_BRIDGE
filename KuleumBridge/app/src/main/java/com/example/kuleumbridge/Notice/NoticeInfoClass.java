@@ -1,14 +1,11 @@
-package com.example.kuleumbridge.Data;
+package com.example.kuleumbridge.Notice;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.kuleumbridge.Data.Notice;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class NoticeInfoClass implements Parcelable {

@@ -1,9 +1,7 @@
-package com.example.kuleumbridge.Data;
+package com.example.kuleumbridge.Grade;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Grade implements Parcelable {
     /* JSON배열안에 들어있는 ELEMENTS는 크게 3가지로 나뉨.
