@@ -9,13 +9,14 @@
 
     <Button
         android:id="@+id/notification"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="64dp"
         android:background="@drawable/notification"
         android:gravity="center"
         android:onClick="onCalenderBtnClick"
+        android:hint="alarm"
         app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,7 +26,6 @@
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_marginBottom="250dp"
-        app:layout_constraintBottom_toTopOf="@+id/zoomcalendar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintTop_toBottomOf="@+id/notification">
@@ -36,7 +36,7 @@
             android:layout_height="26.23dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="35dp"
+            android:layout_marginLeft="33dp"
             android:layout_marginTop="9dp"
             android:fontFamily="@font/elice_digital_baeum_otf_bold"
             android:gravity="top"
@@ -86,17 +86,6 @@
         app:layout_constraintVertical_bias="0.0"/>
 
 
-    <Button
-        android:id="@+id/zoomcalendar"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="144dp"
-        android:layout_marginEnd="36dp"
-        android:background="@drawable/plus"
-        android:onClick="onCalenderBtnClick"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
-
     <RelativeLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="0dp"
@@ -106,8 +95,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/simplemenu">
+        app:layout_constraintTop_toBottomOf="@+id/notification">
 
+
+        <TextView
+            android:id="@+id/simplemenu"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="28dp"
+            android:layout_marginBottom="176dp"
+            android:fontFamily="@font/elice_digital_baeum_otf_bold"
+            android:text="간편메뉴"
+            android:textColor="#000000"
+            android:textSize="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <RelativeLayout
             android:id="@+id/frame_34254"
@@ -194,6 +199,14 @@
 
         </RelativeLayout>
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="285dp"
+            android:background="@drawable/line" />
+
 
     </RelativeLayout>
 
@@ -234,38 +247,19 @@
 
     </com.google.android.material.tabs.TabLayout>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:background="@drawable/line"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="326dp"
-        android:id="@+id/imageView"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/simplemenu"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:fontFamily="@font/elice_digital_baeum_otf_bold"
-        android:gravity="top"
-        android:text="간편메뉴"
-        android:textColor="#000000"
-        android:textSize="30dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="25dp"
-        tools:layout_editor_absoluteY="365dp" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="5dp"
         android:src="@drawable/hojoon"
         app:civ_border_color="@color/design_default_color_primary_dark"
         app:civ_border_width="1dp"
         app:civ_fill_color="#23f22f"
-        tools:layout_editor_absoluteX="355dp"
-        tools:layout_editor_absoluteY="16dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

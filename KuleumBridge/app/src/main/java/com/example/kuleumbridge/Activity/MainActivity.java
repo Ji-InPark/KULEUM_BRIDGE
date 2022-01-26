@@ -166,8 +166,8 @@ public class MainActivity extends AppCompatActivity {
         catch (Exception e)
         {
             /* 당일 캘린더 탭에서 저장해놓은 오늘의 할 일이 없을 때 */
-            mainAlarm temp = new mainAlarm();
-            calenderTV.setText(temp.getTime()+"\n오늘의 할 일이 존재하지 않습니다.");
+//            mainAlarm temp = new mainAlarm();
+//            calenderTV.setText(temp.getTime()+"\n오늘의 할 일이 존재하지 않습니다.");
         }
 
     }
@@ -218,10 +218,10 @@ public class MainActivity extends AppCompatActivity {
 
             for (int h = 0; h < 4; h++) {
                 TextView textView = new TextView(this);
-                textView.setTextSize(15);
+                textView.setTextSize(16);
+                textView.setPadding(10,0,20,50);
                 textView.setWidth(0);
-                textView.setPadding(10, 10, 10, 25);
-                textView.setGravity(Gravity.CENTER);
+
 
                 //글자 수 많으면 ... 으로 처리
                 textView.setSingleLine(true);
@@ -231,15 +231,23 @@ public class MainActivity extends AppCompatActivity {
                 switch (h) {
                     case 0:
                         textView.setText(a_div.get(j));
+                        textView.setGravity(Gravity.CENTER);
+                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,1.0f));
                         break;
                     case 1:
                         textView.setText(a_name.get(j));
+                        textView.setGravity(Gravity.LEFT);
+                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,2.0f));
                         break;
                     case 2:
                         textView.setText(a_hak.get(j));
+                        textView.setGravity(Gravity.CENTER);
+                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.5f));
                         break;
                     case 3:
                         textView.setText(a_grd.get(j));
+                        textView.setGravity(Gravity.CENTER);
+                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.7f));
                         break;
                 }
                 tableRow.addView(textView);
@@ -337,23 +345,35 @@ public class MainActivity extends AppCompatActivity {
     // 학생증 정보 수정
     public void editStudentID()
     {
-        ImageView img = findViewById(R.id.photo);
-        TextView name = findViewById(R.id.user_nm);
-        TextView user_id = findViewById(R.id.user_id);
-        TextView major = findViewById(R.id.dpet_ttnm);
+
+
+        ImageView img_menu = findViewById(R.id.menu_img);
+        TextView name_menu = findViewById(R.id.menu_name);
+
+        ImageView img = findViewById(R.id.studentCard_photo);
+        TextView name = findViewById(R.id.studentCard_name);
+        TextView stdNum = findViewById(R.id.studentCard_stdNum);
+        TextView birthday = findViewById(R.id.studentCard_birthday);
+        TextView major = findViewById(R.id.studentCard_major);
 
         try {
-            // 학생 사진 세팅
+            // 로그인 후 메인 메뉴 우측 상단 학생 사진 세팅
+            img_menu.setImageBitmap(getImageBitMap());
+
+            // 로그인 후 안녕, ㅁㅁㅁ! 세팅
+            name_menu.setText("안녕, " + uic.getUSER_NM());
+
+            // 학생증 사진 세팅
             img.setImageBitmap(getImageBitMap());
 
-            // 학생 이름 세팅
-            name.setText(uic.getUSER_NM());
+            // 학생증 이름 세팅
+            name.setText("이름 : " + uic.getUSER_NM());
 
-            // 학생 학번 세팅
-            user_id.setText(getString(R.string.userid, uic.getUSER_ID()));
+            // 학생증 학번 세팅
+            stdNum.setText("학번 : " + uic.getUSER_ID());
 
-            // 학생 학과 세팅
-            major.setText(getString(R.string.dept, uic.getDEPT_TTNM()));
+            // 학생증 학과 세팅
+            major.setText("학과 : " + uic.getDEPT_TTNM());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -482,11 +502,10 @@ public class MainActivity extends AppCompatActivity {
                 (LinearLayout) findViewById(R.id.frag1),
                 (TableLayout) findViewById(R.id.frag2),
                 (LinearLayout) findViewById(R.id.frag3),
-                (LinearLayout) findViewById(R.id.frag4),
-                (TableLayout) findViewById(R.id.frag5)
+                (TableLayout) findViewById(R.id.frag4)
         };
 
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < 4; i++)
         {
             if(index == i)
                 layouts[i].setVisibility(View.VISIBLE);
