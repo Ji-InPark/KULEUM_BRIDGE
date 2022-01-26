@@ -166,8 +166,8 @@ public class MainActivity extends AppCompatActivity {
         catch (Exception e)
         {
             /* 당일 캘린더 탭에서 저장해놓은 오늘의 할 일이 없을 때 */
-            mainAlarm temp = new mainAlarm();
-            calenderTV.setText(temp.getTime()+"\n오늘의 할 일이 존재하지 않습니다.");
+//            mainAlarm temp = new mainAlarm();
+//            calenderTV.setText(temp.getTime()+"\n오늘의 할 일이 존재하지 않습니다.");
         }
 
     }
