@@ -28,6 +28,8 @@ import com.example.kuleumbridge.Common.CallBack;
 import com.example.kuleumbridge.Common.EncryptClass;
 import com.example.kuleumbridge.Grade.Grade;
 import com.example.kuleumbridge.Data.UserInfoClass;
+import com.example.kuleumbridge.Notice.Notice;
+import com.example.kuleumbridge.Notice.NoticeInfoClass;
 import com.example.kuleumbridge.R;
 import com.example.kuleumbridge.Taste.TasteHandler;
 import com.example.kuleumbridge.Taste.TastePlaceActivity;
@@ -41,7 +43,7 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
      // User의 정보들을 저장할 객체
     UserInfoClass uic;
-    TextView calenderTV;
+    NoticeInfoClass nic;
     CustomProgress customProgress;
     String gradeAT = "";
 
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         uic = new UserInfoClass();
+        nic = new NoticeInfoClass();
         customProgress = new CustomProgress(MainActivity.this);
 
         // 로딩 화면 시작
@@ -148,28 +151,20 @@ public class MainActivity extends AppCompatActivity {
             // 로딩 애니메이션 종료
             stopLoadingAnimation();
 
-            // 작은 캘린더에 출력하는 부분
-            calenderTV = findViewById(R.id.calendarview);
-            mainAlarm mA = new mainAlarm();
-            String today = mA.getTime();
-
-            SharedPreferences pref = getSharedPreferences(today ,MODE_PRIVATE); // 날짜를 기준으로 여는 것
-
-            String fileData = pref.getString("input", "오늘 할 일이 존재하지 않습니다."); // fileData 변수에 저장된 것을 저장
-
-            calenderTV.setText(today + "\n" + fileData); // 로그인 후 작은 캘린더 화면에 출력
-
         }
         catch (Exception e)
         {
-            /* 당일 캘린더 탭에서 저장해놓은 오늘의 할 일이 없을 때 */
-//            mainAlarm temp = new mainAlarm();
-//            calenderTV.setText(temp.getTime()+"\n오늘의 할 일이 존재하지 않습니다.");
         }
 
     }
 
-    // 전체 성적 조회 성공시
+    // ApiNoticeClass 통해 공지사항 정보 가져오기 성공시
+    public void NoticeSuccess(String result) {
+        // nic에 얻어온 정보 저장
+        //nic.setNoticeInfo(result);
+    }
+
+    // ApiGradeAllClass 통해 전체 성적 정보 가져오기 성공시
     public void gradeAllSuccess(String result)
     {
         // uic에 얻어온 정보 저장 - 전체성적
@@ -183,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
         editStudentID();
     }
 
-    // 현재 성적 조회 성공시 -> 현재 성적 출력
+    // ApiGradeNowClass 통해 금학기 성적 정보 가져오기 성공시
     public void gradeNowSuccess(String result)
     {
         // uic에 얻어온 정보 저장 - 금학기성적
@@ -325,20 +320,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // 작은 캘린더 화면 글 불러오기 함수
-    public void setCalenderText()
-    {
-        calenderTV = findViewById(R.id.calendarview);
-        mainAlarm mA = new mainAlarm();
-        String today = mA.getTime();
-
-        SharedPreferences pref = getSharedPreferences(today ,MODE_PRIVATE);                 // 날짜를 기준으로 여는 것
-
-        String fileData = pref.getString("input", "오늘 할 일이 존재하지 않습니다.");      // fileData 변수에 저장된 것을 저장
-
-        calenderTV.setText(getString(R.string.calender, today, fileData));                  // 로그인 후 작은 캘린더 화면에 출력
-    }
-
     // 학생증 정보 수정
     public void editStudentID()
     {
@@ -452,11 +433,10 @@ public class MainActivity extends AppCompatActivity {
 
         return null;
     }
-
-    // 캘린더 버튼 상호작용 함수
-    public void onCalenderBtnClick(View view) {
-        //CalenderActivity 실행, 기존 창은 유지.
-        Intent intent = new Intent(this, CalendarActivity.class);
+    public void onNoticeBtnClick(View view) {
+        //NoticeActivity 실행
+        Intent intent = new Intent(this, NoticeActivity.class);
+        //intent.putParcelableArrayListExtra("Notice");
         startActivity(intent);
     }
 
