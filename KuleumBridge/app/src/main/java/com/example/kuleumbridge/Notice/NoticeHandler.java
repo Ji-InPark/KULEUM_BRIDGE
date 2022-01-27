@@ -1,16 +1,30 @@
 package com.example.kuleumbridge.Notice;
 
-import com.example.kuleumbridge.R;
-
 import java.util.HashMap;
 
 public class NoticeHandler {
     private static HashMap<String, String> firstLink = createFirstLink();
-    private static HashMap<String, String> secodLink = createSecondLink();
+    private static HashMap<String, String> secondLink = createSecondLink();
 
-    private static HashMap<String, Integer> indexMap = createMap();
+    private static HashMap<String, Integer> indexMap = createIndexMap();
+    private static HashMap<Integer, String> categoryMap = createCategoryMap();
 
-    private static HashMap<String, Integer> createMap()
+    private static HashMap<Integer, String> createCategoryMap()
+    {
+        HashMap<Integer, String> map = new HashMap<Integer, String>();
+
+        map.put(0, "학사");
+        map.put(1, "장학");
+        map.put(2, "취창업");
+        map.put(3, "국제");
+        map.put(4, "학생");
+        map.put(5, "산학");
+        map.put(6, "일반");
+
+        return map;
+    }
+
+    private static HashMap<String, Integer> createIndexMap()
     {
         HashMap<String, Integer> map = new HashMap<String, Integer>();
 
@@ -57,11 +71,16 @@ public class NoticeHandler {
 
     public static String getLink(String key, String id)
     {
-        return firstLink.get(key) + id + secodLink.get(key);
+        return firstLink.get(key) + id + secondLink.get(key);
     }
 
     public static int getIndex(String key)
     {
         return indexMap.get(key);
+    }
+
+    public static String getCategory(int index)
+    {
+        return categoryMap.get(index);
     }
 }

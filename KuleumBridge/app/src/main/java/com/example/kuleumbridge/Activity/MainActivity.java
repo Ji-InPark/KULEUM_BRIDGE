@@ -30,6 +30,7 @@ import com.example.kuleumbridge.Common.EncryptClass;
 import com.example.kuleumbridge.Grade.Grade;
 import com.example.kuleumbridge.Data.UserInfoClass;
 import com.example.kuleumbridge.Notice.Notice;
+import com.example.kuleumbridge.Notice.NoticeHandler;
 import com.example.kuleumbridge.Notice.NoticeInfoClass;
 import com.example.kuleumbridge.R;
 import com.example.kuleumbridge.Taste.TasteHandler;
@@ -45,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
      // User의 정보들을 저장할 객체
     UserInfoClass uic;
     NoticeInfoClass nic;
-    CustomProgress customProgress;
-    String gradeAT = "";
 
+    // 로딩 애니메이션을 위한 객체
+    CustomProgress customProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,125 +146,25 @@ public class MainActivity extends AppCompatActivity {
         });
         agnc.execute();
 
+        ApiNoticeClass anc;
         // 순서는 학사 - 장학 - 취창업 - 국제 - 학생 - 산학 - 일반
-        ApiNoticeClass anc_haksa = new ApiNoticeClass(uic.getUSER_ID(), "학사", new CallBack() {
-            @Override
-            public void callback_success(String result) {
-                NoticeSuccess(result, "학사");
-            }
+        for(int i = 0; i < 7; i++)
+        {
+            String categroy = NoticeHandler.getCategory(i);
+            anc = new ApiNoticeClass(uic.getUSER_ID(), categroy, new CallBack(){
 
-            @Override
-            public void callback_fail() {
-                // 연결 실패시 작동
-                // 애니메이션 동작 중단
-                // 적정한 화면으로 전환
+                @Override
+                public void callback_success(String result) {
+                    NoticeSuccess(result, categroy);
+                }
 
-                stopLoadingAnimation();
-            }
-        });
-        anc_haksa.execute();
+                @Override
+                public void callback_fail() {
 
-        ApiNoticeClass anc_janghak = new ApiNoticeClass(uic.getUSER_ID(), "장학", new CallBack() {
-            @Override
-            public void callback_success(String result) {
-                NoticeSuccess(result, "장학");
-            }
-
-            @Override
-            public void callback_fail() {
-                // 연결 실패시 작동
-                // 애니메이션 동작 중단
-                // 적정한 화면으로 전환
-
-                stopLoadingAnimation();
-            }
-        });
-        anc_janghak.execute();
-
-        ApiNoticeClass anc_chwichangup = new ApiNoticeClass(uic.getUSER_ID(), "취창업", new CallBack() {
-            @Override
-            public void callback_success(String result) {
-                NoticeSuccess(result, "취창업");
-            }
-
-            @Override
-            public void callback_fail() {
-                // 연결 실패시 작동
-                // 애니메이션 동작 중단
-                // 적정한 화면으로 전환
-
-                stopLoadingAnimation();
-            }
-        });
-        anc_chwichangup.execute();
-
-        ApiNoticeClass anc_gukje = new ApiNoticeClass(uic.getUSER_ID(), "국제", new CallBack() {
-            @Override
-            public void callback_success(String result) {
-                NoticeSuccess(result, "국제");
-            }
-
-            @Override
-            public void callback_fail() {
-                // 연결 실패시 작동
-                // 애니메이션 동작 중단
-                // 적정한 화면으로 전환
-
-                stopLoadingAnimation();
-            }
-        });
-        anc_gukje.execute();
-
-        ApiNoticeClass anc_haksaeng = new ApiNoticeClass(uic.getUSER_ID(), "학생", new CallBack() {
-            @Override
-            public void callback_success(String result) {
-                NoticeSuccess(result, "학생");
-            }
-
-            @Override
-            public void callback_fail() {
-                // 연결 실패시 작동
-                // 애니메이션 동작 중단
-                // 적정한 화면으로 전환
-
-                stopLoadingAnimation();
-            }
-        });
-        anc_haksaeng.execute();
-
-        ApiNoticeClass anc_sanhak = new ApiNoticeClass(uic.getUSER_ID(), "산학", new CallBack() {
-            @Override
-            public void callback_success(String result) {
-                NoticeSuccess(result, "산학");
-            }
-
-            @Override
-            public void callback_fail() {
-                // 연결 실패시 작동
-                // 애니메이션 동작 중단
-                // 적정한 화면으로 전환
-
-                stopLoadingAnimation();
-            }
-        });
-        anc_sanhak.execute();
-
-        ApiNoticeClass anc_ilban = new ApiNoticeClass(uic.getUSER_ID(), "일반", new CallBack() {
-            @Override
-            public void callback_success(String result) {
-                NoticeSuccess(result, "일반");
-            }
-
-            @Override
-            public void callback_fail() {
-                // 연결 실패시 작동
-                // 애니메이션 동작 중단
-                // 적정한 화면으로 전환
-
-                stopLoadingAnimation();
-            }
-        });
-        anc_ilban.execute();
+                }
+            });
+            anc.execute();
+        }
 
         try {
             // 뷰 전환
@@ -276,16 +177,12 @@ public class MainActivity extends AppCompatActivity {
         catch (Exception e)
         {
         }
-
     }
 
     // ApiNoticeClass 통해 공지사항 정보 가져오기 성공시
     public void NoticeSuccess(String result, String notice_category) {
         // nic에 얻어온 정보 저장
         nic.setNoticeInfo(result,notice_category);
-
-        // 정보 접근은 이런식으로
-        // nic.getNotice("장학").get(0).getSUBJECT();
     }
 
     // ApiGradeAllClass 통해 전체 성적 정보 가져오기 성공시
@@ -293,9 +190,6 @@ public class MainActivity extends AppCompatActivity {
     {
         // uic에 얻어온 정보 저장 - 전체성적
         uic.setGradeAllInfo(result);
-
-        gradeAT = uic.getGrade_all_txt();
-
 
         //※새로운 창에서 생성되는 TextView 객체에 setText를 진행할경우 앱이 비정상종료되는 문제 발생※
         // 학생증 정보 수정
@@ -369,10 +263,7 @@ public class MainActivity extends AppCompatActivity {
                 tableRow.addView(textView);
             }
             tableLayout.addView(tableRow);
-
         }
-
-
     }
 
     // 뷰 전환 및 tablayout 세팅
@@ -447,8 +338,6 @@ public class MainActivity extends AppCompatActivity {
     // 학생증 정보 수정
     public void editStudentID()
     {
-
-
         ImageView img_menu = findViewById(R.id.menu_img);
         TextView name_menu = findViewById(R.id.menu_name);
         ImageView img = findViewById(R.id.studentCard_photo);
@@ -466,6 +355,9 @@ public class MainActivity extends AppCompatActivity {
 
             // 학생증 사진 세팅
             img.setImageBitmap(getImageBitMap());
+
+            // 학생증 생년월일 세팅
+            birthday.setText("생년월일: " + uic.getRESNO());
 
             // 학생증 이름 세팅
             name.setText("이름 : " + uic.getUSER_NM());
