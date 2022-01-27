@@ -14,13 +14,13 @@ public class NoticeHandler {
     {
         HashMap<String, Integer> map = new HashMap<String, Integer>();
 
-        map.put("Haksa", 0);
-        map.put("Janghak", 1);
-        map.put("Chwichangup", 2);
-        map.put("Gukje", 3);
-        map.put("Haksaeng", 4);
-        map.put("Sanhak", 5);
-        map.put("Ilban", 6);
+        map.put("학사", 0);
+        map.put("장학", 1);
+        map.put("취창업", 2);
+        map.put("국제", 3);
+        map.put("학생", 4);
+        map.put("산학", 5);
+        map.put("일반", 6);
 
         return map;
     }
@@ -29,13 +29,13 @@ public class NoticeHandler {
     {
         HashMap<String, String> map = new HashMap<String, String>();
 
-        map.put("Haksa", "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=notice?&sort=6&id=");
-        map.put("Janghak", "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=11688412?&sort=6&id=");
-        map.put("Chwichangup", "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=11731332?&sort=6&id=");
-        map.put("Gukje", "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=notice?&sort=6&id=");
-        map.put("Haksaeng", "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=notice?&sort=6&id=");
-        map.put("Sanhak", "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=65659?&sort=6&id=");
-        map.put("Ilban", "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=notice?&sort=6&id=");
+        map.put("학사", "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=notice?&sort=6&id=");
+        map.put("장학", "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=11688412?&sort=6&id=");
+        map.put("취창업", "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=11731332?&sort=6&id=");
+        map.put("국제", "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=notice?&sort=6&id=");
+        map.put("학생", "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=notice?&sort=6&id=");
+        map.put("산학", "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=65659?&sort=6&id=");
+        map.put("일반", "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=notice?&sort=6&id=");
 
         return map;
     }
@@ -44,13 +44,13 @@ public class NoticeHandler {
     {
         HashMap<String, String> map = new HashMap<String, String>();
 
-        map.put("Haksa", "&cat=0000300001");
-        map.put("Janghak", "&cat=");
-        map.put("Chwichangup", "&cat=");
-        map.put("Gukje", "&cat=0000300002");
-        map.put("Haksaeng", "&cat=0000300003");
-        map.put("Sanhak", "&cat=");
-        map.put("Ilban", "&cat=0000300006");
+        map.put("학사", "&cat=0000300001");
+        map.put("장학", "&cat=");
+        map.put("취창업", "&cat=");
+        map.put("국제", "&cat=0000300002");
+        map.put("학생", "&cat=0000300003");
+        map.put("산학", "&cat=");
+        map.put("일반", "&cat=0000300006");
 
         return map;
     }

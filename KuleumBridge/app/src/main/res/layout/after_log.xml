@@ -574,12 +574,6 @@
             android:id="@+id/tabItem4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="학생증" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabItem5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="관련 링크" />
 
     </com.google.android.material.tabs.TabLayout>

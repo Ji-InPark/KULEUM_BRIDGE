@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.example.kuleumbridge.API.ApiGradeAllClass;
 import com.example.kuleumbridge.API.ApiGradeNowClass;
 import com.example.kuleumbridge.API.ApiLoginClass;
+import com.example.kuleumbridge.API.ApiNoticeClass;
 import com.example.kuleumbridge.Animation.CustomProgress;
 import com.example.kuleumbridge.Common.CallBack;
 import com.example.kuleumbridge.Common.EncryptClass;
@@ -144,6 +145,126 @@ public class MainActivity extends AppCompatActivity {
         });
         agnc.execute();
 
+        // 순서는 학사 - 장학 - 취창업 - 국제 - 학생 - 산학 - 일반
+        ApiNoticeClass anc_haksa = new ApiNoticeClass(uic.getUSER_ID(), "학사", new CallBack() {
+            @Override
+            public void callback_success(String result) {
+                NoticeSuccess(result, "학사");
+            }
+
+            @Override
+            public void callback_fail() {
+                // 연결 실패시 작동
+                // 애니메이션 동작 중단
+                // 적정한 화면으로 전환
+
+                stopLoadingAnimation();
+            }
+        });
+        anc_haksa.execute();
+
+        ApiNoticeClass anc_janghak = new ApiNoticeClass(uic.getUSER_ID(), "장학", new CallBack() {
+            @Override
+            public void callback_success(String result) {
+                NoticeSuccess(result, "장학");
+            }
+
+            @Override
+            public void callback_fail() {
+                // 연결 실패시 작동
+                // 애니메이션 동작 중단
+                // 적정한 화면으로 전환
+
+                stopLoadingAnimation();
+            }
+        });
+        anc_janghak.execute();
+
+        ApiNoticeClass anc_chwichangup = new ApiNoticeClass(uic.getUSER_ID(), "취창업", new CallBack() {
+            @Override
+            public void callback_success(String result) {
+                NoticeSuccess(result, "취창업");
+            }
+
+            @Override
+            public void callback_fail() {
+                // 연결 실패시 작동
+                // 애니메이션 동작 중단
+                // 적정한 화면으로 전환
+
+                stopLoadingAnimation();
+            }
+        });
+        anc_chwichangup.execute();
+
+        ApiNoticeClass anc_gukje = new ApiNoticeClass(uic.getUSER_ID(), "국제", new CallBack() {
+            @Override
+            public void callback_success(String result) {
+                NoticeSuccess(result, "국제");
+            }
+
+            @Override
+            public void callback_fail() {
+                // 연결 실패시 작동
+                // 애니메이션 동작 중단
+                // 적정한 화면으로 전환
+
+                stopLoadingAnimation();
+            }
+        });
+        anc_gukje.execute();
+
+        ApiNoticeClass anc_haksaeng = new ApiNoticeClass(uic.getUSER_ID(), "학생", new CallBack() {
+            @Override
+            public void callback_success(String result) {
+                NoticeSuccess(result, "학생");
+            }
+
+            @Override
+            public void callback_fail() {
+                // 연결 실패시 작동
+                // 애니메이션 동작 중단
+                // 적정한 화면으로 전환
+
+                stopLoadingAnimation();
+            }
+        });
+        anc_haksaeng.execute();
+
+        ApiNoticeClass anc_sanhak = new ApiNoticeClass(uic.getUSER_ID(), "산학", new CallBack() {
+            @Override
+            public void callback_success(String result) {
+                NoticeSuccess(result, "산학");
+            }
+
+            @Override
+            public void callback_fail() {
+                // 연결 실패시 작동
+                // 애니메이션 동작 중단
+                // 적정한 화면으로 전환
+
+                stopLoadingAnimation();
+            }
+        });
+        anc_sanhak.execute();
+
+        ApiNoticeClass anc_ilban = new ApiNoticeClass(uic.getUSER_ID(), "일반", new CallBack() {
+            @Override
+            public void callback_success(String result) {
+                NoticeSuccess(result, "일반");
+            }
+
+            @Override
+            public void callback_fail() {
+                // 연결 실패시 작동
+                // 애니메이션 동작 중단
+                // 적정한 화면으로 전환
+
+                stopLoadingAnimation();
+            }
+        });
+        anc_ilban.execute();
+
         try {
             // 뷰 전환
             viewTransform();
@@ -159,9 +280,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // ApiNoticeClass 통해 공지사항 정보 가져오기 성공시
-    public void NoticeSuccess(String result) {
+    public void NoticeSuccess(String result, String notice_category) {
         // nic에 얻어온 정보 저장
-        //nic.setNoticeInfo(result);
+        nic.setNoticeInfo(result,notice_category);
+
+        // 정보 접근은 이런식으로
+        // nic.getNotice("장학").get(0).getSUBJECT();
     }
 
     // ApiGradeAllClass 통해 전체 성적 정보 가져오기 성공시
@@ -189,10 +313,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         ArrayList<Grade> gradeNow= uic.getGrade_now();
-        ArrayList<String> a_div = new ArrayList<>(); //이수구분
-        ArrayList<String> a_name= new ArrayList<>(); //과목명
-        ArrayList<String> a_hak= new ArrayList<>(); //학점
-        ArrayList<String> a_grd= new ArrayList<>(); //등급
+        ArrayList<String> a_div = new ArrayList<>(); // 이수구분
+        ArrayList<String> a_name= new ArrayList<>(); // 과목명
+        ArrayList<String> a_hak= new ArrayList<>(); // 학점
+        ArrayList<String> a_grd= new ArrayList<>(); // 등급
 
 
         for(int i=0; i<gradeNow.size(); i++) {
@@ -327,7 +451,6 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView img_menu = findViewById(R.id.menu_img);
         TextView name_menu = findViewById(R.id.menu_name);
-
         ImageView img = findViewById(R.id.studentCard_photo);
         TextView name = findViewById(R.id.studentCard_name);
         TextView stdNum = findViewById(R.id.studentCard_stdNum);
@@ -435,9 +558,9 @@ public class MainActivity extends AppCompatActivity {
     }
     public void onNoticeBtnClick(View view) {
         //NoticeActivity 실행
-        Intent intent = new Intent(this, NoticeActivity.class);
-        //intent.putParcelableArrayListExtra("Notice");
-        startActivity(intent);
+        Intent intent_notice = new Intent(this, NoticeActivity.class);
+        //intent_notice.putParcelableArrayListExtra("Notice");
+        startActivity(intent_notice);
     }
 
     // 맛 버튼 상호작용 함수
@@ -451,25 +574,25 @@ public class MainActivity extends AppCompatActivity {
     public void OnTasteBtnClick(View view) {
         String parameter = TasteHandler.getValue(view.getId());
 
-        Intent intent = new Intent(this, TastePlaceList.class);
-        intent.putExtra("parameter", parameter);
-        startActivity(intent);
+        Intent intent_tastePlace = new Intent(this, TastePlaceList.class);
+        intent_tastePlace.putExtra("parameter", parameter);
+        startActivity(intent_tastePlace);
     }
 
 
     // 세부성적 보기 버튼 상호작용 함수
     public void onGradeCheckAcBtnClick(View view) {
         //GradeCheckActivity 실행, 기존 창은 유지.
-        Intent intent2 = new Intent(this, GradeCheckActivity.class);
-        intent2.putParcelableArrayListExtra("GAA", uic.getGrade_all()); // uic 객체를 UIC라는 이름으로 포장해서 GradeCheckActivity로 보낸다.
-        startActivity(intent2);
+        Intent intent_gradeAll = new Intent(this, GradeCheckActivity.class);
+        intent_gradeAll.putParcelableArrayListExtra("GAA", uic.getGrade_all()); // uic 객체를 UIC라는 이름으로 포장해서 GradeCheckActivity로 보낸다.
+        startActivity(intent_gradeAll);
     }
 
     // 관련 링크 버튼 상호작용 함수
     public void onSiteBtnClick(View view) {
         String uri = view.getResources().getResourceEntryName(view.getId());    // id의 String을 그대로 가져오는 구문
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));         // intent 만들고
-        startActivity(intent);                                                  // 실행
+        Intent intent_links = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));   // intent 만들고
+        startActivity(intent_links);                                            // 실행
     }
 
 
@@ -481,7 +604,6 @@ public class MainActivity extends AppCompatActivity {
                 (LinearLayout) findViewById(R.id.frag3),
                 (TableLayout) findViewById(R.id.frag4)
         };
-
         for(int i = 0; i < 4; i++)
         {
             if(index == i)
@@ -489,6 +611,5 @@ public class MainActivity extends AppCompatActivity {
             else
                 layouts[i].setVisibility(View.GONE);
         }
-
     }
 }

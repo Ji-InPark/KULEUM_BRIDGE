@@ -26,8 +26,7 @@ public class NoticeInfoClass implements Parcelable {
         5번 인덱스 - 산학
         6번 인덱스 - 일반
         */
-        for(int i = 0; i < 7; i++)
-        {
+        for(int i = 0; i < 7; i++) {
             notices[i] = new ArrayList<Notice>();
         }
     }
@@ -53,7 +52,7 @@ public class NoticeInfoClass implements Parcelable {
     // ARTICLE_ID는 각 게시글 URL에 들어있는 게시글 고유의 ID
 
     public void setNoticeInfo(String response_string_notice, String notice_category) {
-        try{
+        try {
             JSONObject temp = new JSONObject(response_string_notice);
             JSONArray DS_LIST = temp.getJSONArray("DS_LIST");
             for (int i = 0; i < 5; i++) {
@@ -64,8 +63,7 @@ public class NoticeInfoClass implements Parcelable {
                         NoticeHandler.getLink(notice_category, article_id)));
             }
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             e.printStackTrace();
         }
     }

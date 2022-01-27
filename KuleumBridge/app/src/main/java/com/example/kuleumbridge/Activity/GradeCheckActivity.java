@@ -50,8 +50,8 @@ public class GradeCheckActivity extends AppCompatActivity {
         tab2 = new ArrayList<String>();
 
 
-        Collections.reverse(tab); //순서 역순으로 바꿔줌
-        tab.remove(0); //전체 소계 제거
+        Collections.reverse(tab); // 순서 역순으로 바꿔줌
+        tab.remove(0); // 전체 소계 제거
 
         for (int i = 0; i < tab.size(); i++) {
             if (tab.get(i).contains("소계")) { //소계 다 제거함
