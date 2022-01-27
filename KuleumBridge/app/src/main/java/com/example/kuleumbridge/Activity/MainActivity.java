@@ -29,14 +29,12 @@ import com.example.kuleumbridge.Common.CallBack;
 import com.example.kuleumbridge.Common.EncryptClass;
 import com.example.kuleumbridge.Grade.Grade;
 import com.example.kuleumbridge.Data.UserInfoClass;
-import com.example.kuleumbridge.Notice.Notice;
 import com.example.kuleumbridge.Notice.NoticeHandler;
 import com.example.kuleumbridge.Notice.NoticeInfoClass;
 import com.example.kuleumbridge.R;
 import com.example.kuleumbridge.Taste.TasteHandler;
 import com.example.kuleumbridge.Taste.TastePlaceActivity;
 import com.example.kuleumbridge.Taste.TastePlaceList;
-import com.example.kuleumbridge.Calendar.mainAlarm;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -480,13 +478,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent_gradeAll);
     }
 
-    // 관련 링크 버튼 상호작용 함수
-    public void onSiteBtnClick(View view) {
-        String uri = view.getResources().getResourceEntryName(view.getId());    // id의 String을 그대로 가져오는 구문
-        Intent intent_links = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));   // intent 만들고
-        startActivity(intent_links);                                            // 실행
-    }
-
 
     // 탭바 상호작용 함수
     private void changeView(int index) {
@@ -494,9 +485,8 @@ public class MainActivity extends AppCompatActivity {
                 (LinearLayout) findViewById(R.id.frag1),
                 (TableLayout) findViewById(R.id.frag2),
                 (LinearLayout) findViewById(R.id.frag3),
-                (TableLayout) findViewById(R.id.frag4)
         };
-        for(int i = 0; i < 4; i++)
+        for(int i = 0; i < 3; i++)
         {
             if(index == i)
                 layouts[i].setVisibility(View.VISIBLE);

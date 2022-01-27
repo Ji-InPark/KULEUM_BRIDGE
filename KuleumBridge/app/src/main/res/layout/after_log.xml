@@ -431,118 +431,7 @@
                 android:layout_marginTop="10dp"
                 android:onClick="onGradeCheckAcBtnClick"
                 android:text="세부 성적 조회" />
-
-
         </LinearLayout>
-
-        <!-- 관련 링크 레이아웃 -->
-        <TableLayout
-            android:id="@+id/frag4"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:visibility="gone">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="40dp"
-                android:gravity="center">
-
-                <ImageButton
-                    android:id="@+id/kosaf"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginRight="30dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/janghak"
-                    android:onClick="onSiteBtnClick"/>
-
-                <ImageButton
-                    android:id="@+id/campuz"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginRight="30dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/campuz"
-                    android:onClick="onSiteBtnClick"/>
-
-                <ImageButton
-                    android:id="@+id/detizen"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/detizen"
-                    android:onClick="onSiteBtnClick"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginTop="30dp"
-                android:gravity="center">
-
-                <ImageButton
-                    android:id="@+id/dok"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginRight="30dp"
-                    android:src="@drawable/dok"
-                    android:scaleType="fitCenter"
-                    android:onClick="onSiteBtnClick"/>
-
-                <ImageButton
-                    android:id="@+id/dreamspawn"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginRight="30dp"
-                    android:src="@drawable/dreamspawn"
-                    android:scaleType="fitCenter"
-                    android:onClick="onSiteBtnClick"/>
-
-                <ImageButton
-                    android:id="@+id/lingcar"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/lingcar"
-                    android:scaleType="fitCenter"
-                    android:onClick="onSiteBtnClick"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginTop="30dp"
-                android:gravity="center">
-
-                <ImageButton
-                    android:id="@+id/singgood"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginRight="30dp"
-                    android:src="@drawable/singgood"
-                    android:scaleType="fitCenter"
-                    android:onClick="onSiteBtnClick"/>
-
-                <ImageButton
-                    android:id="@+id/specup"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginRight="30dp"
-                    android:src="@drawable/specup"
-                    android:scaleType="fitCenter"
-                    android:onClick="onSiteBtnClick"/>
-
-                <ImageButton
-                    android:id="@+id/webiti"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/webiti"
-                    android:scaleType="fitCenter"
-                    android:onClick="onSiteBtnClick"/>
-            </TableRow>
-
-        </TableLayout>
 
     </FrameLayout>
 
@@ -569,12 +458,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="성적조회" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabItem4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="관련 링크" />
 
     </com.google.android.material.tabs.TabLayout>
 
