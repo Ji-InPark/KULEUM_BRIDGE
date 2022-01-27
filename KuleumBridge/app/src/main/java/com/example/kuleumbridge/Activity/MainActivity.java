@@ -46,8 +46,6 @@ public class MainActivity extends AppCompatActivity {
     UserInfoClass uic;
     NoticeInfoClass nic;
     CustomProgress customProgress;
-    String gradeAT = "";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -293,8 +291,6 @@ public class MainActivity extends AppCompatActivity {
     {
         // uic에 얻어온 정보 저장 - 전체성적
         uic.setGradeAllInfo(result);
-
-        gradeAT = uic.getGrade_all_txt();
 
 
         //※새로운 창에서 생성되는 TextView 객체에 setText를 진행할경우 앱이 비정상종료되는 문제 발생※
@@ -588,13 +584,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent_gradeAll);
     }
 
-    // 관련 링크 버튼 상호작용 함수
-    public void onSiteBtnClick(View view) {
-        String uri = view.getResources().getResourceEntryName(view.getId());    // id의 String을 그대로 가져오는 구문
-        Intent intent_links = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));   // intent 만들고
-        startActivity(intent_links);                                            // 실행
-    }
-
 
     // 탭바 상호작용 함수
     private void changeView(int index) {
@@ -602,9 +591,8 @@ public class MainActivity extends AppCompatActivity {
                 (LinearLayout) findViewById(R.id.frag1),
                 (TableLayout) findViewById(R.id.frag2),
                 (LinearLayout) findViewById(R.id.frag3),
-                (TableLayout) findViewById(R.id.frag4)
         };
-        for(int i = 0; i < 4; i++)
+        for(int i = 0; i < 3; i++)
         {
             if(index == i)
                 layouts[i].setVisibility(View.VISIBLE);
