@@ -37,9 +37,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Activity.CalendarActivity">
-        </activity>
-
         <activity android:name=".Activity.GradeCheckActivity">
         </activity>
 
@@ -50,11 +47,9 @@
         </activity>
 
         <activity android:name=".Activity.NoticeActivity">
-
         </activity>
 
         <activity android:name=".Taste.TastePlaceInfo">
-
         </activity>
 
 

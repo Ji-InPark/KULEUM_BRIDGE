@@ -5,23 +5,24 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#23B14D"
+    android:background="@drawable/background1"
     tools:context=".Activity.MainActivity">
 
     <ImageView
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_gravity="center"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="100dp"
         android:src="@drawable/kuleum" />
 
     <TextView
         android:id="@+id/Konkuk"
         android:layout_width="200dp"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
+        android:fontFamily="@font/elice_digital_baeum_otf_bold"
         android:gravity="center"
-        android:text="학교생활의 연결, KU:LEUM BRIDGE" />
+        android:text="학교생활의 연결,  \nKU:LEUM BRIDGE" />
 
     <EditText
         android:layout_marginTop="50dp"
@@ -56,6 +57,7 @@
         android:layout_gravity="center"
         android:text="Log in"
         android:textAllCaps="false"
+        android:backgroundTint="@color/black"
         android:onClick="onLoginBtnClick"/>
 
 

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -201,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
         uic.setGradeNowInfo(result);
         TableLayout tableLayout = (TableLayout) findViewById(R.id.grade_now_tablelayout);
 
-        LinearLayout linear = (LinearLayout) findViewById(R.id.frag3);
+        LinearLayout linear = (LinearLayout) findViewById(R.id.grade_check_layout);
 
 
         ArrayList<Grade> gradeNow= uic.getGrade_now();
@@ -262,32 +263,6 @@ public class MainActivity extends AppCompatActivity {
             }
             tableLayout.addView(tableRow);
         }
-    }
-
-    // 뷰 전환 및 tablayout 세팅
-    public void viewTransform()
-    {
-        setContentView(R.layout.after_log);
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                // tab의 상태가 선택 상태로 변경
-                int pos = tab.getPosition();
-                changeView(pos);
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                // tab의 상태가 선택되지 않음으로 변경
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                // 이미 선택된 상태의 tab이 사용자에 의해 다시 선택됨
-            }
-        });
     }
 
     // 로딩 화면 시작
@@ -453,24 +428,23 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent_notice);
     }
 
-    // 맛 버튼 상호작용 함수
+    // 맛집 레이아웃의 "지도로 보기" 버튼 상호작용 함수
     public void onTastePlaceBtnClick(View view) {
         //onTastePlaceActivity 실행, 기존 창은 유지.
         Intent intent = new Intent(this, TastePlaceActivity.class);
         startActivity(intent);
     }
 
-    // 맛집 장르별 버튼 상호작용 함수
+    // 맛집 레이아웃의 9가지 맛집 아이콘 상호작용 함수
     public void OnTasteBtnClick(View view) {
         String parameter = TasteHandler.getValue(view.getId());
-
         Intent intent_tastePlace = new Intent(this, TastePlaceList.class);
         intent_tastePlace.putExtra("parameter", parameter);
         startActivity(intent_tastePlace);
     }
 
 
-    // 세부성적 보기 버튼 상호작용 함수
+    // 성적조회 레이아웃의 "세부 성적 조회" 버튼 상호작용 함수
     public void onGradeCheckAcBtnClick(View view) {
         //GradeCheckActivity 실행, 기존 창은 유지.
         Intent intent_gradeAll = new Intent(this, GradeCheckActivity.class);
@@ -478,20 +452,49 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent_gradeAll);
     }
 
+    // 뷰 전환 및 탭바 이벤트 세팅
+    public void viewTransform()
+    {
+        setContentView(R.layout.after_log);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
+        tabLayout.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#000000"));
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                // tab의 상태가 선택 상태로 변경
+                int pos = tab.getPosition();
+                changeView(pos);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                // tab의 상태가 선택되지 않음으로 변경
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                // 이미 선택된 상태의 tab이 사용자에 의해 다시 선택됨
+            }
+        });
+    }
 
     // 탭바 상호작용 함수
     private void changeView(int index) {
         LinearLayout[] layouts = {
-                (LinearLayout) findViewById(R.id.frag1),
-                (TableLayout) findViewById(R.id.frag2),
-                (LinearLayout) findViewById(R.id.frag3),
+                (LinearLayout) findViewById(R.id.home_layout),
+                (LinearLayout) findViewById(R.id.notice_layout),
+                (LinearLayout) findViewById(R.id.taste_place_layout),
+                (LinearLayout) findViewById(R.id.grade_check_layout)
         };
-        for(int i = 0; i < 3; i++)
+
+        for(int i = 0; i < 4; i++)
         {
             if(index == i)
                 layouts[i].setVisibility(View.VISIBLE);
             else
-                layouts[i].setVisibility(View.GONE);
+                layouts[i].setVisibility(View.INVISIBLE);
         }
     }
 }

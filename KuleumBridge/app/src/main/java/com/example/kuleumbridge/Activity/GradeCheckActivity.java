@@ -1,5 +1,6 @@
 package com.example.kuleumbridge.Activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -64,8 +65,9 @@ public class GradeCheckActivity extends AppCompatActivity {
             }
         } //중복 된 요소 제거
 
-
         tabs = findViewById(R.id.tabs);
+        tabs.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
+        tabs.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#000000"));
 
         //탭 추가 과정
         for (int i = 0; i < tab2.size(); i++) {
