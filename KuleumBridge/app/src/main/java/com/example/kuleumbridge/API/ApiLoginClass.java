@@ -96,24 +96,21 @@ public class ApiLoginClass extends AsyncTask<String, String, Boolean> {
                 .post(body)
                 .build();
 
-        for(int i = 0; i < 5; i++)
-        {
-            try {
-                response = client.newCall(request).execute();
+        try {
+            response = client.newCall(request).execute();
 
-                result = response.body().string();
+            result = response.body().string();
 
-                if (result.contains("ERRMSGINFO")) {
-                    return false;
-                } else {
-                    return true;
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                continue;
+            if (result.contains("ERRMSGINFO")) {
+                return false;
+            } else {
+                return true;
             }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
         return null;
     }
 }
