@@ -93,8 +93,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void callback_fail() {
-                // 연결 실패시 작동
-                // 로딩 애니메이션 종료
                 stopLoadingAnimation();
             }
         });
@@ -117,9 +115,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void callback_fail() {
-                // 연결 실패시 작동
-                // 애니메이션 동작 중단
-                // 적정한 화면으로 전환
                 stopLoadingAnimation();
             }
         });
@@ -135,10 +130,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void callback_fail() {
-                // 연결 실패시 작동
-                // 애니메이션 동작 중단
-                // 적정한 화면으로 전환
-
                 stopLoadingAnimation();
             }
         });
@@ -170,18 +161,11 @@ public class MainActivity extends AppCompatActivity {
 
             // 로딩 애니메이션 종료
             stopLoadingAnimation();
-
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
-    }
-
-    // ApiNoticeClass 통해 공지사항 정보 가져오기 성공시
-    public void NoticeSuccess(String result, String notice_category) {
-        // nic 에 얻어온 정보 저장
-        nic.setNoticeInfo(result,notice_category);
     }
 
     // ApiGradeAllClass 통해 전체 성적 정보 가져오기 성공시
@@ -200,58 +184,47 @@ public class MainActivity extends AppCompatActivity {
     {
         // uic에 얻어온 정보 저장 - 금학기성적
         uic.setGradeNowInfo(result);
+
         TableLayout tableLayout = findViewById(R.id.grade_now_tablelayout);
 
         ArrayList<Grade> gradeNow= uic.getGrade_now();
-        ArrayList<String> a_div = new ArrayList<>(); // 이수구분
-        ArrayList<String> a_name= new ArrayList<>(); // 과목명
-        ArrayList<String> a_hak= new ArrayList<>(); // 학점
-        ArrayList<String> a_grd= new ArrayList<>(); // 등급
 
-
-        for(int i=0; i<gradeNow.size(); i++) {
-            a_div.add(gradeNow.get(i).getPOBT_DIV());
-            a_name.add(gradeNow.get(i).getHAKSU_NM());
-            a_hak.add(gradeNow.get(i).getPNT());
-            a_grd.add(gradeNow.get(i).getGRD());
-        }
-
-        for(int j=0; j<a_div.size(); j++) {
+        for(int i = 0; i < gradeNow.size(); i++) {
             TableRow tableRow = new TableRow(this);
             tableRow.setLayoutParams(new TableRow.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT));
 
-            for (int h = 0; h < 4; h++) {
+            for (int j = 0; j < 4; j++) {
                 TextView textView = new TextView(this);
+
                 textView.setTextSize(16);
                 textView.setPadding(10,0,20,50);
                 textView.setWidth(0);
-
 
                 //글자 수 많으면 ... 으로 처리
                 textView.setSingleLine(true);
                 textView.setEllipsize(TextUtils.TruncateAt.END);
                 textView.setSelected(true);
 
-                switch (h) {
+                switch (j) {
                     case 0:
-                        textView.setText(a_div.get(j));
+                        textView.setText(gradeNow.get(i).getPOBT_DIV());
                         textView.setGravity(Gravity.CENTER);
                         textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,1.0f));
                         break;
                     case 1:
-                        textView.setText(a_name.get(j));
+                        textView.setText(gradeNow.get(i).getHAKSU_NM());
                         textView.setGravity(Gravity.START); // Gravity Start를 대신 쓰라고 해서 Start로 수정함
                         textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,2.0f));
                         break;
                     case 2:
-                        textView.setText(a_hak.get(j));
+                        textView.setText(gradeNow.get(i).getPNT());
                         textView.setGravity(Gravity.CENTER);
                         textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.5f));
                         break;
                     case 3:
-                        textView.setText(a_grd.get(j));
+                        textView.setText(gradeNow.get(i).getGRD());
                         textView.setGravity(Gravity.CENTER);
                         textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.7f));
                         break;
@@ -260,6 +233,12 @@ public class MainActivity extends AppCompatActivity {
             }
             tableLayout.addView(tableRow);
         }
+    }
+
+    // ApiNoticeClass 통해 공지사항 정보 가져오기 성공시
+    public void NoticeSuccess(String result, String notice_category) {
+        // nic 에 얻어온 정보 저장
+        nic.setNoticeInfo(result,notice_category);
     }
 
     // 로딩 화면 시작
