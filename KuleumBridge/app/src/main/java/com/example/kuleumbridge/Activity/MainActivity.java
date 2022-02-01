@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Base64;
@@ -175,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
         }
         catch (Exception e)
         {
+            e.printStackTrace();
         }
     }
 
@@ -200,10 +200,7 @@ public class MainActivity extends AppCompatActivity {
     {
         // uic에 얻어온 정보 저장 - 금학기성적
         uic.setGradeNowInfo(result);
-        TableLayout tableLayout = (TableLayout) findViewById(R.id.grade_now_tablelayout);
-
-        LinearLayout linear = (LinearLayout) findViewById(R.id.grade_check_layout);
-
+        TableLayout tableLayout = findViewById(R.id.grade_now_tablelayout);
 
         ArrayList<Grade> gradeNow= uic.getGrade_now();
         ArrayList<String> a_div = new ArrayList<>(); // 이수구분
@@ -245,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 1:
                         textView.setText(a_name.get(j));
-                        textView.setGravity(Gravity.LEFT);
+                        textView.setGravity(Gravity.START); // Gravity Start를 대신 쓰라고 해서 Start로 수정함
                         textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,2.0f));
                         break;
                     case 2:
@@ -324,22 +321,22 @@ public class MainActivity extends AppCompatActivity {
             img_menu.setImageBitmap(getImageBitMap());
 
             // 로그인 후 안녕, ㅁㅁㅁ! 세팅
-            name_menu.setText("안녕, " + uic.getUSER_NM());
+            name_menu.setText(getString(R.string.hello, uic.getUSER_NM()));
 
             // 학생증 사진 세팅
             img.setImageBitmap(getImageBitMap());
 
             // 학생증 생년월일 세팅
-            birthday.setText("생년월일: " + uic.getRESNO());
+            birthday.setText(getString(R.string.birth, uic.getRESNO()));
 
             // 학생증 이름 세팅
-            name.setText("이름 : " + uic.getUSER_NM());
+            name.setText(getString(R.string.name, uic.getUSER_NM()));
 
             // 학생증 학번 세팅
-            stdNum.setText("학번 : " + uic.getUSER_ID());
+            stdNum.setText(getString(R.string.userid, uic.getUSER_ID()));
 
             // 학생증 학과 세팅
-            major.setText("학과 : " + uic.getDEPT_TTNM());
+            major.setText(getString(R.string.dept, uic.getDEPT_TTNM()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -349,9 +346,8 @@ public class MainActivity extends AppCompatActivity {
     public Bitmap getImageBitMap()
     {
         byte[] encodeByte = Base64.decode(uic.getPHOTO(), Base64.DEFAULT);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
 
-        return bitmap;
+        return BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
     }
 
     // 자동 로그인 함수
@@ -421,6 +417,7 @@ public class MainActivity extends AppCompatActivity {
 
         return null;
     }
+
     public void onNoticeBtnClick(View view) {
         //NoticeActivity 실행
         Intent intent_notice = new Intent(this, NoticeActivity.class);
@@ -457,7 +454,7 @@ public class MainActivity extends AppCompatActivity {
     {
         setContentView(R.layout.after_log);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
         tabLayout.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#000000"));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -483,10 +480,10 @@ public class MainActivity extends AppCompatActivity {
     // 탭바 상호작용 함수
     private void changeView(int index) {
         LinearLayout[] layouts = {
-                (LinearLayout) findViewById(R.id.home_layout),
-                (LinearLayout) findViewById(R.id.notice_layout),
-                (LinearLayout) findViewById(R.id.taste_place_layout),
-                (LinearLayout) findViewById(R.id.grade_check_layout)
+                findViewById(R.id.home_layout),
+                findViewById(R.id.notice_layout),
+                findViewById(R.id.taste_place_layout),
+                findViewById(R.id.grade_check_layout)
         };
 
         for(int i = 0; i < 4; i++)

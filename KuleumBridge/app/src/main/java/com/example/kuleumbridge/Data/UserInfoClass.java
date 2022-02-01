@@ -148,7 +148,13 @@ public class UserInfoClass implements Parcelable{
     }
 
     public void setRESNO(String resno) {
-        RESNO = resno;
+        int year = Integer.parseInt(resno.substring(0, 2));
+
+        if(year < 50)
+            year += 100;
+        year += 1900;
+
+        RESNO = year + "년 " +  resno.substring(2, 4) + "월 " + resno.substring(4) + "일";
     }
 
     public void setDEPT_TTNM(String dept_ttnm) {
