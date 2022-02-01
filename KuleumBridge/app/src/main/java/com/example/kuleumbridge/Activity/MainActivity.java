@@ -41,7 +41,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-     // User의 정보들을 저장할 객체
+     // User 의 정보들을 저장할 객체
     UserInfoClass uic;
     NoticeInfoClass nic;
 
@@ -80,8 +80,8 @@ public class MainActivity extends AppCompatActivity {
     // 로그인 함수
     public void Login(String input_id, String input_pwd)
     {
-        // 인터넷 연결은 스레드를 통해서 백그라운드로 돌아가야 하므로(안드로이드 정책) AsyncTask를 사용한다.
-        // 그 AsyncTask를 상속한 ApiConnetClass 클래스를 만들어서 객체로 사용하기로 함
+        // 인터넷 연결은 스레드를 통해서 백그라운드로 돌아가야 하므로(안드로이드 정책) AsyncTask 를 사용한다.
+        // 그 AsyncTask 를 상속한 ApiConnectClass 클래스를 만들어서 객체로 사용하기로 함
         // 생성자의 파라매터로 id, pwd 를 받는다.
         ApiLoginClass alc = new ApiLoginClass(input_id, input_pwd, this, new CallBack() {
 
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         // 유저 정보 저장하는 부분
         uic.setLoginInfo(result);
 
-        // GradeAll 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask를 상속한 클래스를 활용해 값을 얻어온다.
+        // GradeAll 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask 를 상속한 클래스를 활용해 값을 얻어온다.
         ApiGradeAllClass agac = new ApiGradeAllClass(uic.getUSER_ID(), new CallBack() {
 
             @Override
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         });
         agac.execute();
 
-        // GradeNow 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask를 상속한 클래스를 활요해 값을 얻어온다.
+        // GradeNow 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask 를 상속한 클래스를 활요해 값을 얻어온다.
         ApiGradeNowClass agnc = new ApiGradeNowClass(uic.getUSER_ID(), new CallBack() {
 
             @Override
@@ -148,12 +148,12 @@ public class MainActivity extends AppCompatActivity {
         // 순서는 학사 - 장학 - 취창업 - 국제 - 학생 - 산학 - 일반
         for(int i = 0; i < 7; i++)
         {
-            String categroy = NoticeHandler.getCategory(i);
-            anc = new ApiNoticeClass(uic.getUSER_ID(), categroy, new CallBack(){
+            String category = NoticeHandler.getCategory(i);
+            anc = new ApiNoticeClass(uic.getUSER_ID(), category, new CallBack(){
 
                 @Override
                 public void callback_success(String result) {
-                    NoticeSuccess(result, categroy);
+                    NoticeSuccess(result, category);
                 }
 
                 @Override
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
 
     // ApiNoticeClass 통해 공지사항 정보 가져오기 성공시
     public void NoticeSuccess(String result, String notice_category) {
-        // nic에 얻어온 정보 저장
+        // nic 에 얻어온 정보 저장
         nic.setNoticeInfo(result,notice_category);
     }
 
