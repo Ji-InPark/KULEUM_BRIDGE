@@ -31,11 +31,6 @@ public class NoticeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.notice);
-        noticeAll = new ArrayList[7];
-        for(int i = 0; i < 7; i++) {
-            noticeAll[i] = new ArrayList<Notice>();
-        }
     }
 
     public void onNoticeText1Clicked(View view) {

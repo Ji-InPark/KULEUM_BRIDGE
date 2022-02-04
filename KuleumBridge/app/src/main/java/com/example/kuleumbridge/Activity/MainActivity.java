@@ -1,7 +1,6 @@
 package com.example.kuleumbridge.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -19,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-
 import com.example.kuleumbridge.API.ApiGradeAllClass;
 import com.example.kuleumbridge.API.ApiGradeNowClass;
 import com.example.kuleumbridge.API.ApiLoginClass;
@@ -29,6 +27,7 @@ import com.example.kuleumbridge.Common.CallBack;
 import com.example.kuleumbridge.Common.EncryptClass;
 import com.example.kuleumbridge.Grade.Grade;
 import com.example.kuleumbridge.Data.UserInfoClass;
+import com.example.kuleumbridge.Notice.Notice;
 import com.example.kuleumbridge.Notice.NoticeHandler;
 import com.example.kuleumbridge.Notice.NoticeInfoClass;
 import com.example.kuleumbridge.R;
@@ -174,7 +173,6 @@ public class MainActivity extends AppCompatActivity {
         // uic에 얻어온 정보 저장 - 전체성적
         uic.setGradeAllInfo(result);
 
-        //※새로운 창에서 생성되는 TextView 객체에 setText를 진행할경우 앱이 비정상종료되는 문제 발생※
         // 학생증 정보 수정
         editStudentID();
     }
@@ -184,10 +182,8 @@ public class MainActivity extends AppCompatActivity {
     {
         // uic에 얻어온 정보 저장 - 금학기성적
         uic.setGradeNowInfo(result);
-
         TableLayout tableLayout = findViewById(R.id.grade_now_tablelayout);
-
-        ArrayList<Grade> gradeNow= uic.getGrade_now();
+        ArrayList<Grade> gradeNow = uic.getGrade_now();
 
         for(int i = 0; i < gradeNow.size(); i++) {
             TableRow tableRow = new TableRow(this);
@@ -292,8 +288,8 @@ public class MainActivity extends AppCompatActivity {
         ImageView img = findViewById(R.id.studentCard_photo);
         TextView name = findViewById(R.id.studentCard_name);
         TextView stdNum = findViewById(R.id.studentCard_stdNum);
-        TextView birthday = findViewById(R.id.studentCard_birthday);
         TextView major = findViewById(R.id.studentCard_major);
+        TextView birthday = findViewById(R.id.studentCard_birthday);
 
         try {
             // 로그인 후 메인 메뉴 우측 상단 학생 사진 세팅
@@ -305,9 +301,6 @@ public class MainActivity extends AppCompatActivity {
             // 학생증 사진 세팅
             img.setImageBitmap(getImageBitMap());
 
-            // 학생증 생년월일 세팅
-            birthday.setText(getString(R.string.birth, uic.getRESNO()));
-
             // 학생증 이름 세팅
             name.setText(getString(R.string.name, uic.getUSER_NM()));
 
@@ -316,6 +309,9 @@ public class MainActivity extends AppCompatActivity {
 
             // 학생증 학과 세팅
             major.setText(getString(R.string.dept, uic.getDEPT_TTNM()));
+
+            // 학생증 생년월일 세팅
+            birthday.setText(getString(R.string.birth, uic.getRESNO()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -432,7 +428,6 @@ public class MainActivity extends AppCompatActivity {
     public void viewTransform()
     {
         setContentView(R.layout.after_log);
-
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
         tabLayout.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#000000"));
@@ -441,7 +436,29 @@ public class MainActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 // tab의 상태가 선택 상태로 변경
                 int pos = tab.getPosition();
-                changeView(pos);
+                changeTab(pos);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                // tab의 상태가 선택되지 않음으로 변경
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                // 이미 선택된 상태의 tab이 사용자에 의해 다시 선택됨
+            }
+        });
+
+        TabLayout tabLayout_notice = findViewById(R.id.notice_category_tab);
+        tabLayout_notice.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
+        tabLayout_notice.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#000000"));
+        tabLayout_notice.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                // tab의 상태가 선택 상태로 변경
+                int pos = tab.getPosition();
+                changeTabNotice(pos);
             }
 
             @Override
@@ -457,7 +474,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // 탭바 상호작용 함수
-    private void changeView(int index) {
+    private void changeTab(int index) {
         LinearLayout[] layouts = {
                 findViewById(R.id.home_layout),
                 findViewById(R.id.notice_layout),
@@ -467,10 +484,35 @@ public class MainActivity extends AppCompatActivity {
 
         for(int i = 0; i < 4; i++)
         {
-            if(index == i)
+            if(index == i) {
                 layouts[i].setVisibility(View.VISIBLE);
-            else
+            }
+            else {
                 layouts[i].setVisibility(View.INVISIBLE);
+            }
+        }
+    }
+
+    // 공지사항 탭바 상호작용 함수
+    private void changeTabNotice(int index) {
+        TableLayout[] tables = {
+                findViewById(R.id.notice_element_tab0),
+                findViewById(R.id.notice_element_tab1),
+                findViewById(R.id.notice_element_tab2),
+                findViewById(R.id.notice_element_tab3),
+                findViewById(R.id.notice_element_tab4),
+                findViewById(R.id.notice_element_tab5),
+                findViewById(R.id.notice_element_tab6)
+        };
+
+        for(int i = 0; i < 7; i++)
+        {
+            if(index == i) {
+                tables[i].setVisibility(View.VISIBLE);
+            }
+            else {
+                tables[i].setVisibility(View.GONE);
+            }
         }
     }
 }

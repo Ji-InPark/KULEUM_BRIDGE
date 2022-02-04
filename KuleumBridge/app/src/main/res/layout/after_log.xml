@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/background1"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <!-- 홈 레이아웃 -->
     <LinearLayout
+        android:id="@+id/home_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:orientation="vertical"
-        android:id="@+id/home_layout"
         android:visibility="visible">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -104,311 +103,700 @@
                 android:textColor="#000000" />
 
 
-
-
         </FrameLayout>
     </LinearLayout>
 
     <!-- 공지사항 레이아웃 -->
     <LinearLayout
-            android:id="@+id/notice_layout"
+        android:id="@+id/notice_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:visibility="invisible">
+        <!-- 공지사항 카테고리 탭 -->
+        <com.google.android.material.tabs.TabLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/notice_category_tab"
+                android:layout_marginTop="100dp">
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/notice_tabItem_0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="학사" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/notice_tabItem_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="장학" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/notice_tabItem_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="취창업" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/notice_tabItem_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="국제" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/notice_tabItem_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="학생" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/notice_tabItem_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="산학" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/notice_tabItem_6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="일반" />
+
+            </com.google.android.material.tabs.TabLayout>
+
+        <!-- 학사 공지사항 -->
+        <TableLayout
+            android:id="@+id/notice_element_tab0"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:visibility="invisible">
-
-            <EditText
-                android:layout_width="300dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:background="@color/white"
-                android:gravity="center"
-                android:hint="공지사항" />
-
-        </LinearLayout>
-
-        <!-- 맛집 레이아웃 -->
-        <LinearLayout
-            android:id="@+id/taste_place_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:visibility="invisible">
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:isScrollContainer="true"
+            android:stretchColumns="*"
+            android:visibility="visible">
 
             <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="100dp"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/HanSik"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginRight="30dp"
-                    android:src="@drawable/hansik"
-                    android:onClick="OnTasteBtnClick"/>
-
-                <ImageView
-                    android:id="@+id/BunSik"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginRight="30dp"
-                    android:src="@drawable/bunsik"
-                    android:onClick="OnTasteBtnClick"/>
-
-                <ImageView
-                    android:id="@+id/Caffe"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/dessert"
-                    android:onClick="OnTasteBtnClick"/>
-            </TableRow>
-
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="35dp"
-                    android:layout_marginRight="30dp"
-                    android:src="@drawable/kfood"/>
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="35dp"
-                    android:layout_marginRight="30dp"
-                    android:src="@drawable/ttaek"/>
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="35dp"
-                    android:src="@drawable/caffe"/>
-            </TableRow>
-
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:gravity="center"
-                android:layout_marginTop="30dp">
-
-                <ImageView
-                    android:id="@+id/IlSik"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginRight="30dp"
-                    android:src="@drawable/sushi"
-                    android:onClick="OnTasteBtnClick"/>
-
-                <ImageView
-                    android:id="@+id/FastFood"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginRight="30dp"
-                    android:src="@drawable/hamburger"
-                    android:onClick="OnTasteBtnClick"/>
-
-                <ImageView
-                    android:id="@+id/Asian"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/asian"
-                    android:onClick="OnTasteBtnClick"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="35dp"
-                    android:layout_marginRight="30dp"
-                    android:src="@drawable/gatsu"/>
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="35dp"
-                    android:layout_marginRight="30dp"
-                    android:src="@drawable/chicken"/>
-
-                <ImageView
-                    android:id="@+id/YangSik"
-                    android:onClick="showYangSik"
-                    android:layout_width="80dp"
-                    android:layout_height="35dp"
-                    android:src="@drawable/yangki"/>
-            </TableRow>
-
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="30dp"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/JungSik"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginRight="30dp"
-                    android:src="@drawable/jjang"
-                    android:onClick="OnTasteBtnClick"/>
-
-                <ImageView
-                    android:id="@+id/Meat"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginRight="30dp"
-                    android:src="@drawable/meat"
-                    android:onClick="OnTasteBtnClick"/>
-
-                <ImageView
-                    android:id="@+id/Alchol"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/alchol"
-                    android:onClick="OnTasteBtnClick"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="35dp"
-                    android:layout_marginRight="30dp"
-                    android:src="@drawable/jung"/>
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="35dp"
-                    android:layout_marginRight="30dp"
-                    android:src="@drawable/gogi"/>
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="35dp"
-                    android:src="@drawable/sulsul"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="40dp"
-                android:gravity="center">
-
-                <Button
-                    android:text="↗지도로 보기"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:onClick="onTastePlaceBtnClick"
-                    android:textSize="16sp"
-                    android:backgroundTint="@color/black"
-                    android:textStyle="bold"/>
-            </TableRow>
-
-
-        </LinearLayout>
-
-        <!-- 성적 조회 레이아웃 -->
-
-        <LinearLayout
-            android:id="@+id/grade_check_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:visibility="invisible">
-
-
-            <TableLayout
-                android:id="@+id/grade_now_tablelayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:isScrollContainer="true"
-                android:layout_marginTop="100dp"
-                android:stretchColumns="*">
+                android:layout_marginBottom="20dp">
 
-                <TableRow
-                    android:layout_width="match_parent"
+
+                <TextView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp">
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="0.3"
+                    android:gravity="center"
+                    android:text="No"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="2.0"
+                    android:gravity="center"
+                    android:text="제목"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:gravity="center"
+                    android:text="등록일"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+            </TableRow>
+        </TableLayout>
+
+        <!-- 성적 공지사항 -->
+        <TableLayout
+            android:id="@+id/notice_element_tab1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:isScrollContainer="true"
+            android:stretchColumns="*"
+            android:visibility="gone">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
 
 
-                    <TextView
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="0.3"
+                    android:gravity="center"
+                    android:text="No"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
 
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
 
-                        android:gravity="center"
-                        android:layout_weight="1.0"
-                        android:layout_marginLeft="5dp"
-                        android:text="이수구분"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                    android:layout_weight="2.0"
+                    android:gravity="center"
+                    android:text="제목"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
 
-                    <TextView
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:gravity="center"
+                    android:text="등록일"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+            </TableRow>
+        </TableLayout>
 
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+        <!-- 취창업 공지사항 -->
+        <TableLayout
+            android:id="@+id/notice_element_tab2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:isScrollContainer="true"
+            android:stretchColumns="*"
+            android:visibility="gone">
 
-                        android:gravity="center"
-                        android:layout_weight="2.0"
-                        android:text="과목명"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:gravity="center"
-                        android:text="학점"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:gravity="center"
-                        android:layout_weight="0.7"
-                        android:text="성적"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-                </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
 
 
-            </TableLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="0.3"
+                    android:gravity="center"
+                    android:text="No"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="2.0"
+                    android:gravity="center"
+                    android:text="제목"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:gravity="center"
+                    android:text="등록일"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+            </TableRow>
+        </TableLayout>
+
+        <!-- 국제 공지사항 -->
+        <TableLayout
+            android:id="@+id/notice_element_tab3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:isScrollContainer="true"
+            android:stretchColumns="*"
+            android:visibility="gone">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="0.3"
+                    android:gravity="center"
+                    android:text="No"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="2.0"
+                    android:gravity="center"
+                    android:text="제목"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:gravity="center"
+                    android:text="등록일"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+            </TableRow>
+        </TableLayout>
+
+        <!-- 학생 공지사항 -->
+        <TableLayout
+            android:id="@+id/notice_element_tab4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:isScrollContainer="true"
+            android:stretchColumns="*"
+            android:visibility="gone">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="0.3"
+                    android:gravity="center"
+                    android:text="No"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="2.0"
+                    android:gravity="center"
+                    android:text="제목"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:gravity="center"
+                    android:text="등록일"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+            </TableRow>
+        </TableLayout>
+
+        <!-- 산학 공지사항 -->
+        <TableLayout
+            android:id="@+id/notice_element_tab5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:isScrollContainer="true"
+            android:stretchColumns="*"
+            android:visibility="gone">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="0.3"
+                    android:gravity="center"
+                    android:text="No"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="2.0"
+                    android:gravity="center"
+                    android:text="제목"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:gravity="center"
+                    android:text="등록일"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+            </TableRow>
+        </TableLayout>
+
+        <!-- 일반 공지사항 -->
+        <TableLayout
+            android:id="@+id/notice_element_tab6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:isScrollContainer="true"
+            android:stretchColumns="*"
+            android:visibility="gone">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="0.3"
+                    android:gravity="center"
+                    android:text="No"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="2.0"
+                    android:gravity="center"
+                    android:text="제목"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:gravity="center"
+                    android:text="등록일"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+            </TableRow>
+        </TableLayout>
+
+    </LinearLayout>
+
+    <!-- 맛집 레이아웃 -->
+    <LinearLayout
+        android:id="@+id/taste_place_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="100dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/HanSik"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="30dp"
+                android:onClick="OnTasteBtnClick"
+                android:src="@drawable/hansik" />
+
+            <ImageView
+                android:id="@+id/BunSik"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="30dp"
+                android:onClick="OnTasteBtnClick"
+                android:src="@drawable/bunsik" />
+
+            <ImageView
+                android:id="@+id/Caffe"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:onClick="OnTasteBtnClick"
+                android:src="@drawable/dessert" />
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="35dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/kfood" />
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="35dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/ttaek" />
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="35dp"
+                android:src="@drawable/caffe" />
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/IlSik"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="30dp"
+                android:onClick="OnTasteBtnClick"
+                android:src="@drawable/sushi" />
+
+            <ImageView
+                android:id="@+id/FastFood"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="30dp"
+                android:onClick="OnTasteBtnClick"
+                android:src="@drawable/hamburger" />
+
+            <ImageView
+                android:id="@+id/Asian"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:onClick="OnTasteBtnClick"
+                android:src="@drawable/asian" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="35dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/gatsu" />
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="35dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/chicken" />
+
+            <ImageView
+                android:id="@+id/YangSik"
+                android:layout_width="80dp"
+                android:layout_height="35dp"
+                android:onClick="showYangSik"
+                android:src="@drawable/yangki" />
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/JungSik"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="30dp"
+                android:onClick="OnTasteBtnClick"
+                android:src="@drawable/jjang" />
+
+            <ImageView
+                android:id="@+id/Meat"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="30dp"
+                android:onClick="OnTasteBtnClick"
+                android:src="@drawable/meat" />
+
+            <ImageView
+                android:id="@+id/Alchol"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:onClick="OnTasteBtnClick"
+                android:src="@drawable/alchol" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="35dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/jung" />
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="35dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/gogi" />
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="35dp"
+                android:src="@drawable/sulsul" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="40dp"
+            android:gravity="center">
 
             <Button
-                android:id="@+id/checkDGBtn"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:onClick="onGradeCheckAcBtnClick"
                 android:backgroundTint="@color/black"
-                android:text="세부 성적 조회"
-                android:textStyle="bold"
-                android:textSize="16sp"/>
-        </LinearLayout>
+                android:onClick="onTastePlaceBtnClick"
+                android:text="↗지도로 보기"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </TableRow>
 
+
+    </LinearLayout>
+
+    <!-- 성적 조회 레이아웃 -->
+    <LinearLayout
+        android:id="@+id/grade_check_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+
+        <TableLayout
+            android:id="@+id/grade_now_tablelayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:background="@color/white"
+            android:isScrollContainer="true"
+            android:stretchColumns="*">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1.0"
+                    android:gravity="center"
+                    android:text="이수구분"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="2.0"
+                    android:gravity="center"
+                    android:text="과목명"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:text="학점"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="0.7"
+                    android:gravity="center"
+                    android:text="성적"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+
+        </TableLayout>
+
+
+        <Button
+            android:id="@+id/checkDGBtn"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/black"
+            android:onClick="onGradeCheckAcBtnClick"
+            android:text="세부 성적 조회"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- 최하단 탭 메뉴 -->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"

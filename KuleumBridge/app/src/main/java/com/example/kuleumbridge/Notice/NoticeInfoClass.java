@@ -2,10 +2,8 @@ package com.example.kuleumbridge.Notice;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class NoticeInfoClass implements Parcelable {
@@ -13,7 +11,6 @@ public class NoticeInfoClass implements Parcelable {
     //순서는 학사 - 장학 - 취창업 - 국제 - 학생 - 산학 - 일반 잊지말자~
 
     private ArrayList<Notice>[] notices;
-
 
     public NoticeInfoClass() {
         notices = new ArrayList[7];
