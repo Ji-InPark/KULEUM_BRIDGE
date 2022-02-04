@@ -235,6 +235,19 @@ public class MainActivity extends AppCompatActivity {
     public void NoticeSuccess(String result, String notice_category) {
         // nic 에 얻어온 정보 저장
         nic.setNoticeInfo(result,notice_category);
+
+        TableLayout[] tables = {
+                findViewById(R.id.notice_element_table0),
+                findViewById(R.id.notice_element_table1),
+                findViewById(R.id.notice_element_table2),
+                findViewById(R.id.notice_element_table3),
+                findViewById(R.id.notice_element_table4),
+                findViewById(R.id.notice_element_table5),
+                findViewById(R.id.notice_element_table6)
+        };
+        for (int k = 0; k < 7; k++) {
+            setNoticeTable(nic.getNotice(NoticeHandler.getCategory(k)), tables[k]);
+        }
     }
 
     // 로딩 화면 시작
@@ -393,13 +406,6 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
-    public void onNoticeBtnClick(View view) {
-        //NoticeActivity 실행
-        Intent intent_notice = new Intent(this, NoticeActivity.class);
-        //intent_notice.putParcelableArrayListExtra("Notice");
-        startActivity(intent_notice);
-    }
-
     // 맛집 레이아웃의 "지도로 보기" 버튼 상호작용 함수
     public void onTastePlaceBtnClick(View view) {
         //onTastePlaceActivity 실행, 기존 창은 유지.
@@ -422,6 +428,48 @@ public class MainActivity extends AppCompatActivity {
         Intent intent_gradeAll = new Intent(this, GradeCheckActivity.class);
         intent_gradeAll.putParcelableArrayListExtra("GAA", uic.getGrade_all()); // uic 객체를 UIC라는 이름으로 포장해서 GradeCheckActivity로 보낸다.
         startActivity(intent_gradeAll);
+    }
+
+    // 7개의 공지사항 표 세팅(아직 미완성)
+    // 네트워크 문제로 공지사항을 제대로 가져오지 못하는 경우가 발생
+    public void setNoticeTable(ArrayList<Notice> na, TableLayout table) {
+        for(int i = 0; i < na.size(); i++) {
+            TableRow tbr = new TableRow(this);
+            tbr.setLayoutParams(new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT));
+            for (int j = 0; j < 3; j++) {
+                TextView tv = new TextView(this);
+                tv.setTextSize(16);
+                tv.setPadding(10,0,20,50);
+                tv.setWidth(0);
+
+                // 글자 수 많으면 ... 으로 처리
+                tv.setSingleLine(true);
+                tv.setEllipsize(TextUtils.TruncateAt.END);
+                tv.setSelected(true);
+
+                switch(j) {
+                    case 0:
+                        tv.setText(Integer.toString(i+1));
+                        //tv.setGravity(Gravity.CENTER);
+                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.3f));
+                        break;
+                    case 1:
+                        tv.setText(na.get(i).getSUBJECT());
+                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,2.0f));
+                        //tv.setGravity(Gravity.CENTER);
+                        break;
+                    case 2:
+                        tv.setText(na.get(i).getPOSTED_DT());
+                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.7f));
+                        //tv.setGravity(Gravity.CENTER);
+                        break;
+                }
+                tbr.addView(tv);
+            }
+            table.addView(tbr);
+        }
     }
 
     // 뷰 전환 및 탭바 이벤트 세팅
@@ -496,13 +544,13 @@ public class MainActivity extends AppCompatActivity {
     // 공지사항 탭바 상호작용 함수
     private void changeTabNotice(int index) {
         TableLayout[] tables = {
-                findViewById(R.id.notice_element_tab0),
-                findViewById(R.id.notice_element_tab1),
-                findViewById(R.id.notice_element_tab2),
-                findViewById(R.id.notice_element_tab3),
-                findViewById(R.id.notice_element_tab4),
-                findViewById(R.id.notice_element_tab5),
-                findViewById(R.id.notice_element_tab6)
+                findViewById(R.id.notice_element_table0),
+                findViewById(R.id.notice_element_table1),
+                findViewById(R.id.notice_element_table2),
+                findViewById(R.id.notice_element_table3),
+                findViewById(R.id.notice_element_table4),
+                findViewById(R.id.notice_element_table5),
+                findViewById(R.id.notice_element_table6)
         };
 
         for(int i = 0; i < 7; i++)

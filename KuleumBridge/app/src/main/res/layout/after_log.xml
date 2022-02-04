@@ -167,7 +167,7 @@
 
         <!-- 학사 공지사항 -->
         <TableLayout
-            android:id="@+id/notice_element_tab0"
+            android:id="@+id/notice_element_table0"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -217,7 +217,7 @@
 
         <!-- 성적 공지사항 -->
         <TableLayout
-            android:id="@+id/notice_element_tab1"
+            android:id="@+id/notice_element_table1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -267,7 +267,7 @@
 
         <!-- 취창업 공지사항 -->
         <TableLayout
-            android:id="@+id/notice_element_tab2"
+            android:id="@+id/notice_element_table2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -317,7 +317,7 @@
 
         <!-- 국제 공지사항 -->
         <TableLayout
-            android:id="@+id/notice_element_tab3"
+            android:id="@+id/notice_element_table3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -367,7 +367,7 @@
 
         <!-- 학생 공지사항 -->
         <TableLayout
-            android:id="@+id/notice_element_tab4"
+            android:id="@+id/notice_element_table4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -417,7 +417,7 @@
 
         <!-- 산학 공지사항 -->
         <TableLayout
-            android:id="@+id/notice_element_tab5"
+            android:id="@+id/notice_element_table5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -467,7 +467,7 @@
 
         <!-- 일반 공지사항 -->
         <TableLayout
-            android:id="@+id/notice_element_tab6"
+            android:id="@+id/notice_element_table6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
