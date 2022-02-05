@@ -185,13 +185,15 @@ public class MainActivity extends AppCompatActivity {
         TableLayout tableLayout = findViewById(R.id.grade_now_tablelayout);
         ArrayList<Grade> gradeNow = uic.getGrade_now();
 
-        for(int i = 0; i < gradeNow.size(); i++) {
+        for(int i = 0; i < gradeNow.size(); i++)
+        {
             TableRow tableRow = new TableRow(this);
             tableRow.setLayoutParams(new TableRow.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT));
 
-            for (int j = 0; j < 4; j++) {
+            for (int j = 0; j < 4; j++)
+            {
                 TextView textView = new TextView(this);
 
                 textView.setTextSize(16);
@@ -232,7 +234,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // ApiNoticeClass 통해 공지사항 정보 가져오기 성공시
-    public void NoticeSuccess(String result, String notice_category) {
+    public void NoticeSuccess(String result, String notice_category)
+    {
         // nic 에 얻어온 정보 저장
         nic.setNoticeInfo(result,notice_category);
 
@@ -245,9 +248,9 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.notice_element_table5),
                 findViewById(R.id.notice_element_table6)
         };
-        for (int k = 0; k < 7; k++) {
+
+        for (int k = 0; k < 7; k++)
             setNoticeTable(nic.getNotice(NoticeHandler.getCategory(k)), tables[k]);
-        }
     }
 
     // 로딩 화면 시작
@@ -433,13 +436,17 @@ public class MainActivity extends AppCompatActivity {
     // 7개의 공지사항 표 세팅(아직 미완성)
     // 네트워크 문제로 공지사항을 제대로 가져오지 못하는 경우가 발생
     public void setNoticeTable(ArrayList<Notice> na, TableLayout table) {
-        for(int i = 0; i < na.size(); i++) {
+        for(int i = 0; i < na.size(); i++)
+        {
             TableRow tbr = new TableRow(this);
             tbr.setLayoutParams(new ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT));
-            for (int j = 0; j < 3; j++) {
+
+            for (int j = 0; j < 3; j++)
+            {
                 TextView tv = new TextView(this);
+
                 tv.setTextSize(16);
                 tv.setPadding(10,0,20,50);
                 tv.setWidth(0);
@@ -476,6 +483,7 @@ public class MainActivity extends AppCompatActivity {
     public void viewTransform()
     {
         setContentView(R.layout.after_log);
+
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
         tabLayout.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#000000"));
@@ -532,12 +540,10 @@ public class MainActivity extends AppCompatActivity {
 
         for(int i = 0; i < 4; i++)
         {
-            if(index == i) {
+            if(index == i)
                 layouts[i].setVisibility(View.VISIBLE);
-            }
-            else {
+            else
                 layouts[i].setVisibility(View.INVISIBLE);
-            }
         }
     }
 
@@ -555,12 +561,10 @@ public class MainActivity extends AppCompatActivity {
 
         for(int i = 0; i < 7; i++)
         {
-            if(index == i) {
+            if(index == i)
                 tables[i].setVisibility(View.VISIBLE);
-            }
-            else {
+            else
                 tables[i].setVisibility(View.GONE);
-            }
         }
     }
 }
