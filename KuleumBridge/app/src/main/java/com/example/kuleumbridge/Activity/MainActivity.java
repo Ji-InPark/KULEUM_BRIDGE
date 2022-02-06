@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.util.Linkify;
 import android.util.Base64;
 import android.view.Gravity;
 import android.view.View;
@@ -38,6 +39,8 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
      // User 의 정보들을 저장할 객체
@@ -248,9 +251,7 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.notice_element_table5),
                 findViewById(R.id.notice_element_table6)
         };
-
-        for (int k = 0; k < 7; k++)
-            setNoticeTable(nic.getNotice(NoticeHandler.getCategory(k)), tables[k]);
+        setNoticeTable(nic.getNotice(notice_category), tables[NoticeHandler.getIndex(notice_category)]);
     }
 
     // 로딩 화면 시작
@@ -433,8 +434,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent_gradeAll);
     }
 
-    // 7개의 공지사항 표 세팅(아직 미완성)
-    // 네트워크 문제로 공지사항을 제대로 가져오지 못하는 경우가 발생
+    // 네트워크 문제로 공지사항을 제대로 가져오지 못하는 경우가 발생.
+    // ApiNoticeClass는 내가 못건들겠음
     public void setNoticeTable(ArrayList<Notice> na, TableLayout table) {
         for(int i = 0; i < na.size(); i++)
         {
@@ -459,18 +460,26 @@ public class MainActivity extends AppCompatActivity {
                 switch(j) {
                     case 0:
                         tv.setText(Integer.toString(i+1));
-                        //tv.setGravity(Gravity.CENTER);
                         tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.3f));
                         break;
                     case 1:
-                        tv.setText(na.get(i).getSUBJECT());
+                        String noticeTitle = na.get(i).getSUBJECT();
+                        tv.setText(noticeTitle);
                         tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,2.0f));
-                        //tv.setGravity(Gravity.CENTER);
+                        Linkify.TransformFilter link = new Linkify.TransformFilter() {
+                            @Override
+                            public String transformUrl(Matcher matcher, String s) {
+                                return "";
+                            }
+                        };
+                        Pattern pattern = Pattern.compile(noticeTitle);
+                        Linkify.addLinks(tv,pattern,na.get(i).getURL(),null,link);
+                        //System.out.println("공지 제목 : " + noticeTitle);
+                        //System.out.println("공지 URL : " + na.get(i).getURL() + "\n");
                         break;
                     case 2:
                         tv.setText(na.get(i).getPOSTED_DT());
                         tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.7f));
-                        //tv.setGravity(Gravity.CENTER);
                         break;
                 }
                 tbr.addView(tv);
