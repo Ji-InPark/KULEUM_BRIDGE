@@ -434,8 +434,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent_gradeAll);
     }
 
-    // 네트워크 문제로 공지사항을 제대로 가져오지 못하는 경우가 발생.
-    // ApiNoticeClass는 내가 못건들겠음
+    // 5%남음. Linkify.addLinks가 모든 제목 텍스트뷰에서 호출되야되는데 왜 안됨
     public void setNoticeTable(ArrayList<Notice> na, TableLayout table) {
         for(int i = 0; i < na.size(); i++)
         {
@@ -464,18 +463,20 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 1:
                         String noticeTitle = na.get(i).getSUBJECT();
+                        String noticeURL = na.get(i).getURL();
                         tv.setText(noticeTitle);
+                        Pattern pattern = Pattern.compile(noticeTitle);
                         tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,2.0f));
-                        Linkify.TransformFilter link = new Linkify.TransformFilter() {
+                        Linkify.TransformFilter mTransform = new Linkify.TransformFilter() {
                             @Override
                             public String transformUrl(Matcher matcher, String s) {
-                                return "";
+                                System.out.println("transformUrl 실행");
+                                return noticeURL;
                             }
                         };
-                        Pattern pattern = Pattern.compile(noticeTitle);
-                        Linkify.addLinks(tv,pattern,na.get(i).getURL(),null,link);
-                        //System.out.println("공지 제목 : " + noticeTitle);
-                        //System.out.println("공지 URL : " + na.get(i).getURL() + "\n");
+                        Linkify.addLinks(tv,pattern,"",null,mTransform);
+                        System.out.println("공지 제목 : " + noticeTitle);
+                        System.out.println("공지 URL : " + noticeURL + "\n");
                         break;
                     case 2:
                         tv.setText(na.get(i).getPOSTED_DT());
