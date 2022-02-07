@@ -434,7 +434,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent_gradeAll);
     }
 
-    // 5%남음. Linkify.addLinks가 모든 제목 텍스트뷰에서 호출되야되는데 왜 안됨
+    // 5%남음. 공지 제목에 [, ], (, ), ★ 같은 특수문자가 포함된 제목의 경우
+    // Linkify.addLinks가 정상적으로 작동하지 않는 문제 존재함( .이나 /같은 문장부호 특수문자의 경우 상관 없는듯)
     public void setNoticeTable(ArrayList<Notice> na, TableLayout table) {
         for(int i = 0; i < na.size(); i++)
         {
@@ -482,6 +483,21 @@ public class MainActivity extends AppCompatActivity {
                         tv.setText(na.get(i).getPOSTED_DT());
                         tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.7f));
                         break;
+                    /* String 내의 특수문자 해결방법이 없을경우 게시일자 우측에 추가로 링크 텍스트뷰 만드는 대안
+                    case 3:
+                        String noticeURL = na.get(i).getURL();
+                        tv.setText("링크");
+                        Pattern pattern = Pattern.compile("링크");
+                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,2.0f));
+                        Linkify.TransformFilter mTransform = new Linkify.TransformFilter() {
+                            @Override
+                            public String transformUrl(Matcher matcher, String s) {
+                                System.out.println("transformUrl 실행");
+                                return noticeURL;
+                            }
+                        };
+                        Linkify.addLinks(tv,pattern,"",null,mTransform);
+                    */
                 }
                 tbr.addView(tv);
             }
