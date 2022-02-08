@@ -434,8 +434,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent_gradeAll);
     }
 
-    // 5%남음. 공지 제목에 [, ], (, ), ★ 같은 특수문자가 포함된 제목의 경우
-    // Linkify.addLinks가 정상적으로 작동하지 않는 문제 존재함( .이나 /같은 문장부호 특수문자의 경우 상관 없는듯)
+    // 공지사항 레이아웃의 카테고리별 공지 테이블을 채우는 함수
     public void setNoticeTable(ArrayList<Notice> na, TableLayout table) {
         for(int i = 0; i < na.size(); i++)
         {
@@ -463,41 +462,24 @@ public class MainActivity extends AppCompatActivity {
                         tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.3f));
                         break;
                     case 1:
-                        String noticeTitle = na.get(i).getSUBJECT();
-                        String noticeURL = na.get(i).getURL();
+                        String noticeTitle = na.get(i).getSUBJECT(); // 공지사항 제목
+                        String noticeURL = na.get(i).getURL();       // 공지사항 URL
                         tv.setText(noticeTitle);
-                        Pattern pattern = Pattern.compile(noticeTitle);
+                        String regexNT = changeRegex(noticeTitle); // 정규표현식으로 바뀐 noticeTitle
+                        Pattern pattern = Pattern.compile(regexNT); // 패턴에 컴파일되는 문자열은 정규표현식이 지켜져야 특수문자도 감지함.
                         tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,2.0f));
                         Linkify.TransformFilter mTransform = new Linkify.TransformFilter() {
                             @Override
                             public String transformUrl(Matcher matcher, String s) {
-                                System.out.println("transformUrl 실행");
                                 return noticeURL;
                             }
                         };
                         Linkify.addLinks(tv,pattern,"",null,mTransform);
-                        System.out.println("공지 제목 : " + noticeTitle);
-                        System.out.println("공지 URL : " + noticeURL + "\n");
                         break;
                     case 2:
                         tv.setText(na.get(i).getPOSTED_DT());
                         tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.7f));
                         break;
-                    /* String 내의 특수문자 해결방법이 없을경우 게시일자 우측에 추가로 링크 텍스트뷰 만드는 대안
-                    case 3:
-                        String noticeURL = na.get(i).getURL();
-                        tv.setText("링크");
-                        Pattern pattern = Pattern.compile("링크");
-                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,2.0f));
-                        Linkify.TransformFilter mTransform = new Linkify.TransformFilter() {
-                            @Override
-                            public String transformUrl(Matcher matcher, String s) {
-                                System.out.println("transformUrl 실행");
-                                return noticeURL;
-                            }
-                        };
-                        Linkify.addLinks(tv,pattern,"",null,mTransform);
-                    */
                 }
                 tbr.addView(tv);
             }
@@ -592,5 +574,20 @@ public class MainActivity extends AppCompatActivity {
             else
                 tables[i].setVisibility(View.GONE);
         }
+    }
+
+    // 문자열을 정규표현식을 만족하는 문자열로 바꿔주는 함수
+    private String changeRegex(String str) {
+        String changedStr = str.replace("(","\\(");
+        changedStr = changedStr.replace(")","\\)");
+        changedStr = changedStr.replace("[","\\[");
+        changedStr = changedStr.replace("]","\\]");
+        changedStr = changedStr.replace("★","\\★");
+        changedStr = changedStr.replace("☆","\\☆");
+        changedStr = changedStr.replace("?","\\?");
+        changedStr = changedStr.replace("^","\\^");
+        changedStr = changedStr.replace("&","\\&");
+        changedStr = changedStr.replace("+","\\+");
+        return changedStr;
     }
 }
