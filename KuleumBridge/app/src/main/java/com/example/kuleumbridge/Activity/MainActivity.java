@@ -44,7 +44,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
-     // User 의 정보들을 저장할 객체
+    // User 의 정보들을 저장할 객체
     UserInfoClass uic;
     NoticeInfoClass nic;
 
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         alc.execute();
     }
 
-    // 로그인 성공시
+    // ApiLoginClass 통해 로그인 성공시
     public void loginSuccess(String result)
     {
         // 유저 정보 저장하는 부분
@@ -252,6 +252,7 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.notice_element_table5),
                 findViewById(R.id.notice_element_table6)
         };
+        // 공지사항 테이블을 가져온 정보들을 바탕으로 채워준다.
         setNoticeTable(nic.getNotice(notice_category), tables[NoticeHandler.getIndex(notice_category)]);
     }
 
@@ -411,6 +412,7 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
+    // 공지사항 레이아웃의 "웹 공지사항 이동" 버튼 상호작용 함수
     public void onNoticeBtnClick(View view) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp"));
         startActivity(intent);
@@ -471,11 +473,12 @@ public class MainActivity extends AppCompatActivity {
                         String noticeURL = na.get(i).getURL();       // 공지사항 URL
                         tv.setText(noticeTitle);
                         String regexNT = changeRegex(noticeTitle); // 정규표현식으로 바뀐 noticeTitle
-                        Pattern pattern = Pattern.compile(regexNT); // 패턴에 컴파일되는 문자열은 정규표현식이 지켜져야 특수문자도 감지함.
+                        Pattern pattern = Pattern.compile(regexNT); // 패턴에 컴파일되는 문자열은 정규표현식이 지켜져야 특수문자도 감지한다.
                         Linkify.TransformFilter mTransform = new Linkify.TransformFilter() {
                             @Override
                             public String transformUrl(Matcher matcher, String s) {
                                 return noticeURL;
+                                // 스키마인 ""뒤에 noticeURL을 붙여서 리턴한다.
                             }
                         };
                         Linkify.addLinks(tv,pattern,"",null,mTransform);
@@ -554,8 +557,10 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0; i < 4; i++)
         {
             if(index == i)
+                // 선택된 탭만 화면 상에 보여지게 한다.
                 layouts[i].setVisibility(View.VISIBLE);
             else
+                // 선택되지 않은 탭은 보이지 않고, 화면에서 공간또한 차지하지 않는다.
                 layouts[i].setVisibility(View.GONE);
         }
     }
@@ -575,8 +580,10 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0; i < 7; i++)
         {
             if(index == i)
+                // 선택된 탭만 화면 상에 보여지게 한다.
                 tables[i].setVisibility(View.VISIBLE);
             else
+                // 선택되지 않은 탭은 보이지 않고, 화면에서 공간또한 차지하지 않는다.
                 tables[i].setVisibility(View.GONE);
         }
     }
