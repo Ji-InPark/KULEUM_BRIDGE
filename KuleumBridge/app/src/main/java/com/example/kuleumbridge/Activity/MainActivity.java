@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.util.Linkify;
@@ -410,6 +411,11 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
+    public void onNoticeBtnClick(View view) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp"));
+        startActivity(intent);
+    }
+
     // 맛집 레이아웃의 "지도로 보기" 버튼 상호작용 함수
     public void onTastePlaceBtnClick(View view) {
         //onTastePlaceActivity 실행, 기존 창은 유지.
@@ -424,7 +430,6 @@ public class MainActivity extends AppCompatActivity {
         intent_tastePlace.putExtra("parameter", parameter);
         startActivity(intent_tastePlace);
     }
-
 
     // 성적조회 레이아웃의 "세부 성적 조회" 버튼 상호작용 함수
     public void onGradeCheckAcBtnClick(View view) {
@@ -467,7 +472,6 @@ public class MainActivity extends AppCompatActivity {
                         tv.setText(noticeTitle);
                         String regexNT = changeRegex(noticeTitle); // 정규표현식으로 바뀐 noticeTitle
                         Pattern pattern = Pattern.compile(regexNT); // 패턴에 컴파일되는 문자열은 정규표현식이 지켜져야 특수문자도 감지함.
-                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,2.0f));
                         Linkify.TransformFilter mTransform = new Linkify.TransformFilter() {
                             @Override
                             public String transformUrl(Matcher matcher, String s) {
@@ -475,6 +479,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         };
                         Linkify.addLinks(tv,pattern,"",null,mTransform);
+                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,2.0f));
                         break;
                     case 2:
                         tv.setText(na.get(i).getPOSTED_DT());
@@ -551,7 +556,7 @@ public class MainActivity extends AppCompatActivity {
             if(index == i)
                 layouts[i].setVisibility(View.VISIBLE);
             else
-                layouts[i].setVisibility(View.INVISIBLE);
+                layouts[i].setVisibility(View.GONE);
         }
     }
 

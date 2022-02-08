@@ -46,9 +46,6 @@
         <activity android:name=".Taste.TastePlaceList">
         </activity>
 
-        <activity android:name=".Activity.NoticeActivity">
-        </activity>
-
         <activity android:name=".Taste.TastePlaceInfo">
         </activity>
 
