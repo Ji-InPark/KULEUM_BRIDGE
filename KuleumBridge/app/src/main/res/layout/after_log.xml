@@ -529,8 +529,10 @@
             android:layout_marginTop="30dp"
             android:backgroundTint="@color/black"
             android:onClick="onNoticeBtnClick"
-            android:text="웹 공지사항 이동"
+            android:gravity="center"
+            android:text="↗웹 공지사항 이동 "
             android:textSize="16sp"
+            android:textColor="@color/white"
             android:textStyle="bold" />
 
 
@@ -582,22 +584,37 @@
             android:layout_height="50dp"
             android:gravity="center">
 
-            <ImageView
+            <TextView
                 android:layout_width="80dp"
                 android:layout_height="35dp"
                 android:layout_marginRight="30dp"
-                android:src="@drawable/kfood" />
+                android:gravity="center"
+                android:text="한식"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:background="@drawable/round_tp"/>
 
-            <ImageView
+            <TextView
                 android:layout_width="80dp"
                 android:layout_height="35dp"
                 android:layout_marginRight="30dp"
-                android:src="@drawable/ttaek" />
+                android:gravity="center"
+                android:text="분식"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:background="@drawable/round_tp"/>
 
-            <ImageView
+            <TextView
                 android:layout_width="80dp"
                 android:layout_height="35dp"
-                android:src="@drawable/caffe" />
+                android:gravity="center"
+                android:text="카페/디저트"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:background="@drawable/round_tp"/>
         </TableRow>
 
 
@@ -636,24 +653,37 @@
             android:layout_height="50dp"
             android:gravity="center">
 
-            <ImageView
+            <TextView
                 android:layout_width="80dp"
                 android:layout_height="35dp"
                 android:layout_marginRight="30dp"
-                android:src="@drawable/gatsu" />
+                android:gravity="center"
+                android:text="일식"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:background="@drawable/round_tp"/>
 
-            <ImageView
+            <TextView
                 android:layout_width="80dp"
                 android:layout_height="35dp"
                 android:layout_marginRight="30dp"
-                android:src="@drawable/chicken" />
+                android:gravity="center"
+                android:text="치킨/햄버거"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:background="@drawable/round_tp"/>
 
-            <ImageView
-                android:id="@+id/YangSik"
+            <TextView
                 android:layout_width="80dp"
                 android:layout_height="35dp"
-                android:onClick="showYangSik"
-                android:src="@drawable/yangki" />
+                android:gravity="center"
+                android:text="아시안/양식"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:background="@drawable/round_tp"/>
         </TableRow>
 
 
@@ -692,22 +722,37 @@
             android:layout_height="50dp"
             android:gravity="center">
 
-            <ImageView
+            <TextView
                 android:layout_width="80dp"
                 android:layout_height="35dp"
                 android:layout_marginRight="30dp"
-                android:src="@drawable/jung" />
+                android:gravity="center"
+                android:text="중식"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:background="@drawable/round_tp"/>
 
-            <ImageView
+            <TextView
                 android:layout_width="80dp"
                 android:layout_height="35dp"
                 android:layout_marginRight="30dp"
-                android:src="@drawable/gogi" />
+                android:gravity="center"
+                android:text="고기"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:background="@drawable/round_tp"/>
 
-            <ImageView
+            <TextView
                 android:layout_width="80dp"
                 android:layout_height="35dp"
-                android:src="@drawable/sulsul" />
+                android:gravity="center"
+                android:text="술집"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:background="@drawable/round_tp"/>
         </TableRow>
 
         <TableRow
@@ -721,8 +766,9 @@
                 android:layout_height="50dp"
                 android:backgroundTint="@color/black"
                 android:onClick="onTastePlaceBtnClick"
-                android:text="↗지도로 보기"
+                android:text="↗지도로 보기 "
                 android:textSize="16sp"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
         </TableRow>
 
@@ -759,13 +805,13 @@
 
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1.0"
                     android:gravity="center"
                     android:text="이수구분"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
 
                 <TextView
 
@@ -776,7 +822,8 @@
                     android:gravity="center"
                     android:text="과목명"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
 
                 <TextView
 
@@ -786,7 +833,8 @@
                     android:gravity="center"
                     android:text="학점"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
 
                 <TextView
 
@@ -797,7 +845,8 @@
                     android:gravity="center"
                     android:text="성적"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
             </TableRow>
 
 
@@ -812,8 +861,10 @@
             android:layout_marginTop="30dp"
             android:backgroundTint="@color/black"
             android:onClick="onGradeCheckAcBtnClick"
-            android:text="세부 성적 조회"
+            android:gravity="center"
+            android:text="↗세부 성적 조회 "
             android:textSize="16sp"
+            android:textColor="@color/white"
             android:textStyle="bold" />
     </LinearLayout>
 

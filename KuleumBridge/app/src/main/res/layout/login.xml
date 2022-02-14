@@ -52,10 +52,13 @@
     <Button
         android:layout_marginTop="15dp"
         android:id="@+id/loginButton"
-        android:layout_width="280dp"
-        android:layout_height="48dp"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
         android:layout_gravity="center"
-        android:text="Log in"
+        android:text="Login"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
         android:textAllCaps="false"
         android:backgroundTint="@color/black"
         android:onClick="onLoginBtnClick"/>
