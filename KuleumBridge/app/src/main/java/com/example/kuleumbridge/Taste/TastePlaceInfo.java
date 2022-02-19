@@ -46,7 +46,6 @@ public class TastePlaceInfo extends AppCompatActivity {
             bundle.putDouble("latitude",latitude);
             bundle.putDouble("longitude",longitude);
             mainFragment.setArguments(bundle);
-
         }
 
     }
@@ -58,10 +57,6 @@ public class TastePlaceInfo extends AppCompatActivity {
         ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("Copy", address_copy);
         clipboard.setPrimaryClip(clip); //클립보드
-
-        Toast myToast = Toast.makeText(this.getApplicationContext(), "주소가 복사되었습니다.", Toast.LENGTH_SHORT);
-        myToast.setGravity(Gravity.BOTTOM, 0, 10);
-        myToast.show();
 
     }
 

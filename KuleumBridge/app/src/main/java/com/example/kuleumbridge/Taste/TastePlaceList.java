@@ -22,7 +22,6 @@ import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
 public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출력
-
     ListView list_excel;
 
     @Override
@@ -32,8 +31,6 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
         list_excel = (ListView)findViewById(R.id.list_excel);
 
         Excel();
-
-
     }
 
     //엑셀 값 읽어들이는 과정
@@ -61,15 +58,9 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
                     listData.latitude = Double.parseDouble(sheet.getCell(3,row).getContents()); //위도
                     listData.longitude = Double.parseDouble(sheet.getCell(4,row).getContents()); //경도
 
-
                     listViewData.add(listData);
-
                 }
-
             }
-
-
-
         } catch (IOException e) {
             e.printStackTrace();
         } catch (BiffException e) {
@@ -97,6 +88,4 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
             });
         }
     }
-
-
-    }
+}

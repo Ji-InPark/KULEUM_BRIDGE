@@ -15,7 +15,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -39,6 +38,7 @@ import com.example.kuleumbridge.Taste.TastePlaceActivity;
 import com.example.kuleumbridge.Taste.TastePlaceList;
 import com.google.android.material.tabs.TabLayout;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     // User 의 정보들을 저장할 객체
     UserInfoClass uic;
     NoticeInfoClass nic;
+
 
     // 로딩 애니메이션을 위한 객체
     CustomProgress customProgress;
@@ -63,8 +64,20 @@ public class MainActivity extends AppCompatActivity {
         // 로딩 화면 시작
         customProgress.show();
 
+        // 맛집 정보 불러오기
+        setPlaceData();
+
         // 자동로그인
         autoLogin();
+    }
+
+    public void setPlaceData()
+    {
+        try {
+            TastePlaceActivity.getDataFromExcel(getBaseContext().getResources().getAssets().open("place.xls"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // 로그인 버튼이 눌렸을 때
@@ -435,7 +448,7 @@ public class MainActivity extends AppCompatActivity {
 
     // 맛집 레이아웃의 9가지 맛집 아이콘 상호작용 함수
     public void OnTasteBtnClick(View view) {
-        String parameter = TasteHandler.getValue(view.getId());
+        String parameter = TasteHandler.getStringValue(view.getId());
         Intent intent_tastePlace = new Intent(this, TastePlaceList.class);
         intent_tastePlace.putExtra("parameter", parameter);
         startActivity(intent_tastePlace);
