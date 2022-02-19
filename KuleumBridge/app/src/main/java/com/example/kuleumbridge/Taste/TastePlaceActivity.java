@@ -28,6 +28,7 @@ import jxl.read.biff.BiffException;
 /* 맛집 메인 화면에서 하단 부분에 위치한
  지도로 보기 버튼 누르면 나타나는 화면 구성*/
 
+// todo 카카오 api로 바꾸고 싶다 ui가 너무 구림
 public class TastePlaceActivity extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     static String kind[] = new String[200]; //종류

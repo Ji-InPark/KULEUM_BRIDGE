@@ -33,7 +33,6 @@ public class TastePlaceInfo extends AppCompatActivity {
         Double latitude = intent.getDoubleExtra("latitude",0);
         Double longitude = intent.getDoubleExtra("longitude",0);
 
-
         if(savedInstanceState == null) {
             TastePlaceInfoMap mainFragment = new TastePlaceInfoMap();
             getSupportFragmentManager().beginTransaction()
@@ -45,25 +44,25 @@ public class TastePlaceInfo extends AppCompatActivity {
             bundle.putString("address",address);
             bundle.putDouble("latitude",latitude);
             bundle.putDouble("longitude",longitude);
+
             mainFragment.setArguments(bundle);
         }
-
     }
 
-    public void CopyClick(View view) { //주소 복사하기 버튼
-
+    //주소 복사하기 버튼
+    public void CopyClick(View view) {
         TextView textView= (TextView)findViewById(R.id.info_address); //텍스트뷰
         String address_copy= textView.getText().toString(); // 텍스트뷰 글자 가져옴
         ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("Copy", address_copy);
         clipboard.setPrimaryClip(clip); //클립보드
-
     }
 
+    // todo 이거 앱으로 연결을 해주자
     public void MapClick(View view) {
        Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.google.co.kr/maps/@37.5425241,127.073699,15z"));
-       startActivity(intent);
 
+       startActivity(intent);
     }
 }
 

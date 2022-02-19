@@ -21,6 +21,7 @@ import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
+// todo 가독성 높이는 refactoring 필요
 public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출력
     ListView list_excel;
 
@@ -82,8 +83,8 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
                     intent.putExtra("address",listViewData.get(position).address);
                     intent.putExtra("latitude",listViewData.get(position).latitude);
                     intent.putExtra("longitude",listViewData.get(position).longitude);
-                    startActivity(intent);
 
+                    startActivity(intent);
                 }
             });
         }

@@ -52,16 +52,13 @@ public class TastePlaceInfoMap extends Fragment implements OnMapReadyCallback {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        rootView = (ViewGroup)inflater.inflate(R.layout.taste_info_item, container, false);
-        mapView = (MapView) rootView.findViewById(R.id.mapView);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        rootView = inflater.inflate(R.layout.taste_info_item, container, false);
+        mapView = rootView.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
 
-        TextView name = (TextView) rootView.findViewById(R.id.info_name);
-        TextView address = (TextView) rootView.findViewById(R.id.info_address);
-
+        TextView name = rootView.findViewById(R.id.info_name);
+        TextView address = rootView.findViewById(R.id.info_address);
 
         //TastePlaceInfo(Activity)의 값을 받아오는 과정
         Bundle bundle = getArguments();
@@ -72,7 +69,6 @@ public class TastePlaceInfoMap extends Fragment implements OnMapReadyCallback {
 
         name.setText(name2);
         address.setText(address2);
-
 
         mapView.getMapAsync(this);
 
@@ -100,12 +96,10 @@ public class TastePlaceInfoMap extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
         MapsInitializer.initialize(this.getActivity());
 
-
         //해당 맛집 위도, 경도 마커로 표시하는 과정
-      CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 16);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 16);
 
         googleMap.animateCamera(cameraUpdate);
 
