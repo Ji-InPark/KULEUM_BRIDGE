@@ -201,6 +201,7 @@ public class MainActivity extends AppCompatActivity {
                 for (int j = 0; j < 4; j++) {
                     TextView textView = new TextView(this);
                     textView.setTextSize(16);
+                    textView.setTextColor(Color.parseColor("#000000"));
                     textView.setPadding(10, 0, 20, 50);
                     textView.setWidth(0);
 
@@ -462,6 +463,7 @@ public class MainActivity extends AppCompatActivity {
                 TextView tv = new TextView(this);
 
                 tv.setTextSize(16);
+                tv.setTextColor(Color.parseColor("#000000"));
                 tv.setPadding(10,0,20,50);
                 tv.setWidth(0);
 
