@@ -867,7 +867,7 @@
             android:backgroundTint="@color/black"
             android:onClick="onGradeCheckAcBtnClick"
             android:gravity="center"
-            android:text="↗세부 성적 조회 "
+            android:text="↗전체 성적 조회 "
             android:textSize="16sp"
             android:textColor="@color/white"
             android:textStyle="bold" />
