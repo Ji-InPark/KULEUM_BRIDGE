@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background1"
     android:orientation="vertical"
     android:gravity="center">
@@ -125,6 +126,10 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:id="@+id/notice_category_tab"
+                android:background="@drawable/round_top"
+                android:backgroundTint="#9FF781"
+                app:tabTextColor="@color/black"
+                app:tabTextAppearance="@style/notice_tab_text"
                 android:layout_marginTop="100dp">
 
                 <com.google.android.material.tabs.TabItem
@@ -176,7 +181,7 @@
             android:id="@+id/notice_element_table0"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@drawable/round_bottom"
             android:isScrollContainer="true"
             android:stretchColumns="*"
             android:visibility="visible">
@@ -226,7 +231,7 @@
             android:id="@+id/notice_element_table1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@drawable/round_bottom"
             android:isScrollContainer="true"
             android:stretchColumns="*"
             android:visibility="gone">
@@ -276,7 +281,7 @@
             android:id="@+id/notice_element_table2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@drawable/round_bottom"
             android:isScrollContainer="true"
             android:stretchColumns="*"
             android:visibility="gone">
@@ -326,7 +331,7 @@
             android:id="@+id/notice_element_table3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@drawable/round_bottom"
             android:isScrollContainer="true"
             android:stretchColumns="*"
             android:visibility="gone">
@@ -376,7 +381,7 @@
             android:id="@+id/notice_element_table4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@drawable/round_bottom"
             android:isScrollContainer="true"
             android:stretchColumns="*"
             android:visibility="gone">
@@ -426,7 +431,7 @@
             android:id="@+id/notice_element_table5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@drawable/round_bottom"
             android:isScrollContainer="true"
             android:stretchColumns="*"
             android:visibility="gone">
@@ -476,7 +481,7 @@
             android:id="@+id/notice_element_table6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@drawable/round_bottom"
             android:isScrollContainer="true"
             android:stretchColumns="*"
             android:visibility="gone">
@@ -876,6 +881,8 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
+        android:background="@color/white"
+        app:tabTextAppearance="@style/main_tab_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
