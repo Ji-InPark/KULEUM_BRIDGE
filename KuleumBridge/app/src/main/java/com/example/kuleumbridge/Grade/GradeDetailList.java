@@ -94,9 +94,6 @@ public class GradeDetailList extends Fragment {
             }
 
         }
-
-
-
         for (int k = 0; k < a_yy.size() - 1; k++) {
 
             //클릭한 탭내용과 일치하는 성적만 불러오는 과정(ex. 2021년 2학기 클릭시, 해당 학기 성적만 불러옴)

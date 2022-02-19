@@ -26,6 +26,7 @@ public class GradeCheckActivity extends AppCompatActivity {
 
     String year = "";
     int position = 0;
+    String tabb ="";
 
 
 
@@ -38,13 +39,9 @@ public class GradeCheckActivity extends AppCompatActivity {
         setContentView(R.layout.grade_detail);
         gradeAllArr = new ArrayList<>();
         gradeAllArr = getIntent().getParcelableArrayListExtra("GAA"); // 넘어온 ArrayList 객체
-        Iterator it = gradeAllArr.iterator(); // ArrayList 내에서 반복해야 할 일이 필요할때 사용
-
 
         for (int h = 0; h < gradeAllArr.size(); h++) {
             year += gradeAllArr.get(h).getYY() + " " + gradeAllArr.get(h).getSHTM_NM() + ",";
-
-//            System.out.println(gradeAllArr.get(h).getHAKSU_NM()+","+gradeAllArr.get(h).getPOBT_DIV()+","+gradeAllArr.get(h).getGRD());
         } // String에 년도랑 학기 임시 저장(쉼표로 구분)
 
         tab = new ArrayList<String>(Arrays.asList(year.split(",")));
@@ -76,15 +73,25 @@ public class GradeCheckActivity extends AppCompatActivity {
 
 
 
+        //탭 아무것도 안눌렀을 때, 세부성적 버튼 클릭시 화면 초기화
+        tabb = tab2.get(0);
+        if(savedInstanceState == null) {
+            GradeDetailList fragment = new GradeDetailList();
+            getSupportFragmentManager().beginTransaction().replace(R.id.grade_fragment, fragment).commit();
+            Bundle bundle = new Bundle();
+            bundle.putString("tabb",tabb);
+            bundle.putParcelableArrayList("gaa",gradeAllArr);
+            fragment.setArguments(bundle);
+        }
 
 
-
+        //탭 클릭했을 때
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
                 position = tab.getPosition();
-                String tabb = tab2.get(position);
+                tabb = tab2.get(position);
 
 
                 if(savedInstanceState == null) {
@@ -99,8 +106,6 @@ public class GradeCheckActivity extends AppCompatActivity {
 
 
             }
-
-
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
 

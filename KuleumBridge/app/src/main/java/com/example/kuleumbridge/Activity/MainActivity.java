@@ -15,6 +15,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -184,56 +185,62 @@ public class MainActivity extends AppCompatActivity {
     // ApiGradeNowClass 통해 금학기 성적 정보 가져오기 성공시
     public void gradeNowSuccess(String result)
     {
-        // uic에 얻어온 정보 저장 - 금학기성적
-        uic.setGradeNowInfo(result);
-        TableLayout tableLayout = findViewById(R.id.grade_now_tablelayout);
-        ArrayList<Grade> gradeNow = uic.getGrade_now();
 
-        for(int i = 0; i < gradeNow.size(); i++)
-        {
-            TableRow tableRow = new TableRow(this);
-            tableRow.setLayoutParams(new TableRow.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT));
+        try {
+            // uic에 얻어온 정보 저장 - 금학기성적
+            uic.setGradeNowInfo(result);
+            TableLayout tableLayout = findViewById(R.id.grade_now_tablelayout);
+            ArrayList<Grade> gradeNow = uic.getGrade_now();
 
-            for (int j = 0; j < 4; j++)
-            {
-                TextView textView = new TextView(this);
+            for (int i = 0; i < gradeNow.size(); i++) {
+                TableRow tableRow = new TableRow(this);
+                tableRow.setLayoutParams(new TableRow.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
 
-                textView.setTextSize(16);
-                textView.setPadding(10,0,20,50);
-                textView.setWidth(0);
+                for (int j = 0; j < 4; j++) {
+                    TextView textView = new TextView(this);
+                    textView.setTextSize(16);
+                    textView.setPadding(10, 0, 20, 50);
+                    textView.setWidth(0);
 
-                //글자 수 많으면 ... 으로 처리
-                textView.setSingleLine(true);
-                textView.setEllipsize(TextUtils.TruncateAt.END);
-                textView.setSelected(true);
+                    //글자 수 많으면 ... 으로 처리
+                    textView.setSingleLine(true);
+                    textView.setEllipsize(TextUtils.TruncateAt.END);
+                    textView.setSelected(true);
 
-                switch (j) {
-                    case 0:
-                        textView.setText(gradeNow.get(i).getPOBT_DIV());
-                        textView.setGravity(Gravity.CENTER);
-                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,1.0f));
-                        break;
-                    case 1:
-                        textView.setText(gradeNow.get(i).getHAKSU_NM());
-                        textView.setGravity(Gravity.START); // Gravity Start를 대신 쓰라고 해서 Start로 수정함
-                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,2.0f));
-                        break;
-                    case 2:
-                        textView.setText(gradeNow.get(i).getPNT());
-                        textView.setGravity(Gravity.CENTER);
-                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.5f));
-                        break;
-                    case 3:
-                        textView.setText(gradeNow.get(i).getGRD());
-                        textView.setGravity(Gravity.CENTER);
-                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.7f));
-                        break;
+                    switch (j) {
+                        case 0:
+                            textView.setText(gradeNow.get(i).getPOBT_DIV());
+                            textView.setGravity(Gravity.CENTER);
+                            textView.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f));
+                            break;
+                        case 1:
+                            textView.setText(gradeNow.get(i).getHAKSU_NM());
+                            textView.setGravity(Gravity.START); // Gravity Start를 대신 쓰라고 해서 Start로 수정함
+                            textView.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 2.0f));
+                            break;
+                        case 2:
+                            textView.setText(gradeNow.get(i).getPNT());
+                            textView.setGravity(Gravity.CENTER);
+                            textView.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 0.5f));
+                            break;
+                        case 3:
+                            textView.setText(gradeNow.get(i).getGRD());
+                            textView.setGravity(Gravity.CENTER);
+                            textView.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 0.7f));
+                            break;
+                    }
+                    tableRow.addView(textView);
                 }
-                tableRow.addView(textView);
+                tableLayout.addView(tableRow);
             }
-            tableLayout.addView(tableRow);
+        }catch (NullPointerException e) { //uic 객체가 비었을때 예외처리
+            TextView textView = new TextView(this);
+            textView.setText("해당 학기 성적이 존재하지 않습니다.");
+            textView.setTextSize(16);
+            textView.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL); //텍스트뷰 가로 세로 중앙 정렬
+
         }
     }
 
