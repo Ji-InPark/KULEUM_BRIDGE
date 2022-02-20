@@ -63,6 +63,7 @@ public class GradeCheckActivity extends AppCompatActivity {
         } //중복 된 요소 제거
 
         tabs = findViewById(R.id.tabs);
+        tabs.setBackgroundColor(Color.parseColor("#9FF781"));
         tabs.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
         tabs.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#000000"));
 

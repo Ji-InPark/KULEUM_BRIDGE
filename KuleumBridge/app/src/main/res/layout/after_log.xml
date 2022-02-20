@@ -880,7 +880,7 @@
         android:orientation="horizontal">
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
+        android:id="@+id/main_tab_layout"
         android:background="@color/white"
         app:tabTextAppearance="@style/main_tab_text"
         android:layout_width="match_parent"
@@ -912,5 +912,11 @@
 
     </com.google.android.material.tabs.TabLayout>
     </LinearLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/view_pager"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
 
 </LinearLayout>

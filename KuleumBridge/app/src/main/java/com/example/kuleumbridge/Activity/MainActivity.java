@@ -1,6 +1,12 @@
 package com.example.kuleumbridge.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -468,8 +474,7 @@ public class MainActivity extends AppCompatActivity {
         {
             TableRow tbr = new TableRow(this);
             tbr.setLayoutParams(new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT));
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
             for (int j = 0; j < 3; j++)
             {
@@ -481,8 +486,6 @@ public class MainActivity extends AppCompatActivity {
                 tv.setWidth(0);
 
                 // 글자 수 많으면 ... 으로 처리
-                tv.setSingleLine(true);
-                tv.setEllipsize(TextUtils.TruncateAt.END);
                 tv.setSelected(true);
 
                 switch(j) {
@@ -522,7 +525,11 @@ public class MainActivity extends AppCompatActivity {
     {
         setContentView(R.layout.after_log);
 
-        TabLayout tabLayout = findViewById(R.id.tab_layout);
+        //ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
+        //PagerAdapter adapter = new PageAdapter(getSupportFragmentManager());
+        //viewPager.setAdapter(adapter);
+        TabLayout tabLayout = findViewById(R.id.main_tab_layout);
+        //tabLayout.setupWithViewPager(viewPager);
         tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
         tabLayout.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#000000"));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -624,4 +631,7 @@ public class MainActivity extends AppCompatActivity {
         changedStr = changedStr.replace("+","\\+");
         return changedStr;
     }
+
+
+
 }
