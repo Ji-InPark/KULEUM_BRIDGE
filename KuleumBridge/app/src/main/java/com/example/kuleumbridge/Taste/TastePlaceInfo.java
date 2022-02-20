@@ -5,10 +5,8 @@ import android.content.ClipboardManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,11 +25,11 @@ public class TastePlaceInfo extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        //TastePlaceList의 값 받아오는 과정
+        //TastePlaceList 의 값 받아오는 과정
         String name = intent.getStringExtra("name");
         String address = intent.getStringExtra("address");
-        Double latitude = intent.getDoubleExtra("latitude",0);
-        Double longitude = intent.getDoubleExtra("longitude",0);
+        double latitude = intent.getDoubleExtra("latitude",0);
+        double longitude = intent.getDoubleExtra("longitude",0);
 
         if(savedInstanceState == null) {
             TastePlaceInfoMap mainFragment = new TastePlaceInfoMap();
