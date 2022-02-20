@@ -108,6 +108,7 @@ public class GradeDetailList extends Fragment {
 
                     textView = new TextView(getActivity());
                     textView.setTextSize(19);
+                    textView.setTextColor(Color.parseColor("#000000"));
                     textView.setWidth(0);
                     textView.setPadding(0,0,10,70);
 
