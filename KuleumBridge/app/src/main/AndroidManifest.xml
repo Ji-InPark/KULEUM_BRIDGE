@@ -24,6 +24,8 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"/>
 
+        <meta-data android:name="com.kakao.sdk.AppKey" android:value="6772273772a982d379b77822752fa525"/>
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false"/>

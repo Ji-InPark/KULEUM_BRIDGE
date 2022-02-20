@@ -3,19 +3,17 @@ package com.example.kuleumbridge.Taste;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.view.ViewGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.kuleumbridge.R;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import net.daum.mf.map.api.MapPOIItem;
+import net.daum.mf.map.api.MapPoint;
+import net.daum.mf.map.api.MapView;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,7 +27,7 @@ import jxl.read.biff.BiffException;
  지도로 보기 버튼 누르면 나타나는 화면 구성*/
 
 // todo 카카오 api로 바꾸고 싶다 ui가 너무 구림
-public class TastePlaceActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class TastePlaceActivity extends AppCompatActivity implements MapView.POIItemEventListener {
     private GoogleMap mMap;
     static String kind[] = new String[200]; //종류
     static String name[]= new String[200]; //상호명
@@ -76,29 +74,57 @@ public class TastePlaceActivity extends AppCompatActivity implements OnMapReadyC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.taste_place);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        MapView mapView = new MapView(this);
+        ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map);
+        mapViewContainer.addView(mapView);
+
+        getKakaoMap(mapView);
     }
 
-    //지도 화면 구성
     @Override
-    public void onMapReady(final GoogleMap googleMap) {
-        mMap = googleMap;
+    public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
 
-        //마커 추가 과정
+    }
+
+    @Override
+    public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem) {
+
+    }
+
+    @Override
+    public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem, MapPOIItem.CalloutBalloonButtonType calloutBalloonButtonType) {
+
+    }
+
+    @Override
+    public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
+
+    }
+
+    public void getKakaoMap(MapView mapView)
+    {
+        mapView.setPOIItemEventListener(this);
+
+        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.5425241, 127.073699), true);
+        mapView.setZoomLevel(2, true);
+
+        addMarkers(mapView);
+    }
+
+    public void addMarkers(MapView mapView)
+    {
         for(int i =1; i< RowEnd; i++) {
-            MarkerOptions marker = new MarkerOptions();
-            marker.position(new LatLng(latitude[i],longitude[i])).title(name[i]).snippet(address[i]);
+            MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(latitude[i], longitude[i]);
+            Bitmap image = Bitmap.createScaledBitmap(((BitmapDrawable) getResources().getDrawable(TasteHandler.getDrawableValue(kind[i]))).getBitmap(), 75, 75, true);
 
-            // 음식 종류에 따라 마커 이미지 변경
-            Bitmap bitmap = ((BitmapDrawable) getResources().getDrawable(TasteHandler.getDrawableValue(kind[i]))).getBitmap();
-            Bitmap smallMarker = Bitmap.createScaledBitmap(bitmap,80,80,false);
-            marker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+            MapPOIItem marker = new MapPOIItem();
+            marker.setItemName(name[i]);
+            marker.setMapPoint(mapPoint);
+            marker.setMarkerType(MapPOIItem.MarkerType.CustomImage);
+            marker.setCustomImageBitmap(image);
 
-            mMap.addMarker(marker);
+            mapView.addPOIItem(marker);
         }
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(37.5425241,127.073699), 16));
     }
 }
 

@@ -38,6 +38,8 @@ import com.example.kuleumbridge.Taste.TastePlaceActivity;
 import com.example.kuleumbridge.Taste.TastePlaceList;
 import com.google.android.material.tabs.TabLayout;
 
+import net.daum.mf.map.api.MapView;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;

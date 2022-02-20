@@ -19,7 +19,7 @@ public class TasteHandler {
         idToStringMap.put(R.id.Caffe, "디저트");
         idToStringMap.put(R.id.IlSik, "일식");
         idToStringMap.put(R.id.Asian, "아시안");
-        idToStringMap.put(R.id.FastFood, "패스트푸드");
+        idToStringMap.put(R.id.FastFood, "치킨");
         idToStringMap.put(R.id.JungSik, "중식");
         idToStringMap.put(R.id.Meat, "고기");
         idToStringMap.put(R.id.Alchol, "술집");
@@ -35,8 +35,8 @@ public class TasteHandler {
         stringToDrawableMap.put("분식", R.drawable.bunsik);
         stringToDrawableMap.put("카페/디저트", R.drawable.dessert);
         stringToDrawableMap.put("돈까스/회/일식", R.drawable.sushi);
-        stringToDrawableMap.put("치킨/햄버거", R.drawable.asian);
-        stringToDrawableMap.put("아시안/양식", R.drawable.hamburger);
+        stringToDrawableMap.put("치킨/햄버거", R.drawable.hamburger);
+        stringToDrawableMap.put("아시안/양식", R.drawable.asian);
         stringToDrawableMap.put("중식", R.drawable.jjang);
         stringToDrawableMap.put("고기", R.drawable.meat);
         stringToDrawableMap.put("술집", R.drawable.alchol);
