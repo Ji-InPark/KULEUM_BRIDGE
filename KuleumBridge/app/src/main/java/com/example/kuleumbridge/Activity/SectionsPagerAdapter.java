@@ -26,7 +26,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
         // 스와이프 후 현재 포지션에 따라 각각의 Fragment(페이지)를 리턴
-        // 여기서 우려되는 부분이 각각의 페이지가
         switch(position)
         {
             case 0:
