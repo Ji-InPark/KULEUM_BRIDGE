@@ -19,6 +19,8 @@ public class SwipeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = TabViewpagerBinding.inflate(getLayoutInflater());
+
+        // setContentView(R.layout.tab_viewpager);와 동일한 구문. 바인딩을 했으므로 이런식으로 View설정 가능
         setContentView(binding.getRoot());
 
         //섹션페이저어댑터 객체 생성. 생성자 안에 들어가있는건 나도 잘 모르겠다. 별 중요한건 아닌거 같음.
