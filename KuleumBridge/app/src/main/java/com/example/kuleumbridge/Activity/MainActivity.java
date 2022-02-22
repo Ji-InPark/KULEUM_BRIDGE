@@ -523,11 +523,6 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.home_layout);
 
         TabLayout tabLayout = findViewById(R.id.main_tab_layout);
-        //ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
-        //viewPager.setOffscreenPageLimit(3);
-        //tabLayout.setupWithViewPager(viewPager); // 탭레이아웃과 뷰페이저 연결
-        //viewPager.setAdapter(new PageAdapter(getSupportFragmentManager()));
-
         tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
         tabLayout.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#000000"));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
