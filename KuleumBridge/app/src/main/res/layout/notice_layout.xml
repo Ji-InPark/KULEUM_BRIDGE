@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background1"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <!-- 공지사항 레이아웃 -->
+    <LinearLayout
+        android:id="@+id/notice_layout_sep"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible">
+        <!-- 공지사항 카테고리 탭 -->
+        <com.google.android.material.tabs.TabLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/notice_category_tab"
+            android:background="@drawable/round_top"
+            android:backgroundTint="#9FF781"
+            app:tabTextColor="@color/black"
+            app:tabTextAppearance="@style/notice_tab_text"
+            android:layout_marginTop="100dp">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/notice_tabItem_0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="학사" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/notice_tabItem_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="장학" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/notice_tabItem_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="취창업" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/notice_tabItem_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="국제" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/notice_tabItem_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="학생" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/notice_tabItem_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="산학" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/notice_tabItem_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="일반" />
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <!-- 학사 공지사항 -->
+        <TableLayout
+            android:id="@+id/notice_element_table0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_bottom"
+            android:isScrollContainer="true"
+            android:stretchColumns="*"
+            android:visibility="visible">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="0.3"
+                    android:gravity="center"
+                    android:text="No"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="2.0"
+                    android:gravity="center"
+                    android:text="제목"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:gravity="center"
+                    android:text="등록일"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+            </TableRow>
+        </TableLayout>
+
+        <!-- 성적 공지사항 -->
+        <TableLayout
+            android:id="@+id/notice_element_table1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_bottom"
+            android:isScrollContainer="true"
+            android:stretchColumns="*"
+            android:visibility="gone">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="0.3"
+                    android:gravity="center"
+                    android:text="No"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="2.0"
+                    android:gravity="center"
+                    android:text="제목"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:gravity="center"
+                    android:text="등록일"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+            </TableRow>
+        </TableLayout>
+
+        <!-- 취창업 공지사항 -->
+        <TableLayout
+            android:id="@+id/notice_element_table2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_bottom"
+            android:isScrollContainer="true"
+            android:stretchColumns="*"
+            android:visibility="gone">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="0.3"
+                    android:gravity="center"
+                    android:text="No"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="2.0"
+                    android:gravity="center"
+                    android:text="제목"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:gravity="center"
+                    android:text="등록일"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+            </TableRow>
+        </TableLayout>
+
+        <!-- 국제 공지사항 -->
+        <TableLayout
+            android:id="@+id/notice_element_table3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_bottom"
+            android:isScrollContainer="true"
+            android:stretchColumns="*"
+            android:visibility="gone">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="0.3"
+                    android:gravity="center"
+                    android:text="No"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="2.0"
+                    android:gravity="center"
+                    android:text="제목"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:gravity="center"
+                    android:text="등록일"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+            </TableRow>
+        </TableLayout>
+
+        <!-- 학생 공지사항 -->
+        <TableLayout
+            android:id="@+id/notice_element_table4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_bottom"
+            android:isScrollContainer="true"
+            android:stretchColumns="*"
+            android:visibility="gone">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="0.3"
+                    android:gravity="center"
+                    android:text="No"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="2.0"
+                    android:gravity="center"
+                    android:text="제목"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:gravity="center"
+                    android:text="등록일"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+            </TableRow>
+        </TableLayout>
+
+        <!-- 산학 공지사항 -->
+        <TableLayout
+            android:id="@+id/notice_element_table5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_bottom"
+            android:isScrollContainer="true"
+            android:stretchColumns="*"
+            android:visibility="gone">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="0.3"
+                    android:gravity="center"
+                    android:text="No"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="2.0"
+                    android:gravity="center"
+                    android:text="제목"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:gravity="center"
+                    android:text="등록일"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+            </TableRow>
+        </TableLayout>
+
+        <!-- 일반 공지사항 -->
+        <TableLayout
+            android:id="@+id/notice_element_table6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_bottom"
+            android:isScrollContainer="true"
+            android:stretchColumns="*"
+            android:visibility="gone">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="0.3"
+                    android:gravity="center"
+                    android:text="No"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="2.0"
+                    android:gravity="center"
+                    android:text="제목"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:gravity="center"
+                    android:text="등록일"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+            </TableRow>
+        </TableLayout>
+
+        <Button
+            android:id="@+id/goAllNotice"
+            android:layout_width="170dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/black"
+            android:onClick="onNoticeBtnClick"
+            android:gravity="center"
+            android:text="↗웹 공지사항 이동 "
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+</LinearLayout>
