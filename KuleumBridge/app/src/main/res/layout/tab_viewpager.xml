@@ -7,7 +7,8 @@
     android:orientation="vertical"
     android:gravity="center">
 
-
+    <!-- 뷰페이저와 하단의 메인탭만 있는 레이아웃
+         뷰페이저 부분에 스와이프된 페이지(Fragment)가 나타나게 된다.-->
 
 
     <androidx.viewpager.widget.ViewPager
