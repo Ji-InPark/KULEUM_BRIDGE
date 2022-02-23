@@ -1,17 +1,14 @@
 package com.example.kuleumbridge.Activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -50,7 +47,7 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
     // User 의 정보들을 저장할 객체
     UserInfoClass uic;
     NoticeInfoClass nic;
@@ -523,13 +520,9 @@ public class MainActivity extends AppCompatActivity {
     // 뷰 전환 및 탭바 이벤트 세팅
     public void viewTransform()
     {
-        setContentView(R.layout.after_log);
+        setContentView(R.layout.home_layout);
 
-        //ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
-        //PagerAdapter adapter = new PageAdapter(getSupportFragmentManager());
-        //viewPager.setAdapter(adapter);
         TabLayout tabLayout = findViewById(R.id.main_tab_layout);
-        //tabLayout.setupWithViewPager(viewPager);
         tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
         tabLayout.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#000000"));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

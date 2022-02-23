@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <!-- 뷰페이저와 하단의 메인탭만 있는 레이아웃
+         뷰페이저 부분에 스와이프된 페이지(Fragment)가 나타나게 된다.-->
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+        <!-- 최하단 탭 메뉴 -->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/mainTab"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                app:tabTextAppearance="@style/main_tab_text"
+                android:layout_height="wrap_content">
+
+
+            </com.google.android.material.tabs.TabLayout>
+
+
+
+</LinearLayout>
