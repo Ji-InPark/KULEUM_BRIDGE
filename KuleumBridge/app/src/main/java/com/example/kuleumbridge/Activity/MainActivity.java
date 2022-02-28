@@ -222,7 +222,6 @@ public class MainActivity extends AppCompatActivity{
                     textView.setWidth(0);
 
                     //글자 수 많으면 ... 으로 처리
-                    textView.setSingleLine(true);
                     textView.setEllipsize(TextUtils.TruncateAt.END);
                     textView.setSelected(true);
 
