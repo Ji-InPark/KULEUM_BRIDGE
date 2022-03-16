@@ -13,6 +13,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.KonDuckJoa.kuleumbridge.Data.UserInfoClass;
 import com.KonDuckJoa.kuleumbridge.R;
 
 import java.util.ArrayList;
@@ -37,14 +38,11 @@ public class GradeDetailList extends Fragment {
     String s_hak = "";
     String s_grd = "";
 
-
     TableLayout tableLayout;
 
     public GradeDetailList() {
         // Required empty public constructor
     }
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,13 +51,12 @@ public class GradeDetailList extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView =  inflater.inflate(R.layout.grade_detail_list, container, false);
-        tableLayout = (TableLayout) rootView.findViewById(R.id.tablelayout);
+        tableLayout = rootView.findViewById(R.id.tablelayout);
         if (getArguments() != null) {
-            gradeAllArr2 = getArguments().getParcelableArrayList("gaa");
+            gradeAllArr2 = UserInfoClass.getInstance().getGradeAll();
             flag= getArguments().getString("tabb"); //클릭한 탭 내용 받아옴(ex. 2021년 1학기)
         }
 
@@ -71,11 +68,11 @@ public class GradeDetailList extends Fragment {
             s_grd += gradeAllArr2.get(i).getGRD() + ",";
         }
 
-        a_yy = new ArrayList<String>(Arrays.asList(s_yy.split(",")));
-        a_div = new ArrayList<String>(Arrays.asList(s_div.split(",")));
-        a_name = new ArrayList<String>(Arrays.asList(s_name.split(",")));
-        a_hak = new ArrayList<String>(Arrays.asList(s_hak.split(",")));
-        a_grd = new ArrayList<String>(Arrays.asList(s_grd.split(",")));
+        a_yy = new ArrayList<>(Arrays.asList(s_yy.split(",")));
+        a_div = new ArrayList<>(Arrays.asList(s_div.split(",")));
+        a_name = new ArrayList<>(Arrays.asList(s_name.split(",")));
+        a_hak = new ArrayList<>(Arrays.asList(s_hak.split(",")));
+        a_grd = new ArrayList<>(Arrays.asList(s_grd.split(",")));
 
         //Arraylist에서 불필요한 요소들 없애주는 과정
         a_yy.remove(a_yy.size() - 1);
@@ -95,7 +92,6 @@ public class GradeDetailList extends Fragment {
 
         }
         for (int k = 0; k < a_yy.size() - 1; k++) {
-
             //클릭한 탭내용과 일치하는 성적만 불러오는 과정(ex. 2021년 2학기 클릭시, 해당 학기 성적만 불러옴)
             if (a_yy.get(k).contains(flag)) {
 
@@ -104,8 +100,7 @@ public class GradeDetailList extends Fragment {
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT));
 
-                for (int h = 0; h < 4; h++) {
-
+                for (int i = 0; i < 4; i++) {
                     textView = new TextView(getActivity());
                     textView.setTextSize(19);
                     textView.setTextColor(Color.parseColor("#000000"));
@@ -114,7 +109,7 @@ public class GradeDetailList extends Fragment {
 
                     textView.setSelected(true);
 
-                    switch (h) {
+                    switch (i) {
                         case 0:
                             textView.setText(a_div.get(k));
                             textView.setGravity(Gravity.CENTER);
@@ -137,20 +132,14 @@ public class GradeDetailList extends Fragment {
                             break;
                     }
 
-
                     tableRow.addView(textView);
-
-
                 }
 
                 tableLayout.addView(tableRow);
-
-
             }
 
-
-
         }
+
         return rootView;
     }
 }
