@@ -516,27 +516,30 @@ public class MainActivity extends AppCompatActivity{
     }
 
     // 시간표 레이아웃의 시간표를 채우는 함수
-    public void setTimeTable(TableLayout table) {
-        for (int i = 0; i < 24; i++) { //  24행 추가로 만들어 총 25행
-            TableRow tbr = new TableRow(this);
-            tbr.setLayoutParams(new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+    public void setTimeTable(TableLayout table)
+    {
+        //  24행 추가로 만들어 총 25행
+        for (int i = 0; i < 24; i++)
+        {
+            TableRow tableRow = new TableRow(this);
+            tableRow.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
             String[] time = {"9","","10","","11","","12","","1","","2","","3","","4","",
                     "5","","6","","","","",""};
 
-            for (int j = 0; j < 6; j++) { // 6열
+            // 6열
+            for (int j = 0; j < 6; j++)
+            {
                 TextView tv = new TextView(this);
+
                 tv.setTextSize(16);
-                if (i % 2 == 0) {
-                    tv.setBackground(getDrawable(R.drawable.border_textview_even));
-                } else {
-                    tv.setBackground(getDrawable(R.drawable.border_textview_odd));
-                }
+                tv.setBackground(getDrawable(i % 2 == 0 ? R.drawable.border_textview_even : R.drawable.border_textview_odd));
                 tv.setTextColor(Color.parseColor("#000000"));
                 tv.setPadding(10,0,20,10);
                 tv.setWidth(0);
 
-                switch(j) {
+                switch(j)
+                {
                     case 0: // 시간
                         tv.setText(time[i]);
                         tv.setTypeface(null, Typeface.BOLD);
@@ -544,29 +547,17 @@ public class MainActivity extends AppCompatActivity{
                         tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.2f));
                         break;
                     case 1: // 월
-                        tv.setGravity(Gravity.CENTER);
-                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.4f));
-                        break;
                     case 2: // 화
-                        tv.setGravity(Gravity.CENTER);
-                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.4f));
-                        break;
                     case 3: // 수
-                        tv.setGravity(Gravity.CENTER);
-                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.4f));
-                        break;
                     case 4: // 목
-                        tv.setGravity(Gravity.CENTER);
-                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.4f));
-                        break;
                     case 5: // 금
                         tv.setGravity(Gravity.CENTER);
                         tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.4f));
                         break;
                 }
-                tbr.addView(tv);
+                tableRow.addView(tv);
             }
-            table.addView(tbr);
+            table.addView(tableRow);
         }
     }
     // 뷰 전환 및 탭바 이벤트 세팅
@@ -577,51 +568,44 @@ public class MainActivity extends AppCompatActivity{
         TabLayout tabLayout = findViewById(R.id.main_tab_layout);
         tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
         tabLayout.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#000000"));
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
+        {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                // tab의 상태가 선택 상태로 변경
-                int pos = tab.getPosition();
-                changeTab(pos);
+            public void onTabSelected(TabLayout.Tab tab)
+            {
+                changeTab(tab.getPosition());
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                // tab의 상태가 선택되지 않음으로 변경
-            }
+            public void onTabUnselected(TabLayout.Tab tab) { }
 
             @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                // 이미 선택된 상태의 tab이 사용자에 의해 다시 선택됨
-            }
+            public void onTabReselected(TabLayout.Tab tab) { }
         });
 
         TabLayout tabLayout_notice = findViewById(R.id.notice_category_tab);
         tabLayout_notice.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
         tabLayout_notice.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#000000"));
-        tabLayout_notice.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayout_notice.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
+        {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                // tab의 상태가 선택 상태로 변경
-                int pos = tab.getPosition();
-                changeTabNotice(pos);
+            public void onTabSelected(TabLayout.Tab tab)
+            {
+                changeTabNotice(tab.getPosition());
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                // tab의 상태가 선택되지 않음으로 변경
-            }
+            public void onTabUnselected(TabLayout.Tab tab) { }
 
             @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                // 이미 선택된 상태의 tab이 사용자에 의해 다시 선택됨
-            }
+            public void onTabReselected(TabLayout.Tab tab) { }
         });
+
         setTimeTable(findViewById(R.id.timeTable_table));
     }
 
     // 탭바 상호작용 함수
-    private void changeTab(int index) {
+    private void changeTab(int selectedIndex) {
         LinearLayout[] layouts = {
                 findViewById(R.id.home_layout),
                 findViewById(R.id.notice_layout),
@@ -631,18 +615,11 @@ public class MainActivity extends AppCompatActivity{
         };
 
         for(int i = 0; i < 5; i++)
-        {
-            if(index == i)
-                // 선택된 탭만 화면 상에 보여지게 한다.
-                layouts[i].setVisibility(View.VISIBLE);
-            else
-                // 선택되지 않은 탭은 보이지 않고, 화면에서 공간또한 차지하지 않는다.
-                layouts[i].setVisibility(View.GONE);
-        }
+            layouts[i].setVisibility(selectedIndex == i ? View.VISIBLE : View.GONE);
     }
 
     // 공지사항 탭바 상호작용 함수
-    private void changeTabNotice(int index) {
+    private void changeTabNotice(int selectedIndex) {
         TableLayout[] tables = {
                 findViewById(R.id.notice_element_table0),
                 findViewById(R.id.notice_element_table1),
@@ -654,14 +631,7 @@ public class MainActivity extends AppCompatActivity{
         };
 
         for(int i = 0; i < 7; i++)
-        {
-            if(index == i)
-                // 선택된 탭만 화면 상에 보여지게 한다.
-                tables[i].setVisibility(View.VISIBLE);
-            else
-                // 선택되지 않은 탭은 보이지 않고, 화면에서 공간또한 차지하지 않는다.
-                tables[i].setVisibility(View.GONE);
-        }
+            tables[i].setVisibility(selectedIndex == i ? View.VISIBLE : View.GONE);
     }
 
     // 문자열을 정규표현식을 만족하는 문자열로 바꿔주는 함수
