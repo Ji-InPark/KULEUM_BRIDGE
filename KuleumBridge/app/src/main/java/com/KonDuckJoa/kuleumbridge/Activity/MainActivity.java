@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -514,6 +515,60 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    // 시간표 레이아웃의 시간표를 채우는 함수
+    public void setTimeTable(TableLayout table) {
+        for (int i = 0; i < 24; i++) { //  24행 추가로 만들어 총 25행
+            TableRow tbr = new TableRow(this);
+            tbr.setLayoutParams(new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            String[] time = {"9","","10","","11","","12","","1","","2","","3","","4","",
+                    "5","","6","","","","",""};
+
+            for (int j = 0; j < 6; j++) { // 6열
+                TextView tv = new TextView(this);
+                tv.setTextSize(16);
+                if (i % 2 == 0) {
+                    tv.setBackground(getDrawable(R.drawable.border_textview_even));
+                } else {
+                    tv.setBackground(getDrawable(R.drawable.border_textview_odd));
+                }
+                tv.setTextColor(Color.parseColor("#000000"));
+                tv.setPadding(10,0,20,10);
+                tv.setWidth(0);
+
+                switch(j) {
+                    case 0: // 시간
+                        tv.setText(time[i]);
+                        tv.setTypeface(null, Typeface.BOLD);
+                        tv.setGravity(Gravity.RIGHT);
+                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.2f));
+                        break;
+                    case 1: // 월
+                        tv.setGravity(Gravity.CENTER);
+                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.4f));
+                        break;
+                    case 2: // 화
+                        tv.setGravity(Gravity.CENTER);
+                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.4f));
+                        break;
+                    case 3: // 수
+                        tv.setGravity(Gravity.CENTER);
+                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.4f));
+                        break;
+                    case 4: // 목
+                        tv.setGravity(Gravity.CENTER);
+                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.4f));
+                        break;
+                    case 5: // 금
+                        tv.setGravity(Gravity.CENTER);
+                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.4f));
+                        break;
+                }
+                tbr.addView(tv);
+            }
+            table.addView(tbr);
+        }
+    }
     // 뷰 전환 및 탭바 이벤트 세팅
     public void viewTransform()
     {
@@ -562,6 +617,7 @@ public class MainActivity extends AppCompatActivity{
                 // 이미 선택된 상태의 tab이 사용자에 의해 다시 선택됨
             }
         });
+        setTimeTable(findViewById(R.id.timeTable_table));
     }
 
     // 탭바 상호작용 함수
@@ -570,10 +626,11 @@ public class MainActivity extends AppCompatActivity{
                 findViewById(R.id.home_layout),
                 findViewById(R.id.notice_layout),
                 findViewById(R.id.taste_place_layout),
-                findViewById(R.id.grade_check_layout)
+                findViewById(R.id.grade_check_layout),
+                findViewById(R.id.timeTable_layout)
         };
 
-        for(int i = 0; i < 4; i++)
+        for(int i = 0; i < 5; i++)
         {
             if(index == i)
                 // 선택된 탭만 화면 상에 보여지게 한다.
