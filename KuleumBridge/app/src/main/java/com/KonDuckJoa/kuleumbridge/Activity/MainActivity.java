@@ -467,31 +467,31 @@ public class MainActivity extends AppCompatActivity{
     public void setNoticeTable(ArrayList<Notice> na, TableLayout table) {
         for(int i = 0; i < na.size(); i++)
         {
-            TableRow tbr = new TableRow(this);
-            tbr.setLayoutParams(new ViewGroup.LayoutParams(
+            TableRow tableRow = new TableRow(this);
+            tableRow.setLayoutParams(new ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
             for (int j = 0; j < 3; j++)
             {
-                TextView tv = new TextView(this);
+                TextView textView = new TextView(this);
 
-                tv.setTextSize(16);
-                tv.setTextColor(Color.parseColor("#000000"));
-                tv.setPadding(10,0,20,50);
-                tv.setWidth(0);
+                textView.setTextSize(16);
+                textView.setTextColor(Color.parseColor("#000000"));
+                textView.setPadding(10,0,20,50);
+                textView.setWidth(0);
 
                 // 글자 수 많으면 ... 으로 처리
-                tv.setSelected(true);
+                textView.setSelected(true);
 
                 switch(j) {
                     case 0:
-                        tv.setText(Integer.toString(i+1));
-                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.3f));
+                        textView.setText(Integer.toString(i+1));
+                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.3f));
                         break;
                     case 1:
                         String noticeTitle = na.get(i).getSUBJECT(); // 공지사항 제목
                         String noticeURL = na.get(i).getURL();       // 공지사항 URL
-                        tv.setText(noticeTitle);
+                        textView.setText(noticeTitle);
                         String regexNT = changeRegex(noticeTitle); // 정규표현식으로 바뀐 noticeTitle
                         Pattern pattern = Pattern.compile(regexNT); // 패턴에 컴파일되는 문자열은 정규표현식이 지켜져야 특수문자도 감지한다.
                         Linkify.TransformFilter mTransform = new Linkify.TransformFilter() {
@@ -501,17 +501,17 @@ public class MainActivity extends AppCompatActivity{
                                 // 스키마인 ""뒤에 noticeURL을 붙여서 리턴한다.
                             }
                         };
-                        Linkify.addLinks(tv,pattern,"",null,mTransform);
-                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,2.0f));
+                        Linkify.addLinks(textView,pattern,"",null,mTransform);
+                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,2.0f));
                         break;
                     case 2:
-                        tv.setText(na.get(i).getPOSTED_DT());
-                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.7f));
+                        textView.setText(na.get(i).getPOSTED_DT());
+                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.7f));
                         break;
                 }
-                tbr.addView(tv);
+                tableRow.addView(textView);
             }
-            table.addView(tbr);
+            table.addView(tableRow);
         }
     }
 
@@ -530,32 +530,32 @@ public class MainActivity extends AppCompatActivity{
             // 6열
             for (int j = 0; j < 6; j++)
             {
-                TextView tv = new TextView(this);
+                TextView textView = new TextView(this);
 
-                tv.setTextSize(16);
-                tv.setBackground(getDrawable(i % 2 == 0 ? R.drawable.border_textview_even : R.drawable.border_textview_odd));
-                tv.setTextColor(Color.parseColor("#000000"));
-                tv.setPadding(10,0,20,10);
-                tv.setWidth(0);
+                textView.setTextSize(16);
+                textView.setBackground(getDrawable(i % 2 == 0 ? R.drawable.border_textview_even : R.drawable.border_textview_odd));
+                textView.setTextColor(Color.parseColor("#000000"));
+                textView.setPadding(10,0,20,10);
+                textView.setWidth(0);
 
                 switch(j)
                 {
                     case 0: // 시간
-                        tv.setText(time[i]);
-                        tv.setTypeface(null, Typeface.BOLD);
-                        tv.setGravity(Gravity.RIGHT);
-                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.2f));
+                        textView.setText(time[i]);
+                        textView.setTypeface(null, Typeface.BOLD);
+                        textView.setGravity(Gravity.RIGHT);
+                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.2f));
                         break;
                     case 1: // 월
                     case 2: // 화
                     case 3: // 수
                     case 4: // 목
                     case 5: // 금
-                        tv.setGravity(Gravity.CENTER);
-                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.4f));
+                        textView.setGravity(Gravity.CENTER);
+                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.4f));
                         break;
                 }
-                tableRow.addView(tv);
+                tableRow.addView(textView);
             }
             table.addView(tableRow);
         }
