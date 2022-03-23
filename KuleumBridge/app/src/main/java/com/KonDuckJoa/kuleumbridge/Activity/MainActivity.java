@@ -518,47 +518,7 @@ public class MainActivity extends AppCompatActivity{
     // 시간표 레이아웃의 시간표를 채우는 함수
     public void setTimeTable(TableLayout table)
     {
-        //  24행 추가로 만들어 총 25행
-        for (int i = 0; i < 24; i++)
-        {
-            TableRow tableRow = new TableRow(this);
-            tableRow.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-            String[] time = {"9","","10","","11","","12","","1","","2","","3","","4","",
-                    "5","","6","","","","",""};
-
-            // 6열
-            for (int j = 0; j < 6; j++)
-            {
-                TextView textView = new TextView(this);
-
-                textView.setTextSize(16);
-                textView.setBackground(getDrawable(i % 2 == 0 ? R.drawable.border_textview_even : R.drawable.border_textview_odd));
-                textView.setTextColor(Color.parseColor("#000000"));
-                textView.setPadding(10,0,20,10);
-                textView.setWidth(0);
-
-                switch(j)
-                {
-                    case 0: // 시간
-                        textView.setText(time[i]);
-                        textView.setTypeface(null, Typeface.BOLD);
-                        textView.setGravity(Gravity.RIGHT);
-                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.2f));
-                        break;
-                    case 1: // 월
-                    case 2: // 화
-                    case 3: // 수
-                    case 4: // 목
-                    case 5: // 금
-                        textView.setGravity(Gravity.CENTER);
-                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.4f));
-                        break;
-                }
-                tableRow.addView(textView);
-            }
-            table.addView(tableRow);
-        }
     }
     // 뷰 전환 및 탭바 이벤트 세팅
     public void viewTransform()
@@ -611,10 +571,9 @@ public class MainActivity extends AppCompatActivity{
                 findViewById(R.id.notice_layout),
                 findViewById(R.id.taste_place_layout),
                 findViewById(R.id.grade_check_layout),
-                findViewById(R.id.timeTable_layout)
         };
 
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < 4; i++)
             layouts[i].setVisibility(selectedIndex == i ? View.VISIBLE : View.GONE);
     }
 
