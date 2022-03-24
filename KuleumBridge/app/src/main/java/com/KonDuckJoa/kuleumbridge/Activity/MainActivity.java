@@ -46,10 +46,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity{
-    // User 의 정보들을 저장할 객체
-    UserInfoClass uic;
+    // 공지사항을 저장할 객체
     NoticeInfoClass nic;
-
 
     // 로딩 애니메이션을 위한 객체
     CustomProgress customProgress;
@@ -58,7 +56,6 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        uic = new UserInfoClass();
         nic = new NoticeInfoClass();
         customProgress = new CustomProgress(MainActivity.this);
 
@@ -121,10 +118,10 @@ public class MainActivity extends AppCompatActivity{
     public void loginSuccess(String result)
     {
         // 유저 정보 저장하는 부분
-        uic.setLoginInfo(result);
+        UserInfoClass.getInstance().setLoginInfo(result);
 
         // GradeAll 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask 를 상속한 클래스를 활용해 값을 얻어온다.
-        ApiGradeAllClass agac = new ApiGradeAllClass(uic.getUSER_ID(), new CallBack() {
+        ApiGradeAllClass agac = new ApiGradeAllClass(UserInfoClass.getInstance().getUSER_ID(), new CallBack() {
 
             @Override
             public void callback_success(String result) {
@@ -139,7 +136,7 @@ public class MainActivity extends AppCompatActivity{
         agac.execute();
 
         // GradeNow 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask 를 상속한 클래스를 활요해 값을 얻어온다.
-        ApiGradeNowClass agnc = new ApiGradeNowClass(uic.getUSER_ID(), new CallBack() {
+        ApiGradeNowClass agnc = new ApiGradeNowClass(UserInfoClass.getInstance().getUSER_ID(), new CallBack() {
 
             @Override
             public void callback_success(String result) {
@@ -158,7 +155,7 @@ public class MainActivity extends AppCompatActivity{
         for(int i = 0; i < 7; i++)
         {
             String category = NoticeHandler.getCategory(i);
-            anc = new ApiNoticeClass(uic.getUSER_ID(), category, new CallBack(){
+            anc = new ApiNoticeClass(UserInfoClass.getInstance().getUSER_ID(), category, new CallBack(){
 
                 @Override
                 public void callback_success(String result) {
@@ -189,8 +186,8 @@ public class MainActivity extends AppCompatActivity{
     // ApiGradeAllClass 통해 전체 성적 정보 가져오기 성공시
     public void gradeAllSuccess(String result)
     {
-        // uic에 얻어온 정보 저장 - 전체성적
-        uic.setGradeAllInfo(result);
+        // UserInfoClass.getInstance()에 얻어온 정보 저장 - 전체성적
+        UserInfoClass.getInstance().setGradeAllInfo(result);
 
         // 학생증 정보 수정
         editStudentID();
@@ -201,10 +198,10 @@ public class MainActivity extends AppCompatActivity{
     {
 
         try {
-            // uic에 얻어온 정보 저장 - 금학기성적
-            uic.setGradeNowInfo(result);
+            // UserInfoClass.getInstance()에 얻어온 정보 저장 - 금학기성적
+            UserInfoClass.getInstance().setGradeNowInfo(result);
             TableLayout tableLayout = findViewById(R.id.grade_now_tablelayout);
-            ArrayList<Grade> gradeNow = uic.getGrade_now();
+            ArrayList<Grade> gradeNow = UserInfoClass.getInstance().getGradeNow();
 
             for (int i = 0; i < gradeNow.size(); i++) {
                 TableRow tableRow = new TableRow(this);
@@ -249,7 +246,7 @@ public class MainActivity extends AppCompatActivity{
                 }
                 tableLayout.addView(tableRow);
             }
-        }catch (NullPointerException e) { //uic 객체가 비었을때 예외처리
+        }catch (NullPointerException e) { //UserInfoClass.getInstance() 객체가 비었을때 예외처리
             TextView textView = new TextView(this);
             textView.setText("해당 학기 성적이 존재하지 않습니다.");
             textView.setTextSize(16);
@@ -336,22 +333,22 @@ public class MainActivity extends AppCompatActivity{
             img_menu.setImageBitmap(getImageBitMap());
 
             // 로그인 후 안녕, ㅁㅁㅁ! 세팅
-            name_menu.setText(getString(R.string.hello, uic.getUSER_NM()));
+            name_menu.setText(getString(R.string.hello, UserInfoClass.getInstance().getUSER_NM()));
 
             // 학생증 사진 세팅
             img.setImageBitmap(getImageBitMap());
 
             // 학생증 이름 세팅
-            name.setText(getString(R.string.name, uic.getUSER_NM()));
+            name.setText(getString(R.string.name, UserInfoClass.getInstance().getUSER_NM()));
 
             // 학생증 학번 세팅
-            stdNum.setText(getString(R.string.userid, uic.getUSER_ID()));
+            stdNum.setText(getString(R.string.userid, UserInfoClass.getInstance().getUSER_ID()));
 
             // 학생증 학과 세팅
-            major.setText(getString(R.string.dept, uic.getDEPT_TTNM()));
+            major.setText(getString(R.string.dept, UserInfoClass.getInstance().getDEPT_TTNM()));
 
             // 학생증 생년월일 세팅
-            birthday.setText(getString(R.string.birth, uic.getRESNO()));
+            birthday.setText(getString(R.string.birth, UserInfoClass.getInstance().getRESNO()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -360,7 +357,7 @@ public class MainActivity extends AppCompatActivity{
     // 이미지 비트맵 반환
     public Bitmap getImageBitMap()
     {
-        byte[] encodeByte = Base64.decode(uic.getPHOTO(), Base64.DEFAULT);
+        byte[] encodeByte = Base64.decode(UserInfoClass.getInstance().getPHOTO(), Base64.DEFAULT);
 
         return BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
     }
@@ -458,7 +455,6 @@ public class MainActivity extends AppCompatActivity{
     public void onGradeCheckAcBtnClick(View view) {
         //GradeCheckActivity 실행, 기존 창은 유지.
         Intent intent_gradeAll = new Intent(this, GradeCheckActivity.class);
-        intent_gradeAll.putParcelableArrayListExtra("GAA", uic.getGrade_all()); // uic 객체를 UIC라는 이름으로 포장해서 GradeCheckActivity로 보낸다.
         startActivity(intent_gradeAll);
     }
 
