@@ -914,11 +914,6 @@
     </com.google.android.material.tabs.TabLayout>
     </LinearLayout>
 
-    <!-- 스와이프 기능을 위한 ViewPager -->
-    <androidx.viewpager2.widget.ViewPager2
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/view_pager"
-        android:layout_width="0dp"
-        android:layout_height="0dp" />
+
 
 </LinearLayout>

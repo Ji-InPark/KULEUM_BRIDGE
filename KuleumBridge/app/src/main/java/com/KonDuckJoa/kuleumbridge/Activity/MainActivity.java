@@ -1,7 +1,7 @@
 package com.KonDuckJoa.kuleumbridge.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -37,6 +37,7 @@ import com.KonDuckJoa.kuleumbridge.R;
 import com.KonDuckJoa.kuleumbridge.Taste.TasteHandler;
 import com.KonDuckJoa.kuleumbridge.Taste.TastePlaceActivity;
 import com.KonDuckJoa.kuleumbridge.Taste.TastePlaceList;
+import com.KonDuckJoa.kuleumbridge.databinding.TabViewpagerBinding;
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.IOException;
@@ -48,6 +49,8 @@ import java.util.regex.Pattern;
 public class MainActivity extends AppCompatActivity{
     // 로딩 애니메이션을 위한 객체
     CustomProgress customProgress;
+
+    private TabViewpagerBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +124,7 @@ public class MainActivity extends AppCompatActivity{
 
             @Override
             public void callback_success(String result) {
-                gradeAllSuccess(result);
+                UserInfoClass.getInstance().setGradeAllInfo(result);
             }
 
             @Override
@@ -136,7 +139,7 @@ public class MainActivity extends AppCompatActivity{
 
             @Override
             public void callback_success(String result) {
-                gradeNowSuccess(result);
+                UserInfoClass.getInstance().setGradeNowInfo(result);
             }
 
             @Override
@@ -155,7 +158,8 @@ public class MainActivity extends AppCompatActivity{
 
                 @Override
                 public void callback_success(String result) {
-                    NoticeSuccess(result, category);
+                    // NoticeInfoClass.getInstance() 에 얻어온 정보 저장
+                    NoticeInfoClass.getInstance().setNoticeInfo(result,category);
                 }
 
                 @Override
@@ -267,7 +271,7 @@ public class MainActivity extends AppCompatActivity{
                 findViewById(R.id.notice_element_table6)
         };
         // 공지사항 테이블을 가져온 정보들을 바탕으로 채워준다.
-        setNoticeTable(NoticeInfoClass.getInstance().getNotice(notice_category), tables[NoticeHandler.getIndex(notice_category)]);
+        //setNoticeTable(NoticeInfoClass.getInstance().getNotice(notice_category), tables[NoticeHandler.getIndex(notice_category)]);
     }
 
     // 로딩 화면 시작
@@ -448,13 +452,12 @@ public class MainActivity extends AppCompatActivity{
     }
 
     // 성적조회 레이아웃의 "세부 성적 조회" 버튼 상호작용 함수
-    public void onGradeCheckAcBtnClick(View view) {
+    public void onGradeAllCheckBtnClick(View view) {
         //GradeCheckActivity 실행, 기존 창은 유지.
-        Intent intent_gradeAll = new Intent(this, GradeCheckActivity.class);
-        startActivity(intent_gradeAll);
+        startActivity(new Intent(this, GradeCheckActivity.class));
     }
 
-    // 공지사항 레이아웃의 카테고리별 공지 테이블을 채우는 함수
+    /*// 공지사항 레이아웃의 카테고리별 공지 테이블을 채우는 함수
     public void setNoticeTable(ArrayList<Notice> noticeArrayList, TableLayout table) {
         for(int i = 0; i < noticeArrayList.size(); i++)
         {
@@ -499,100 +502,26 @@ public class MainActivity extends AppCompatActivity{
             }
             table.addView(tbr);
         }
-    }
+    }*/
 
     // 뷰 전환 및 탭바 이벤트 세팅
     public void viewTransform()
     {
-        setContentView(R.layout.home_layout);
+        //editStudentID();
+        binding = TabViewpagerBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        TabLayout tabLayout = findViewById(R.id.main_tab_layout);
-        tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
-        tabLayout.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#000000"));
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                // tab의 상태가 선택 상태로 변경
-                int pos = tab.getPosition();
-                changeTab(pos);
-            }
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+        ViewPager viewPager = binding.viewPager;
+        viewPager.setAdapter(sectionsPagerAdapter);
+        TabLayout tabs = binding.mainTab;
+        tabs.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
+        tabs.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#000000"));
+        tabs.setupWithViewPager(viewPager);
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                // tab의 상태가 선택되지 않음으로 변경
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                // 이미 선택된 상태의 tab이 사용자에 의해 다시 선택됨
-            }
-        });
-
-        TabLayout tabLayout_notice = findViewById(R.id.notice_category_tab);
-        tabLayout_notice.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
-        tabLayout_notice.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#000000"));
-        tabLayout_notice.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                // tab의 상태가 선택 상태로 변경
-                int pos = tab.getPosition();
-                changeTabNotice(pos);
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                // tab의 상태가 선택되지 않음으로 변경
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                // 이미 선택된 상태의 tab이 사용자에 의해 다시 선택됨
-            }
-        });
     }
 
-    // 탭바 상호작용 함수
-    private void changeTab(int index) {
-        LinearLayout[] layouts = {
-                findViewById(R.id.home_layout),
-                findViewById(R.id.notice_layout),
-                findViewById(R.id.taste_place_layout),
-                findViewById(R.id.grade_check_layout)
-        };
 
-        for(int i = 0; i < 4; i++)
-        {
-            if(index == i)
-                // 선택된 탭만 화면 상에 보여지게 한다.
-                layouts[i].setVisibility(View.VISIBLE);
-            else
-                // 선택되지 않은 탭은 보이지 않고, 화면에서 공간또한 차지하지 않는다.
-                layouts[i].setVisibility(View.GONE);
-        }
-    }
-
-    // 공지사항 탭바 상호작용 함수
-    private void changeTabNotice(int index) {
-        TableLayout[] tables = {
-                findViewById(R.id.notice_element_table0),
-                findViewById(R.id.notice_element_table1),
-                findViewById(R.id.notice_element_table2),
-                findViewById(R.id.notice_element_table3),
-                findViewById(R.id.notice_element_table4),
-                findViewById(R.id.notice_element_table5),
-                findViewById(R.id.notice_element_table6)
-        };
-
-        for(int i = 0; i < 7; i++)
-        {
-            if(index == i)
-                // 선택된 탭만 화면 상에 보여지게 한다.
-                tables[i].setVisibility(View.VISIBLE);
-            else
-                // 선택되지 않은 탭은 보이지 않고, 화면에서 공간또한 차지하지 않는다.
-                tables[i].setVisibility(View.GONE);
-        }
-    }
 
     // 문자열을 정규표현식을 만족하는 문자열로 바꿔주는 함수
     private String changeRegex(String str) {

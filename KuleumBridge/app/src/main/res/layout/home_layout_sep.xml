@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background1"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <!-- 홈 레이아웃 -->
+    <LinearLayout
+        android:id="@+id/home_layout_sep"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/menu_img_sep"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="335dp"
+            android:layout_marginTop="15dp" />
+
+        <TextView
+            android:id="@+id/menu_name_sep"
+            android:layout_width="150dp"
+            android:layout_height="26dp"
+            android:layout_marginLeft="25dp"
+
+            android:fontFamily="@font/elice_digital_baeum_otf_bold"
+            android:gravity="top"
+            android:text="안녕, 홍길동!"
+            android:textColor="#000000"
+            android:textSize="22.74sp" />
+
+        <TextView
+            android:id="@+id/you_have_4_sep"
+            android:layout_width="200dp"
+            android:layout_height="19dp"
+            android:layout_marginLeft="25dp"
+
+            android:fontFamily="@font/elice_digital_baeum_otf_bold"
+            android:gravity="top"
+            android:text="너의 학교 생활을 이어줄게:)"
+            android:textSize="15sp" />
+
+
+        <FrameLayout
+            android:layout_width="380dp"
+            android:layout_height="170dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/calendar_view">
+
+            <ImageView
+                android:id="@+id/studentCard_photo_sep"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:id="@+id/studentCard_name_sep"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="140dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/elice_digital_baeum_otf_bold"
+                android:text="이름 : 홍길동"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/studentCard_stdNum_sep"
+                android:layout_width="130dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="140dp"
+                android:layout_marginTop="55dp"
+                android:fontFamily="@font/elice_digital_baeum_otf_bold"
+                android:text="학번 : 202000000"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/studentCard_major_sep"
+                android:layout_width="200dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="140dp"
+                android:layout_marginTop="90dp"
+                android:fontFamily="@font/elice_digital_baeum_otf_bold"
+                android:text="소속 : 공과대학 컴퓨터공학부"
+                android:textColor="#000000" />
+
+
+            <TextView
+                android:id="@+id/studentCard_birthday_sep"
+                android:layout_width="230dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="140dp"
+                android:layout_marginTop="125dp"
+                android:fontFamily="@font/elice_digital_baeum_otf_bold"
+                android:text="생년월일 : 2000년 00월 00일"
+                android:textColor="#000000" />
+
+
+        </FrameLayout>
+    </LinearLayout>
+
+</LinearLayout>
