@@ -164,106 +164,6 @@ public class MainActivity extends AppCompatActivity{
             }
         });
         anc.execute();
-
-        try {
-            // 로딩 애니메이션 종료
-            stopLoadingAnimation();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    // ApiGradeAllClass 통해 전체 성적 정보 가져오기 성공시
-    public void gradeAllSuccess(String result)
-    {
-        // UserInfoClass.getInstance()에 얻어온 정보 저장 - 전체성적
-        UserInfoClass.getInstance().setGradeAllInfo(result);
-
-        // 학생증 정보 수정
-        editStudentID();
-    }
-
-    // ApiGradeNowClass 통해 금학기 성적 정보 가져오기 성공시
-    public void gradeNowSuccess(String result)
-    {
-
-        try {
-            // UserInfoClass.getInstance()에 얻어온 정보 저장 - 금학기성적
-            UserInfoClass.getInstance().setGradeNowInfo(result);
-            TableLayout tableLayout = findViewById(R.id.grade_now_tablelayout);
-            ArrayList<Grade> gradeNow = UserInfoClass.getInstance().getGradeNow();
-
-            for (int i = 0; i < gradeNow.size(); i++) {
-                TableRow tableRow = new TableRow(this);
-                tableRow.setLayoutParams(new TableRow.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT));
-
-                for (int j = 0; j < 4; j++) {
-                    TextView textView = new TextView(this);
-                    textView.setTextSize(16);
-                    textView.setTextColor(Color.parseColor("#000000"));
-                    textView.setPadding(10, 0, 20, 50);
-                    textView.setWidth(0);
-
-                    //글자 수 많으면 ... 으로 처리
-                    textView.setEllipsize(TextUtils.TruncateAt.END);
-                    textView.setSelected(true);
-
-                    switch (j) {
-                        case 0:
-                            textView.setText(gradeNow.get(i).getPOBT_DIV());
-                            textView.setGravity(Gravity.CENTER);
-                            textView.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f));
-                            break;
-                        case 1:
-                            textView.setText(gradeNow.get(i).getHAKSU_NM());
-                            textView.setGravity(Gravity.START); // Gravity Start를 대신 쓰라고 해서 Start로 수정함
-                            textView.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 2.0f));
-                            break;
-                        case 2:
-                            textView.setText(gradeNow.get(i).getPNT());
-                            textView.setGravity(Gravity.CENTER);
-                            textView.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 0.5f));
-                            break;
-                        case 3:
-                            textView.setText(gradeNow.get(i).getGRD());
-                            textView.setGravity(Gravity.CENTER);
-                            textView.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 0.7f));
-                            break;
-                    }
-                    tableRow.addView(textView);
-                }
-                tableLayout.addView(tableRow);
-            }
-        }catch (NullPointerException e) { //UserInfoClass.getInstance() 객체가 비었을때 예외처리
-            TextView textView = new TextView(this);
-            textView.setText("해당 학기 성적이 존재하지 않습니다.");
-            textView.setTextSize(16);
-            textView.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL); //텍스트뷰 가로 세로 중앙 정렬
-
-        }
-    }
-
-    // ApiNoticeClass 통해 공지사항 정보 가져오기 성공시
-    public void NoticeSuccess(String result, String notice_category)
-    {
-        // NoticeInfoClass.getInstance() 에 얻어온 정보 저장
-        NoticeInfoClass.getInstance().setNoticeInfo(result,notice_category);
-
-        TableLayout[] tables = {
-                findViewById(R.id.notice_element_table0),
-                findViewById(R.id.notice_element_table1),
-                findViewById(R.id.notice_element_table2),
-                findViewById(R.id.notice_element_table3),
-                findViewById(R.id.notice_element_table4),
-                findViewById(R.id.notice_element_table5),
-                findViewById(R.id.notice_element_table6)
-        };
-        // 공지사항 테이블을 가져온 정보들을 바탕으로 채워준다.
-        //setNoticeTable(NoticeInfoClass.getInstance().getNotice(notice_category), tables[NoticeHandler.getIndex(notice_category)]);
     }
 
     // 로딩 화면 시작
@@ -277,7 +177,6 @@ public class MainActivity extends AppCompatActivity{
     {
         customProgress.dismiss();
     }
-
 
     // 로그인 정보 저장
     public void saveLoginInfo(String input_id, String input_pwd)
@@ -307,51 +206,6 @@ public class MainActivity extends AppCompatActivity{
         {
             e.printStackTrace();
         }
-    }
-
-    // 학생증 정보 수정
-    public void editStudentID()
-    {
-        ImageView img_menu = findViewById(R.id.menu_img);
-        TextView name_menu = findViewById(R.id.menu_name);
-        ImageView img = findViewById(R.id.studentCard_photo);
-        TextView name = findViewById(R.id.studentCard_name);
-        TextView stdNum = findViewById(R.id.studentCard_stdNum);
-        TextView major = findViewById(R.id.studentCard_major);
-        TextView birthday = findViewById(R.id.studentCard_birthday);
-
-        try {
-            // 로그인 후 메인 메뉴 우측 상단 학생 사진 세팅
-            img_menu.setImageBitmap(getImageBitMap());
-
-            // 로그인 후 안녕, ㅁㅁㅁ! 세팅
-            name_menu.setText(getString(R.string.hello, UserInfoClass.getInstance().getUSER_NM()));
-
-            // 학생증 사진 세팅
-            img.setImageBitmap(getImageBitMap());
-
-            // 학생증 이름 세팅
-            name.setText(getString(R.string.name, UserInfoClass.getInstance().getUSER_NM()));
-
-            // 학생증 학번 세팅
-            stdNum.setText(getString(R.string.userid, UserInfoClass.getInstance().getUSER_ID()));
-
-            // 학생증 학과 세팅
-            major.setText(getString(R.string.dept, UserInfoClass.getInstance().getDEPT_TTNM()));
-
-            // 학생증 생년월일 세팅
-            birthday.setText(getString(R.string.birth, UserInfoClass.getInstance().getRESNO()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // 이미지 비트맵 반환
-    public Bitmap getImageBitMap()
-    {
-        byte[] encodeByte = Base64.decode(UserInfoClass.getInstance().getPHOTO(), Base64.DEFAULT);
-
-        return BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
     }
 
     // 자동 로그인 함수
@@ -449,57 +303,9 @@ public class MainActivity extends AppCompatActivity{
         startActivity(new Intent(this, GradeCheckActivity.class));
     }
 
-    /*// 공지사항 레이아웃의 카테고리별 공지 테이블을 채우는 함수
-    public void setNoticeTable(ArrayList<Notice> noticeArrayList, TableLayout table) {
-        for(int i = 0; i < noticeArrayList.size(); i++)
-        {
-            TableRow tbr = new TableRow(this);
-            tbr.setLayoutParams(new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
-            for (int j = 0; j < 3; j++)
-            {
-                TextView textView = new TextView(this);
-
-                textView.setTextSize(16);
-                textView.setTextColor(Color.parseColor("#000000"));
-                textView.setPadding(10,0,20,50);
-                textView.setWidth(0);
-
-                // 글자 수 많으면 ... 으로 처리
-                textView.setSelected(true);
-
-                switch(j) {
-                    case 0:
-                        textView.setText(Integer.toString(i+1));
-                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.3f));
-                        break;
-                    case 1:
-                        String noticeTitle = noticeArrayList.get(i).getSUBJECT(); // 공지사항 제목
-                        String noticeURL = noticeArrayList.get(i).getURL();       // 공지사항 URL
-                        textView.setText(noticeTitle);
-
-                        String regexNT = changeRegex(noticeTitle); // 정규표현식으로 바뀐 noticeTitle
-                        Pattern pattern = Pattern.compile(regexNT); // 패턴에 컴파일되는 문자열은 정규표현식이 지켜져야 특수문자도 감지한다.
-                        Linkify.TransformFilter mTransform = (matcher, s) -> noticeURL; // 스키마인 ""뒤에 noticeURL을 붙여서 리턴한다.
-                        Linkify.addLinks(textView, pattern,"",null, mTransform);
-                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,2.0f));
-                        break;
-                    case 2:
-                        textView.setText(noticeArrayList.get(i).getPOSTED_DT());
-                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.7f));
-                        break;
-                }
-                tbr.addView(textView);
-            }
-            table.addView(tbr);
-        }
-    }*/
-
     // 뷰 전환 및 탭바 이벤트 세팅
     public void viewTransform()
     {
-        //editStudentID();
         binding = TabViewpagerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -511,25 +317,8 @@ public class MainActivity extends AppCompatActivity{
         tabs.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#000000"));
         tabs.setupWithViewPager(viewPager);
 
+        // 로딩 애니메이션 종료
+        stopLoadingAnimation();
+
     }
-
-
-
-    // 문자열을 정규표현식을 만족하는 문자열로 바꿔주는 함수
-    private String changeRegex(String str) {
-        String changedStr = str.replace("(","\\(");
-        changedStr = changedStr.replace(")","\\)");
-        changedStr = changedStr.replace("[","\\[");
-        changedStr = changedStr.replace("]","\\]");
-        changedStr = changedStr.replace("★","\\★");
-        changedStr = changedStr.replace("☆","\\☆");
-        changedStr = changedStr.replace("?","\\?");
-        changedStr = changedStr.replace("^","\\^");
-        changedStr = changedStr.replace("&","\\&");
-        changedStr = changedStr.replace("+","\\+");
-        return changedStr;
-    }
-
-
-
 }
