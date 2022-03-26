@@ -1,10 +1,10 @@
 package com.KonDuckJoa.kuleumbridge.Activity;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import android.content.Context;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.KonDuckJoa.kuleumbridge.fragment.gradeCheckFragment;
@@ -14,11 +14,19 @@ import com.KonDuckJoa.kuleumbridge.fragment.tastePlaceFragment;
 
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
+    Fragment[] fragments = new Fragment[4];
 
     // 요건 별거아님
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
+        initFragments();
+    }
+
+    private void initFragments() {
+        fragments[0] = new homeFragment();
+        fragments[1] = new noticeFragment();
+        fragments[2] = new tastePlaceFragment();
+        fragments[3] = new gradeCheckFragment();
     }
 
 
@@ -27,18 +35,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
         // 스와이프 후 현재 포지션에 따라 각각의 Fragment(페이지)를 리턴
-        switch(position)
-        {
-            case 0:
-                return new homeFragment();
-            case 1:
-                return new noticeFragment();
-            case 2:
-                return new tastePlaceFragment();
-            case 3:
-                return new gradeCheckFragment();
-        }
-        return null;
+
+        return fragments[position];
     }
 
     @Nullable

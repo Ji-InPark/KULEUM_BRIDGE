@@ -3,6 +3,8 @@ package com.KonDuckJoa.kuleumbridge.API;
 import android.os.AsyncTask;
 
 import com.KonDuckJoa.kuleumbridge.Common.CallBack;
+import com.KonDuckJoa.kuleumbridge.Notice.NoticeHandler;
+import com.KonDuckJoa.kuleumbridge.Notice.NoticeInfoClass;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,13 +16,12 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class ApiNoticeClass extends AsyncTask<String, String, Boolean> {
-    private String std_num, menu, result;
+    private String std_num, result;
     private CallBack cb;
 
-    public ApiNoticeClass(String std_num, String menu, CallBack cb)
+    public ApiNoticeClass(String std_num, CallBack cb)
     {
         this.std_num = std_num;
-        this.menu = menu;
         this.cb = cb;
     }
 
@@ -46,34 +47,43 @@ public class ApiNoticeClass extends AsyncTask<String, String, Boolean> {
         OkHttpClient client = new OkHttpClient();
 
         JSONObject json = new JSONObject();
-        try {
-            json.put("std_num", std_num);
-            json.put("menu", menu);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
-        // rest api 로그인 post로 보냄
-        RequestBody body = RequestBody.create(JSON, json.toString());
-        Request request = new Request.Builder()
-                .url("http://3.37.235.212:5000/notice")
-                .addHeader("Connection", "close")
-                .post(body)
-                .build();
+        String category;
 
-        Response response;
+        for(int i = 0; i < 7; i++)
+        {
+            category = NoticeHandler.getCategory(i);
 
-        try {
-            response = client.newCall(request).execute();
-            result = response.body().string();
-
-            if (result.contains("ERRMSGINFO")) {
-                return false;
-            } else {
-                return true;
+            try {
+                json.put("std_num", std_num);
+                json.put("menu", category);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+
+            // rest api 로그인 post로 보냄
+            RequestBody body = RequestBody.create(JSON, json.toString());
+            Request request = new Request.Builder()
+                    .url("http://3.37.235.212:5000/notice")
+                    .addHeader("Connection", "close")
+                    .post(body)
+                    .build();
+
+            Response response;
+
+            try {
+                response = client.newCall(request).execute();
+                result = response.body().string();
+
+                if (result.contains("ERRMSGINFO")) {
+                    return false;
+                } else {
+                    NoticeInfoClass.getInstance().setNoticeInfo(result,category);
+                    continue;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         return true;

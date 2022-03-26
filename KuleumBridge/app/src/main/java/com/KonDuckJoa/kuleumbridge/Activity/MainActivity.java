@@ -150,30 +150,22 @@ public class MainActivity extends AppCompatActivity{
         agnc.execute();
 
         ApiNoticeClass anc;
-        // 순서는 학사 - 장학 - 취창업 - 국제 - 학생 - 산학 - 일반
-        for(int i = 0; i < 7; i++)
-        {
-            String category = NoticeHandler.getCategory(i);
-            anc = new ApiNoticeClass(UserInfoClass.getInstance().getUSER_ID(), category, new CallBack(){
+        anc = new ApiNoticeClass(UserInfoClass.getInstance().getUSER_ID(), new CallBack(){
 
-                @Override
-                public void callback_success(String result) {
-                    // NoticeInfoClass.getInstance() 에 얻어온 정보 저장
-                    NoticeInfoClass.getInstance().setNoticeInfo(result,category);
-                }
+            @Override
+            public void callback_success(String result) {
+                // NoticeInfoClass.getInstance() 에 얻어온 정보 저장
+                viewTransform();
+            }
 
-                @Override
-                public void callback_fail() {
+            @Override
+            public void callback_fail() {
 
-                }
-            });
-            anc.execute();
-        }
+            }
+        });
+        anc.execute();
 
         try {
-            // 뷰 전환
-            viewTransform();
-
             // 로딩 애니메이션 종료
             stopLoadingAnimation();
         }
