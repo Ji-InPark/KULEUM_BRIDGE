@@ -21,6 +21,10 @@ public class NoticeInfoClass{
     private ArrayList<Notice>[] notices;
 
     private NoticeInfoClass() {
+        initializeNotices();
+    }
+
+    private void initializeNotices() {
         notices = new ArrayList[7];
 
         for(int i = 0; i < 7; i++) notices[i] = new ArrayList<>();
@@ -37,12 +41,13 @@ public class NoticeInfoClass{
 
     public void setNoticeInfo(String response_string_notice, String notice_category) {
         try {
-            JSONObject temp = new JSONObject(response_string_notice);
-            JSONArray DS_LIST = temp.getJSONArray("DS_LIST");
+            JSONArray DS_LIST = (new JSONObject(response_string_notice)).getJSONArray("DS_LIST");
             for (int i = 0; i < 5; i++)
             {
                 JSONObject notice = DS_LIST.getJSONObject(i);
+
                 String article_id = notice.getString("ARTICLE_ID");
+
                 notices[NoticeHandler.getIndex(notice_category)].add(new Notice(
                         notice.getString("POSTED_DT"),
                         notice.getString("SUBJECT"), article_id,

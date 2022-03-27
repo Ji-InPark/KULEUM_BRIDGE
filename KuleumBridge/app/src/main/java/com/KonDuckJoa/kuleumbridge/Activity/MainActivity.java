@@ -255,7 +255,7 @@ public class MainActivity extends AppCompatActivity{
     public void NoticeSuccess(String result, String notice_category)
     {
         // NoticeInfoClass.getInstance() 에 얻어온 정보 저장
-        NoticeInfoClass.getInstance().setNoticeInfo(result,notice_category);
+        NoticeInfoClass.getInstance().setNoticeInfo(result, notice_category);
 
         TableLayout[] tables = {
                 findViewById(R.id.notice_element_table0),
