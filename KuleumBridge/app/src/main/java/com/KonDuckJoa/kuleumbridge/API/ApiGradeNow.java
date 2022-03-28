@@ -13,21 +13,18 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class ApiGradeDetailClass extends AsyncTask<String, String, Boolean> {
-    private String std_num, year, shtm, id, result;
+public class ApiGradeNow extends AsyncTask<String, String, Boolean> {
+    private String std_num, result;
     private CallBack cb;
 
-    public ApiGradeDetailClass(String std_num, String year, String shtm, String id, CallBack cb)
+    public ApiGradeNow(String std_num, CallBack cb)
     {
         this.std_num = std_num;
-        this.year = year;
-        this.shtm = shtm;
-        this.id = id;
         this.cb = cb;
     }
 
     @Override
-    protected void onPostExecute(java.lang.Boolean success) {
+    protected void onPostExecute(Boolean success) {
         super.onPostExecute(success);
 
         if(success)
@@ -42,7 +39,7 @@ public class ApiGradeDetailClass extends AsyncTask<String, String, Boolean> {
     }
 
     @Override
-    protected java.lang.Boolean doInBackground(String... strings) {
+    protected Boolean doInBackground(String... strings) {
         final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
         OkHttpClient client = new OkHttpClient();
@@ -50,9 +47,6 @@ public class ApiGradeDetailClass extends AsyncTask<String, String, Boolean> {
         JSONObject json = new JSONObject();
         try {
             json.put("std_num", std_num);
-            json.put("year", year);
-            json.put("shtm", shtm);
-            json.put("sub_id", id);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -60,7 +54,7 @@ public class ApiGradeDetailClass extends AsyncTask<String, String, Boolean> {
         // rest api 로그인 post로 보냄
         RequestBody body = RequestBody.create(JSON, json.toString());
         Request request = new Request.Builder()
-                .url("http://3.37.235.212:5000/grade/detail")
+                .url("http://3.37.235.212:5000/grade/now")
                 .addHeader("Connection", "close")
                 .post(body)
                 .build();
@@ -83,8 +77,7 @@ public class ApiGradeDetailClass extends AsyncTask<String, String, Boolean> {
         return true;
     }
 
-    public java.lang.String getResult() {
+    public String getResult() {
         return result;
     }
 }
-
