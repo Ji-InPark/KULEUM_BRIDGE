@@ -46,9 +46,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity{
-    // 공지사항을 저장할 객체
-    NoticeInfoClass nic;
-
     // 로딩 애니메이션을 위한 객체
     CustomProgress customProgress;
 
@@ -56,7 +53,6 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        nic = new NoticeInfoClass();
         customProgress = new CustomProgress(MainActivity.this);
 
         // 로딩 화면 시작
@@ -258,8 +254,8 @@ public class MainActivity extends AppCompatActivity{
     // ApiNoticeClass 통해 공지사항 정보 가져오기 성공시
     public void NoticeSuccess(String result, String notice_category)
     {
-        // nic 에 얻어온 정보 저장
-        nic.setNoticeInfo(result,notice_category);
+        // NoticeInfoClass.getInstance() 에 얻어온 정보 저장
+        NoticeInfoClass.getInstance().setNoticeInfo(result, notice_category);
 
         TableLayout[] tables = {
                 findViewById(R.id.notice_element_table0),
@@ -271,7 +267,7 @@ public class MainActivity extends AppCompatActivity{
                 findViewById(R.id.notice_element_table6)
         };
         // 공지사항 테이블을 가져온 정보들을 바탕으로 채워준다.
-        setNoticeTable(nic.getNotice(notice_category), tables[NoticeHandler.getIndex(notice_category)]);
+        setNoticeTable(NoticeInfoClass.getInstance().getNotice(notice_category), tables[NoticeHandler.getIndex(notice_category)]);
     }
 
     // 로딩 화면 시작
@@ -459,8 +455,8 @@ public class MainActivity extends AppCompatActivity{
     }
 
     // 공지사항 레이아웃의 카테고리별 공지 테이블을 채우는 함수
-    public void setNoticeTable(ArrayList<Notice> na, TableLayout table) {
-        for(int i = 0; i < na.size(); i++)
+    public void setNoticeTable(ArrayList<Notice> noticeArrayList, TableLayout table) {
+        for(int i = 0; i < noticeArrayList.size(); i++)
         {
             TableRow tbr = new TableRow(this);
             tbr.setLayoutParams(new ViewGroup.LayoutParams(
@@ -468,43 +464,38 @@ public class MainActivity extends AppCompatActivity{
 
             for (int j = 0; j < 3; j++)
             {
-                TextView tv = new TextView(this);
+                TextView textView = new TextView(this);
 
-                tv.setTextSize(16);
-                tv.setTextColor(Color.parseColor("#000000"));
-                tv.setPadding(10,0,20,50);
-                tv.setWidth(0);
+                textView.setTextSize(16);
+                textView.setTextColor(Color.parseColor("#000000"));
+                textView.setPadding(10,0,20,50);
+                textView.setWidth(0);
 
                 // 글자 수 많으면 ... 으로 처리
-                tv.setSelected(true);
+                textView.setSelected(true);
 
                 switch(j) {
                     case 0:
-                        tv.setText(Integer.toString(i+1));
-                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.3f));
+                        textView.setText(Integer.toString(i+1));
+                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.3f));
                         break;
                     case 1:
-                        String noticeTitle = na.get(i).getSUBJECT(); // 공지사항 제목
-                        String noticeURL = na.get(i).getURL();       // 공지사항 URL
-                        tv.setText(noticeTitle);
+                        String noticeTitle = noticeArrayList.get(i).getSUBJECT(); // 공지사항 제목
+                        String noticeURL = noticeArrayList.get(i).getURL();       // 공지사항 URL
+                        textView.setText(noticeTitle);
+
                         String regexNT = changeRegex(noticeTitle); // 정규표현식으로 바뀐 noticeTitle
                         Pattern pattern = Pattern.compile(regexNT); // 패턴에 컴파일되는 문자열은 정규표현식이 지켜져야 특수문자도 감지한다.
-                        Linkify.TransformFilter mTransform = new Linkify.TransformFilter() {
-                            @Override
-                            public String transformUrl(Matcher matcher, String s) {
-                                return noticeURL;
-                                // 스키마인 ""뒤에 noticeURL을 붙여서 리턴한다.
-                            }
-                        };
-                        Linkify.addLinks(tv,pattern,"",null,mTransform);
-                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,2.0f));
+                        Linkify.TransformFilter mTransform = (matcher, s) -> noticeURL; // 스키마인 ""뒤에 noticeURL을 붙여서 리턴한다.
+                        Linkify.addLinks(textView, pattern,"",null, mTransform);
+                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,2.0f));
                         break;
                     case 2:
-                        tv.setText(na.get(i).getPOSTED_DT());
-                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.7f));
+                        textView.setText(noticeArrayList.get(i).getPOSTED_DT());
+                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.7f));
                         break;
                 }
-                tbr.addView(tv);
+                tbr.addView(textView);
             }
             table.addView(tbr);
         }
