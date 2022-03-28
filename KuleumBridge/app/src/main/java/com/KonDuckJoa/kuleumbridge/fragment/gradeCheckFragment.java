@@ -9,10 +9,6 @@ import com.KonDuckJoa.kuleumbridge.R;
 
 
 public class gradeCheckFragment extends Fragment {
-
-    public gradeCheckFragment() {
-
-    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

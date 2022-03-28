@@ -9,10 +9,6 @@ import com.KonDuckJoa.kuleumbridge.R;
 
 
 public class noticeFragment extends Fragment {
-    public noticeFragment() {
-
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState) {

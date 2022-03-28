@@ -10,10 +10,6 @@ import com.KonDuckJoa.kuleumbridge.R;
 
 
 public class tastePlaceFragment extends Fragment {
-
-    public tastePlaceFragment() {
-
-    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
