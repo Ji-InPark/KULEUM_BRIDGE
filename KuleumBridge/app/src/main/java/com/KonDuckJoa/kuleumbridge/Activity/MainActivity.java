@@ -18,7 +18,7 @@ import com.KonDuckJoa.kuleumbridge.API.ApiNotice;
 import com.KonDuckJoa.kuleumbridge.Animation.CustomProgress;
 import com.KonDuckJoa.kuleumbridge.Common.CallBack;
 import com.KonDuckJoa.kuleumbridge.Common.EncryptClass;
-import com.KonDuckJoa.kuleumbridge.Data.UserInfo;
+import com.KonDuckJoa.kuleumbridge.Common.Data.UserInfo;
 import com.KonDuckJoa.kuleumbridge.R;
 import com.KonDuckJoa.kuleumbridge.Taste.TasteHandler;
 import com.KonDuckJoa.kuleumbridge.Taste.TastePlaceList;
@@ -313,6 +313,7 @@ public class MainActivity extends AppCompatActivity{
         stopLoadingAnimation();
     }
 
+    // 메인 탭 텍스트 및 하단 표시부 색깔 변경
     public void setMainTabColor(TabLayout mainTab, String colorString)
     {
         mainTab.setSelectedTabIndicatorColor(Color.parseColor(colorString));

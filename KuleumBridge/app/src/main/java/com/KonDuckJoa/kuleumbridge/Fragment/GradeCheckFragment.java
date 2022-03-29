@@ -13,16 +13,16 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.KonDuckJoa.kuleumbridge.Data.UserInfo;
+import com.KonDuckJoa.kuleumbridge.Common.Data.UserInfo;
 import com.KonDuckJoa.kuleumbridge.Grade.Grade;
 import com.KonDuckJoa.kuleumbridge.R;
 
 import java.util.ArrayList;
 
 
-public class gradeCheckFragment extends Fragment {
+public class GradeCheckFragment extends Fragment {
 
-    public gradeCheckFragment() {
+    public GradeCheckFragment() {
 
     }
     @Override

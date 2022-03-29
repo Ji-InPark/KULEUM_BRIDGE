@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.KonDuckJoa.kuleumbridge.Data.UserInfo;
+import com.KonDuckJoa.kuleumbridge.Common.Data.UserInfo;
 import com.KonDuckJoa.kuleumbridge.Grade.Grade;
 import com.KonDuckJoa.kuleumbridge.Grade.GradeDetailList;
 import com.KonDuckJoa.kuleumbridge.R;

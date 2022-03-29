@@ -1,4 +1,4 @@
-package com.KonDuckJoa.kuleumbridge.Data;
+package com.KonDuckJoa.kuleumbridge.Common.Data;
 
 import com.KonDuckJoa.kuleumbridge.Grade.Grade;
 
@@ -167,36 +167,11 @@ public class UserInfo {
         return DS_GRADOFSTUDENT_length;
     }
 
-    // 전체 성적 ArrayList 리턴
     public ArrayList<Grade> getGradeAll() {
         return grade_all;
     }
 
-    // 금학기 성적 ArrayList 리턴
     public ArrayList<Grade> getGradeNow() {
         return grade_now;
-    }
-
-    // 전체 성적 하나의 문자열로 리턴
-    public String getGrade_all_txt()
-    {
-        for (int i = 0; i<DS_GRAD_length; i++)
-        {
-            if (!(grade_all.get(i).getHAKSU_NM().equals("평점평균")) && !(grade_all.get(i).getHAKSU_NM().equals("총평점평균")))
-            {
-                grade_all_txt.append(grade_all.get(i).toString());
-            }
-        }
-        return grade_all_txt.toString();
-    }
-
-    // 금학기 성적 하나의 문자열로 리턴
-    public String getGrade_now_txt()
-    {
-        for (int i = 0; i<DS_GRADOFSTUDENT_length; i++)
-        {
-            grade_now_txt.append(grade_now.get(i).toString());
-        }
-        return grade_now_txt.toString();
     }
 }

@@ -9,15 +9,11 @@ import androidx.fragment.app.Fragment;
 import com.KonDuckJoa.kuleumbridge.R;
 
 
-public class tastePlaceFragment extends Fragment {
+public class TastePlaceFragment extends Fragment {
 
-    public tastePlaceFragment() {
-
-    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.taste_place_layout,container,false);
-        return view;
+        return inflater.inflate(R.layout.taste_place_layout,container,false);
     }
 }

@@ -7,10 +7,10 @@ import android.content.Context;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.KonDuckJoa.kuleumbridge.Fragment.gradeCheckFragment;
-import com.KonDuckJoa.kuleumbridge.Fragment.homeFragment;
-import com.KonDuckJoa.kuleumbridge.Fragment.noticeFragment;
-import com.KonDuckJoa.kuleumbridge.Fragment.tastePlaceFragment;
+import com.KonDuckJoa.kuleumbridge.Fragment.GradeCheckFragment;
+import com.KonDuckJoa.kuleumbridge.Fragment.HomeFragment;
+import com.KonDuckJoa.kuleumbridge.Fragment.NoticeFragment;
+import com.KonDuckJoa.kuleumbridge.Fragment.TastePlaceFragment;
 
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -23,10 +23,10 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     }
 
     private void initFragments() {
-        fragments[0] = new homeFragment();
-        fragments[1] = new noticeFragment();
-        fragments[2] = new tastePlaceFragment();
-        fragments[3] = new gradeCheckFragment();
+        fragments[0] = new HomeFragment();
+        fragments[1] = new NoticeFragment();
+        fragments[2] = new TastePlaceFragment();
+        fragments[3] = new GradeCheckFragment();
     }
 
 

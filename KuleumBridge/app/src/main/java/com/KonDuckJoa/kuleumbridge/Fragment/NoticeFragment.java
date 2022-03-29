@@ -24,22 +24,22 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class noticeFragment extends Fragment {
+public class NoticeFragment extends Fragment {
 
     private Button noticeBtn;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.notice_layout,container,false);
-        noticeTabListener(view);
+        addOnNoticeTabSelectedListener(view);
         for (int i = 0; i < 7; i++) {
             String category = NoticeHandler.getCategory(i);
             NoticeSuccess(view, category);
         }
         return view;
     }
+
     private void NoticeSuccess(View view, String notice_category)
     {
         TableLayout[] tables = {
@@ -54,7 +54,6 @@ public class noticeFragment extends Fragment {
         // 공지사항 테이블을 가져온 정보들을 바탕으로 채워준다.
         setNoticeTable(view, NoticeInfo.getInstance().getNotice(notice_category), tables[NoticeHandler.getIndex(notice_category)]);
     }
-
 
     private void setNoticeTable(View view,ArrayList<Notice> noticeArrayList, TableLayout table) {
         for(int i = 0; i < noticeArrayList.size(); i++)
@@ -86,12 +85,9 @@ public class noticeFragment extends Fragment {
                         tv.setText(noticeTitle);
                         String regexNT = changeRegex(noticeTitle); // 정규표현식으로 바뀐 noticeTitle
                         Pattern pattern = Pattern.compile(regexNT); // 패턴에 컴파일되는 문자열은 정규표현식이 지켜져야 특수문자도 감지한다.
-                        Linkify.TransformFilter mTransform = new Linkify.TransformFilter() {
-                            @Override
-                            public String transformUrl(Matcher matcher, String s) {
-                                return noticeURL;
-                                // 스키마인 ""뒤에 noticeURL을 붙여서 리턴한다.
-                            }
+                        Linkify.TransformFilter mTransform = (matcher, s) -> {
+                            return noticeURL;
+                            // 스키마인 ""뒤에 noticeURL을 붙여서 리턴한다.
                         };
                         Linkify.addLinks(tv,pattern,"",null,mTransform);
                         tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,2.0f));
@@ -107,32 +103,28 @@ public class noticeFragment extends Fragment {
         }
     }
 
-    private void noticeTabListener(View view) {
-        TabLayout tabLayout_notice = view.findViewById(R.id.notice_category_tab);
-        tabLayout_notice.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
-        tabLayout_notice.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#000000"));
-        tabLayout_notice.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+    private void addOnNoticeTabSelectedListener(View view) {
+        TabLayout noticeTab = view.findViewById(R.id.notice_category_tab);
+        setNoticeTabColor(noticeTab, "#000000");
+        noticeTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                // tab의 상태가 선택 상태로 변경
                 int pos = tab.getPosition();
                 changeTabNotice(pos,view);
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                // tab의 상태가 선택되지 않음으로 변경
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                // 이미 선택된 상태의 tab이 사용자에 의해 다시 선택됨
             }
         });
     }
 
     // 공지사항 탭바 상호작용 함수
-    private void changeTabNotice(int index, View view) {
+    private void changeTabNotice(int selectedIndex, View view) {
         TableLayout[] tables = {
                 view.findViewById(R.id.notice_element_table0),
                 view.findViewById(R.id.notice_element_table1),
@@ -145,12 +137,10 @@ public class noticeFragment extends Fragment {
 
         for(int i = 0; i < 7; i++)
         {
-            if(index == i) {
-                // 선택된 탭만 화면 상에 보여지게 한다.
+            if(selectedIndex == i) {
                 tables[i].setVisibility(View.VISIBLE);
             }
             else
-                // 선택되지 않은 탭은 보이지 않고, 화면에서 공간또한 차지하지 않는다.
                 tables[i].setVisibility(View.GONE);
         }
     }
@@ -169,6 +159,13 @@ public class noticeFragment extends Fragment {
         changedStr = changedStr.replace("&","\\&");
         changedStr = changedStr.replace("+","\\+");
         return changedStr;
+    }
+
+    // 공지사항 탭 텍스트 및 하단 표시부 색깔 변경
+    public void setNoticeTabColor(TabLayout noticeTab, String colorString)
+    {
+        noticeTab.setSelectedTabIndicatorColor(Color.parseColor(colorString));
+        noticeTab.setTabTextColors(Color.parseColor(colorString),Color.parseColor(colorString));
     }
 
 

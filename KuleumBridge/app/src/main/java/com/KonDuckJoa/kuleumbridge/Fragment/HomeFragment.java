@@ -12,14 +12,11 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.KonDuckJoa.kuleumbridge.Data.UserInfo;
+import com.KonDuckJoa.kuleumbridge.Common.Data.UserInfo;
 import com.KonDuckJoa.kuleumbridge.R;
 
-public class homeFragment extends Fragment {
+public class HomeFragment extends Fragment {
 
-    public homeFragment() {
-
-    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

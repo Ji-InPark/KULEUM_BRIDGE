@@ -13,7 +13,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.KonDuckJoa.kuleumbridge.Data.UserInfo;
+import com.KonDuckJoa.kuleumbridge.Common.Data.UserInfo;
 import com.KonDuckJoa.kuleumbridge.R;
 
 import java.util.ArrayList;
