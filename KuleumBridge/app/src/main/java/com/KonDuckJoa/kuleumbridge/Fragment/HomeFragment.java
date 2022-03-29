@@ -28,7 +28,6 @@ public class HomeFragment extends Fragment {
     // 학생증 정보 수정
     private void editStudentID(View view)
     {
-        System.out.println("editStudentID 실행");
         ImageView img_menu = view.findViewById(R.id.menu_img_sep);
         TextView name_menu = view.findViewById(R.id.menu_name_sep);
         ImageView img = view.findViewById(R.id.studentCard_photo_sep);
