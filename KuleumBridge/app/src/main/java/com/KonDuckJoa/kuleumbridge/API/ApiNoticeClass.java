@@ -13,11 +13,11 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class ApiNotice extends AsyncTask<String, String, Boolean> {
+public class ApiNoticeClass extends AsyncTask<String, String, Boolean> {
     private String std_num, menu, result;
     private CallBack cb;
 
-    public ApiNotice(String std_num, String menu, CallBack cb)
+    public ApiNoticeClass(String std_num, String menu, CallBack cb)
     {
         this.std_num = std_num;
         this.menu = menu;

@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.KonDuckJoa.kuleumbridge.Data.UserInfo;
+import com.KonDuckJoa.kuleumbridge.Data.UserInfoClass;
 import com.KonDuckJoa.kuleumbridge.Grade.Grade;
 import com.KonDuckJoa.kuleumbridge.Grade.GradeDetailList;
 import com.KonDuckJoa.kuleumbridge.R;
@@ -30,7 +30,7 @@ public class GradeCheckActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.grade_detail);
-        gradeAllArr = UserInfo.getInstance().getGradeAll();
+        gradeAllArr = UserInfoClass.getInstance().getGradeAll();
 
         for (int i = 0; i < gradeAllArr.size(); i++) // String에 년도랑 학기 임시 저장(쉼표로 구분)
             year += gradeAllArr.get(i).getYY() + " " + gradeAllArr.get(i).getSHTM_NM() + ",";

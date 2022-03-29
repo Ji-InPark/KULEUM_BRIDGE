@@ -7,8 +7,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class UserInfo {
-    private static UserInfo instance = new UserInfo();
+public class UserInfoClass{
+    private static UserInfoClass instance = new UserInfoClass();
 
     private String RESNO;       // 생년월일
     private String DEPT_TTNM;   // 소속단과대 및 학과
@@ -25,13 +25,13 @@ public class UserInfo {
     private StringBuilder grade_all_txt = new StringBuilder(); // 화면 상에서 보여지는 전체 성적 텍스트
     private StringBuilder grade_now_txt = new StringBuilder(); // 화면 상에서 보여지는 금학기 성적 텍스트
 
-    private UserInfo()
+    private UserInfoClass()
     {
         grade_all = new ArrayList<>();
         grade_now = new ArrayList<>();
     }
 
-    public static UserInfo getInstance()
+    public static UserInfoClass getInstance()
     {
         return instance;
     }

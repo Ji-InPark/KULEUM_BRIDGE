@@ -13,15 +13,13 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class ApiSchedule extends AsyncTask<String, String, Boolean> {
-    private String std_num, year, semester, result;
+public class ApiGradeAllClass extends AsyncTask<String, String, Boolean> {
+    private String std_num, result;
     private CallBack cb;
 
-    public ApiSchedule(String std_num, String year, String semester, CallBack cb)
+    public ApiGradeAllClass(String std_num, CallBack cb)
     {
         this.std_num = std_num;
-        this.year = year;
-        this.semester = semester;
         this.cb = cb;
     }
 
@@ -49,8 +47,6 @@ public class ApiSchedule extends AsyncTask<String, String, Boolean> {
         JSONObject json = new JSONObject();
         try {
             json.put("std_num", std_num);
-            json.put("year", year);
-            json.put("semester", semester);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -58,7 +54,7 @@ public class ApiSchedule extends AsyncTask<String, String, Boolean> {
         // rest api 로그인 post로 보냄
         RequestBody body = RequestBody.create(JSON, json.toString());
         Request request = new Request.Builder()
-                .url("http://3.37.235.212:5000/schedule")
+                .url("http://3.37.235.212:5000/grade/all")
                 .addHeader("Connection", "close")
                 .post(body)
                 .build();

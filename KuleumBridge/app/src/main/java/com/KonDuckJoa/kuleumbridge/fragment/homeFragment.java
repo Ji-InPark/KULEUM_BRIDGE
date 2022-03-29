@@ -8,6 +8,10 @@ import androidx.fragment.app.Fragment;
 import com.KonDuckJoa.kuleumbridge.R;
 
 public class homeFragment extends Fragment {
+
+    public homeFragment() {
+
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

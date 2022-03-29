@@ -13,7 +13,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.KonDuckJoa.kuleumbridge.Data.UserInfo;
+import com.KonDuckJoa.kuleumbridge.Data.UserInfoClass;
 import com.KonDuckJoa.kuleumbridge.R;
 
 import java.util.ArrayList;
@@ -56,7 +56,7 @@ public class GradeDetailList extends Fragment {
         rootView =  inflater.inflate(R.layout.grade_detail_list, container, false);
         tableLayout = rootView.findViewById(R.id.tablelayout);
         if (getArguments() != null) {
-            gradeAllArr2 = UserInfo.getInstance().getGradeAll();
+            gradeAllArr2 = UserInfoClass.getInstance().getGradeAll();
             flag= getArguments().getString("tabb"); //클릭한 탭 내용 받아옴(ex. 2021년 1학기)
         }
 

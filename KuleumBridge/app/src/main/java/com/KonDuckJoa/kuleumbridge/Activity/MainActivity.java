@@ -21,15 +21,15 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import com.KonDuckJoa.kuleumbridge.API.ApiGradeAll;
-import com.KonDuckJoa.kuleumbridge.API.ApiGradeNow;
-import com.KonDuckJoa.kuleumbridge.API.ApiLogin;
-import com.KonDuckJoa.kuleumbridge.API.ApiNotice;
+import com.KonDuckJoa.kuleumbridge.API.ApiGradeAllClass;
+import com.KonDuckJoa.kuleumbridge.API.ApiGradeNowClass;
+import com.KonDuckJoa.kuleumbridge.API.ApiLoginClass;
+import com.KonDuckJoa.kuleumbridge.API.ApiNoticeClass;
 import com.KonDuckJoa.kuleumbridge.Animation.CustomProgress;
 import com.KonDuckJoa.kuleumbridge.Common.CallBack;
-import com.KonDuckJoa.kuleumbridge.Common.Encrypt;
+import com.KonDuckJoa.kuleumbridge.Common.EncryptClass;
 import com.KonDuckJoa.kuleumbridge.Grade.Grade;
-import com.KonDuckJoa.kuleumbridge.Data.UserInfo;
+import com.KonDuckJoa.kuleumbridge.Data.UserInfoClass;
 import com.KonDuckJoa.kuleumbridge.Notice.Notice;
 import com.KonDuckJoa.kuleumbridge.Notice.NoticeHandler;
 import com.KonDuckJoa.kuleumbridge.Notice.NoticeInfoClass;
@@ -42,6 +42,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity{
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity{
         // 인터넷 연결은 스레드를 통해서 백그라운드로 돌아가야 하므로(안드로이드 정책) AsyncTask 를 사용한다.
         // 그 AsyncTask 를 상속한 ApiConnectClass 클래스를 만들어서 객체로 사용하기로 함
         // 생성자의 파라매터로 id, pwd 를 받는다.
-        ApiLogin alc = new ApiLogin(input_id, input_pwd, this, new CallBack() {
+        ApiLoginClass alc = new ApiLoginClass(input_id, input_pwd, this, new CallBack() {
 
             @Override
             public void callback_success(String result) {
@@ -113,10 +114,10 @@ public class MainActivity extends AppCompatActivity{
     public void loginSuccess(String result)
     {
         // 유저 정보 저장하는 부분
-        UserInfo.getInstance().setLoginInfo(result);
+        UserInfoClass.getInstance().setLoginInfo(result);
 
         // GradeAll 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask 를 상속한 클래스를 활용해 값을 얻어온다.
-        ApiGradeAll agac = new ApiGradeAll(UserInfo.getInstance().getUSER_ID(), new CallBack() {
+        ApiGradeAllClass agac = new ApiGradeAllClass(UserInfoClass.getInstance().getUSER_ID(), new CallBack() {
 
             @Override
             public void callback_success(String result) {
@@ -131,7 +132,7 @@ public class MainActivity extends AppCompatActivity{
         agac.execute();
 
         // GradeNow 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask 를 상속한 클래스를 활요해 값을 얻어온다.
-        ApiGradeNow agnc = new ApiGradeNow(UserInfo.getInstance().getUSER_ID(), new CallBack() {
+        ApiGradeNowClass agnc = new ApiGradeNowClass(UserInfoClass.getInstance().getUSER_ID(), new CallBack() {
 
             @Override
             public void callback_success(String result) {
@@ -145,12 +146,12 @@ public class MainActivity extends AppCompatActivity{
         });
         agnc.execute();
 
-        ApiNotice anc;
+        ApiNoticeClass anc;
         // 순서는 학사 - 장학 - 취창업 - 국제 - 학생 - 산학 - 일반
         for(int i = 0; i < 7; i++)
         {
             String category = NoticeHandler.getCategory(i);
-            anc = new ApiNotice(UserInfo.getInstance().getUSER_ID(), category, new CallBack(){
+            anc = new ApiNoticeClass(UserInfoClass.getInstance().getUSER_ID(), category, new CallBack(){
 
                 @Override
                 public void callback_success(String result) {
@@ -182,7 +183,7 @@ public class MainActivity extends AppCompatActivity{
     public void gradeAllSuccess(String result)
     {
         // UserInfoClass.getInstance()에 얻어온 정보 저장 - 전체성적
-        UserInfo.getInstance().setGradeAllInfo(result);
+        UserInfoClass.getInstance().setGradeAllInfo(result);
 
         // 학생증 정보 수정
         editStudentID();
@@ -194,9 +195,9 @@ public class MainActivity extends AppCompatActivity{
 
         try {
             // UserInfoClass.getInstance()에 얻어온 정보 저장 - 금학기성적
-            UserInfo.getInstance().setGradeNowInfo(result);
+            UserInfoClass.getInstance().setGradeNowInfo(result);
             TableLayout tableLayout = findViewById(R.id.grade_now_tablelayout);
-            ArrayList<Grade> gradeNow = UserInfo.getInstance().getGradeNow();
+            ArrayList<Grade> gradeNow = UserInfoClass.getInstance().getGradeNow();
 
             for (int i = 0; i < gradeNow.size(); i++) {
                 TableRow tableRow = new TableRow(this);
@@ -286,7 +287,7 @@ public class MainActivity extends AppCompatActivity{
     public void saveLoginInfo(String input_id, String input_pwd)
     {
         // 자동 로그인을 위한 로그인 정보 암호화 부분
-        Encrypt ec = new Encrypt(getEncryptKey());
+        EncryptClass ec = new EncryptClass(getEncryptKey());
 
         try {
             String ec_id = ec.encrypt(input_id);
@@ -328,22 +329,22 @@ public class MainActivity extends AppCompatActivity{
             img_menu.setImageBitmap(getImageBitMap());
 
             // 로그인 후 안녕, ㅁㅁㅁ! 세팅
-            name_menu.setText(getString(R.string.hello, UserInfo.getInstance().getUSER_NM()));
+            name_menu.setText(getString(R.string.hello, UserInfoClass.getInstance().getUSER_NM()));
 
             // 학생증 사진 세팅
             img.setImageBitmap(getImageBitMap());
 
             // 학생증 이름 세팅
-            name.setText(getString(R.string.name, UserInfo.getInstance().getUSER_NM()));
+            name.setText(getString(R.string.name, UserInfoClass.getInstance().getUSER_NM()));
 
             // 학생증 학번 세팅
-            stdNum.setText(getString(R.string.userid, UserInfo.getInstance().getUSER_ID()));
+            stdNum.setText(getString(R.string.userid, UserInfoClass.getInstance().getUSER_ID()));
 
             // 학생증 학과 세팅
-            major.setText(getString(R.string.dept, UserInfo.getInstance().getDEPT_TTNM()));
+            major.setText(getString(R.string.dept, UserInfoClass.getInstance().getDEPT_TTNM()));
 
             // 학생증 생년월일 세팅
-            birthday.setText(getString(R.string.birth, UserInfo.getInstance().getRESNO()));
+            birthday.setText(getString(R.string.birth, UserInfoClass.getInstance().getRESNO()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -352,7 +353,7 @@ public class MainActivity extends AppCompatActivity{
     // 이미지 비트맵 반환
     public Bitmap getImageBitMap()
     {
-        byte[] encodeByte = Base64.decode(UserInfo.getInstance().getPHOTO(), Base64.DEFAULT);
+        byte[] encodeByte = Base64.decode(UserInfoClass.getInstance().getPHOTO(), Base64.DEFAULT);
 
         return BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
     }
@@ -373,7 +374,7 @@ public class MainActivity extends AppCompatActivity{
                 return;
             }
 
-            Encrypt ec = new Encrypt(getEncryptKey());
+            EncryptClass ec = new EncryptClass(getEncryptKey());
 
             // 암호화된 id, pwd를 복호화
             String dc_id = ec.decrypt(ec_id);
