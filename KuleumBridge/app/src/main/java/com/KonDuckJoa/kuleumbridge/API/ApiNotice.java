@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 
 import com.KonDuckJoa.kuleumbridge.Common.CallBack;
 import com.KonDuckJoa.kuleumbridge.Notice.NoticeHandler;
-import com.KonDuckJoa.kuleumbridge.Notice.NoticeInfoClass;
+import com.KonDuckJoa.kuleumbridge.Notice.NoticeInfo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,11 +15,11 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class ApiNoticeClass extends AsyncTask<String, String, Boolean> {
+public class ApiNotice extends AsyncTask<String, String, Boolean> {
     private String std_num, result;
     private CallBack cb;
 
-    public ApiNoticeClass(String std_num, CallBack cb)
+    public ApiNotice(String std_num, CallBack cb)
     {
         this.std_num = std_num;
         this.cb = cb;
@@ -78,7 +78,7 @@ public class ApiNoticeClass extends AsyncTask<String, String, Boolean> {
                 if (result.contains("ERRMSGINFO")) {
                     return false;
                 } else {
-                    NoticeInfoClass.getInstance().setNoticeInfo(result,category);
+                    NoticeInfo.getInstance().setNoticeInfo(result,category);
                     continue;
                 }
             } catch (Exception e) {

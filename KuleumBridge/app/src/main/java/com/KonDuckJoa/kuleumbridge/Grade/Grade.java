@@ -1,9 +1,10 @@
 package com.KonDuckJoa.kuleumbridge.Grade;
 
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Grade implements Parcelable {
+public class Grade {
     /* JSON배열안에 들어있는 ELEMENTS는 크게 3가지로 나뉨.
     이수했던 과목 OR 해당학기의 평점(학점)평균 OR 전체학기를 합산한 총평점(학점)평균 */
     private String YY = "";          // 이수년도 | 해당년도 | 0000
@@ -37,18 +38,6 @@ public class Grade implements Parcelable {
         GRD = in.readString();
         DETM_CD = in.readString();
     }
-
-    public static final Creator<Grade> CREATOR = new Creator<Grade>() {
-        @Override
-        public Grade createFromParcel(Parcel in) {
-            return new Grade(in);
-        }
-
-        @Override
-        public Grade[] newArray(int size) {
-            return new Grade[size];
-        }
-    };
 
     public void setYY(String yy) {
         YY = yy;
@@ -114,20 +103,4 @@ public class Grade implements Parcelable {
         return YY + " " + SHTM_NM + " " + HAKSU_NM + " " + PNT + " " + POBT_DIV + " " + GRD + "\n";
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(YY);
-        parcel.writeString(HAKSU_NM);
-        parcel.writeString(POBT_DIV);
-        parcel.writeString(SHTM_NM);
-        parcel.writeString(SHTM);
-        parcel.writeString(PNT);
-        parcel.writeString(GRD);
-        parcel.writeString(DETM_CD);
-    }
 }

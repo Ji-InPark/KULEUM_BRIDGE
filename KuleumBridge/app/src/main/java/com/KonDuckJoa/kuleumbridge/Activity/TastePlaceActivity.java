@@ -1,4 +1,4 @@
-package com.KonDuckJoa.kuleumbridge.Taste;
+package com.KonDuckJoa.kuleumbridge.Activity;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.KonDuckJoa.kuleumbridge.R;
+import com.KonDuckJoa.kuleumbridge.Taste.TasteHandler;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 

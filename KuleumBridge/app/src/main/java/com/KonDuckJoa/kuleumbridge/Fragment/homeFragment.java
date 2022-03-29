@@ -1,4 +1,4 @@
-package com.KonDuckJoa.kuleumbridge.fragment;
+package com.KonDuckJoa.kuleumbridge.Fragment;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.KonDuckJoa.kuleumbridge.Data.UserInfoClass;
+import com.KonDuckJoa.kuleumbridge.Data.UserInfo;
 import com.KonDuckJoa.kuleumbridge.R;
 
 public class homeFragment extends Fragment {
@@ -45,22 +45,22 @@ public class homeFragment extends Fragment {
             img_menu.setImageBitmap(getImageBitMap());
 
             // 로그인 후 안녕, ㅁㅁㅁ! 세팅
-            name_menu.setText(getString(R.string.hello, UserInfoClass.getInstance().getUSER_NM()));
+            name_menu.setText(getString(R.string.hello, UserInfo.getInstance().getUSER_NM()));
 
             // 학생증 사진 세팅
             img.setImageBitmap(getImageBitMap());
 
             // 학생증 이름 세팅
-            name.setText(getString(R.string.name, UserInfoClass.getInstance().getUSER_NM()));
+            name.setText(getString(R.string.name, UserInfo.getInstance().getUSER_NM()));
 
             // 학생증 학번 세팅
-            stdNum.setText(getString(R.string.userid, UserInfoClass.getInstance().getUSER_ID()));
+            stdNum.setText(getString(R.string.userid, UserInfo.getInstance().getUSER_ID()));
 
             // 학생증 학과 세팅
-            major.setText(getString(R.string.dept, UserInfoClass.getInstance().getDEPT_TTNM()));
+            major.setText(getString(R.string.dept, UserInfo.getInstance().getDEPT_TTNM()));
 
             // 학생증 생년월일 세팅
-            birthday.setText(getString(R.string.birth, UserInfoClass.getInstance().getRESNO()));
+            birthday.setText(getString(R.string.birth, UserInfo.getInstance().getRESNO()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -69,7 +69,7 @@ public class homeFragment extends Fragment {
     // 이미지 비트맵 반환
     public Bitmap getImageBitMap()
     {
-        byte[] encodeByte = Base64.decode(UserInfoClass.getInstance().getPHOTO(), Base64.DEFAULT);
+        byte[] encodeByte = Base64.decode(UserInfo.getInstance().getPHOTO(), Base64.DEFAULT);
 
         return BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
     }

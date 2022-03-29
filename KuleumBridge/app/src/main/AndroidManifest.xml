@@ -40,7 +40,7 @@
         <activity android:name="com.KonDuckJoa.kuleumbridge.Activity.GradeCheckActivity">
         </activity>
 
-        <activity android:name="com.KonDuckJoa.kuleumbridge.Taste.TastePlaceActivity">
+        <activity android:name="com.KonDuckJoa.kuleumbridge.Activity.TastePlaceActivity">
         </activity>
 
         <activity android:name="com.KonDuckJoa.kuleumbridge.Taste.TastePlaceList">

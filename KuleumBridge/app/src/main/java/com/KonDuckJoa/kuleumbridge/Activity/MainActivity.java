@@ -1,56 +1,38 @@
 package com.KonDuckJoa.kuleumbridge.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.text.util.Linkify;
-import android.util.Base64;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
-import com.KonDuckJoa.kuleumbridge.API.ApiGradeAllClass;
-import com.KonDuckJoa.kuleumbridge.API.ApiGradeNowClass;
-import com.KonDuckJoa.kuleumbridge.API.ApiLoginClass;
-import com.KonDuckJoa.kuleumbridge.API.ApiNoticeClass;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
+import com.KonDuckJoa.kuleumbridge.API.ApiGradeAll;
+import com.KonDuckJoa.kuleumbridge.API.ApiGradeNow;
+import com.KonDuckJoa.kuleumbridge.API.ApiLogin;
+import com.KonDuckJoa.kuleumbridge.API.ApiNotice;
 import com.KonDuckJoa.kuleumbridge.Animation.CustomProgress;
 import com.KonDuckJoa.kuleumbridge.Common.CallBack;
 import com.KonDuckJoa.kuleumbridge.Common.EncryptClass;
-import com.KonDuckJoa.kuleumbridge.Grade.Grade;
-import com.KonDuckJoa.kuleumbridge.Data.UserInfoClass;
-import com.KonDuckJoa.kuleumbridge.Notice.Notice;
-import com.KonDuckJoa.kuleumbridge.Notice.NoticeHandler;
-import com.KonDuckJoa.kuleumbridge.Notice.NoticeInfoClass;
+import com.KonDuckJoa.kuleumbridge.Data.UserInfo;
 import com.KonDuckJoa.kuleumbridge.R;
 import com.KonDuckJoa.kuleumbridge.Taste.TasteHandler;
-import com.KonDuckJoa.kuleumbridge.Taste.TastePlaceActivity;
 import com.KonDuckJoa.kuleumbridge.Taste.TastePlaceList;
 import com.KonDuckJoa.kuleumbridge.databinding.TabViewpagerBinding;
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity{
     // 로딩 애니메이션을 위한 객체
     CustomProgress customProgress;
 
-    private TabViewpagerBinding binding;
+    private TabViewpagerBinding tabViewpagerBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +79,7 @@ public class MainActivity extends AppCompatActivity{
         // 인터넷 연결은 스레드를 통해서 백그라운드로 돌아가야 하므로(안드로이드 정책) AsyncTask 를 사용한다.
         // 그 AsyncTask 를 상속한 ApiConnectClass 클래스를 만들어서 객체로 사용하기로 함
         // 생성자의 파라매터로 id, pwd 를 받는다.
-        ApiLoginClass alc = new ApiLoginClass(input_id, input_pwd, this, new CallBack() {
+        ApiLogin alc = new ApiLogin(input_id, input_pwd, this, new CallBack() {
 
             @Override
             public void callback_success(String result) {
@@ -117,14 +99,14 @@ public class MainActivity extends AppCompatActivity{
     public void loginSuccess(String result)
     {
         // 유저 정보 저장하는 부분
-        UserInfoClass.getInstance().setLoginInfo(result);
+        UserInfo.getInstance().setLoginInfo(result);
 
         // GradeAll 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask 를 상속한 클래스를 활용해 값을 얻어온다.
-        ApiGradeAllClass agac = new ApiGradeAllClass(UserInfoClass.getInstance().getUSER_ID(), new CallBack() {
+        ApiGradeAll agac = new ApiGradeAll(UserInfo.getInstance().getUSER_ID(), new CallBack() {
 
             @Override
             public void callback_success(String result) {
-                UserInfoClass.getInstance().setGradeAllInfo(result);
+                UserInfo.getInstance().setGradeAllInfo(result);
             }
 
             @Override
@@ -135,11 +117,11 @@ public class MainActivity extends AppCompatActivity{
         agac.execute();
 
         // GradeNow 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask 를 상속한 클래스를 활요해 값을 얻어온다.
-        ApiGradeNowClass agnc = new ApiGradeNowClass(UserInfoClass.getInstance().getUSER_ID(), new CallBack() {
+        ApiGradeNow agnc = new ApiGradeNow(UserInfo.getInstance().getUSER_ID(), new CallBack() {
 
             @Override
             public void callback_success(String result) {
-                UserInfoClass.getInstance().setGradeNowInfo(result);
+                UserInfo.getInstance().setGradeNowInfo(result);
             }
 
             @Override
@@ -149,8 +131,8 @@ public class MainActivity extends AppCompatActivity{
         });
         agnc.execute();
 
-        ApiNoticeClass anc;
-        anc = new ApiNoticeClass(UserInfoClass.getInstance().getUSER_ID(), new CallBack(){
+        ApiNotice anc;
+        anc = new ApiNotice(UserInfo.getInstance().getUSER_ID(), new CallBack(){
 
             @Override
             public void callback_success(String result) {
@@ -306,19 +288,36 @@ public class MainActivity extends AppCompatActivity{
     // 뷰 전환 및 탭바 이벤트 세팅
     public void viewTransform()
     {
-        binding = TabViewpagerBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        tabViewpagerBinding = TabViewpagerBinding.inflate(getLayoutInflater());
 
+        // setContentView(R.layout.tab_viewpager);와 동일한 구문. 바인딩을 했으므로 이런식으로 View설정 가능
+        setContentView(tabViewpagerBinding.getRoot());
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
-        ViewPager viewPager = binding.viewPager;
+
+        // tab_viewpager.xml에는 view_pager라는 id를 가지고있는 뷰페이저 객체가 존재하는데,
+        // binding 변수는 tab_viewpager.xml가 바인딩된 것이므로 이렇게 xml파일 내부의 객체를 직접 가져올수 있음.
+        ViewPager viewPager = tabViewpagerBinding.viewPager;
+
+        // 뷰페이저와 페이저어댑터를 연결
         viewPager.setAdapter(sectionsPagerAdapter);
-        TabLayout tabs = binding.mainTab;
-        tabs.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
-        tabs.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#000000"));
-        tabs.setupWithViewPager(viewPager);
+
+        // 상단의 뷰페이저와 동일. tab_viewpager.xml에 존재하는 mainTab id를 가진 TabLayout 객체
+        // 바인딩했기때문에 findViewById 없이 이런 식으로 직접 가져올 수 있다.
+        TabLayout mainTab = tabViewpagerBinding.mainTab;
+
+        // 탭과 뷰페이저를 연결
+        mainTab.setupWithViewPager(viewPager);
+        setMainTabColor(mainTab,"#000000");
 
         // 로딩 애니메이션 종료
         stopLoadingAnimation();
-
     }
+
+    public void setMainTabColor(TabLayout mainTab, String colorString)
+    {
+        mainTab.setSelectedTabIndicatorColor(Color.parseColor(colorString));
+        mainTab.setTabTextColors(Color.parseColor(colorString),Color.parseColor(colorString));
+    }
+
+
 }

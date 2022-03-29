@@ -7,10 +7,10 @@ import android.content.Context;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.KonDuckJoa.kuleumbridge.fragment.gradeCheckFragment;
-import com.KonDuckJoa.kuleumbridge.fragment.homeFragment;
-import com.KonDuckJoa.kuleumbridge.fragment.noticeFragment;
-import com.KonDuckJoa.kuleumbridge.fragment.tastePlaceFragment;
+import com.KonDuckJoa.kuleumbridge.Fragment.gradeCheckFragment;
+import com.KonDuckJoa.kuleumbridge.Fragment.homeFragment;
+import com.KonDuckJoa.kuleumbridge.Fragment.noticeFragment;
+import com.KonDuckJoa.kuleumbridge.Fragment.tastePlaceFragment;
 
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {

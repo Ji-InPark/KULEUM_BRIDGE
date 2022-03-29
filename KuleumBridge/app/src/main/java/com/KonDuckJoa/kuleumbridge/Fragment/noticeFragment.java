@@ -1,4 +1,4 @@
-package com.KonDuckJoa.kuleumbridge.fragment;
+package com.KonDuckJoa.kuleumbridge.Fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.KonDuckJoa.kuleumbridge.Notice.Notice;
 import com.KonDuckJoa.kuleumbridge.Notice.NoticeHandler;
-import com.KonDuckJoa.kuleumbridge.Notice.NoticeInfoClass;
+import com.KonDuckJoa.kuleumbridge.Notice.NoticeInfo;
 import com.KonDuckJoa.kuleumbridge.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -52,7 +52,7 @@ public class noticeFragment extends Fragment {
                 view.findViewById(R.id.notice_element_table6)
         };
         // 공지사항 테이블을 가져온 정보들을 바탕으로 채워준다.
-        setNoticeTable(view, NoticeInfoClass.getInstance().getNotice(notice_category), tables[NoticeHandler.getIndex(notice_category)]);
+        setNoticeTable(view, NoticeInfo.getInstance().getNotice(notice_category), tables[NoticeHandler.getIndex(notice_category)]);
     }
 
 

@@ -15,18 +15,18 @@ import java.util.ArrayList;
 6번 인덱스 - 일반
 */
 
-public class NoticeInfoClass{
-    private static NoticeInfoClass instance = new NoticeInfoClass();
+public class NoticeInfo {
+    private static NoticeInfo instance = new NoticeInfo();
 
     private ArrayList<Notice>[] notices;
 
-    private NoticeInfoClass() {
+    private NoticeInfo() {
         notices = new ArrayList[7];
 
         for(int i = 0; i < 7; i++) notices[i] = new ArrayList<>();
     }
 
-    public static NoticeInfoClass getInstance()
+    public static NoticeInfo getInstance()
     {
         return instance;
     }

@@ -1,6 +1,5 @@
-package com.KonDuckJoa.kuleumbridge.fragment;
+package com.KonDuckJoa.kuleumbridge.Fragment;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,9 +13,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.KonDuckJoa.kuleumbridge.Activity.GradeCheckActivity;
-import com.KonDuckJoa.kuleumbridge.Activity.MainActivity;
-import com.KonDuckJoa.kuleumbridge.Data.UserInfoClass;
+import com.KonDuckJoa.kuleumbridge.Data.UserInfo;
 import com.KonDuckJoa.kuleumbridge.Grade.Grade;
 import com.KonDuckJoa.kuleumbridge.R;
 
@@ -42,7 +39,7 @@ public class gradeCheckFragment extends Fragment {
         try {
             // UserInfoClass.getInstance()에 얻어온 정보 저장 - 금학기성적
             TableLayout tableLayout = view.findViewById(R.id.grade_now_tablelayout);
-            ArrayList<Grade> gradeNow = UserInfoClass.getInstance().getGradeNow();
+            ArrayList<Grade> gradeNow = UserInfo.getInstance().getGradeNow();
 
             for (int i = 0; i < gradeNow.size(); i++) {
                 TableRow tableRow = new TableRow(view.getContext());

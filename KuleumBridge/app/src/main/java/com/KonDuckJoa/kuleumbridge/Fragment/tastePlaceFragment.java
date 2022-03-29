@@ -1,4 +1,4 @@
-package com.KonDuckJoa.kuleumbridge.fragment;
+package com.KonDuckJoa.kuleumbridge.Fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
