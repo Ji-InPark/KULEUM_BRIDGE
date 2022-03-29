@@ -16,7 +16,6 @@ import com.KonDuckJoa.kuleumbridge.Fragment.TastePlaceFragment;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
     Fragment[] fragments = new Fragment[4];
 
-    // 요건 별거아님
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
         initFragments();
@@ -32,10 +31,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
-        // 스와이프 후 현재 포지션에 따라 각각의 Fragment(페이지)를 리턴
-
         return fragments[position];
     }
 

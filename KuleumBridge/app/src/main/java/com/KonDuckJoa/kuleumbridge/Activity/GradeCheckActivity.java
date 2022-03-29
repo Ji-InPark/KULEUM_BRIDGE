@@ -62,13 +62,13 @@ public class GradeCheckActivity extends AppCompatActivity {
         tabs.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
         tabs.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#000000"));
 
-        //탭 추가 과정
+        // 탭 추가 과정
         for (int i = 0; i < tab2.size(); i++)
         {
             tabs.addTab(tabs.newTab().setText(tab2.get(i)));
         }
 
-        //탭 아무것도 안눌렀을 때, 세부성적 버튼 클릭시 화면 초기화
+        // 탭 아무것도 안눌렀을 때, 세부성적 버튼 클릭시 화면 초기화
         tabb = tab2.get(0);
 
         if(savedInstanceState == null)
@@ -82,7 +82,7 @@ public class GradeCheckActivity extends AppCompatActivity {
             fragment.setArguments(bundle);
         }
 
-        //탭 클릭했을 때
+        // 탭 클릭했을 때
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
         {
             @Override

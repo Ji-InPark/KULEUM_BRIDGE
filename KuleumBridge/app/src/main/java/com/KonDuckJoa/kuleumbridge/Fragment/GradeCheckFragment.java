@@ -22,16 +22,12 @@ import java.util.ArrayList;
 
 public class GradeCheckFragment extends Fragment {
 
-    public GradeCheckFragment() {
-
-    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.grade_check_layout,container,false);
         gradeNowSuccess(view);
         return view;
-
     }
 
     private void gradeNowSuccess(View view)
@@ -66,7 +62,7 @@ public class GradeCheckFragment extends Fragment {
                             break;
                         case 1:
                             textView.setText(gradeNow.get(i).getHAKSU_NM());
-                            textView.setGravity(Gravity.START); // Gravity Start를 대신 쓰라고 해서 Start로 수정함
+                            textView.setGravity(Gravity.START);
                             textView.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 2.0f));
                             break;
                         case 2:
@@ -88,7 +84,7 @@ public class GradeCheckFragment extends Fragment {
             TextView textView = new TextView(view.getContext());
             textView.setText("해당 학기 성적이 존재하지 않습니다.");
             textView.setTextSize(16);
-            textView.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL); //텍스트뷰 가로 세로 중앙 정렬
+            textView.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL); // 텍스트뷰 가로 세로 중앙 정렬
 
         }
     }

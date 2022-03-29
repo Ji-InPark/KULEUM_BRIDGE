@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity{
         // 맛집 정보 불러오기
         setPlaceData();
 
-        // 자동로그인
+        // 자동 로그인
         autoLogin();
     }
 

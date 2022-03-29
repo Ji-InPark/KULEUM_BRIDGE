@@ -32,12 +32,12 @@ import jxl.read.biff.BiffException;
 // todo 카카오 api로 바꾸고 싶다 ui가 너무 구림
 public class TastePlaceActivity extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
-    static String kind[] = new String[200]; //종류
-    static String name[]= new String[200]; //상호명
-    static String address[] = new String[200]; //주소
-    static double latitude[] = new double[200]; //위도
-    static double longitude[] = new double[200]; //경도
-    static int RowEnd = 0;  // 행 개수 세는 변수
+    static String kind[] = new String[200]; // 종류
+    static String name[]= new String[200]; // 상호명
+    static String address[] = new String[200]; // 주소
+    static double latitude[] = new double[200]; // 위도
+    static double longitude[] = new double[200]; // 경도
+    static int RowEnd = 0;  // 행의 개수를 세는 변수
 
     //엑셀 불러서 값 저장하는 과정
     public static void getDataFromExcel(InputStream inputStream) {
@@ -58,12 +58,12 @@ public class TastePlaceActivity extends AppCompatActivity implements OnMapReadyC
                 address[row] = sheet.getCell(2, row).getContents();
 
                 NumberCell latitude2 = (NumberCell) sheet.getCell(3, row);
-                latitude2.getNumberFormat().setMaximumFractionDigits(5); //소수점 5자리까지
+                latitude2.getNumberFormat().setMaximumFractionDigits(5); // 소수점 5자리까지
                 latitude[row] = Double.parseDouble(latitude2.getContents()); //위도
 
                 NumberCell longitude2 = (NumberCell) sheet.getCell(4, row);
-                longitude2.getNumberFormat().setMaximumFractionDigits(5); //소수점 5자리까지
-                longitude[row] = Double.parseDouble(longitude2.getContents()); //경도
+                longitude2.getNumberFormat().setMaximumFractionDigits(5); // 소수점 5자리까지
+                longitude[row] = Double.parseDouble(longitude2.getContents()); // 경도
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -81,12 +81,12 @@ public class TastePlaceActivity extends AppCompatActivity implements OnMapReadyC
         mapFragment.getMapAsync(this);
     }
 
-    //지도 화면 구성
+    // 지도 화면 구성
     @Override
     public void onMapReady(final GoogleMap googleMap) {
         mMap = googleMap;
 
-        //마커 추가 과정
+        // 마커 추가 과정
         for(int i =1; i< RowEnd; i++) {
             MarkerOptions marker = new MarkerOptions();
             marker.position(new LatLng(latitude[i],longitude[i])).title(name[i]).snippet(address[i]);
@@ -95,10 +95,8 @@ public class TastePlaceActivity extends AppCompatActivity implements OnMapReadyC
             Bitmap bitmap = ((BitmapDrawable) getResources().getDrawable(TasteHandler.getDrawableValue(kind[i]))).getBitmap();
             Bitmap smallMarker = Bitmap.createScaledBitmap(bitmap,80,80,false);
             marker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
-
             mMap.addMarker(marker);
         }
-
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(37.5425241,127.073699), 16));
     }
 }
