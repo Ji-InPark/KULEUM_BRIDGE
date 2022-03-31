@@ -17,52 +17,50 @@ import okhttp3.Response;
 
 public class ApiNotice extends AsyncTask<String, String, Boolean> {
     private String std_num, result;
-    private CallBack cb;
+    private CallBack callBack;
 
-    public ApiNotice(String std_num, CallBack cb)
+    public ApiNotice(String std_num, CallBack callBack)
     {
         this.std_num = std_num;
-        this.cb = cb;
+        this.callBack = callBack;
     }
 
     @Override
-    protected void onPostExecute(Boolean success) {
+    protected void onPostExecute(Boolean success)
+    {
         super.onPostExecute(success);
 
         if(success)
         {
-            cb.callback_success(result);
+            callBack.callback_success(result);
         }
-        else
-        {
-            return;
-        }
-
     }
 
     @Override
-    protected Boolean doInBackground(String... strings) {
-        final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    protected Boolean doInBackground(String... strings)
+    {
+        final MediaType jsonType = MediaType.parse("application/json; charset=utf-8");
 
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient okHttpClient = new OkHttpClient();
 
-        JSONObject json = new JSONObject();
-
-        String category;
+        JSONObject parameterJson = new JSONObject();
 
         for(int i = 0; i < 7; i++)
         {
-            category = NoticeHandler.getCategory(i);
+            String category = NoticeHandler.getCategory(i);
 
-            try {
-                json.put("std_num", std_num);
-                json.put("menu", category);
-            } catch (JSONException e) {
+            try
+            {
+                parameterJson.put("std_num", std_num);
+                parameterJson.put("menu", category);
+            }
+            catch (JSONException e)
+            {
                 e.printStackTrace();
             }
 
             // rest api 로그인 post로 보냄
-            RequestBody body = RequestBody.create(JSON, json.toString());
+            RequestBody body = RequestBody.create(jsonType, parameterJson.toString());
             Request request = new Request.Builder()
                     .url("http://3.37.235.212:5000/notice")
                     .addHeader("Connection", "close")
@@ -71,25 +69,25 @@ public class ApiNotice extends AsyncTask<String, String, Boolean> {
 
             Response response;
 
-            try {
-                response = client.newCall(request).execute();
+            try
+            {
+                response = okHttpClient.newCall(request).execute();
                 result = response.body().string();
 
-                if (result.contains("ERRMSGINFO")) {
+                if (result.contains("ERRMSGINFO"))
+                {
                     return false;
-                } else {
-                    NoticeInfo.getInstance().setNoticeInfo(result,category);
-                    continue;
                 }
-            } catch (Exception e) {
+                else
+                {
+                    NoticeInfo.getInstance().setNoticeInfo(result,category);
+                }
+            }
+            catch (Exception e)
+            {
                 e.printStackTrace();
             }
         }
-
         return true;
-    }
-
-    public String getResult() {
-        return result;
     }
 }
