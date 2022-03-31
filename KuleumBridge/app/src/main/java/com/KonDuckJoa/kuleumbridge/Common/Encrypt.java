@@ -10,13 +10,13 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-public class EncryptClass {
+public class Encrypt {
     public static String alg = "AES/CBC/PKCS5Padding";
     private final String key;
     private final String iv; // 16byte
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public EncryptClass(String key)
+    public Encrypt(String key)
     {
         this.key = key;
         iv = this.key.substring(0, 16);
