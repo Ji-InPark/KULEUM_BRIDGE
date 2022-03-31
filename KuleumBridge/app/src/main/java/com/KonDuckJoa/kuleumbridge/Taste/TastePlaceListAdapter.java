@@ -57,7 +57,7 @@ public class TastePlaceListAdapter extends BaseAdapter {
 
         name.setText(listViewData.get(position).name);
         address.setText(listViewData.get(position).address);
-        mention.setText(listViewData.get(position).mention);
+        mention.setText(listViewData.get(position).oneLineComment);
 
         return convertView;
 
