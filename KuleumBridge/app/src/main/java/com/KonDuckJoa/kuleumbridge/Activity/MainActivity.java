@@ -15,7 +15,7 @@ import com.KonDuckJoa.kuleumbridge.API.ApiGradeAll;
 import com.KonDuckJoa.kuleumbridge.API.ApiGradeNow;
 import com.KonDuckJoa.kuleumbridge.API.ApiLogin;
 import com.KonDuckJoa.kuleumbridge.API.ApiNotice;
-import com.KonDuckJoa.kuleumbridge.Animation.CustomProgress;
+import com.KonDuckJoa.kuleumbridge.Animation.AnimationProgress;
 import com.KonDuckJoa.kuleumbridge.Common.CallBack;
 import com.KonDuckJoa.kuleumbridge.Common.Encrypt;
 import com.KonDuckJoa.kuleumbridge.Common.Data.UserInfo;
@@ -30,7 +30,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity{
     // 로딩 애니메이션을 위한 객체
-    CustomProgress customProgress;
+    AnimationProgress customProgress;
 
     private TabViewpagerBinding tabViewpagerBinding;
 
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity{
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        customProgress = new CustomProgress(MainActivity.this);
+        customProgress = new AnimationProgress(MainActivity.this);
 
         // 로딩 화면 시작
         customProgress.show();

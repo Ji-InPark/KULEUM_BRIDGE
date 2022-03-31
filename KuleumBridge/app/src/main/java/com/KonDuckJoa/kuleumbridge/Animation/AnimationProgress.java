@@ -10,24 +10,27 @@ import android.widget.ImageView;
 import com.KonDuckJoa.kuleumbridge.R;
 
 // 애니메이션 담당 클래스
-public class CustomProgress extends Dialog {
-    Context mContext;
+public class AnimationProgress extends Dialog {
+    Context context;
     ImageView imageView;
     AnimationDrawable animationDrawable;
 
-    public CustomProgress(Context activity) {
+    public AnimationProgress(Context activity) {
         super(activity);
-        mContext = activity;
+        context = activity;
         InitProgress();
     }
     
     public void InitProgress(){
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
         setContentView(R.layout.loading_layout);
+
         imageView = findViewById(R.id.progresss);
         imageView.setBackgroundResource(R.drawable.loading_animation);
         animationDrawable = (AnimationDrawable)imageView.getBackground();
+
         animationDrawable.start();
     }
 }
