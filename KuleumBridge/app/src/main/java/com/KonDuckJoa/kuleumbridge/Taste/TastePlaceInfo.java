@@ -19,7 +19,8 @@ import com.KonDuckJoa.kuleumbridge.R;
 public class TastePlaceInfo extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.taste_info);
 
@@ -31,7 +32,8 @@ public class TastePlaceInfo extends AppCompatActivity {
         double latitude = intent.getDoubleExtra("latitude",0);
         double longitude = intent.getDoubleExtra("longitude",0);
 
-        if(savedInstanceState == null) {
+        if(savedInstanceState == null)
+        {
             TastePlaceInfoMap mainFragment = new TastePlaceInfoMap();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.mainFragment, mainFragment,"main").commit();
@@ -48,16 +50,19 @@ public class TastePlaceInfo extends AppCompatActivity {
     }
 
     //주소 복사하기 버튼
-    public void CopyClick(View view) {
-        TextView textView= (TextView)findViewById(R.id.info_address); //텍스트뷰
-        String address_copy= textView.getText().toString(); // 텍스트뷰 글자 가져옴
+    public void CopyClick(View view)
+    {
+        TextView textView = (TextView)findViewById(R.id.info_address); //텍스트뷰
+        String addressCopy = textView.getText().toString(); // 텍스트뷰 글자 가져옴
+
         ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText("Copy", address_copy);
+        ClipData clip = ClipData.newPlainText("Copy", addressCopy);
         clipboard.setPrimaryClip(clip); //클립보드
     }
 
     // todo 이거 앱으로 연결을 해주자
-    public void MapClick(View view) {
+    public void MapClick(View view)
+    {
        Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.google.co.kr/maps/@37.5425241,127.073699,15z"));
 
        startActivity(intent);
