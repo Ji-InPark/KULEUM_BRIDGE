@@ -17,7 +17,7 @@ import com.KonDuckJoa.kuleumbridge.API.ApiLogin;
 import com.KonDuckJoa.kuleumbridge.API.ApiNotice;
 import com.KonDuckJoa.kuleumbridge.Animation.CustomProgress;
 import com.KonDuckJoa.kuleumbridge.Common.CallBack;
-import com.KonDuckJoa.kuleumbridge.Common.EncryptClass;
+import com.KonDuckJoa.kuleumbridge.Common.Encrypt;
 import com.KonDuckJoa.kuleumbridge.Common.Data.UserInfo;
 import com.KonDuckJoa.kuleumbridge.R;
 import com.KonDuckJoa.kuleumbridge.Taste.TasteHandler;
@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity{
     private TabViewpagerBinding tabViewpagerBinding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         customProgress = new CustomProgress(MainActivity.this);
@@ -52,9 +53,12 @@ public class MainActivity extends AppCompatActivity{
 
     public void setPlaceData()
     {
-        try {
+        try
+        {
             TastePlaceActivity.getDataFromExcel(getBaseContext().getResources().getAssets().open("place.xls"));
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
@@ -102,7 +106,7 @@ public class MainActivity extends AppCompatActivity{
         UserInfo.getInstance().setLoginInfo(result);
 
         // GradeAll 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask 를 상속한 클래스를 활용해 값을 얻어온다.
-        ApiGradeAll agac = new ApiGradeAll(UserInfo.getInstance().getUSER_ID(), new CallBack() {
+        ApiGradeAll agac = new ApiGradeAll(UserInfo.getInstance().getUserId(), new CallBack() {
 
             @Override
             public void callback_success(String result) {
@@ -117,7 +121,7 @@ public class MainActivity extends AppCompatActivity{
         agac.execute();
 
         // GradeNow 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask 를 상속한 클래스를 활요해 값을 얻어온다.
-        ApiGradeNow agnc = new ApiGradeNow(UserInfo.getInstance().getUSER_ID(), new CallBack() {
+        ApiGradeNow agnc = new ApiGradeNow(UserInfo.getInstance().getUserId(), new CallBack() {
 
             @Override
             public void callback_success(String result) {
@@ -132,7 +136,7 @@ public class MainActivity extends AppCompatActivity{
         agnc.execute();
 
         ApiNotice anc;
-        anc = new ApiNotice(UserInfo.getInstance().getUSER_ID(), new CallBack(){
+        anc = new ApiNotice(UserInfo.getInstance().getUserId(), new CallBack(){
 
             @Override
             public void callback_success(String result) {
@@ -164,7 +168,7 @@ public class MainActivity extends AppCompatActivity{
     public void saveLoginInfo(String input_id, String input_pwd)
     {
         // 자동 로그인을 위한 로그인 정보 암호화 부분
-        EncryptClass ec = new EncryptClass(getEncryptKey());
+        Encrypt ec = new Encrypt(getEncryptKey());
 
         try {
             String ec_id = ec.encrypt(input_id);
@@ -206,7 +210,7 @@ public class MainActivity extends AppCompatActivity{
                 return;
             }
 
-            EncryptClass ec = new EncryptClass(getEncryptKey());
+            Encrypt ec = new Encrypt(getEncryptKey());
 
             // 암호화된 id, pwd를 복호화
             String dc_id = ec.decrypt(ec_id);

@@ -33,7 +33,7 @@ public class GradeCheckActivity extends AppCompatActivity {
         gradeAllArr = UserInfo.getInstance().getGradeAll();
 
         for (int i = 0; i < gradeAllArr.size(); i++) // String에 년도랑 학기 임시 저장(쉼표로 구분)
-            year += gradeAllArr.get(i).getYY() + " " + gradeAllArr.get(i).getSHTM_NM() + ",";
+            year += gradeAllArr.get(i).getCompletedYear() + " " + gradeAllArr.get(i).getSemester() + ",";
 
         tab = new ArrayList<>(Arrays.asList(year.split(",")));
         tab2 = new ArrayList<>();

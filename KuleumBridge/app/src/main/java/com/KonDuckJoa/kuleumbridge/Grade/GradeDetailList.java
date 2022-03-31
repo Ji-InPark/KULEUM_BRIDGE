@@ -61,11 +61,11 @@ public class GradeDetailList extends Fragment {
         }
 
         for (int i = 0; i < gradeAllArr2.size(); i++) {
-            s_yy += gradeAllArr2.get(i).getYY() + " " + gradeAllArr2.get(i).getSHTM_NM() + ",";
-            s_div += gradeAllArr2.get(i).getPOBT_DIV() + ",";
-            s_name += gradeAllArr2.get(i).getHAKSU_NM() + ",";
-            s_hak += gradeAllArr2.get(i).getPNT() + ",";
-            s_grd += gradeAllArr2.get(i).getGRD() + ",";
+            s_yy += gradeAllArr2.get(i).getCompletedYear() + " " + gradeAllArr2.get(i).getSemester() + ",";
+            s_div += gradeAllArr2.get(i).getCompletedDivision() + ",";
+            s_name += gradeAllArr2.get(i).getSubjectName() + ",";
+            s_hak += gradeAllArr2.get(i).getGradeCount() + ",";
+            s_grd += gradeAllArr2.get(i).getGradeRate() + ",";
         }
 
         a_yy = new ArrayList<>(Arrays.asList(s_yy.split(",")));
