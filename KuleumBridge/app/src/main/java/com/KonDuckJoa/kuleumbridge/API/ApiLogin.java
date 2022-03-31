@@ -9,8 +9,6 @@ import com.KonDuckJoa.kuleumbridge.Common.CallBack;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -37,7 +35,7 @@ public class ApiLogin extends AsyncTask<String, String, Boolean> {
         if(success == null)
         {
             Toast.makeText(context, "네트워크가 불안정합니다. 다시 로그인해주세요.", Toast.LENGTH_SHORT).show();
-            callBack.callback_fail();
+            callBack.callbackFail();
             return;
         }
 
@@ -45,7 +43,7 @@ public class ApiLogin extends AsyncTask<String, String, Boolean> {
 
         if(success)
         {
-            callBack.callback_success(result);
+            callBack.callbackSuccess(result);
         }
         else
         {
@@ -62,7 +60,7 @@ public class ApiLogin extends AsyncTask<String, String, Boolean> {
                 // 토스트로 에러메세지 출력
                 Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show();
 
-                callBack.callback_fail();
+                callBack.callbackFail();
             }
             catch (JSONException e)
             {

@@ -32,7 +32,7 @@ public class ApiNotice extends AsyncTask<String, String, Boolean> {
 
         if(success)
         {
-            callBack.callback_success(result);
+            callBack.callbackSuccess(result);
         }
     }
 

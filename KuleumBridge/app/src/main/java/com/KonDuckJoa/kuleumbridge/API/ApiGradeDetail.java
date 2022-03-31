@@ -33,7 +33,7 @@ public class ApiGradeDetail extends AsyncTask<String, String, Boolean> {
 
         if(success)
         {
-            callBackb.callback_success(result);
+            callBackb.callbackSuccess(result);
         }
     }
 

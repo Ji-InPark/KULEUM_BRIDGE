@@ -87,14 +87,14 @@ public class MainActivity extends AppCompatActivity{
         ApiLogin apiLogin = new ApiLogin(input_id, input_pwd, this, new CallBack()
         {
             @Override
-            public void callback_success(String result)
+            public void callbackSuccess(String result)
             {
                 loginSuccess(result);
                 saveLoginInfo(input_id, input_pwd);
             }
 
             @Override
-            public void callback_fail()
+            public void callbackFail()
             {
                 stopLoadingAnimation();
             }
@@ -112,13 +112,13 @@ public class MainActivity extends AppCompatActivity{
         ApiGradeAll apiGradeAll = new ApiGradeAll(UserInfo.getInstance().getUserId(), new CallBack()
         {
             @Override
-            public void callback_success(String result)
+            public void callbackSuccess(String result)
             {
                 UserInfo.getInstance().setGradeAllInfo(result);
             }
 
             @Override
-            public void callback_fail()
+            public void callbackFail()
             {
                 stopLoadingAnimation();
             }
@@ -129,13 +129,13 @@ public class MainActivity extends AppCompatActivity{
         ApiGradeNow apiGradeNow = new ApiGradeNow(UserInfo.getInstance().getUserId(), new CallBack()
         {
             @Override
-            public void callback_success(String result)
+            public void callbackSuccess(String result)
             {
                 UserInfo.getInstance().setGradeNowInfo(result);
             }
 
             @Override
-            public void callback_fail()
+            public void callbackFail()
             {
                 stopLoadingAnimation();
             }
@@ -145,14 +145,14 @@ public class MainActivity extends AppCompatActivity{
         ApiNotice apiNotice = new ApiNotice(UserInfo.getInstance().getUserId(), new CallBack()
         {
             @Override
-            public void callback_success(String result)
+            public void callbackSuccess(String result)
             {
                 // NoticeInfoClass.getInstance() 에 얻어온 정보 저장
                 viewTransform();
             }
 
             @Override
-            public void callback_fail() { }
+            public void callbackFail() { }
         });
         apiNotice.execute();
     }
