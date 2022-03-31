@@ -83,8 +83,8 @@ public class NoticeFragment extends Fragment {
                         textView.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT,0.3f));
                         break;
                     case 1:
-                        String noticeTitle = noticeArrayList.get(i).getSUBJECT(); // 공지사항 제목
-                        String noticeURL = noticeArrayList.get(i).getURL();       // 공지사항 URL
+                        String noticeTitle = noticeArrayList.get(i).getSubject(); // 공지사항 제목
+                        String noticeURL = noticeArrayList.get(i).getUrl();       // 공지사항 URL
                         textView.setText(noticeTitle);
 
                         String regexNT = changeRegex(noticeTitle); // 정규표현식으로 바뀐 noticeTitle
@@ -97,7 +97,7 @@ public class NoticeFragment extends Fragment {
                         textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,2.0f));
                         break;
                     case 2:
-                        textView.setText(noticeArrayList.get(i).getPOSTED_DT());
+                        textView.setText(noticeArrayList.get(i).getPostedDate());
                         textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.7f));
                         break;
                 }
