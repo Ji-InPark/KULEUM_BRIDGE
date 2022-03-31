@@ -64,17 +64,18 @@ public class MainActivity extends AppCompatActivity{
     }
 
     // 로그인 버튼이 눌렸을 때
-    public void onLoginBtnClick(View view){
-        EditText et_id = findViewById(R.id.idInput);
-        EditText et_pwd = findViewById(R.id.passwordInput);
-        String input_id = String.valueOf(et_id.getText());
-        String input_pwd = String.valueOf(et_pwd.getText());
+    public void onLoginBtnClick(View view)
+    {
+        EditText editTextId = findViewById(R.id.idInput);
+        EditText editTextPwd = findViewById(R.id.passwordInput);
+        String inputId = String.valueOf(editTextId.getText());
+        String inputPwd = String.valueOf(editTextPwd.getText());
 
         // 로딩 애니메이션 시작
         startLoadingAnimation();
 
         // 로그인 함수
-        Login(input_id, input_pwd);
+        Login(inputId, inputPwd);
     }
 
     // 로그인 함수
@@ -83,20 +84,22 @@ public class MainActivity extends AppCompatActivity{
         // 인터넷 연결은 스레드를 통해서 백그라운드로 돌아가야 하므로(안드로이드 정책) AsyncTask 를 사용한다.
         // 그 AsyncTask 를 상속한 ApiConnectClass 클래스를 만들어서 객체로 사용하기로 함
         // 생성자의 파라매터로 id, pwd 를 받는다.
-        ApiLogin alc = new ApiLogin(input_id, input_pwd, this, new CallBack() {
-
+        ApiLogin apiLogin = new ApiLogin(input_id, input_pwd, this, new CallBack()
+        {
             @Override
-            public void callback_success(String result) {
+            public void callback_success(String result)
+            {
                 loginSuccess(result);
                 saveLoginInfo(input_id, input_pwd);
             }
 
             @Override
-            public void callback_fail() {
+            public void callback_fail()
+            {
                 stopLoadingAnimation();
             }
         });
-        alc.execute();
+        apiLogin.execute();
     }
 
     // ApiLoginClass 통해 로그인 성공시
@@ -106,50 +109,52 @@ public class MainActivity extends AppCompatActivity{
         UserInfo.getInstance().setLoginInfo(result);
 
         // GradeAll 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask 를 상속한 클래스를 활용해 값을 얻어온다.
-        ApiGradeAll agac = new ApiGradeAll(UserInfo.getInstance().getUserId(), new CallBack() {
-
+        ApiGradeAll apiGradeAll = new ApiGradeAll(UserInfo.getInstance().getUserId(), new CallBack()
+        {
             @Override
-            public void callback_success(String result) {
+            public void callback_success(String result)
+            {
                 UserInfo.getInstance().setGradeAllInfo(result);
             }
 
             @Override
-            public void callback_fail() {
+            public void callback_fail()
+            {
                 stopLoadingAnimation();
             }
         });
-        agac.execute();
+        apiGradeAll.execute();
 
         // GradeNow 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask 를 상속한 클래스를 활요해 값을 얻어온다.
-        ApiGradeNow agnc = new ApiGradeNow(UserInfo.getInstance().getUserId(), new CallBack() {
-
+        ApiGradeNow apiGradeNow = new ApiGradeNow(UserInfo.getInstance().getUserId(), new CallBack()
+        {
             @Override
-            public void callback_success(String result) {
+            public void callback_success(String result)
+            {
                 UserInfo.getInstance().setGradeNowInfo(result);
             }
 
             @Override
-            public void callback_fail() {
+            public void callback_fail()
+            {
                 stopLoadingAnimation();
             }
         });
-        agnc.execute();
+        apiGradeNow.execute();
 
-        ApiNotice anc;
-        anc = new ApiNotice(UserInfo.getInstance().getUserId(), new CallBack(){
-
+        ApiNotice apiNotice = new ApiNotice(UserInfo.getInstance().getUserId(), new CallBack()
+        {
             @Override
-            public void callback_success(String result) {
+            public void callback_success(String result)
+            {
                 // NoticeInfoClass.getInstance() 에 얻어온 정보 저장
                 viewTransform();
             }
 
             @Override
-            public void callback_fail() {
-
-            }
+            public void callback_fail() { }
         });
-        anc.execute();
+        apiNotice.execute();
     }
 
     // 로딩 화면 시작
@@ -165,25 +170,26 @@ public class MainActivity extends AppCompatActivity{
     }
 
     // 로그인 정보 저장
-    public void saveLoginInfo(String input_id, String input_pwd)
+    public void saveLoginInfo(String inputId, String inputPwd)
     {
         // 자동 로그인을 위한 로그인 정보 암호화 부분
-        Encrypt ec = new Encrypt(getEncryptKey());
+        Encrypt encrypt = new Encrypt(getEncryptKey());
 
-        try {
-            String ec_id = ec.encrypt(input_id);
-            String ec_pwd = ec.encrypt(input_pwd);
+        try
+        {
+            String encryptedId = encrypt.encrypt(inputId);
+            String encryptedPwd = encrypt.encrypt(inputPwd);
 
             // 암호화된 로그인 정보 저장 부분
             // 이미 암호화된 정보가 있다면 저장 X
-            SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
+            SharedPreferences sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
 
-            if(pref.getString("id", "").equals(""))
+            if(sharedPreferences.getString("id", "").equals(""))
             {
-                SharedPreferences.Editor editor = pref.edit();
+                SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                editor.putString("id", ec_id);
-                editor.putString("pwd", ec_pwd);
+                editor.putString("id", encryptedId);
+                editor.putString("pwd", encryptedPwd);
 
                 editor.apply();
             }
@@ -195,29 +201,31 @@ public class MainActivity extends AppCompatActivity{
     }
 
     // 자동 로그인 함수
-    public void autoLogin(){
-        try {
-            SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
+    public void autoLogin()
+    {
+        try
+        {
+            SharedPreferences sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
 
-            String ec_id = pref.getString("id", "");
-            String ec_pwd = pref.getString("pwd", "");
+            String encryptedId = sharedPreferences.getString("id", "");
+            String encryptedPwd = sharedPreferences.getString("pwd", "");
 
             // login 파일에 저장된 정보가 없다면 함수 종료
-            if(ec_id.equals(""))
+            if(encryptedId.equals(""))
             {
                 // 로딩 화면 중단
                 customProgress.dismiss();
                 return;
             }
 
-            Encrypt ec = new Encrypt(getEncryptKey());
+            Encrypt encrypt = new Encrypt(getEncryptKey());
 
             // 암호화된 id, pwd를 복호화
-            String dc_id = ec.decrypt(ec_id);
-            String dc_pwd = ec.decrypt(ec_pwd);
+            String decryptId = encrypt.decrypt(encryptedId);
+            String decryptPwd = encrypt.decrypt(encryptedPwd);
 
             // 복호화된 login 정보를 가지고 login
-            Login(dc_id, dc_pwd);
+            Login(decryptId, decryptPwd);
         }
         catch (Exception e)
         {
@@ -226,27 +234,29 @@ public class MainActivity extends AppCompatActivity{
     }
 
     // 암호화를 위한 key를 불러오는 함수
-    public String getEncryptKey(){
-        try {
-            SharedPreferences pref = getSharedPreferences("key",MODE_PRIVATE);
+    public String getEncryptKey()
+    {
+        try
+        {
+            SharedPreferences sharedPreferences = getSharedPreferences("key", MODE_PRIVATE);
 
-            String key = pref.getString("key", "");
+            String key = sharedPreferences.getString("key", "");
 
             // 만약 저장되어 있는 키가 없다면 키를 랜덤으로 만든다.
             // 그리고 저장한다.
             if(key.equals(""))
             {
-                Random rand = new Random();
+                Random random = new Random();
                 StringBuilder sb = new StringBuilder(key);
 
                 for(int i = 0; i < 16; i++)
                 {
-                    sb.append(rand.nextInt(10));
+                    sb.append(random.nextInt(10));
                 }
 
                 key = sb.toString();
 
-                SharedPreferences.Editor editor = pref.edit();
+                SharedPreferences.Editor editor = sharedPreferences.edit();
 
                 editor.putString("key", key);
 
@@ -255,7 +265,9 @@ public class MainActivity extends AppCompatActivity{
 
             return key;
 
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
 
@@ -263,28 +275,30 @@ public class MainActivity extends AppCompatActivity{
     }
 
     // 공지사항 레이아웃의 "웹 공지사항 이동" 버튼 상호작용 함수
-    public void onNoticeBtnClick(View view) {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp"));
-        startActivity(intent);
+    public void onNoticeBtnClick(View view)
+    {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp")));
     }
 
     // 맛집 레이아웃의 "지도로 보기" 버튼 상호작용 함수
-    public void onTastePlaceBtnClick(View view) {
+    public void onTastePlaceBtnClick(View view)
+    {
         //onTastePlaceActivity 실행, 기존 창은 유지.
-        Intent intent = new Intent(this, TastePlaceActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(this, TastePlaceActivity.class));
     }
 
     // 맛집 레이아웃의 9가지 맛집 아이콘 상호작용 함수
-    public void OnTasteBtnClick(View view) {
-        String parameter = TasteHandler.getStringValue(view.getId());
-        Intent intent_tastePlace = new Intent(this, TastePlaceList.class);
-        intent_tastePlace.putExtra("parameter", parameter);
-        startActivity(intent_tastePlace);
+    public void OnTasteBtnClick(View view)
+    {
+        String buttonName = TasteHandler.getStringValue(view.getId());
+        Intent intentTastePlace = new Intent(this, TastePlaceList.class);
+        intentTastePlace.putExtra("buttonName", buttonName);
+        startActivity(intentTastePlace);
     }
 
     // 성적조회 레이아웃의 "세부 성적 조회" 버튼 상호작용 함수
-    public void onGradeAllCheckBtnClick(View view) {
+    public void onGradeAllCheckBtnClick(View view)
+    {
         //GradeCheckActivity 실행, 기존 창은 유지.
         startActivity(new Intent(this, GradeCheckActivity.class));
     }
@@ -323,6 +337,4 @@ public class MainActivity extends AppCompatActivity{
         mainTab.setSelectedTabIndicatorColor(Color.parseColor(colorString));
         mainTab.setTabTextColors(Color.parseColor(colorString),Color.parseColor(colorString));
     }
-
-
 }

@@ -38,7 +38,7 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
         Workbook workbook = null;
         Sheet sheet = null;
         // 어떤 버튼을 눌렀는지 받아서 저장 (ex: 한식)
-        String Taste_Button = getIntent().getStringExtra("parameter");
+        String Taste_Button = getIntent().getStringExtra("buttonName");
 
         try {
             InputStream inputStream = getBaseContext().getResources().getAssets().open("place.xls");
