@@ -23,27 +23,31 @@ import java.util.ArrayList;
 public class GradeCheckFragment extends Fragment {
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         View view = inflater.inflate(R.layout.grade_check_layout,container,false);
         gradeNowSuccess(view);
+
         return view;
     }
 
     private void gradeNowSuccess(View view)
     {
-        try {
+        try
+        {
             // UserInfoClass.getInstance()에 얻어온 정보 저장 - 금학기성적
             TableLayout tableLayout = view.findViewById(R.id.grade_now_tablelayout);
-            ArrayList<Grade> gradeNow = UserInfo.getInstance().getGradeNow();
+            ArrayList<Grade> gradeNowArray = UserInfo.getInstance().getGradeNow();
 
-            for (int i = 0; i < gradeNow.size(); i++) {
+            for (int i = 0; i < gradeNowArray.size(); i++)
+            {
                 TableRow tableRow = new TableRow(view.getContext());
                 tableRow.setLayoutParams(new TableRow.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT));
 
-                for (int j = 0; j < 4; j++) {
+                for (int j = 0; j < 4; j++)
+                {
                     TextView textView = new TextView(view.getContext());
                     textView.setTextSize(16);
                     textView.setTextColor(Color.parseColor("#000000"));
@@ -54,24 +58,25 @@ public class GradeCheckFragment extends Fragment {
                     textView.setEllipsize(TextUtils.TruncateAt.END);
                     textView.setSelected(true);
 
-                    switch (j) {
+                    switch (j)
+                    {
                         case 0:
-                            textView.setText(gradeNow.get(i).getPOBT_DIV());
+                            textView.setText(gradeNowArray.get(i).getCompletedDivision());
                             textView.setGravity(Gravity.CENTER);
                             textView.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f));
                             break;
                         case 1:
-                            textView.setText(gradeNow.get(i).getHAKSU_NM());
+                            textView.setText(gradeNowArray.get(i).getSubjectName());
                             textView.setGravity(Gravity.START);
                             textView.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 2.0f));
                             break;
                         case 2:
-                            textView.setText(gradeNow.get(i).getPNT());
+                            textView.setText(gradeNowArray.get(i).getGradeCount());
                             textView.setGravity(Gravity.CENTER);
                             textView.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 0.5f));
                             break;
                         case 3:
-                            textView.setText(gradeNow.get(i).getGRD());
+                            textView.setText(gradeNowArray.get(i).getGradeRate());
                             textView.setGravity(Gravity.CENTER);
                             textView.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 0.7f));
                             break;
@@ -80,15 +85,13 @@ public class GradeCheckFragment extends Fragment {
                 }
                 tableLayout.addView(tableRow);
             }
-        }catch (NullPointerException e) { //UserInfoClass.getInstance() 객체가 비었을때 예외처리
+        }
+        catch (NullPointerException e) //UserInfoClass.getInstance() 객체가 비었을때 예외처리
+        {
             TextView textView = new TextView(view.getContext());
             textView.setText("해당 학기 성적이 존재하지 않습니다.");
             textView.setTextSize(16);
             textView.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL); // 텍스트뷰 가로 세로 중앙 정렬
-
         }
     }
-
-
-
 }

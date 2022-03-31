@@ -310,7 +310,7 @@ public class MainActivity extends AppCompatActivity{
 
         // setContentView(R.layout.tab_viewpager);와 동일한 구문. 바인딩을 했으므로 이런식으로 View설정 가능
         setContentView(tabViewpagerBinding.getRoot());
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // tab_viewpager.xml에는 view_pager라는 id를 가지고있는 뷰페이저 객체가 존재하는데,
         // binding 변수는 tab_viewpager.xml가 바인딩된 것이므로 이렇게 xml파일 내부의 객체를 직접 가져올수 있음.

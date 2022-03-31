@@ -20,27 +20,28 @@ import com.KonDuckJoa.kuleumbridge.R;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
 public class NoticeFragment extends Fragment {
-
     private Button noticeBtn;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                              Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         View view = inflater.inflate(R.layout.notice_layout,container,false);
+
         addOnNoticeTabSelectedListener(view);
-        for (int i = 0; i < 7; i++) {
-            String category = NoticeHandler.getCategory(i);
-            NoticeSuccess(view, category);
+
+        for (int i = 0; i < 7; i++)
+        {
+            noticeSuccess(view, NoticeHandler.getCategory(i));
         }
+
         return view;
     }
 
-    private void NoticeSuccess(View view, String notice_category)
+    private void noticeSuccess(View view, String noticeCategory)
     {
         TableLayout[] tables = {
                 view.findViewById(R.id.notice_element_table0),
@@ -52,74 +53,78 @@ public class NoticeFragment extends Fragment {
                 view.findViewById(R.id.notice_element_table6)
         };
         // 공지사항 테이블을 가져온 정보들을 바탕으로 채워준다.
-        setNoticeTable(view, NoticeInfo.getInstance().getNotice(notice_category), tables[NoticeHandler.getIndex(notice_category)]);
+        setNoticeTable(view, NoticeInfo.getInstance().getNotice(noticeCategory), tables[NoticeHandler.getIndex(noticeCategory)]);
     }
 
-    private void setNoticeTable(View view,ArrayList<Notice> noticeArrayList, TableLayout table) {
+    private void setNoticeTable(View view, ArrayList<Notice> noticeArrayList, TableLayout tableLayout)
+    {
         for(int i = 0; i < noticeArrayList.size(); i++)
         {
-            TableRow tbr = new TableRow(view.getContext());
-            tbr.setLayoutParams(new ViewGroup.LayoutParams(
+            TableRow tableRow = new TableRow(view.getContext());
+            tableRow.setLayoutParams(new ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
             for (int j = 0; j < 3; j++)
             {
-                TextView tv = new TextView(view.getContext());
+                TextView textView = new TextView(view.getContext());
 
-                tv.setTextSize(16);
-                tv.setTextColor(Color.parseColor("#000000"));
-                tv.setPadding(10,0,20,50);
-                tv.setWidth(0);
+                textView.setTextSize(16);
+                textView.setTextColor(Color.parseColor("#000000"));
+                textView.setPadding(10,0,20,50);
+                textView.setWidth(0);
 
                 // 글자 수 많으면 ... 으로 처리
-                tv.setSelected(true);
+                textView.setSelected(true);
 
-                switch(j) {
+                switch(j)
+                {
                     case 0:
-                        tv.setText(Integer.toString(i+1));
-                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.3f));
+                        textView.setText(Integer.toString(i + 1));
+                        textView.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT,0.3f));
                         break;
                     case 1:
                         String noticeTitle = noticeArrayList.get(i).getSUBJECT(); // 공지사항 제목
                         String noticeURL = noticeArrayList.get(i).getURL();       // 공지사항 URL
-                        tv.setText(noticeTitle);
+                        textView.setText(noticeTitle);
+
                         String regexNT = changeRegex(noticeTitle); // 정규표현식으로 바뀐 noticeTitle
                         Pattern pattern = Pattern.compile(regexNT); // 패턴에 컴파일되는 문자열은 정규표현식이 지켜져야 특수문자도 감지한다.
                         Linkify.TransformFilter mTransform = (matcher, s) -> {
                             return noticeURL;
                             // 스키마인 ""뒤에 noticeURL을 붙여서 리턴한다.
                         };
-                        Linkify.addLinks(tv,pattern,"",null,mTransform);
-                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,2.0f));
+                        Linkify.addLinks(textView,pattern,"",null,mTransform);
+                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,2.0f));
                         break;
                     case 2:
-                        tv.setText(noticeArrayList.get(i).getPOSTED_DT());
-                        tv.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.7f));
+                        textView.setText(noticeArrayList.get(i).getPOSTED_DT());
+                        textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.7f));
                         break;
                 }
-                tbr.addView(tv);
+                tableRow.addView(textView);
             }
-            table.addView(tbr);
+            tableLayout.addView(tableRow);
         }
     }
 
     private void addOnNoticeTabSelectedListener(View view) {
         TabLayout noticeTab = view.findViewById(R.id.notice_category_tab);
         setNoticeTabColor(noticeTab, "#000000");
-        noticeTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+
+        noticeTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
+        {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
+            public void onTabSelected(TabLayout.Tab tab)
+            {
                 int pos = tab.getPosition();
                 changeTabNotice(pos,view);
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
+            public void onTabUnselected(TabLayout.Tab tab) { }
 
             @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
+            public void onTabReselected(TabLayout.Tab tab) { }
         });
     }
 
@@ -137,11 +142,7 @@ public class NoticeFragment extends Fragment {
 
         for(int i = 0; i < 7; i++)
         {
-            if(selectedIndex == i) {
-                tables[i].setVisibility(View.VISIBLE);
-            }
-            else
-                tables[i].setVisibility(View.GONE);
+            tables[i].setVisibility(selectedIndex == i ? View.VISIBLE : View.GONE);
         }
     }
 
@@ -167,8 +168,4 @@ public class NoticeFragment extends Fragment {
         noticeTab.setSelectedTabIndicatorColor(Color.parseColor(colorString));
         noticeTab.setTabTextColors(Color.parseColor(colorString),Color.parseColor(colorString));
     }
-
-
-
-
 }
