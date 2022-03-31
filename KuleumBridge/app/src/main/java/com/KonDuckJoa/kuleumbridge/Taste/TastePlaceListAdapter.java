@@ -14,15 +14,14 @@ import java.util.ArrayList;
 /* 맛집 리스트 어댑터 */
 
 public class TastePlaceListAdapter extends BaseAdapter {
-
     LayoutInflater layoutInflater = null;
-    private ArrayList<TastePlaceListData> listViewData = null;
-    private int count = 0;
+    private ArrayList<TastePlaceListData> tastePlaceListDataArray;
+    private int count;
 
-    public TastePlaceListAdapter(ArrayList<TastePlaceListData> listData)
+    public TastePlaceListAdapter(ArrayList<TastePlaceListData> tastePlaceListDataArray)
     {
-        listViewData = listData;
-        count = listViewData.size();
+        this.tastePlaceListDataArray = tastePlaceListDataArray;
+        count = this.tastePlaceListDataArray.size();
     }
 
     @Override
@@ -41,26 +40,29 @@ public class TastePlaceListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        if(convertView ==null) {
+    public View getView(int position, View convertView, ViewGroup parent)
+    {
+        if(convertView ==null)
+        {
             final Context context = parent.getContext();
-            if(layoutInflater ==null) {
-                layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+            if(layoutInflater ==null)
+            {
+                layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             }
+
             convertView = layoutInflater.inflate(R.layout.taste_list_item, parent, false);
         }
 
-        TextView name = convertView.findViewById(R.id.list_name);
-        TextView address = convertView.findViewById(R.id.list_address);
-        TextView mention = convertView.findViewById(R.id.list_mention);
+        TextView textViewName = convertView.findViewById(R.id.list_name);
+        TextView textViewAddress = convertView.findViewById(R.id.list_address);
+        TextView textViewOneLineComment = convertView.findViewById(R.id.list_mention);
 
-        name.setText(listViewData.get(position).name);
-        address.setText(listViewData.get(position).address);
-        mention.setText(listViewData.get(position).oneLineComment);
+        textViewName.setText(tastePlaceListDataArray.get(position).name);
+        textViewAddress.setText(tastePlaceListDataArray.get(position).address);
+        textViewOneLineComment.setText(tastePlaceListDataArray.get(position).oneLineComment);
 
         return convertView;
-
     }
 }
 
