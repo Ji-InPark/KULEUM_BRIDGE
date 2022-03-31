@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.KonDuckJoa.kuleumbridge.Common.Data.UserInfo;
 import com.KonDuckJoa.kuleumbridge.Grade.Grade;
-import com.KonDuckJoa.kuleumbridge.Grade.GradeDetailList;
+import com.KonDuckJoa.kuleumbridge.Grade.GradeAllList;
 import com.KonDuckJoa.kuleumbridge.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -73,7 +73,7 @@ public class GradeCheckActivity extends AppCompatActivity {
 
         if(savedInstanceState == null)
         {
-            GradeDetailList fragment = new GradeDetailList();
+            GradeAllList fragment = new GradeAllList();
             getSupportFragmentManager().beginTransaction().replace(R.id.grade_fragment, fragment).commit();
 
             Bundle bundle = new Bundle();
@@ -93,7 +93,7 @@ public class GradeCheckActivity extends AppCompatActivity {
 
                 if(savedInstanceState == null)
                 {
-                    GradeDetailList fragment = new GradeDetailList();
+                    GradeAllList fragment = new GradeAllList();
                     getSupportFragmentManager().beginTransaction().replace(R.id.grade_fragment, fragment).commit();
 
                     Bundle bundle = new Bundle();
