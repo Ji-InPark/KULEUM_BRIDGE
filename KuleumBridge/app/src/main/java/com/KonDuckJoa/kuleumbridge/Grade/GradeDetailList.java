@@ -31,7 +31,6 @@ public class GradeDetailList extends Fragment {
 
     TextView textView;
     String flag = "";
-
     String s_yy = "";
     String s_div = "";
     String s_name = "";
