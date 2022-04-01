@@ -15,44 +15,44 @@ import okhttp3.Response;
 
 public class ApiGradeAll extends AsyncTask<String, String, Boolean> {
     private String std_num, result;
-    private CallBack cb;
+    private CallBack callBack;
 
-    public ApiGradeAll(String std_num, CallBack cb)
+    public ApiGradeAll(String std_num, CallBack callBack)
     {
         this.std_num = std_num;
-        this.cb = cb;
+        this.callBack = callBack;
     }
 
     @Override
-    protected void onPostExecute(Boolean success) {
+    protected void onPostExecute(Boolean success)
+    {
         super.onPostExecute(success);
 
         if(success)
         {
-            cb.callback_success(result);
+            callBack.callbackSuccess(result);
         }
-        else
-        {
-            return;
-        }
-
     }
 
     @Override
-    protected Boolean doInBackground(String... strings) {
-        final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    protected Boolean doInBackground(String... strings)
+    {
+        final MediaType jsonType = MediaType.parse("application/json; charset=utf-8");
 
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient okHttpClient = new OkHttpClient();
 
-        JSONObject json = new JSONObject();
-        try {
-            json.put("std_num", std_num);
-        } catch (JSONException e) {
+        JSONObject parameterJson = new JSONObject();
+        try
+        {
+            parameterJson.put("std_num", std_num);
+        }
+        catch (JSONException e)
+        {
             e.printStackTrace();
         }
 
         // rest api 로그인 post로 보냄
-        RequestBody body = RequestBody.create(JSON, json.toString());
+        RequestBody body = RequestBody.create(jsonType, parameterJson.toString());
         Request request = new Request.Builder()
                 .url("http://3.37.235.212:5000/grade/all")
                 .addHeader("Connection", "close")
@@ -61,23 +61,18 @@ public class ApiGradeAll extends AsyncTask<String, String, Boolean> {
 
         Response response;
 
-        try {
-            response = client.newCall(request).execute();
+        try
+        {
+            response = okHttpClient.newCall(request).execute();
             result = response.body().string();
 
-            if (result.contains("ERRMSGINFO")) {
-                return false;
-            } else {
-                return true;
-            }
-        } catch (Exception e) {
+            return !result.contains("ERRMSGINFO");
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
 
         return true;
-    }
-
-    public String getResult() {
-        return result;
     }
 }

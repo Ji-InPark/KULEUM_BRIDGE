@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.KonDuckJoa.kuleumbridge.Common.Data.UserInfo;
 import com.KonDuckJoa.kuleumbridge.Grade.Grade;
-import com.KonDuckJoa.kuleumbridge.Grade.GradeDetailList;
+import com.KonDuckJoa.kuleumbridge.Grade.GradeAllList;
 import com.KonDuckJoa.kuleumbridge.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -33,7 +33,7 @@ public class GradeCheckActivity extends AppCompatActivity {
         gradeAllArr = UserInfo.getInstance().getGradeAll();
 
         for (int i = 0; i < gradeAllArr.size(); i++) // String에 년도랑 학기 임시 저장(쉼표로 구분)
-            year += gradeAllArr.get(i).getYY() + " " + gradeAllArr.get(i).getSHTM_NM() + ",";
+            year += gradeAllArr.get(i).getCompletedYear() + " " + gradeAllArr.get(i).getSemester() + ",";
 
         tab = new ArrayList<>(Arrays.asList(year.split(",")));
         tab2 = new ArrayList<>();
@@ -73,7 +73,7 @@ public class GradeCheckActivity extends AppCompatActivity {
 
         if(savedInstanceState == null)
         {
-            GradeDetailList fragment = new GradeDetailList();
+            GradeAllList fragment = new GradeAllList();
             getSupportFragmentManager().beginTransaction().replace(R.id.grade_fragment, fragment).commit();
 
             Bundle bundle = new Bundle();
@@ -93,7 +93,7 @@ public class GradeCheckActivity extends AppCompatActivity {
 
                 if(savedInstanceState == null)
                 {
-                    GradeDetailList fragment = new GradeDetailList();
+                    GradeAllList fragment = new GradeAllList();
                     getSupportFragmentManager().beginTransaction().replace(R.id.grade_fragment, fragment).commit();
 
                     Bundle bundle = new Bundle();

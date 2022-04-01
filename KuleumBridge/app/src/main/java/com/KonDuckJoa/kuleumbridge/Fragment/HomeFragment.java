@@ -15,11 +15,11 @@ import androidx.fragment.app.Fragment;
 import com.KonDuckJoa.kuleumbridge.Common.Data.UserInfo;
 import com.KonDuckJoa.kuleumbridge.R;
 
-public class HomeFragment extends Fragment {
-
+public class HomeFragment extends Fragment
+{
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         View view = inflater.inflate(R.layout.home_layout_sep,container,false);
         editStudentID(view);
         return view;
@@ -36,28 +36,31 @@ public class HomeFragment extends Fragment {
         TextView major = view.findViewById(R.id.studentCard_major_sep);
         TextView birthday = view.findViewById(R.id.studentCard_birthday_sep);
 
-        try {
+        try
+        {
             // 로그인 후 메인 메뉴 우측 상단 학생 사진 세팅
             img_menu.setImageBitmap(getImageBitMap());
 
             // 로그인 후 안녕, ㅁㅁㅁ! 세팅
-            name_menu.setText(getString(R.string.hello, UserInfo.getInstance().getUSER_NM()));
+            name_menu.setText(getString(R.string.hello, UserInfo.getInstance().getUserName()));
 
             // 학생증 사진 세팅
             img.setImageBitmap(getImageBitMap());
 
             // 학생증 이름 세팅
-            name.setText(getString(R.string.name, UserInfo.getInstance().getUSER_NM()));
+            name.setText(getString(R.string.name, UserInfo.getInstance().getUserName()));
 
             // 학생증 학번 세팅
-            stdNum.setText(getString(R.string.userid, UserInfo.getInstance().getUSER_ID()));
+            stdNum.setText(getString(R.string.userid, UserInfo.getInstance().getUserId()));
 
             // 학생증 학과 세팅
-            major.setText(getString(R.string.dept, UserInfo.getInstance().getDEPT_TTNM()));
+            major.setText(getString(R.string.dept, UserInfo.getInstance().getDepartmentTotalName()));
 
             // 학생증 생년월일 세팅
-            birthday.setText(getString(R.string.birth, UserInfo.getInstance().getRESNO()));
-        } catch (Exception e) {
+            birthday.setText(getString(R.string.birth, UserInfo.getInstance().getBirthDate()));
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
@@ -65,9 +68,8 @@ public class HomeFragment extends Fragment {
     // 이미지 비트맵 반환
     public Bitmap getImageBitMap()
     {
-        byte[] encodeByte = Base64.decode(UserInfo.getInstance().getPHOTO(), Base64.DEFAULT);
+        byte[] encodeByte = Base64.decode(UserInfo.getInstance().getPhotoUrl(), Base64.DEFAULT);
 
         return BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
     }
-
 }

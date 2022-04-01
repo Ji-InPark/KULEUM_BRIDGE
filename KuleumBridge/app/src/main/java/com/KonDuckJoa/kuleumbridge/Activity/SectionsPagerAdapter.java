@@ -1,10 +1,8 @@
 package com.KonDuckJoa.kuleumbridge.Activity;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import android.content.Context;
-
-import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.KonDuckJoa.kuleumbridge.Fragment.GradeCheckFragment;
@@ -16,18 +14,19 @@ import com.KonDuckJoa.kuleumbridge.Fragment.TastePlaceFragment;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
     Fragment[] fragments = new Fragment[4];
 
-    public SectionsPagerAdapter(Context context, FragmentManager fm) {
+    public SectionsPagerAdapter(FragmentManager fm)
+    {
         super(fm);
-        initFragments();
+        initializeFragments();
     }
 
-    private void initFragments() {
+    private void initializeFragments()
+    {
         fragments[0] = new HomeFragment();
         fragments[1] = new NoticeFragment();
         fragments[2] = new TastePlaceFragment();
         fragments[3] = new GradeCheckFragment();
     }
-
 
     @Override
     public Fragment getItem(int position) {
@@ -37,12 +36,12 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Nullable
     @Override
     // 레이아웃 하단의 탭 이름을 세팅하는 함수
-    public CharSequence getPageTitle(int position) {
+    public CharSequence getPageTitle(int position)
+    {
         switch(position)
         {
             case 0:
                 return "홈";
-
             case 1:
                 return "공지사항";
 
@@ -56,8 +55,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override
-    public int getCount() {
+    public int getCount()
+    {
         // 리턴값은 페이지의 총 개수를 의미함.
-        return 4;
+        return fragments.length;
     }
 }
