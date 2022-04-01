@@ -117,7 +117,7 @@ public class NoticeFragment extends Fragment {
             public void onTabSelected(TabLayout.Tab tab)
             {
                 int pos = tab.getPosition();
-                changeTabNotice(pos,view);
+                changeNoticeTab(pos,view);
             }
 
             @Override
@@ -129,7 +129,7 @@ public class NoticeFragment extends Fragment {
     }
 
     // 공지사항 탭바 상호작용 함수
-    private void changeTabNotice(int selectedIndex, View view) {
+    private void changeNoticeTab(int selectedIndex, View view) {
         TableLayout[] tables = {
                 view.findViewById(R.id.notice_element_table0),
                 view.findViewById(R.id.notice_element_table1),

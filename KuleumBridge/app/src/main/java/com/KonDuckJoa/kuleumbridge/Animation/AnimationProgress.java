@@ -18,10 +18,10 @@ public class AnimationProgress extends Dialog {
     public AnimationProgress(Context activity) {
         super(activity);
         context = activity;
-        InitProgress();
+        initializeProgress();
     }
     
-    public void InitProgress(){
+    public void initializeProgress(){
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 

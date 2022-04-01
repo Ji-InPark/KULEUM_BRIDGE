@@ -17,10 +17,10 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public SectionsPagerAdapter(FragmentManager fm)
     {
         super(fm);
-        initFragments();
+        initializeFragments();
     }
 
-    private void initFragments()
+    private void initializeFragments()
     {
         fragments[0] = new HomeFragment();
         fragments[1] = new NoticeFragment();
