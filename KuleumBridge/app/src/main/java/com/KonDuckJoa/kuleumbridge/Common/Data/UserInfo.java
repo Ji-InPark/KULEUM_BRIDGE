@@ -10,25 +10,22 @@ import java.util.ArrayList;
 public class UserInfo {
     private static UserInfo instance = new UserInfo();
 
-    private String RESNO;       // 생년월일
-    private String DEPT_TTNM;   // 소속단과대 및 학과
-    private String USER_NM;     // 이름
-    private String USER_ID;     // 학번
-    private String PHOTO;       // 사진 URL,
+    private String birthDate;               // 생년월일
+    private String departmentTotalName;     // 소속단과대 및 학과
+    private String userName;                // 이름
+    private String userId;                  // 학번
+    private String photoUrl;                // 사진 URL
 
-    private ArrayList<Grade> grade_all;  // 전체 성적 저장
-    private ArrayList<Grade> grade_now;  // 금학기 성적 저장
+    private ArrayList<Grade> gradeAllArray;  // 전체 성적 저장
+    private ArrayList<Grade> gradeNowArray;  // 금학기 성적 저장
 
-    private int DS_GRAD_length; // grade_all 배열에서 실질적으로 정보가 들어있는 칸의 개수
-    private int DS_GRADOFSTUDENT_length; // grade_now 배열에서 실질적으로 정보가 들어있는 칸의 개수
-
-    private StringBuilder grade_all_txt = new StringBuilder(); // 화면 상에서 보여지는 전체 성적 텍스트
-    private StringBuilder grade_now_txt = new StringBuilder(); // 화면 상에서 보여지는 금학기 성적 텍스트
+    private int gradeAllLength;     // grade_all 배열에서 실질적으로 정보가 들어있는 칸의 개수
+    private int gradeNowLength;     // grade_now 배열에서 실질적으로 정보가 들어있는 칸의 개수
 
     private UserInfo()
     {
-        grade_all = new ArrayList<>();
-        grade_now = new ArrayList<>();
+        gradeAllArray = new ArrayList<>();
+        gradeNowArray = new ArrayList<>();
     }
 
     public static UserInfo getInstance()
@@ -36,32 +33,39 @@ public class UserInfo {
         return instance;
     }
 
-    public void setLoginInfo(String response_string) {
-        try {
-            JSONObject responseJson = new JSONObject(response_string);
+    public void setLoginInfo(String loginResponse)
+    {
+        try
+        {
+            JSONObject responseJson = new JSONObject(loginResponse);
 
-            JSONObject dmUserInfo = responseJson.getJSONObject("dmUserInfo");
+            JSONObject userInfoJson = responseJson.getJSONObject("dmUserInfo");
 
-            setRESNO(dmUserInfo.getString("RESNO"));
-            setDEPT_TTNM(dmUserInfo.getString("DEPT_TTNM"));
-            setUSER_NM(dmUserInfo.getString("USER_NM"));
-            setUSER_ID(dmUserInfo.getString("USER_ID"));
-        } catch (Exception e) {
+            setBirthDate(userInfoJson.getString("RESNO"));
+            setDepartmentTotalName(userInfoJson.getString("DEPT_TTNM"));
+            setUserName(userInfoJson.getString("USER_NM"));
+            setUserId(userInfoJson.getString("USER_ID"));
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
 
     // ApiGradeAllClass를 통해서 얻어온 데이터를 저장하는 메소드
-    public void setGradeAllInfo(String response_string_grade) {
-        try {
-            JSONObject responseJson = new JSONObject(response_string_grade);
-            JSONArray DS_GRAD = responseJson.getJSONArray("DS_GRAD");
-            setDS_GRAD_length(DS_GRAD.length());
+    public void setGradeAllInfo(String gradeAllResponse)
+    {
+        try
+        {
+            JSONObject responseJson = new JSONObject(gradeAllResponse);
 
+            JSONArray gradeAllJson = responseJson.getJSONArray("DS_GRAD");
+            setGradeAllLength(gradeAllJson.length());
 
-            for (int i = 0; i < DS_GRAD.length(); i++) {
-                JSONObject subject = DS_GRAD.getJSONObject(i);
-                grade_all.add(new Grade(subject.getString("YY"),
+            for (int i = 0; i < gradeAllJson.length(); i++)
+            {
+                JSONObject subject = gradeAllJson.getJSONObject(i);
+                gradeAllArray.add(new Grade(subject.getString("YY"),
                         subject.getString("HAKSU_NM"),
                         subject.getString("POBT_DIV"),
                         subject.getString("SHTM_NM"),
@@ -70,10 +74,13 @@ public class UserInfo {
                         subject.getString("GRD"),
                         subject.getString("DETM_CD")));
             }
-            JSONObject dmPhoto = responseJson.getJSONObject("dmPhoto");
 
-            setPHOTO(dmPhoto.getString("PHOTO"));
-        }catch (Exception e) {
+            JSONObject photoJson = responseJson.getJSONObject("dmPhoto");
+
+            setPhotoUrl(photoJson.getString("PHOTO"));
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
@@ -81,17 +88,20 @@ public class UserInfo {
     // ApiGradeNowClass를 통해서 얻어온 데이터를 저장하는 메소드
     // Grade.java에 설명되어있는 3가지의 ELEMENTS중 첫번째인 이수(중인) 과목에 해당.
     // 전체성적을 가져올때랑 JSON배열 내 ELEMENTS의 변수 이름이 대부분 다르다.
-    public void setGradeNowInfo(String response_string_grade) {
-        try {
-            JSONObject responseJson = new JSONObject(response_string_grade);
-            JSONArray DS_GRADEOFSTUDENT = responseJson.getJSONArray("DS_GRADEOFSTUDENT");
-            setDS_GRADOFSTUDENT_length(DS_GRADEOFSTUDENT.length());
+    public void setGradeNowInfo(String gradeNowResponse)
+    {
+        try
+        {
+            JSONObject responseJson = new JSONObject(gradeNowResponse);
 
-            for (int i = 0; i < DS_GRADEOFSTUDENT.length(); i++)
+            JSONArray gradeNowJson = responseJson.getJSONArray("DS_GRADEOFSTUDENT");
+            setGradeNowLength(gradeNowJson.length());
+
+            for (int i = 0; i < gradeNowJson.length(); i++)
             {
-                JSONObject subject = DS_GRADEOFSTUDENT.getJSONObject(i);
+                JSONObject subject = gradeNowJson.getJSONObject(i);
 
-                grade_now.add(new Grade(subject.getString("LT_YY"),
+                gradeNowArray.add(new Grade(subject.getString("LT_YY"),
                         subject.getString("TYPL_KOR_NM"),
                         subject.getString("POBT_NM"),
                         subject.getString("COMM_NM"),
@@ -100,78 +110,80 @@ public class UserInfo {
                         subject.getString("CALCU_GRD"),
                         ""));
             }
-        }catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
 
-    public void setRESNO(String resno) {
-        int year = Integer.parseInt(resno.substring(0, 2));
+    public void setBirthDate(String birthDate) {
+        int year = Integer.parseInt(birthDate.substring(0, 2));
 
         if(year < 50)
             year += 100;
         year += 1900;
 
-        RESNO = year + "년 " +  resno.substring(2, 4) + "월 " + resno.substring(4) + "일";
+        this.birthDate = year + "년 " +  birthDate.substring(2, 4) + "월 " + birthDate.substring(4) + "일";
     }
 
-    public void setDEPT_TTNM(String dept_ttnm) {
-        DEPT_TTNM = dept_ttnm;
+    public void setDepartmentTotalName(String departmentTotalName) {
+        this.departmentTotalName = departmentTotalName;
     }
 
-    public void setUSER_NM(String user_nm) {
-        USER_NM = user_nm;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public void setUSER_ID(String user_id) {
-        USER_ID = user_id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public void setPHOTO(String photo) {
-        PHOTO = photo;
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 
-    public void setDS_GRAD_length(int ds_grad_length) {
-        DS_GRAD_length = ds_grad_length;
+    public void setGradeAllLength(int gradeAllLength) {
+        this.gradeAllLength = gradeAllLength;
     }
 
-    public void setDS_GRADOFSTUDENT_length(int ds_gradOfStudent_length) {
-        DS_GRADOFSTUDENT_length = ds_gradOfStudent_length;
+    public void setGradeNowLength(int gradeNowLength) {
+        this.gradeNowLength = gradeNowLength;
     }
 
-    public String getRESNO() {
-        return RESNO;
+    public String getBirthDate() {
+        return birthDate;
     }
 
-    public String getDEPT_TTNM() {
-        return DEPT_TTNM;
+    public String getDepartmentTotalName() {
+        return departmentTotalName;
     }
 
-    public String getUSER_NM() {
-        return USER_NM;
+    public String getUserName() {
+        return userName;
     }
 
-    public String getUSER_ID() {
-        return USER_ID;
+    public String getUserId() {
+        return userId;
     }
 
-    public String getPHOTO() {
-        return PHOTO;
+    public String getPhotoUrl() {
+        return photoUrl;
     }
 
-    public int getDS_GRAD_length() {
-        return DS_GRAD_length;
+    public int getGradeAllLength() {
+        return gradeAllLength;
     }
 
-    public int getDS_GRADOFSTUDENT_length() {
-        return DS_GRADOFSTUDENT_length;
+    public int getGradeNowLength() {
+        return gradeNowLength;
     }
 
     public ArrayList<Grade> getGradeAll() {
-        return grade_all;
+        return gradeAllArray;
     }
 
     public ArrayList<Grade> getGradeNow() {
-        return grade_now;
+        return gradeNowArray;
     }
 }
