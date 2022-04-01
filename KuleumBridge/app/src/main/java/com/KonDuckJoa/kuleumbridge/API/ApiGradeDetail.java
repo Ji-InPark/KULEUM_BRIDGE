@@ -15,15 +15,15 @@ import okhttp3.Response;
 
 public class ApiGradeDetail extends AsyncTask<String, String, Boolean> {
     private String std_num, year, shtm, id, result;
-    private CallBack callBackb;
+    private CallBack callBack;
 
-    public ApiGradeDetail(String std_num, String year, String shtm, String id, CallBack cb)
+    public ApiGradeDetail(String std_num, String year, String shtm, String id, CallBack callBack)
     {
         this.std_num = std_num;
         this.year = year;
         this.shtm = shtm;
         this.id = id;
-        this.callBackb = cb;
+        this.callBack = callBack;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class ApiGradeDetail extends AsyncTask<String, String, Boolean> {
 
         if(success)
         {
-            callBackb.callbackSuccess(result);
+            callBack.callbackSuccess(result);
         }
     }
 
