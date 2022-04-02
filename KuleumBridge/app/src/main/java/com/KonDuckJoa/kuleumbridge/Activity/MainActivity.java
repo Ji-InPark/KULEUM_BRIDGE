@@ -297,7 +297,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     // 성적조회 레이아웃의 "세부 성적 조회" 버튼 상호작용 함수
-    public void onGradeAllCheckBtnClick(View view)
+    public void onGradeAllCheckButtonClick(View view)
     {
         //GradeCheckActivity 실행, 기존 창은 유지.
         startActivity(new Intent(this, GradeCheckActivity.class));

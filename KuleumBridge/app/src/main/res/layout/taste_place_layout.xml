@@ -234,6 +234,7 @@
             <Button
                 android:layout_width="150dp"
                 android:layout_height="50dp"
+                android:id="@+id/view_on_map_button"
                 android:backgroundTint="@color/black"
                 android:onClick="onTastePlaceBtnClick"
                 android:text="↗지도로 보기 "
