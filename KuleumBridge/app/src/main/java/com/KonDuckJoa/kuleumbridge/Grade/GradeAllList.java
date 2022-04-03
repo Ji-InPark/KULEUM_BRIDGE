@@ -39,7 +39,7 @@ public class GradeAllList extends Fragment {
     {
         View rootView;
 
-        String seletedYear = "";
+        String selectedYear = "";
 
         StringBuilder year = new StringBuilder();
         StringBuilder division = new StringBuilder();
@@ -48,7 +48,6 @@ public class GradeAllList extends Fragment {
         StringBuilder gradeRate = new StringBuilder();
 
         TableLayout tableLayout;
-        TextView textView;
 
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.grade_detail_list, container, false);
@@ -57,7 +56,7 @@ public class GradeAllList extends Fragment {
         if (getArguments() != null)
         {
             gradeAllArray = UserInfo.getInstance().getGradeAll();
-            seletedYear = getArguments().getString("tabb"); //클릭한 탭 내용 받아옴(ex. 2021년 1학기)
+            selectedYear = getArguments().getString("tabb"); //클릭한 탭 내용 받아옴(ex. 2021년 1학기)
         }
 
         for (int i = 0; i < gradeAllArray.size(); i++)
@@ -97,7 +96,7 @@ public class GradeAllList extends Fragment {
         for (int i = 0; i < yearArray.size() - 1; i++)
         {
             //클릭한 탭내용과 일치하는 성적만 불러오는 과정(ex. 2021년 2학기 클릭시, 해당 학기 성적만 불러옴)
-            if (yearArray.get(i).contains(seletedYear))
+            if (yearArray.get(i).contains(selectedYear))
             {
                 TableRow tableRow = new TableRow(getActivity());
                 tableRow.setLayoutParams(new TableRow.LayoutParams(
@@ -106,27 +105,27 @@ public class GradeAllList extends Fragment {
 
                 for (int j = 0; j < 4; j++)
                 {
-                    textView = getTextViewWithSettings();
+                    TextView textView = getTextViewWithSettings();
 
                     switch (j)
                     {
                         case 0:
-                            textView.setText(divisionArray.get(j));
+                            textView.setText(divisionArray.get(i));
                             textView.setGravity(Gravity.CENTER);
                             textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,1.0f));
                             break;
                         case 1:
-                            textView.setText(nameArray.get(j));
+                            textView.setText(nameArray.get(i));
                             textView.setGravity(Gravity.LEFT);
                             textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,2.5f));
                             break;
                         case 2:
-                            textView.setText(gradeCountArray.get(j));
+                            textView.setText(gradeCountArray.get(i));
                             textView.setGravity(Gravity.CENTER);
                             textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.6f));
                             break;
                         case 3:
-                            textView.setText(gradeRateArray.get(j));
+                            textView.setText(gradeRateArray.get(i));
                             textView.setGravity(Gravity.CENTER);
                             textView.setLayoutParams(new TableRow.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,0.6f));
                             break;
@@ -145,13 +144,11 @@ public class GradeAllList extends Fragment {
     private TextView getTextViewWithSettings()
     {
         TextView textView = new TextView(getActivity());
-
         textView.setTextSize(19);
         textView.setTextColor(Color.parseColor("#000000"));
         textView.setWidth(0);
         textView.setPadding(0,0,10,70);
         textView.setSelected(true);
-
         return textView;
     }
 }
