@@ -22,6 +22,7 @@ public class HomeFragment extends Fragment
     {
         View view = inflater.inflate(R.layout.home_layout,container,false);
         editStudentID(view);
+
         return view;
     }
 

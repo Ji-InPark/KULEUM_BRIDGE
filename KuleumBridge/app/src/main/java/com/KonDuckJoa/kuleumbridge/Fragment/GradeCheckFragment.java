@@ -1,6 +1,6 @@
 package com.KonDuckJoa.kuleumbridge.Fragment;
 
-import android.content.Intent;
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -8,14 +8,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.KonDuckJoa.kuleumbridge.Activity.GradeCheckActivity;
 import com.KonDuckJoa.kuleumbridge.Common.Data.UserInfo;
 import com.KonDuckJoa.kuleumbridge.Grade.Grade;
 import com.KonDuckJoa.kuleumbridge.R;
