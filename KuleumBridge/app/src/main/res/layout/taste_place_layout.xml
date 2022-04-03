@@ -29,7 +29,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginRight="30dp"
-                android:onClick="OnTasteBtnClick"
+                android:onClick="OnTasteButtonClick"
                 android:src="@drawable/hansik" />
 
             <ImageView
@@ -37,14 +37,14 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginRight="30dp"
-                android:onClick="OnTasteBtnClick"
+                android:onClick="OnTasteButtonClick"
                 android:src="@drawable/bunsik" />
 
             <ImageView
                 android:id="@+id/Caffe"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:onClick="OnTasteBtnClick"
+                android:onClick="OnTasteButtonClick"
                 android:src="@drawable/dessert" />
         </TableRow>
 
@@ -99,7 +99,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginRight="30dp"
-                android:onClick="OnTasteBtnClick"
+                android:onClick="OnTasteButtonClick"
                 android:src="@drawable/sushi" />
 
             <ImageView
@@ -107,14 +107,14 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginRight="30dp"
-                android:onClick="OnTasteBtnClick"
+                android:onClick="OnTasteButtonClick"
                 android:src="@drawable/hamburger" />
 
             <ImageView
                 android:id="@+id/Asian"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:onClick="OnTasteBtnClick"
+                android:onClick="OnTasteButtonClick"
                 android:src="@drawable/asian" />
         </TableRow>
 
@@ -168,7 +168,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginRight="30dp"
-                android:onClick="OnTasteBtnClick"
+                android:onClick="OnTasteButtonClick"
                 android:src="@drawable/jjang" />
 
             <ImageView
@@ -176,14 +176,14 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginRight="30dp"
-                android:onClick="OnTasteBtnClick"
+                android:onClick="OnTasteButtonClick"
                 android:src="@drawable/meat" />
 
             <ImageView
                 android:id="@+id/Alchol"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:onClick="OnTasteBtnClick"
+                android:onClick="OnTasteButtonClick"
                 android:src="@drawable/alchol" />
         </TableRow>
 
@@ -234,8 +234,9 @@
             <Button
                 android:layout_width="150dp"
                 android:layout_height="50dp"
+                android:id="@+id/view_on_map_button"
                 android:backgroundTint="@color/black"
-                android:onClick="onTastePlaceBtnClick"
+                android:onClick="onClick"
                 android:text="↗지도로 보기 "
                 android:textSize="16sp"
                 android:textColor="@color/white"

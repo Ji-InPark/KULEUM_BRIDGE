@@ -11,7 +11,7 @@ public class NoticeHandler {
 
     private static HashMap<Integer, String> createCategoryMap()
     {
-        HashMap<Integer, String> map = new HashMap<Integer, String>();
+        HashMap<Integer, String> map = new HashMap<>();
 
         map.put(0, "학사");
         map.put(1, "장학");
@@ -26,7 +26,7 @@ public class NoticeHandler {
 
     private static HashMap<String, Integer> createIndexMap()
     {
-        HashMap<String, Integer> map = new HashMap<String, Integer>();
+        HashMap<String, Integer> map = new HashMap<>();
 
         map.put("학사", 0);
         map.put("장학", 1);
@@ -41,7 +41,7 @@ public class NoticeHandler {
 
     private static HashMap<String, String> createFirstLink()
     {
-        HashMap<String, String> map = new HashMap<String, String>();
+        HashMap<String, String> map = new HashMap<>();
 
         // 주소상의 대문자 전부 살려야된다.
         map.put("학사", "http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp?src=http://www.konkuk.ac.kr:80/do/MessageBoard/ArticleRead.do?forum=notice?&sort=6&id=");
@@ -57,7 +57,7 @@ public class NoticeHandler {
 
     private static HashMap<String, String> createSecondLink()
     {
-        HashMap<String, String> map = new HashMap<String, String>();
+        HashMap<String, String> map = new HashMap<>();
 
         map.put("학사", "&cat=0000300001");
         map.put("장학", "&cat=");

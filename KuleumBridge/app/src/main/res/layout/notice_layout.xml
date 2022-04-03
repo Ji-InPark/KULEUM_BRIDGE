@@ -423,13 +423,13 @@
         </TableLayout>
 
         <Button
-            android:id="@+id/goAllNotice"
+            android:id="@+id/move_web_notice_site_button"
             android:layout_width="170dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:backgroundTint="@color/black"
-            android:onClick="onNoticeBtnClick"
+            android:onClick="onClick"
             android:gravity="center"
             android:text="↗웹 공지사항 이동 "
             android:textSize="16sp"

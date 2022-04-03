@@ -2,8 +2,6 @@ package com.KonDuckJoa.kuleumbridge.Taste;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -19,71 +17,77 @@ import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
-// todo 가독성 높이는 refactoring 필요
 public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출력
-    ListView list_excel;
+    ListView listExcel;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.taste_list);
-        list_excel = (ListView)findViewById(R.id.list_excel);
+        listExcel = (ListView)findViewById(R.id.list_excel);
 
-        Excel();
+        getExcelData();
     }
 
     //엑셀 값 읽어들이는 과정
-    public void Excel() {
-        ArrayList<TastePlaceListData> listViewData = new ArrayList<>();
+    public void getExcelData()
+    {
+        ArrayList<TastePlaceListData> tastePlaceListDataArray = new ArrayList<>();
         Workbook workbook = null;
-        Sheet sheet = null;
-        // 어떤 버튼을 눌렀는지 받아서 저장 (ex: 한식)
-        String Taste_Button = getIntent().getStringExtra("parameter");
+        Sheet sheet;
 
-        try {
+        // 어떤 버튼을 눌렀는지 받아서 저장 (ex: 한식)
+        String tasteButtonName = getIntent().getStringExtra("buttonName");
+
+        try
+        {
             InputStream inputStream = getBaseContext().getResources().getAssets().open("place.xls");
+
             workbook = Workbook.getWorkbook(inputStream);
             sheet = workbook.getSheet(0);
-            int  RowEnd = sheet.getColumn(0).length - 1;
 
-            for (int row = 1; row <= RowEnd; row++) {
-                TastePlaceListData listData = new TastePlaceListData();
+            int RowEnd = sheet.getColumn(0).length - 1;
+
+            for (int row = 1; row <= RowEnd; row++)
+            {
+                TastePlaceListData tastePlaceListData = new TastePlaceListData();
                 String kinds = sheet.getCell(0, row).getContents(); //종류(ex: 한식, 중식..)
 
-                if (kinds.contains(Taste_Button)) {
-                    listData.name = sheet.getCell(1, row).getContents(); //상호명
-                    listData.address = sheet.getCell(2,row).getContents(); //주소
-                    listData.mention = sheet.getCell(5,row).getContents(); //한줄평
-                    listData.latitude = Double.parseDouble(sheet.getCell(3,row).getContents()); //위도
-                    listData.longitude = Double.parseDouble(sheet.getCell(4,row).getContents()); //경도
+                if (kinds.contains(tasteButtonName))
+                {
+                    tastePlaceListData.name = sheet.getCell(1, row).getContents(); //상호명
+                    tastePlaceListData.address = sheet.getCell(2,row).getContents(); //주소
+                    tastePlaceListData.oneLineComment = sheet.getCell(5,row).getContents(); //한줄평
+                    tastePlaceListData.latitude = Double.parseDouble(sheet.getCell(3,row).getContents()); //위도
+                    tastePlaceListData.longitude = Double.parseDouble(sheet.getCell(4,row).getContents()); //경도
 
-                    listViewData.add(listData);
+                    tastePlaceListDataArray.add(tastePlaceListData);
                 }
             }
-        } catch (IOException e) {
+        }
+        catch (IOException | BiffException e)
+        {
             e.printStackTrace();
-        } catch (BiffException e) {
-            e.printStackTrace();
-        } finally {
-            ListAdapter oAdapter = new TastePlaceListAdapter(listViewData);
-            list_excel.setAdapter(oAdapter);
+        }
+        finally
+        {
+            ListAdapter tastePlaceListAdapter = new TastePlaceListAdapter(tastePlaceListDataArray);
+            listExcel.setAdapter(tastePlaceListAdapter);
 
             workbook.close();
 
-            list_excel.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /* 리스트 중 한개 클릭 시, 해당 값(상호명, 주소, 위도, 경도)을
+             TastePlaceList(Activity) -> TastePlaceInfo(Activity)로 전달하는 과정 */
+            listExcel.setOnItemClickListener((adapterView, view, position, id) -> {
+                Intent intent = new Intent(getApplicationContext(),TastePlaceInfo.class);
 
-                /* 리스트 중 한개 클릭 시, 해당 값(상호명, 주소, 위도, 경도)을
-                 TastePlaceList(Activity) -> TastePlaceInfo(Activity)로 전달하는 과정 */
-                @Override
-                public void onItemClick(AdapterView parent, View v, int position, long id) {
-                    Intent intent = new Intent(getApplicationContext(),TastePlaceInfo.class);
-                    intent.putExtra("name",listViewData.get(position).name);
-                    intent.putExtra("address",listViewData.get(position).address);
-                    intent.putExtra("latitude",listViewData.get(position).latitude);
-                    intent.putExtra("longitude",listViewData.get(position).longitude);
+                intent.putExtra("name",tastePlaceListDataArray.get(position).name);
+                intent.putExtra("address",tastePlaceListDataArray.get(position).address);
+                intent.putExtra("latitude",tastePlaceListDataArray.get(position).latitude);
+                intent.putExtra("longitude",tastePlaceListDataArray.get(position).longitude);
 
-                    startActivity(intent);
-                }
+                startActivity(intent);
             });
         }
     }

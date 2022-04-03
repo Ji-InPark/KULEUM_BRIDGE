@@ -15,22 +15,19 @@ import java.util.ArrayList;
 6번 인덱스 - 일반
 */
 
-public class NoticeInfoClass{
-    private static NoticeInfoClass instance = new NoticeInfoClass();
+public class NoticeInfo {
+    private static NoticeInfo instance = new NoticeInfo();
 
     private ArrayList<Notice>[] notices;
 
-    private NoticeInfoClass() {
-        initializeNotices();
-    }
-
-    private void initializeNotices() {
+    private NoticeInfo()
+    {
         notices = new ArrayList[7];
 
         for(int i = 0; i < 7; i++) notices[i] = new ArrayList<>();
     }
 
-    public static NoticeInfoClass getInstance()
+    public static NoticeInfo getInstance()
     {
         return instance;
     }
@@ -39,22 +36,28 @@ public class NoticeInfoClass{
     // SUBJECT는 글 제목
     // ARTICLE_ID는 각 게시글 URL에 들어있는 게시글 고유의 ID
 
-    public void setNoticeInfo(String response_string_notice, String notice_category) {
-        try {
-            JSONArray DS_LIST = (new JSONObject(response_string_notice)).getJSONArray("DS_LIST");
+    public void setNoticeInfo(String responseNotice, String noticeCategory)
+    {
+        try
+        {
+            JSONObject responseNoticeJson = new JSONObject(responseNotice);
+
+            JSONArray noticeJsonArray = responseNoticeJson.getJSONArray("DS_LIST");
+
             for (int i = 0; i < 5; i++)
             {
-                JSONObject notice = DS_LIST.getJSONObject(i);
+                JSONObject noticeJson = noticeJsonArray.getJSONObject(i);
 
-                String article_id = notice.getString("ARTICLE_ID");
+                String articleId = noticeJson.getString("ARTICLE_ID");
 
-                notices[NoticeHandler.getIndex(notice_category)].add(new Notice(
-                        notice.getString("POSTED_DT"),
-                        notice.getString("SUBJECT"), article_id,
-                        NoticeHandler.getLink(notice_category, article_id)));
+                notices[NoticeHandler.getIndex(noticeCategory)].add(new Notice(
+                        noticeJson.getString("POSTED_DT"),
+                        noticeJson.getString("SUBJECT"), articleId,
+                        NoticeHandler.getLink(noticeCategory, articleId)));
             }
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }

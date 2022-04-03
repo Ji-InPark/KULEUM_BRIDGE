@@ -12,7 +12,7 @@ public class TasteHandler {
 
     private static HashMap<Integer, String> createIdToStringMap()
     {
-        HashMap<Integer, String> idToStringMap = new HashMap<Integer, String>();
+        HashMap<Integer, String> idToStringMap = new HashMap<>();
 
         idToStringMap.put(R.id.HanSik, "한식");
         idToStringMap.put(R.id.BunSik, "분식");
@@ -29,7 +29,7 @@ public class TasteHandler {
 
     private static HashMap<String, Integer> createStringToIDMap()
     {
-        HashMap<String, Integer> stringToDrawableMap = new HashMap<String, Integer>();
+        HashMap<String, Integer> stringToDrawableMap = new HashMap<>();
 
         stringToDrawableMap.put("한식", R.drawable.hansik);
         stringToDrawableMap.put("분식", R.drawable.bunsik);
