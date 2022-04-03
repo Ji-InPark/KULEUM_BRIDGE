@@ -2,9 +2,6 @@ package com.KonDuckJoa.kuleumbridge.Grade;
 
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import com.KonDuckJoa.kuleumbridge.Common.Data.UserInfo;
 import com.KonDuckJoa.kuleumbridge.R;
@@ -38,6 +37,7 @@ public class GradeAllList extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View rootView;
+
 
         String selectedYear = "";
 
@@ -102,6 +102,9 @@ public class GradeAllList extends Fragment {
                 tableRow.setLayoutParams(new TableRow.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT));
+                TextView average = getTextViewWithSettings();
+                double[] grade3 = gradeCalculate(gradeRateArray, gradeCountArray, divisionArray);
+                average.setText("평균" + grade3[0] +" "+grade3[1]);
 
                 for (int j = 0; j < 4; j++)
                 {
@@ -138,6 +141,9 @@ public class GradeAllList extends Fragment {
             }
         }
 
+//        double[] Test = gradeCalculate(gradeRateArray,gradeCountArray,divisionArray);
+//        System.out.println("평균 계산 테스트" +Test[0] +" "+ Test[1]);
+
         return rootView;
     }
 
@@ -151,6 +157,85 @@ public class GradeAllList extends Fragment {
         textView.setSelected(true);
         return textView;
     }
+
+    //평균 계산
+    private double[] gradeCalculate(ArrayList<String> grade, ArrayList<String> hak, ArrayList<String> division) {
+        double[] gradeResult  = new double[2]; //Grade[0] = 전체 평균 , Grade[1] = 전공 평균
+        double[] gradeRate = new double[grade.size()]; //숫자 성적(ex. 4.5, 4.0)
+        double[] hakRate = new double[hak.size()]; //학점
+        double[] majorGrade = new double[grade.size()]; //전공 과목 숫자 성적
+        double[] majorHak = new double[hak.size()]; //전공 과목 학점
+        double gradeRateRes = 0.0; //성적 합계
+        double hakRateRes = 0.0; //학점 합계
+
+        if(grade!=null) {
+            for(int i=0; i<grade.size(); i++) {
+                switch (grade.get(i)) {
+                    case "A+":
+                        gradeRate[i] = 4.5;
+                    case "A" :
+                        gradeRate[i] = 4.0;
+                    case "B+" :
+                        gradeRate[i] = 3.5;
+                    case "B" :
+                        gradeRate[i] = 3.0;
+                    case "C+" :
+                        gradeRate[i] = 2.5;
+                    case "C" :
+                        gradeRate[i] = 2.0;
+                    case "D+" :
+                        gradeRate[i] = 1.5;
+                    case "D" :
+                        gradeRate[i] = 1.0;
+                    case "F": case "P": case "N":
+                        gradeRate[i] = 0;
+
+                }
+
+            }
+
+        }
+
+        /* 평균 계산법
+        ex) 미분적분학 4.5(A+) * 3(학점) = 13.5
+            선형대수학 3.0(B)  * 3(학점) = 9
+            학점 : (13.5 + 9) / 6(총 학점) = 3.75
+         */
+
+        for(int i=0; i<hak.size(); i++) { //학점 수 다 더하는 과정
+            hakRate[i] = Double.parseDouble(hak.get(i));
+            hakRateRes+=hakRate[i];
+        }
+
+        for(int i =0; i<hakRate.length; i++) { //전체 평균 계산 과정
+            gradeRateRes+=(gradeRate[i]*hakRate[i]);
+        }
+
+        gradeResult[0] = gradeRateRes/hakRateRes; //전체 평균
+
+        //전공 평균 구하는 과정
+        for(int i=0; i<division.size(); i++) {
+            if(division.get(i).equals("전필")||division.get(i).equals("전선")) {
+                majorGrade[i] = gradeRate[i];
+                majorHak[i] = hakRate[i];
+            }
+        }
+
+        for(int i=0; i<majorGrade.length; i++) {
+            gradeRateRes = 0.0;
+            hakRateRes = 0.0;
+            hakRateRes += majorHak[i];
+            gradeRateRes += (majorHak[i] * majorGrade[i]);
+        }
+
+        gradeResult[1] = gradeRateRes/hakRateRes;
+
+
+        return gradeResult;
+    }
+
+
+
 }
 
 
