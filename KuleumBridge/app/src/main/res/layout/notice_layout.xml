@@ -429,7 +429,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:backgroundTint="@color/black"
-            android:onClick="onNoticeBtnClick"
+            android:onClick="onClick"
             android:gravity="center"
             android:text="↗웹 공지사항 이동 "
             android:textSize="16sp"
