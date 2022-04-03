@@ -279,15 +279,12 @@ public class MainActivity extends AppCompatActivity{
         switch (view.getId())
         {
             case R.id.move_web_notice_site_button: // notice_layout의 "웹 공지사항 이동" 버튼
-                System.out.println("공지사항 버튼 클릭");
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.konkuk.ac.kr/jsp/Plaza/plaza_01_01.jsp")));
                 break;
             case R.id.view_on_map_button: // taste_place_layout의 "지도로 보기" 버튼
-                System.out.println("지도로 보기 버튼 클릭");
                 startActivity(new Intent(this, TastePlaceActivity.class));
                 break;
-            case R.id.grade_all_check_button: // 성적조회 레이아웃의 "세부 성적 조회" 버튼 상호작용 함수
-                System.out.println("세부 성적 조회 버튼 클릭");
+            case R.id.grade_all_check_button: // 성적조회 레이아웃의 "세부 성적 조회" 버튼
                 startActivity(new Intent(this, GradeCheckActivity.class));
                 break;
         }
