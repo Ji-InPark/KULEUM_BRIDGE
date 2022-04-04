@@ -76,7 +76,7 @@ public class GradeCheckActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.grade_fragment, fragment).commit();
 
                     Bundle bundle = new Bundle();
-                    bundle.putString("parameterTabName", tab.getText().toString());
+                    bundle.putString("tabName", tab.getText().toString());
 
                     fragment.setArguments(bundle);
                 }
