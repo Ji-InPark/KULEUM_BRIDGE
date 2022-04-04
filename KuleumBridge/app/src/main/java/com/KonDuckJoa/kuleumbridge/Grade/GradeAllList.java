@@ -48,7 +48,7 @@ public class GradeAllList extends Fragment {
 
         if (getArguments() != null)
         {
-            selectedYear = getArguments().getString("tabName"); //클릭한 탭 내용 받아옴(ex. 2021년 1학기)
+            selectedYear = getArguments().getString("parameterTabName"); //클릭한 탭 내용 받아옴(ex. 2021년 1학기)
         }
 
         for (int i = 0; i < yearArray.size(); i++)
