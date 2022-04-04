@@ -37,11 +37,11 @@ public class GradeCheckActivity extends AppCompatActivity {
 
         Collections.reverse(tabNameArray); // 순서 역순으로 바꿔줌
 
-        TabLayout tabLayout = findViewById(R.id.tabs);
+        TabLayout semesterTabLayout = findViewById(R.id.tabs);
 
-        tabLayout.setBackgroundColor(Color.parseColor("#9FF781"));
-        tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
-        tabLayout.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#000000"));
+        semesterTabLayout.setBackgroundColor(Color.parseColor("#9FF781"));
+        semesterTabLayout.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
+        semesterTabLayout.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#000000"));
 
         // 탭 추가 과정
         for (int i = 0; i < tabNameArray.size(); i++)
@@ -50,7 +50,7 @@ public class GradeCheckActivity extends AppCompatActivity {
 
             isDuplicatedTabNameMap.put(tabNameArray.get(i), true);
 
-            tabLayout.addTab(tabLayout.newTab().setText(tabNameArray.get(i)));
+            semesterTabLayout.addTab(semesterTabLayout.newTab().setText(tabNameArray.get(i)));
         }
 
         if(savedInstanceState == null)
@@ -65,7 +65,7 @@ public class GradeCheckActivity extends AppCompatActivity {
         }
 
         // 탭 클릭했을 때
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
+        semesterTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
         {
             @Override
             public void onTabSelected(TabLayout.Tab tab)
