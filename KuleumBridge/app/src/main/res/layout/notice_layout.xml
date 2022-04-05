@@ -10,7 +10,7 @@
 
     <!-- 공지사항 레이아웃 -->
     <LinearLayout
-        android:id="@+id/notice_layout_sep"
+        android:id="@+id/notice_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

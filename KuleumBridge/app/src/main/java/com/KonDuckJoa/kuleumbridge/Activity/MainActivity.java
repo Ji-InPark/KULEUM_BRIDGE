@@ -28,6 +28,17 @@ import com.google.android.material.tabs.TabLayout;
 import java.io.IOException;
 import java.util.Random;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import android.content.Context;
+import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationView;
+
 public class MainActivity extends AppCompatActivity{
     // 로딩 애니메이션을 위한 객체
     AnimationProgress customProgress;
@@ -334,4 +345,6 @@ public class MainActivity extends AppCompatActivity{
         mainTab.setSelectedTabIndicatorColor(Color.parseColor(colorString));
         mainTab.setTabTextColors(Color.parseColor(colorString),Color.parseColor(colorString));
     }
+
+
 }
