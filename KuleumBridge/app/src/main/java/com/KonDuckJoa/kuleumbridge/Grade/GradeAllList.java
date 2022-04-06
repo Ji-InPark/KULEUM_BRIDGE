@@ -28,6 +28,7 @@ public class GradeAllList extends Fragment {
     private static ArrayList<String> nameArray = new ArrayList<>();       //이름
     private static ArrayList<String> gradeCountArray = new ArrayList<>(); //학점
     private static ArrayList<String> gradeRateArray = new ArrayList<>();  //성적
+    //Arraylist 성적 초기화
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -99,21 +100,31 @@ public class GradeAllList extends Fragment {
         return rootView;
     }
 
-    public static void setGradeAllInfo()
-    {
+    public static void setGradeAllInfo() {
+        yearArray = new ArrayList<>();       //년도 + 학기
+        divisionArray = new ArrayList<>();   //이수구분
+        nameArray = new ArrayList<>();       //이름
+        gradeCountArray = new ArrayList<>(); //학점
+        gradeRateArray = new ArrayList<>();  //성적
+        gradeAllArray=new ArrayList<>();
+
+
         gradeAllArray = UserInfo.getInstance().getGradeAll();
 
         // 소계 제외
-        for (int i = 0; i < UserInfo.getInstance().getGradeAll().size(); i++)
-        {
-            if (gradeAllArray.get(i).getSemester().contains("소계")) continue;
 
-            yearArray.add(gradeAllArray.get(i).getCompletedYear() + " " + gradeAllArray.get(i).getSemester());
-            divisionArray.add(gradeAllArray.get(i).getCompletedDivision());
-            nameArray.add(gradeAllArray.get(i).getSubjectName());
-            gradeCountArray.add(gradeAllArray.get(i).getGradeCount());
-            gradeRateArray.add(gradeAllArray.get(i).getGradeRate());
-        }
+            for (int i = 0; i < UserInfo.getInstance().getGradeAll().size(); i++) {
+
+
+                if (gradeAllArray.get(i).getSemester().contains("소계")) continue;
+
+                yearArray.add(gradeAllArray.get(i).getCompletedYear() + " " + gradeAllArray.get(i).getSemester());
+                divisionArray.add(gradeAllArray.get(i).getCompletedDivision());
+                nameArray.add(gradeAllArray.get(i).getSubjectName());
+                gradeCountArray.add(gradeAllArray.get(i).getGradeCount());
+                gradeRateArray.add(gradeAllArray.get(i).getGradeRate());
+            }
+
     }
 
     private TextView getTextViewWithSettings()

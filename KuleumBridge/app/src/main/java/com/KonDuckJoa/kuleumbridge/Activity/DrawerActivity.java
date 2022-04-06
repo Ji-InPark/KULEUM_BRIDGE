@@ -1,6 +1,8 @@
 package com.KonDuckJoa.kuleumbridge.Activity;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -24,12 +26,12 @@ public class DrawerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_layout);
 
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowTitleEnabled(false); // 기존 title 지우기
-        actionBar.setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼 만들기
-        actionBar.setHomeAsUpIndicator(R.drawable.back_button); //뒤로가기 버튼 이미지 지정
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 툴바 메뉴 버튼 생성
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.drawer_menu_button); // 메뉴 버튼 모양 설정
+
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.DrawLayout);
 
@@ -43,16 +45,8 @@ public class DrawerActivity extends AppCompatActivity {
                 int id = menuItem.getItemId();
                 String title = menuItem.getTitle().toString();
 
-                if(id == R.id.Drawer_notice){
-                    Toast.makeText(context, title + ": 공지사항으로 이동합니다.", Toast.LENGTH_SHORT).show();
-                }
-                else if(id == R.id.Drawer_restaurant){
-                    Toast.makeText(context, title + ": 맛집 창으로 이동합니다.", Toast.LENGTH_SHORT).show();
-                }
-                else if(id == R.id.Drawer_grade){
-                    Toast.makeText(context, title + ": 성적 창으로 이동합니다.", Toast.LENGTH_SHORT).show();
-                }
-                else if(id == R.id.Drawer_logout){
+
+               if(id == R.id.Drawer_logout){
                     Toast.makeText(context, title + ": 로그아웃을 시도합니다.", Toast.LENGTH_SHORT).show();
                 }
 
