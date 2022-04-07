@@ -101,6 +101,14 @@ public class GradeAllList extends Fragment {
 
     public static void setGradeAllInfo()
     {
+        yearArray = new ArrayList<>();       //년도 + 학기
+        divisionArray = new ArrayList<>();   //이수구분
+        nameArray = new ArrayList<>();       //이름
+        gradeCountArray = new ArrayList<>(); //학점
+        gradeRateArray = new ArrayList<>();  //성적
+        gradeAllArray=new ArrayList<>(); // 함수 속에 담겨있는 파일들 초기화
+
+
         gradeAllArray = UserInfo.getInstance().getGradeAll();
 
         // 소계 제외
