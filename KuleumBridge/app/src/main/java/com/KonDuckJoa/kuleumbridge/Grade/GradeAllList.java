@@ -29,6 +29,12 @@ public class GradeAllList extends Fragment {
     private static ArrayList<String> gradeCountArray = new ArrayList<>(); //학점
     private static ArrayList<String> gradeRateArray = new ArrayList<>();  //성적
 
+    private static boolean isSet = false;
+
+    public static boolean getIsSet() {
+        return isSet;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -101,14 +107,6 @@ public class GradeAllList extends Fragment {
 
     public static void setGradeAllInfo()
     {
-        yearArray = new ArrayList<>();       //년도 + 학기
-        divisionArray = new ArrayList<>();   //이수구분
-        nameArray = new ArrayList<>();       //이름
-        gradeCountArray = new ArrayList<>(); //학점
-        gradeRateArray = new ArrayList<>();  //성적
-        gradeAllArray=new ArrayList<>(); // 함수 속에 담겨있는 파일들 초기화
-
-
         gradeAllArray = UserInfo.getInstance().getGradeAll();
 
         // 소계 제외
@@ -122,6 +120,8 @@ public class GradeAllList extends Fragment {
             gradeCountArray.add(gradeAllArray.get(i).getGradeCount());
             gradeRateArray.add(gradeAllArray.get(i).getGradeRate());
         }
+
+        isSet = true;
     }
 
     private TextView getTextViewWithSettings()
