@@ -46,7 +46,7 @@ public class DrawerActivity extends AppCompatActivity {
                 String title = menuItem.getTitle().toString();
 
 
-               if(id == R.id.Drawer_logout){
+                if(id == R.id.Drawer_logout){
                     Toast.makeText(context, title + ": 로그아웃을 시도합니다.", Toast.LENGTH_SHORT).show();
                 }
 

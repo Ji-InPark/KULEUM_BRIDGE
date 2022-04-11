@@ -101,13 +101,6 @@ public class GradeAllList extends Fragment {
     }
 
     public static void setGradeAllInfo() {
-        yearArray = new ArrayList<>();       //년도 + 학기
-        divisionArray = new ArrayList<>();   //이수구분
-        nameArray = new ArrayList<>();       //이름
-        gradeCountArray = new ArrayList<>(); //학점
-        gradeRateArray = new ArrayList<>();  //성적
-        gradeAllArray=new ArrayList<>();
-
 
         gradeAllArray = UserInfo.getInstance().getGradeAll();
 
