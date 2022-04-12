@@ -25,7 +25,7 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.taste_list);
-        listExcel = (ListView)findViewById(R.id.list_excel);
+        listExcel = findViewById(R.id.list_excel);
 
         getExcelData();
     }
@@ -49,18 +49,18 @@ public class TastePlaceList extends AppCompatActivity { //맛집 리스트 출�
 
             int RowEnd = sheet.getColumn(0).length - 1;
 
-            for (int row = 1; row <= RowEnd; row++)
+            for (int i = 1; i <= RowEnd; i++)
             {
                 TastePlaceListData tastePlaceListData = new TastePlaceListData();
-                String kinds = sheet.getCell(0, row).getContents(); //종류(ex: 한식, 중식..)
+                String kinds = sheet.getCell(0, i).getContents(); //종류(ex: 한식, 중식..)
 
                 if (kinds.contains(tasteButtonName))
                 {
-                    tastePlaceListData.name = sheet.getCell(1, row).getContents(); //상호명
-                    tastePlaceListData.address = sheet.getCell(2,row).getContents(); //주소
-                    tastePlaceListData.oneLineComment = sheet.getCell(5,row).getContents(); //한줄평
-                    tastePlaceListData.latitude = Double.parseDouble(sheet.getCell(3,row).getContents()); //위도
-                    tastePlaceListData.longitude = Double.parseDouble(sheet.getCell(4,row).getContents()); //경도
+                    tastePlaceListData.name = sheet.getCell(1, i).getContents(); //상호명
+                    tastePlaceListData.address = sheet.getCell(2,i).getContents(); //주소
+                    tastePlaceListData.oneLineComment = sheet.getCell(5,i).getContents(); //한줄평
+                    tastePlaceListData.latitude = Double.parseDouble(sheet.getCell(3,i).getContents()); //위도
+                    tastePlaceListData.longitude = Double.parseDouble(sheet.getCell(4,i).getContents()); //경도
 
                     tastePlaceListDataArray.add(tastePlaceListData);
                 }

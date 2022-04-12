@@ -2,9 +2,6 @@ package com.KonDuckJoa.kuleumbridge.Grade;
 
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +10,12 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import com.KonDuckJoa.kuleumbridge.Common.Data.UserInfo;
 import com.KonDuckJoa.kuleumbridge.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class GradeAllList extends Fragment {
@@ -44,18 +42,10 @@ public class GradeAllList extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View rootView;
-        TableLayout tableLayout;
-        String selectedYear = "";
-
         // Inflate the layout for this fragment
-        rootView = inflater.inflate(R.layout.grade_detail_list, container, false);
-        tableLayout = rootView.findViewById(R.id.tablelayout);
-
-        if (getArguments() != null)
-        {
-            selectedYear = getArguments().getString("tabName"); //클릭한 탭 내용 받아옴(ex. 2021년 1학기)
-        }
+        View rootView = inflater.inflate(R.layout.grade_detail_list, container, false);
+        TableLayout tableLayout = rootView.findViewById(R.id.tablelayout);
+        String selectedYear = getArguments() != null ? getArguments().getString("tabName") : ""; //클릭한 탭 내용 받아옴(ex. 2021년 1학기)
 
         for (int i = 0; i < yearArray.size(); i++)
         {
@@ -110,16 +100,16 @@ public class GradeAllList extends Fragment {
         gradeAllArray = UserInfo.getInstance().getGradeAll();
       
         // 소계 제외
-            for (int i = 0; i < UserInfo.getInstance().getGradeAll().size(); i++)
-            {
-                if (gradeAllArray.get(i).getSemester().contains("소계")) continue;
+        for (int i = 0; i < UserInfo.getInstance().getGradeAll().size(); i++)
+        {
+            if (gradeAllArray.get(i).getSemester().contains("소계")) continue;
 
-                yearArray.add(gradeAllArray.get(i).getCompletedYear() + " " + gradeAllArray.get(i).getSemester());
-                divisionArray.add(gradeAllArray.get(i).getCompletedDivision());
-                nameArray.add(gradeAllArray.get(i).getSubjectName());
-                gradeCountArray.add(gradeAllArray.get(i).getGradeCount());
-                gradeRateArray.add(gradeAllArray.get(i).getGradeRate());
-            }
+            yearArray.add(gradeAllArray.get(i).getCompletedYear() + " " + gradeAllArray.get(i).getSemester());
+            divisionArray.add(gradeAllArray.get(i).getCompletedDivision());
+            nameArray.add(gradeAllArray.get(i).getSubjectName());
+            gradeCountArray.add(gradeAllArray.get(i).getGradeCount());
+            gradeRateArray.add(gradeAllArray.get(i).getGradeRate());
+        }
 
         isSet = true;
     }

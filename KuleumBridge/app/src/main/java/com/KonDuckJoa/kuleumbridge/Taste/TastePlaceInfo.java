@@ -52,7 +52,7 @@ public class TastePlaceInfo extends AppCompatActivity {
     //주소 복사하기 버튼
     public void CopyClick(View view)
     {
-        TextView textView = (TextView)findViewById(R.id.info_address); //텍스트뷰
+        TextView textView = findViewById(R.id.info_address); //텍스트뷰
         String addressCopy = textView.getText().toString(); // 텍스트뷰 글자 가져옴
 
         ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);

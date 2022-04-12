@@ -3,9 +3,6 @@ package com.KonDuckJoa.kuleumbridge.Activity;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import android.content.Context;
-
-import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.KonDuckJoa.kuleumbridge.Fragment.GradeCheckFragment;
@@ -15,7 +12,8 @@ import com.KonDuckJoa.kuleumbridge.Fragment.TastePlaceFragment;
 
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
-    Fragment[] fragments = new Fragment[4];
+    private Fragment[] fragments = new Fragment[4];
+    private String[] pageTitles = {"홈", "공지사항", "맛집", "성적조회"};
 
     public SectionsPagerAdapter(FragmentManager fm)
     {
@@ -31,7 +29,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         fragments[3] = new GradeCheckFragment();
     }
 
-
     @Override
     public Fragment getItem(int position) {
         return fragments[position];
@@ -42,21 +39,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     // 레이아웃 하단의 탭 이름을 세팅하는 함수
     public CharSequence getPageTitle(int position)
     {
-        switch(position)
-        {
-            case 0:
-                return "홈";
-
-            case 1:
-                return "공지사항";
-
-            case 2:
-                return "맛집";
-
-            case 3:
-                return "성적조회";
-        }
-        return null;
+        return pageTitles[position];
     }
 
     @Override

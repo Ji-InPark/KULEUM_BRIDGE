@@ -71,8 +71,8 @@ public class TastePlaceInfoMap extends Fragment implements OnMapReadyCallback {
     @Override
     public void onResume()
     {
-        mapView.onResume();
         super.onResume();
+        mapView.onResume();
     }
 
     @Override
