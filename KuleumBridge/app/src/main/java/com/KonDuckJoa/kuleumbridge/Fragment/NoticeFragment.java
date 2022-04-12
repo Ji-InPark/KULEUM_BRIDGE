@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.KonDuckJoa.kuleumbridge.Activity.MainActivity;
 import com.KonDuckJoa.kuleumbridge.Notice.Notice;
 import com.KonDuckJoa.kuleumbridge.Notice.NoticeHandler;
 import com.KonDuckJoa.kuleumbridge.Notice.NoticeInfo;
@@ -39,6 +40,13 @@ public class NoticeFragment extends Fragment {
         }
 
         return view;
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        MainActivity.stopLoadingAnimation();
     }
 
     private void noticeSuccess(View view, String noticeCategory)

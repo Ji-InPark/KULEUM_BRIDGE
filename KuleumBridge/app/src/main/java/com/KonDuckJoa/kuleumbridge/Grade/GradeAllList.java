@@ -29,6 +29,12 @@ public class GradeAllList extends Fragment {
     private static ArrayList<String> gradeCountArray = new ArrayList<>(); //학점
     private static ArrayList<String> gradeRateArray = new ArrayList<>();  //성적
 
+    private static boolean isSet = false;
+
+    public static boolean getIsSet() {
+        return isSet;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -102,6 +108,7 @@ public class GradeAllList extends Fragment {
     public static void setGradeAllInfo()
     {
         gradeAllArray = UserInfo.getInstance().getGradeAll();
+      
         // 소계 제외
             for (int i = 0; i < UserInfo.getInstance().getGradeAll().size(); i++)
             {
@@ -114,6 +121,7 @@ public class GradeAllList extends Fragment {
                 gradeRateArray.add(gradeAllArray.get(i).getGradeRate());
             }
 
+        isSet = true;
     }
 
     private TextView getTextViewWithSettings()

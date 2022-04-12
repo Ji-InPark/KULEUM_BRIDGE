@@ -26,7 +26,10 @@ public class GradeCheckActivity extends AppCompatActivity {
         ArrayList<String> tabNameArray = new ArrayList<>();
         HashMap<String, Boolean> isDuplicatedTabNameMap = new HashMap<>();
 
-        GradeAllList.setGradeAllInfo();
+        if(!GradeAllList.getIsSet())
+        {
+            GradeAllList.setGradeAllInfo();
+        }
 
         for (int i = 0; i < gradeAllArray.size(); i++)
         {

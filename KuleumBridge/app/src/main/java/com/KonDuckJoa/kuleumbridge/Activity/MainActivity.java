@@ -30,7 +30,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity{
     // 로딩 애니메이션을 위한 객체
-    AnimationProgress customProgress;
+    public static AnimationProgress customProgress;
 
     private TabViewpagerBinding tabViewpagerBinding;
 
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.auto_login_layout);
         customProgress = new AnimationProgress(MainActivity.this);
 
         // 로딩 화면 시작
@@ -74,6 +74,9 @@ public class MainActivity extends AppCompatActivity{
         // 로딩 애니메이션 시작
         startLoadingAnimation();
 
+        // 눈속임을 위한 레이아웃 전환
+        setContentView(R.layout.auto_login_layout);
+
         // 로그인 함수
         Login(inputId, inputPwd);
     }
@@ -97,6 +100,7 @@ public class MainActivity extends AppCompatActivity{
             public void callbackFail()
             {
                 stopLoadingAnimation();
+                setContentView(R.layout.login);
             }
         });
         apiLogin.execute();
@@ -121,6 +125,7 @@ public class MainActivity extends AppCompatActivity{
             public void callbackFail()
             {
                 stopLoadingAnimation();
+                setContentView(R.layout.login);
             }
         });
         apiGradeAll.execute();
@@ -138,6 +143,7 @@ public class MainActivity extends AppCompatActivity{
             public void callbackFail()
             {
                 stopLoadingAnimation();
+                setContentView(R.layout.login);
             }
         });
         apiGradeNow.execute();
@@ -148,7 +154,7 @@ public class MainActivity extends AppCompatActivity{
             public void callbackSuccess(String result)
             {
                 // NoticeInfoClass.getInstance() 에 얻어온 정보 저장
-                viewTransform();
+                transformView();
             }
 
             @Override
@@ -158,13 +164,13 @@ public class MainActivity extends AppCompatActivity{
     }
 
     // 로딩 화면 시작
-    public void startLoadingAnimation()
+    public static void startLoadingAnimation()
     {
         customProgress.show();
     }
 
     // 로딩 애니메이션 종료
-    public void stopLoadingAnimation()
+    public static void stopLoadingAnimation()
     {
         customProgress.dismiss();
     }
@@ -214,7 +220,8 @@ public class MainActivity extends AppCompatActivity{
             if(encryptedId.equals(""))
             {
                 // 로딩 화면 중단
-                customProgress.dismiss();
+                stopLoadingAnimation();
+                setContentView(R.layout.login);
                 return;
             }
 
@@ -301,7 +308,7 @@ public class MainActivity extends AppCompatActivity{
 
 
     // 뷰 전환 및 탭바 이벤트 세팅
-    public void viewTransform()
+    public void transformView()
     {
         tabViewpagerBinding = TabViewpagerBinding.inflate(getLayoutInflater());
 
@@ -323,9 +330,6 @@ public class MainActivity extends AppCompatActivity{
         // 탭과 뷰페이저를 연결
         mainTab.setupWithViewPager(viewPager);
         setMainTabColor(mainTab,"#000000");
-
-        // 로딩 애니메이션 종료
-        stopLoadingAnimation();
     }
 
     // 메인 탭 텍스트 및 하단 표시부 색깔 변경
