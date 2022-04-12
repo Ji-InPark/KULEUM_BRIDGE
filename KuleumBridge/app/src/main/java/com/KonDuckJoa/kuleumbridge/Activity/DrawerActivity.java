@@ -47,8 +47,10 @@ public class DrawerActivity extends AppCompatActivity {
                 {
                     case R.id.Drawer_setting:
                         Toast.makeText(context, title+ ":환경설정 창으로 이동합니다", Toast.LENGTH_SHORT).show();
+                        break;
                     case R.id.Drawer_logout:
                         Toast.makeText(context, title + ": 로그아웃을 시도합니다.", Toast.LENGTH_SHORT).show();
+                        break;
                 }
                 return true;
             }
@@ -56,7 +58,8 @@ public class DrawerActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         if(item.getItemId()==android.R.id.home) // 왼쪽 상단 버튼 눌렀을 때
         {
                 mDrawerLayout.openDrawer(GravityCompat.START);

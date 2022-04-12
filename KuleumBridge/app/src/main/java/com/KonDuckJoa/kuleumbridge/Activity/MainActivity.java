@@ -335,5 +335,4 @@ public class MainActivity extends AppCompatActivity{
         mainTab.setTabTextColors(Color.parseColor(colorString),Color.parseColor(colorString));
     }
 
-
 }
