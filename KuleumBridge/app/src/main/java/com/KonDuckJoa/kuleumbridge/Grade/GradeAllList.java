@@ -108,18 +108,18 @@ public class GradeAllList extends Fragment {
     public static void setGradeAllInfo()
     {
         gradeAllArray = UserInfo.getInstance().getGradeAll();
-
+      
         // 소계 제외
-        for (int i = 0; i < UserInfo.getInstance().getGradeAll().size(); i++)
-        {
-            if (gradeAllArray.get(i).getSemester().contains("소계")) continue;
+            for (int i = 0; i < UserInfo.getInstance().getGradeAll().size(); i++)
+            {
+                if (gradeAllArray.get(i).getSemester().contains("소계")) continue;
 
-            yearArray.add(gradeAllArray.get(i).getCompletedYear() + " " + gradeAllArray.get(i).getSemester());
-            divisionArray.add(gradeAllArray.get(i).getCompletedDivision());
-            nameArray.add(gradeAllArray.get(i).getSubjectName());
-            gradeCountArray.add(gradeAllArray.get(i).getGradeCount());
-            gradeRateArray.add(gradeAllArray.get(i).getGradeRate());
-        }
+                yearArray.add(gradeAllArray.get(i).getCompletedYear() + " " + gradeAllArray.get(i).getSemester());
+                divisionArray.add(gradeAllArray.get(i).getCompletedDivision());
+                nameArray.add(gradeAllArray.get(i).getSubjectName());
+                gradeCountArray.add(gradeAllArray.get(i).getGradeCount());
+                gradeRateArray.add(gradeAllArray.get(i).getGradeRate());
+            }
 
         isSet = true;
     }

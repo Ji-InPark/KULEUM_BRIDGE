@@ -29,7 +29,7 @@ public class HomeFragment extends Fragment
     // 학생증 정보 수정
     private void editStudentID(View view)
     {
-        ImageView img_menu = view.findViewById(R.id.menu_img);
+
         TextView name_menu = view.findViewById(R.id.menu_name);
         ImageView img = view.findViewById(R.id.studentCard_photo);
         TextView name = view.findViewById(R.id.studentCard_name);
@@ -39,8 +39,7 @@ public class HomeFragment extends Fragment
 
         try
         {
-            // 로그인 후 메인 메뉴 우측 상단 학생 사진 세팅
-            img_menu.setImageBitmap(getImageBitMap());
+
 
             // 로그인 후 안녕, ㅁㅁㅁ! 세팅
             name_menu.setText(getString(R.string.hello, UserInfo.getInstance().getUserName()));
