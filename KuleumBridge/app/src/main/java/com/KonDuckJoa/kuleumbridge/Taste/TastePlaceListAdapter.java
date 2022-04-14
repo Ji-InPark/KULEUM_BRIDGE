@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class TastePlaceListAdapter extends BaseAdapter {
     LayoutInflater layoutInflater = null;
     private ArrayList<TastePlaceListData> tastePlaceListDataArray;
-    private int count;
+    private final int count;
 
     public TastePlaceListAdapter(ArrayList<TastePlaceListData> tastePlaceListDataArray)
     {

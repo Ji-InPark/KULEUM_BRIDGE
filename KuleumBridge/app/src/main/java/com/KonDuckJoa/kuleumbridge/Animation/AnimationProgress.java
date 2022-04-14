@@ -11,17 +11,18 @@ import com.KonDuckJoa.kuleumbridge.R;
 
 // 애니메이션 담당 클래스
 public class AnimationProgress extends Dialog {
-    Context context;
     ImageView imageView;
     AnimationDrawable animationDrawable;
 
-    public AnimationProgress(Context activity) {
+    public AnimationProgress(Context activity)
+    {
         super(activity);
-        context = activity;
+
         initializeProgress();
     }
     
-    public void initializeProgress(){
+    public void initializeProgress()
+    {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
@@ -29,8 +30,8 @@ public class AnimationProgress extends Dialog {
 
         imageView = findViewById(R.id.progresss);
         imageView.setBackgroundResource(R.drawable.loading_animation);
-        animationDrawable = (AnimationDrawable)imageView.getBackground();
 
+        animationDrawable = (AnimationDrawable)imageView.getBackground();
         animationDrawable.start();
     }
 }

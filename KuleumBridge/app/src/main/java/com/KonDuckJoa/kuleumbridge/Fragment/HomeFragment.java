@@ -20,7 +20,7 @@ public class HomeFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.home_layout,container,false);
+        View view = inflater.inflate(R.layout.home_layout, container,false);
         editStudentID(view);
 
         return view;
@@ -29,7 +29,6 @@ public class HomeFragment extends Fragment
     // 학생증 정보 수정
     private void editStudentID(View view)
     {
-
         TextView name_menu = view.findViewById(R.id.menu_name);
         ImageView img = view.findViewById(R.id.studentCard_photo);
         TextView name = view.findViewById(R.id.studentCard_name);
@@ -39,8 +38,6 @@ public class HomeFragment extends Fragment
 
         try
         {
-
-
             // 로그인 후 안녕, ㅁㅁㅁ! 세팅
             name_menu.setText(getString(R.string.hello, UserInfo.getInstance().getUserName()));
 
