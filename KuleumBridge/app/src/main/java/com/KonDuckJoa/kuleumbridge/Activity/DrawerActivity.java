@@ -1,8 +1,10 @@
 package com.KonDuckJoa.kuleumbridge.Activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,5 +67,10 @@ public class DrawerActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onGradeCheckButtonClick(View view) {
+        // 성적조회 레이아웃의 "세부 성적 조회" 버튼
+        startActivity(new Intent(this, GradeCheckActivity.class));
     }
 }
