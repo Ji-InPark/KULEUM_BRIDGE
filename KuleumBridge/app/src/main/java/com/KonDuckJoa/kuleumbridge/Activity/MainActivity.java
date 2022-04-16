@@ -163,6 +163,7 @@ public class MainActivity extends AppCompatActivity{
             {
                 // NoticeInfoClass.getInstance() 에 얻어온 정보 저장
                 transformView();
+                gradeNowSuccess();
             }
 
             @Override
@@ -339,24 +340,24 @@ public class MainActivity extends AppCompatActivity{
         setMainTabColor(mainTab,"#000000");
     }
 
-    private void gradeNowSuccess(View view)
+    private void gradeNowSuccess()
     {
         try
         {
             // UserInfoClass.getInstance()에 얻어온 정보 저장 - 금학기성적
-            TableLayout tableLayout = view.findViewById(R.id.grade_now_tablelayout_home);
+            TableLayout tableLayout = findViewById(R.id.grade_now_tablelayout_home);
             ArrayList<Grade> gradeNowArray = UserInfo.getInstance().getGradeNow();
 
             for (int i = 0; i < gradeNowArray.size(); i++)
             {
-                TableRow tableRow = new TableRow(view.getContext());
+                TableRow tableRow = new TableRow(this);
                 tableRow.setLayoutParams(new TableRow.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT));
 
                 for (int j = 0; j < 4; j++)
                 {
-                    TextView textView = new TextView(view.getContext());
+                    TextView textView = new TextView(this);
                     textView.setTextSize(16);
                     textView.setTextColor(Color.parseColor("#000000"));
                     textView.setPadding(10, 0, 20, 50);
@@ -396,7 +397,7 @@ public class MainActivity extends AppCompatActivity{
         }
         catch (NullPointerException e) //UserInfoClass.getInstance() 객체가 비었을때 예외처리
         {
-            TextView textView = new TextView(view.getContext());
+            TextView textView = new TextView(this);
             textView.setText("해당 학기 성적이 존재하지 않습니다.");
             textView.setTextSize(16);
             textView.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL); // 텍스트뷰 가로 세로 중앙 정렬
