@@ -136,7 +136,7 @@ public class HomeFragment extends Fragment
     }
 
     // 이미지 비트맵 반환
-    public Bitmap getImageBitMap()
+    private Bitmap getImageBitMap()
     {
         byte[] encodeByte = Base64.decode(UserInfo.getInstance().getPhotoUrl(), Base64.DEFAULT);
 

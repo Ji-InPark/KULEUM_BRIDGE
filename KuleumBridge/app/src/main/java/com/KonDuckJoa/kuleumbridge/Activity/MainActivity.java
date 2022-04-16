@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    // 자동 로그인 함수
+    // 자동 로그인 메소드
     public void autoLogin()
     {
         try
@@ -240,7 +240,7 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    // 암호화를 위한 key를 불러오는 함수
+    // 암호화를 위한 key를 불러오는 메소드
     public String getEncryptKey()
     {
         try
@@ -291,7 +291,7 @@ public class MainActivity extends AppCompatActivity{
             case R.id.view_on_map_button: // taste_place_layout의 "지도로 보기" 버튼
                 startActivity(new Intent(this, TastePlaceActivity.class));
                 break;
-            case R.id.grade_all_check_button: // taste_place_layout의 "지도로 보기" 버튼
+            case R.id.grade_all_check_button: // home_layout의 "전체 성적 조회" 버튼
                 startActivity(new Intent(this, GradeCheckActivity.class));
                 break;
         }
@@ -332,7 +332,7 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
-    // 메인 탭 텍스트 및 하단 표시부 색깔 변경
+    // 메인 탭 텍스트 및 하단 표시부 색깔 변경 메소드
     public void setMainTabColor(TabLayout mainTab, String colorString)
     {
         mainTab.setSelectedTabIndicatorColor(Color.parseColor(colorString));
