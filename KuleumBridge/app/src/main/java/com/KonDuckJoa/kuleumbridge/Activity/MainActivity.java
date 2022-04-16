@@ -291,6 +291,9 @@ public class MainActivity extends AppCompatActivity{
             case R.id.view_on_map_button: // taste_place_layout의 "지도로 보기" 버튼
                 startActivity(new Intent(this, TastePlaceActivity.class));
                 break;
+            case R.id.grade_all_check_button: // taste_place_layout의 "지도로 보기" 버튼
+                startActivity(new Intent(this, GradeCheckActivity.class));
+                break;
         }
     }
 
