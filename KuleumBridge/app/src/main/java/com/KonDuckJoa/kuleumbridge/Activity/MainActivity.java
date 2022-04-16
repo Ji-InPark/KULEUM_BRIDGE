@@ -15,6 +15,7 @@ import com.KonDuckJoa.kuleumbridge.API.ApiGradeAll;
 import com.KonDuckJoa.kuleumbridge.API.ApiGradeNow;
 import com.KonDuckJoa.kuleumbridge.API.ApiLogin;
 import com.KonDuckJoa.kuleumbridge.API.ApiNotice;
+import com.KonDuckJoa.kuleumbridge.API.ApiResource;
 import com.KonDuckJoa.kuleumbridge.Animation.AnimationProgress;
 import com.KonDuckJoa.kuleumbridge.Common.CallBack;
 import com.KonDuckJoa.kuleumbridge.Common.Encrypt;
@@ -47,8 +48,19 @@ public class MainActivity extends AppCompatActivity{
         // 맛집 정보 불러오기
         setPlaceData();
 
-        // 자동 로그인
-        autoLogin();
+        ApiResource apiResource = new ApiResource(new CallBack() {
+            @Override
+            public void callbackSuccess(String result) {
+                // 자동 로그인
+                autoLogin();
+            }
+
+            @Override
+            public void callbackFail() {
+                stopLoadingAnimation();
+            }
+        });
+        apiResource.execute();
     }
 
     public void setPlaceData()
