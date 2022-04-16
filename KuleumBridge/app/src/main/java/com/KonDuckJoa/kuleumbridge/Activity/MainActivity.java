@@ -5,14 +5,8 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -23,9 +17,8 @@ import com.KonDuckJoa.kuleumbridge.API.ApiLogin;
 import com.KonDuckJoa.kuleumbridge.API.ApiNotice;
 import com.KonDuckJoa.kuleumbridge.Animation.AnimationProgress;
 import com.KonDuckJoa.kuleumbridge.Common.CallBack;
-import com.KonDuckJoa.kuleumbridge.Common.Encrypt;
 import com.KonDuckJoa.kuleumbridge.Common.Data.UserInfo;
-import com.KonDuckJoa.kuleumbridge.Grade.Grade;
+import com.KonDuckJoa.kuleumbridge.Common.Encrypt;
 import com.KonDuckJoa.kuleumbridge.R;
 import com.KonDuckJoa.kuleumbridge.Taste.TasteHandler;
 import com.KonDuckJoa.kuleumbridge.Taste.TastePlaceList;
@@ -33,7 +26,6 @@ import com.KonDuckJoa.kuleumbridge.databinding.TabViewPagerBinding;
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity{
@@ -338,70 +330,6 @@ public class MainActivity extends AppCompatActivity{
         mainTab.setupWithViewPager(viewPager);
         setMainTabColor(mainTab,"#000000");
 
-    }
-
-    private void gradeNowSuccess()
-    {
-        try
-        {
-            // UserInfoClass.getInstance()에 얻어온 정보 저장 - 금학기성적
-            TableLayout tableLayout = findViewById(R.id.grade_now_tablelayout_home);
-            ArrayList<Grade> gradeNowArray = UserInfo.getInstance().getGradeNow();
-
-            for (int i = 0; i < gradeNowArray.size(); i++)
-            {
-                TableRow tableRow = new TableRow(this);
-                tableRow.setLayoutParams(new TableRow.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT));
-
-                for (int j = 0; j < 4; j++)
-                {
-                    TextView textView = new TextView(this);
-                    textView.setTextSize(16);
-                    textView.setTextColor(Color.parseColor("#000000"));
-                    textView.setPadding(10, 0, 20, 50);
-                    textView.setWidth(0);
-
-                    //글자 수 많으면 ... 으로 처리
-                    textView.setEllipsize(TextUtils.TruncateAt.END);
-                    textView.setSelected(true);
-
-                    switch (j)
-                    {
-                        case 0:
-                            textView.setText(gradeNowArray.get(i).getCompletedDivision());
-                            textView.setGravity(Gravity.CENTER);
-                            textView.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f));
-                            break;
-                        case 1:
-                            textView.setText(gradeNowArray.get(i).getSubjectName());
-                            textView.setGravity(Gravity.START);
-                            textView.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 2.0f));
-                            break;
-                        case 2:
-                            textView.setText(gradeNowArray.get(i).getGradeCount());
-                            textView.setGravity(Gravity.CENTER);
-                            textView.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 0.5f));
-                            break;
-                        case 3:
-                            textView.setText(gradeNowArray.get(i).getGradeRate());
-                            textView.setGravity(Gravity.CENTER);
-                            textView.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 0.7f));
-                            break;
-                    }
-                    tableRow.addView(textView);
-                }
-                tableLayout.addView(tableRow);
-            }
-        }
-        catch (NullPointerException e) //UserInfoClass.getInstance() 객체가 비었을때 예외처리
-        {
-            TextView textView = new TextView(this);
-            textView.setText("해당 학기 성적이 존재하지 않습니다.");
-            textView.setTextSize(16);
-            textView.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL); // 텍스트뷰 가로 세로 중앙 정렬
-        }
     }
 
     // 메인 탭 텍스트 및 하단 표시부 색깔 변경
