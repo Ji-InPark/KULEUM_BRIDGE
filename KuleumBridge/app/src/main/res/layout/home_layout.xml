@@ -117,6 +117,85 @@
 
 
         </FrameLayout>
+
+        <TableLayout
+            android:id="@+id/grade_now_tablelayout_home"
+            android:layout_width="380dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/calendar_view"
+            android:isScrollContainer="true"
+            android:stretchColumns="*">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1.0"
+                    android:gravity="center"
+                    android:text="이수구분"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="2.0"
+                    android:gravity="center"
+                    android:text="과목명"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:text="학점"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="0.7"
+                    android:gravity="center"
+                    android:text="성적"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+            </TableRow>
+        </TableLayout>
+
+        <Button
+            android:id="@+id/grade_all_check_button_home"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/black"
+            android:gravity="center"
+            android:text="↗전체 성적 조회 "
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView

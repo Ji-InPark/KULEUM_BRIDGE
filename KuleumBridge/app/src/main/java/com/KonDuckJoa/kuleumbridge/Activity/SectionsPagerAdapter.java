@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.KonDuckJoa.kuleumbridge.Fragment.GradeCheckFragment;
 import com.KonDuckJoa.kuleumbridge.Fragment.HomeFragment;
 import com.KonDuckJoa.kuleumbridge.Fragment.NoticeFragment;
 import com.KonDuckJoa.kuleumbridge.Fragment.TastePlaceFragment;
