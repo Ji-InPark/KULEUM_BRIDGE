@@ -48,15 +48,24 @@ public class MainActivity extends AppCompatActivity{
         // 맛집 정보 불러오기
         setPlaceData();
 
-        ApiResource apiResource = new ApiResource(new CallBack() {
+        // api에 필요한 파라매터 세팅
+        setApiResource();
+    }
+
+    private void setApiResource()
+    {
+        ApiResource apiResource = new ApiResource(new CallBack()
+        {
             @Override
-            public void callbackSuccess(String result) {
+            public void callbackSuccess(String result)
+            {
                 // 자동 로그인
                 autoLogin();
             }
 
             @Override
-            public void callbackFail() {
+            public void callbackFail()
+            {
                 stopLoadingAnimation();
             }
         });
