@@ -140,6 +140,20 @@ public class MainActivity extends AppCompatActivity{
             public void callbackSuccess(String result)
             {
                 UserInfo.getInstance().setGradeAllInfo(result);
+
+                ApiNotice apiNotice = new ApiNotice(UserInfo.getInstance().getUserId(), new CallBack()
+                {
+                    @Override
+                    public void callbackSuccess(String result)
+                    {
+                        // NoticeInfoClass.getInstance() 에 얻어온 정보 저장
+                        transformView();
+                    }
+
+                    @Override
+                    public void callbackFail() { }
+                });
+                apiNotice.execute();
             }
 
             @Override
@@ -168,20 +182,6 @@ public class MainActivity extends AppCompatActivity{
             }
         });
         apiGradeNow.execute();
-
-        ApiNotice apiNotice = new ApiNotice(UserInfo.getInstance().getUserId(), new CallBack()
-        {
-            @Override
-            public void callbackSuccess(String result)
-            {
-                // NoticeInfoClass.getInstance() 에 얻어온 정보 저장
-                transformView();
-            }
-
-            @Override
-            public void callbackFail() { }
-        });
-        apiNotice.execute();
     }
 
     // 로딩 화면 시작

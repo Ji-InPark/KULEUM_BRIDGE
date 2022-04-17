@@ -51,10 +51,9 @@ public class ApiLogin extends AsyncTask<String, String, Boolean> {
         else
         {
             // json으로 받은 에러메세지에서 원하는 부분만 파싱하는 과정
-            JSONObject errorJson;
             try
             {
-                errorJson = new JSONObject(result);
+                JSONObject errorJson = new JSONObject(result);
 
                 errorJson = errorJson.getJSONObject("ERRMSGINFO");
 
@@ -162,6 +161,6 @@ public class ApiLogin extends AsyncTask<String, String, Boolean> {
             e.printStackTrace();
         }
 
-        return null;
+        return false;
     }
 }
