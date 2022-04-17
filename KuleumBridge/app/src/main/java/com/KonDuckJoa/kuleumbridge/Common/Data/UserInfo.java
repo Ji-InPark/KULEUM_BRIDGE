@@ -10,6 +10,8 @@ import java.util.ArrayList;
 public class UserInfo {
     private static UserInfo instance = new UserInfo();
 
+    private String JSESSIONID;
+
     private String birthDate;               // 생년월일
     private String departmentTotalName;     // 소속단과대 및 학과
     private String userName;                // 이름
@@ -127,7 +129,13 @@ public class UserInfo {
         this.birthDate = year + "년 " +  birthDate.substring(2, 4) + "월 " + birthDate.substring(4) + "일";
     }
 
-    public void setDepartmentTotalName(String departmentTotalName) {
+    public void setJSESSIONID(String JSESSIONID)
+    {
+        this.JSESSIONID = JSESSIONID;
+    }
+
+    public void setDepartmentTotalName(String departmentTotalName)
+    {
         this.departmentTotalName = departmentTotalName;
     }
 
@@ -149,6 +157,11 @@ public class UserInfo {
 
     public void setGradeNowLength(int gradeNowLength) {
         this.gradeNowLength = gradeNowLength;
+    }
+
+    public String getJSESSIONID()
+    {
+        return JSESSIONID;
     }
 
     public String getBirthDate() {
@@ -186,4 +199,5 @@ public class UserInfo {
     public ArrayList<Grade> getGradeNow() {
         return gradeNowArray;
     }
+
 }
