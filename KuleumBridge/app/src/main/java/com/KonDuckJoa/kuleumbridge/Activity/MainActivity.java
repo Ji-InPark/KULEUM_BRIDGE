@@ -329,7 +329,6 @@ public class MainActivity extends AppCompatActivity{
         // 탭과 뷰페이저를 연결
         mainTab.setupWithViewPager(viewPager);
         setMainTabColor(mainTab,"#000000");
-
     }
 
     // 메인 탭 텍스트 및 하단 표시부 색깔 변경 메소드
