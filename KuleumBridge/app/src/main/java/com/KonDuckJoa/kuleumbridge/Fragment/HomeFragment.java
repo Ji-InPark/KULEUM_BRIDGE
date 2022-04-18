@@ -94,8 +94,9 @@ public class HomeFragment extends Fragment
                     textView.setPadding(10, 0, 20, 50);
                     textView.setWidth(0);
 
-                    //글자 수 많으면 ... 으로 처리
-                    textView.setEllipsize(TextUtils.TruncateAt.END);
+
+                    textView.setSingleLine(true);
+                    textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
                     textView.setSelected(true);
 
                     switch (j)
