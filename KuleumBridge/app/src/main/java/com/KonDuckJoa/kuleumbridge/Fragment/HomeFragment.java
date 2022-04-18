@@ -93,8 +93,6 @@ public class HomeFragment extends Fragment
                     textView.setTextColor(Color.parseColor("#000000"));
                     textView.setPadding(10, 0, 20, 50);
                     textView.setWidth(0);
-
-
                     textView.setSingleLine(true);
                     textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
                     textView.setSelected(true);
