@@ -5,15 +5,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.KonDuckJoa.kuleumbridge.Fragment.GradeCheckFragment;
 import com.KonDuckJoa.kuleumbridge.Fragment.HomeFragment;
 import com.KonDuckJoa.kuleumbridge.Fragment.NoticeFragment;
 import com.KonDuckJoa.kuleumbridge.Fragment.TastePlaceFragment;
 
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
-    private Fragment[] fragments = new Fragment[4];
-    private String[] pageTitles = {"홈", "공지사항", "맛집", "성적조회"};
+    private Fragment[] fragments = new Fragment[3];
+    private String[] pageTitles = {"홈", "공지사항", "맛집"};
 
     public SectionsPagerAdapter(FragmentManager fm)
     {
@@ -26,7 +25,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         fragments[0] = new HomeFragment();
         fragments[1] = new NoticeFragment();
         fragments[2] = new TastePlaceFragment();
-        fragments[3] = new GradeCheckFragment();
     }
 
     @Override

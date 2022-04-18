@@ -17,12 +17,12 @@ import com.KonDuckJoa.kuleumbridge.API.ApiLogin;
 import com.KonDuckJoa.kuleumbridge.API.ApiNotice;
 import com.KonDuckJoa.kuleumbridge.Animation.AnimationProgress;
 import com.KonDuckJoa.kuleumbridge.Common.CallBack;
-import com.KonDuckJoa.kuleumbridge.Common.Encrypt;
 import com.KonDuckJoa.kuleumbridge.Common.Data.UserInfo;
+import com.KonDuckJoa.kuleumbridge.Common.Encrypt;
 import com.KonDuckJoa.kuleumbridge.R;
 import com.KonDuckJoa.kuleumbridge.Taste.TasteHandler;
 import com.KonDuckJoa.kuleumbridge.Taste.TastePlaceList;
-import com.KonDuckJoa.kuleumbridge.databinding.TabViewpagerBinding;
+import com.KonDuckJoa.kuleumbridge.databinding.TabViewPagerBinding;
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.IOException;
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity{
     // 로딩 애니메이션을 위한 객체
     public static AnimationProgress customProgress;
 
-    private TabViewpagerBinding tabViewpagerBinding;
+    private TabViewPagerBinding tabViewPagerBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    // 자동 로그인 함수
+    // 자동 로그인 메소드
     public void autoLogin()
     {
         try
@@ -240,7 +240,7 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    // 암호화를 위한 key를 불러오는 함수
+    // 암호화를 위한 key를 불러오는 메소드
     public String getEncryptKey()
     {
         try
@@ -291,13 +291,13 @@ public class MainActivity extends AppCompatActivity{
             case R.id.view_on_map_button: // taste_place_layout의 "지도로 보기" 버튼
                 startActivity(new Intent(this, TastePlaceActivity.class));
                 break;
-            case R.id.grade_all_check_button: // 성적조회 레이아웃의 "세부 성적 조회" 버튼
+            case R.id.grade_all_check_button: // home_layout의 "전체 성적 조회" 버튼
                 startActivity(new Intent(this, GradeCheckActivity.class));
                 break;
         }
     }
 
-    // 맛집 레이아웃의 9가지 맛집 아이콘 상호작용 함수
+    // 맛집 레이아웃의 9가지 맛집 아이콘 상호작용 메소드
     public void OnTasteButtonClick(View view)
     {
         String buttonName = TasteHandler.getStringValue(view.getId());
@@ -306,33 +306,32 @@ public class MainActivity extends AppCompatActivity{
         startActivity(intentTastePlace);
     }
 
-
     // 뷰 전환 및 탭바 이벤트 세팅
     public void transformView()
     {
-        tabViewpagerBinding = TabViewpagerBinding.inflate(getLayoutInflater());
+        tabViewPagerBinding = TabViewPagerBinding.inflate(getLayoutInflater());
 
         // setContentView(R.layout.tab_viewpager);와 동일한 구문. 바인딩을 했으므로 이런식으로 View설정 가능
-        setContentView(tabViewpagerBinding.getRoot());
+        setContentView(tabViewPagerBinding.getRoot());
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // tab_viewpager.xml에는 view_pager라는 id를 가지고있는 뷰페이저 객체가 존재하는데,
         // binding 변수는 tab_viewpager.xml가 바인딩된 것이므로 이렇게 xml파일 내부의 객체를 직접 가져올수 있음.
-        ViewPager viewPager = tabViewpagerBinding.viewPager;
+        ViewPager viewPager = tabViewPagerBinding.viewPager;
 
         // 뷰페이저와 페이저어댑터를 연결
         viewPager.setAdapter(sectionsPagerAdapter);
 
         // 상단의 뷰페이저와 동일. tab_viewpager.xml에 존재하는 mainTab id를 가진 TabLayout 객체
         // 바인딩했기때문에 findViewById 없이 이런 식으로 직접 가져올 수 있다.
-        TabLayout mainTab = tabViewpagerBinding.mainTab;
+        TabLayout mainTab = tabViewPagerBinding.mainTab;
 
         // 탭과 뷰페이저를 연결
         mainTab.setupWithViewPager(viewPager);
         setMainTabColor(mainTab,"#000000");
     }
 
-    // 메인 탭 텍스트 및 하단 표시부 색깔 변경
+    // 메인 탭 텍스트 및 하단 표시부 색깔 변경 메소드
     public void setMainTabColor(TabLayout mainTab, String colorString)
     {
         mainTab.setSelectedTabIndicatorColor(Color.parseColor(colorString));
