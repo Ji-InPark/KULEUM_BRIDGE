@@ -12,7 +12,9 @@ import com.KonDuckJoa.kuleumbridge.Common.Data.UserInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.SocketTimeoutException;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -53,6 +55,13 @@ public class ApiLogin extends AsyncTask<String, String, Boolean> {
             // json으로 받은 에러메세지에서 원하는 부분만 파싱하는 과정
             try
             {
+                if(result == null)
+                {
+                    Toast.makeText(context, "네트워크가 불안정합니다. 다시 로그인해주세요.", Toast.LENGTH_SHORT).show();
+                    callBack.callbackFail();
+                    return;
+                }
+
                 JSONObject errorJson = new JSONObject(result);
 
                 errorJson = errorJson.getJSONObject("ERRMSGINFO");
@@ -64,9 +73,11 @@ public class ApiLogin extends AsyncTask<String, String, Boolean> {
 
                 callBack.callbackFail();
             }
-            catch (JSONException e)
+            catch (Exception e)
             {
                 e.printStackTrace();
+
+                callBack.callbackFail();
             }
         }
     }
@@ -76,7 +87,11 @@ public class ApiLogin extends AsyncTask<String, String, Boolean> {
     {
         try
         {
-            OkHttpClient okHttpClient = new OkHttpClient();
+            OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                    .connectTimeout(5, TimeUnit.SECONDS)
+                    .readTimeout(5, TimeUnit.SECONDS)
+                    .writeTimeout(5, TimeUnit.SECONDS)
+                    .build();
 
             FormBody.Builder loginFormBuilder = new FormBody.Builder();
 
@@ -115,7 +130,7 @@ public class ApiLogin extends AsyncTask<String, String, Boolean> {
 
             Response loginResponse = okHttpClient.newCall(loginRequest).execute();
             
-            if(loginResponse.body().string().contains("ERRMSGINFO"))
+            if(loginResponse.body().string().contains("ERRMSGINFO") || loginResponse.header("set-Cookie") == null)
             {
                 return false;
             }
@@ -156,11 +171,15 @@ public class ApiLogin extends AsyncTask<String, String, Boolean> {
 
             return !result.contains("ERRMSGINFO");
         }
+        catch (SocketTimeoutException e)
+        {
+            return null;
+        }
         catch (Exception e)
         {
             e.printStackTrace();
         }
 
-        return false;
+        return null;
     }
 }

@@ -9,7 +9,9 @@ import com.KonDuckJoa.kuleumbridge.Common.Data.UserInfo;
 import com.KonDuckJoa.kuleumbridge.Notice.NoticeHandler;
 import com.KonDuckJoa.kuleumbridge.Notice.NoticeInfo;
 
+import java.net.SocketTimeoutException;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -41,7 +43,11 @@ public class ApiNotice extends AsyncTask<String, String, Boolean> {
     {
         try
         {
-            OkHttpClient okHttpClient = new OkHttpClient();
+            OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                    .connectTimeout(10, TimeUnit.SECONDS)
+                    .readTimeout(10, TimeUnit.SECONDS)
+                    .writeTimeout(10, TimeUnit.SECONDS)
+                    .build();
 
             for (int i = 0; i < 7; i++)
             {
@@ -94,6 +100,10 @@ public class ApiNotice extends AsyncTask<String, String, Boolean> {
                     NoticeInfo.getInstance().setNoticeInfo(result, category);
                 }
             }
+        }
+        catch (SocketTimeoutException e)
+        {
+            return null;
         }
         catch (Exception e)
         {

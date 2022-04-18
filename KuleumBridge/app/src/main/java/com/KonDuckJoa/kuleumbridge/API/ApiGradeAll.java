@@ -7,7 +7,9 @@ import android.os.AsyncTask;
 import com.KonDuckJoa.kuleumbridge.Common.CallBack;
 import com.KonDuckJoa.kuleumbridge.Common.Data.UserInfo;
 
+import java.net.SocketTimeoutException;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -40,7 +42,11 @@ public class ApiGradeAll extends AsyncTask<String, String, Boolean> {
     {
         try
         {
-            OkHttpClient okHttpClient = new OkHttpClient();
+            OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                    .connectTimeout(10, TimeUnit.SECONDS)
+                    .readTimeout(10, TimeUnit.SECONDS)
+                    .writeTimeout(10, TimeUnit.SECONDS)
+                    .build();
 
             FormBody.Builder formBuilder = new FormBody.Builder();
 
@@ -82,6 +88,10 @@ public class ApiGradeAll extends AsyncTask<String, String, Boolean> {
             result = response.body().string();
 
             return !result.contains("ERRMSGINFO");
+        }
+        catch (SocketTimeoutException e)
+        {
+            return null;
         }
         catch (Exception e)
         {
