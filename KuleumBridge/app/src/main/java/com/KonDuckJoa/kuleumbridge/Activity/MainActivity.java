@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -29,6 +30,8 @@ import java.io.IOException;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity{
+    private long backPressedTime = 0;
+
     // 로딩 애니메이션을 위한 객체
     public static AnimationProgress customProgress;
 
@@ -338,4 +341,16 @@ public class MainActivity extends AppCompatActivity{
         mainTab.setTabTextColors(Color.parseColor(colorString),Color.parseColor(colorString));
     }
 
+    @Override
+    public void onBackPressed()
+    {
+        if(System.currentTimeMillis() - backPressedTime > 2000)
+        {
+            backPressedTime = System.currentTimeMillis();
+            Toast.makeText(this, "뒤로가기 버튼을 한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
+        finish();
+    }
 }
