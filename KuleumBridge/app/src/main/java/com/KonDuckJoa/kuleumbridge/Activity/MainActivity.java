@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity{
             public void callbackSuccess(String result)
             {
                 // 자동 로그인
-                autoLogin();
+                autoLogin(true);
             }
 
             @Override
@@ -249,7 +249,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     // 자동 로그인 메소드
-    public void autoLogin()
+    public void autoLogin(boolean whether)
     {
         try
         {
@@ -257,6 +257,12 @@ public class MainActivity extends AppCompatActivity{
 
             String encryptedId = sharedPreferences.getString("id", "");
             String encryptedPwd = sharedPreferences.getString("pwd", "");
+
+            if(whether==false)
+            {
+                encryptedId="";
+            }
+
 
             // login 파일에 저장된 정보가 없다면 함수 종료
             if(encryptedId.equals(""))

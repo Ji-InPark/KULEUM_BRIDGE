@@ -24,18 +24,20 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.KonDuckJoa.kuleumbridge.API.ApiLogin;
 import com.KonDuckJoa.kuleumbridge.Activity.MainActivity;
 import com.KonDuckJoa.kuleumbridge.Common.Data.UserInfo;
 import com.KonDuckJoa.kuleumbridge.Grade.Grade;
 import com.KonDuckJoa.kuleumbridge.R;
 import com.google.android.material.navigation.NavigationView;
 
+import org.apache.log4j.chainsaw.Main;
+
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment
 {
     private DrawerLayout mDrawer;
-    private Toolbar mToolbar;
     Context context;
 
     @Override
@@ -71,6 +73,7 @@ public class HomeFragment extends Fragment
                     break;
                 case R.id.Drawer_logout:
                     Toast.makeText(context, title + ": 로그아웃을 시도합니다.", Toast.LENGTH_SHORT).show();
+                    ((MainActivity)getActivity()).autoLogin(false);
                     break;
             }
 
