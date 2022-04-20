@@ -50,15 +50,10 @@ public class HomeFragment extends Fragment
     {
         View view = inflater.inflate(R.layout.home_layout, container,false);
 
-        mToolbar=(Toolbar) view.findViewById(R.id.toolbar);
+        setActionBarSetting(view.findViewById(R.id.toolbar));
 
-        AppCompatActivity activity=(AppCompatActivity)getActivity();
-        activity.setSupportActionBar(mToolbar);
-        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 툴바 메뉴 버튼 생성
-        activity.getSupportActionBar().setHomeAsUpIndicator(R.drawable.drawer_menu_button); // 메뉴 버튼 모양 설정
-
-        mDrawer=(DrawerLayout) view.findViewById(R.id.DrawLayout);
-        context=container.getContext();
+        mDrawer = view.findViewById(R.id.DrawLayout);
+        context = container.getContext();
 
         NavigationView navigationView = view.findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(menuItem ->
@@ -214,5 +209,14 @@ public class HomeFragment extends Fragment
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void setActionBarSetting(Toolbar toolbar)
+    {
+        AppCompatActivity activity = (AppCompatActivity)getActivity();
+
+        activity.setSupportActionBar(toolbar);
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 툴바 메뉴 버튼 생성
+        activity.getSupportActionBar().setHomeAsUpIndicator(R.drawable.drawer_menu_button); // 메뉴 버튼 모양 설정
     }
 }
