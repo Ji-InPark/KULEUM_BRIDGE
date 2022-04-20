@@ -1,5 +1,6 @@
 package com.KonDuckJoa.kuleumbridge.Fragment;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -8,28 +9,79 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.KonDuckJoa.kuleumbridge.Activity.MainActivity;
 import com.KonDuckJoa.kuleumbridge.Common.Data.UserInfo;
 import com.KonDuckJoa.kuleumbridge.Grade.Grade;
 import com.KonDuckJoa.kuleumbridge.R;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment
 {
+    private DrawerLayout mDrawer;
+    private Toolbar mToolbar;
+    Context context;
+
+    @Override
+    public void onCreate(Bundle saveInstanceState)
+    {
+        super.onCreate(saveInstanceState);
+        setHasOptionsMenu(true);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.home_layout, container,false);
+
+        mToolbar=(Toolbar) view.findViewById(R.id.toolbar);
+
+        AppCompatActivity activity=(AppCompatActivity)getActivity();
+        activity.setSupportActionBar(mToolbar);
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 툴바 메뉴 버튼 생성
+        activity.getSupportActionBar().setHomeAsUpIndicator(R.drawable.drawer_menu_button); // 메뉴 버튼 모양 설정
+
+        mDrawer=(DrawerLayout) view.findViewById(R.id.DrawLayout);
+        context=container.getContext();
+
+        NavigationView navigationView = view.findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(menuItem ->
+        {
+            menuItem.setChecked(true);
+            mDrawer.closeDrawers();
+
+            int id = menuItem.getItemId();
+            String title = menuItem.getTitle().toString();
+
+            switch(id)
+            {
+                case R.id.Drawer_setting:
+                    Toast.makeText(context, title+ ":환경설정 창으로 이동합니다", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.Drawer_logout:
+                    Toast.makeText(context, title + ": 로그아웃을 시도합니다.", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+
+            return true;
+        });
+
         editStudentID(view);
         gradeNowSuccess(view);
 
@@ -149,5 +201,18 @@ public class HomeFragment extends Fragment
         byte[] encodeByte = Base64.decode(UserInfo.getInstance().getPhotoUrl(), Base64.DEFAULT);
 
         return BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        if(item.getItemId()==android.R.id.home) // 왼쪽 상단 버튼 눌렀을 때
+        {
+            mDrawer.openDrawer(GravityCompat.START);
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
