@@ -213,7 +213,7 @@ public class HomeFragment extends Fragment
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        if(item.getItemId()==android.R.id.home) // 왼쪽 상단 버튼 눌렀을 때
+        if(item.getItemId() == android.R.id.home) // 왼쪽 상단 버튼 눌렀을 때
         {
             mDrawer.openDrawer(GravityCompat.START);
 
