@@ -42,13 +42,6 @@ public class NoticeFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onResume()
-    {
-        super.onResume();
-        MainActivity.stopLoadingAnimation();
-    }
-
     private void noticeSuccess(View view, String noticeCategory)
     {
         TableLayout[] tables = {

@@ -16,6 +16,8 @@ import com.KonDuckJoa.kuleumbridge.API.ApiGradeAll;
 import com.KonDuckJoa.kuleumbridge.API.ApiGradeNow;
 import com.KonDuckJoa.kuleumbridge.API.ApiLogin;
 import com.KonDuckJoa.kuleumbridge.API.ApiNotice;
+import com.KonDuckJoa.kuleumbridge.API.ApiPostLogin;
+import com.KonDuckJoa.kuleumbridge.API.ApiResource;
 import com.KonDuckJoa.kuleumbridge.Animation.AnimationProgress;
 import com.KonDuckJoa.kuleumbridge.Common.CallBack;
 import com.KonDuckJoa.kuleumbridge.Common.Data.UserInfo;
@@ -50,8 +52,28 @@ public class MainActivity extends AppCompatActivity{
         // 맛집 정보 불러오기
         setPlaceData();
 
-        // 자동 로그인
-        autoLogin();
+        // api에 필요한 파라매터 세팅
+        setApiResource();
+    }
+
+    private void setApiResource()
+    {
+        ApiResource apiResource = new ApiResource(new CallBack()
+        {
+            @Override
+            public void callbackSuccess(String result)
+            {
+                // 자동 로그인
+                autoLogin();
+            }
+
+            @Override
+            public void callbackFail()
+            {
+                stopLoadingAnimation();
+            }
+        });
+        apiResource.execute();
     }
 
     public void setPlaceData()
@@ -112,26 +134,57 @@ public class MainActivity extends AppCompatActivity{
     // ApiLoginClass 통해 로그인 성공시
     public void loginSuccess(String result)
     {
-        // 유저 정보 저장하는 부분
-        UserInfo.getInstance().setLoginInfo(result);
+        // Jsessionid 저장
+        UserInfo.getInstance().setJSESSIONID(result);
 
-        // GradeAll 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask 를 상속한 클래스를 활용해 값을 얻어온다.
-        ApiGradeAll apiGradeAll = new ApiGradeAll(UserInfo.getInstance().getUserId(), new CallBack()
+        ApiPostLogin apiPostLogin = new ApiPostLogin(new CallBack()
         {
             @Override
             public void callbackSuccess(String result)
             {
-                UserInfo.getInstance().setGradeAllInfo(result);
+                // 유저 정보 저장하는 부분
+                UserInfo.getInstance().setLoginInfo(result);
+
+                // GradeAll 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask 를 상속한 클래스를 활용해 값을 얻어온다.
+                ApiGradeAll apiGradeAll = new ApiGradeAll(UserInfo.getInstance().getUserId(), new CallBack()
+                {
+                    @Override
+                    public void callbackSuccess(String result)
+                    {
+                        UserInfo.getInstance().setGradeAllInfo(result);
+
+                        ApiNotice apiNotice = new ApiNotice(UserInfo.getInstance().getUserId(), new CallBack()
+                        {
+                            @Override
+                            public void callbackSuccess(String result)
+                            {
+                                // NoticeInfoClass.getInstance() 에 얻어온 정보 저장
+                                transformView();
+                            }
+
+                            @Override
+                            public void callbackFail() { }
+                        });
+                        apiNotice.execute();
+                    }
+
+                    @Override
+                    public void callbackFail()
+                    {
+                        stopLoadingAnimation();
+                        setContentView(R.layout.login);
+                    }
+                });
+                apiGradeAll.execute();
             }
 
             @Override
             public void callbackFail()
             {
-                stopLoadingAnimation();
-                setContentView(R.layout.login);
+
             }
         });
-        apiGradeAll.execute();
+        apiPostLogin.execute();
 
         // GradeNow 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask 를 상속한 클래스를 활요해 값을 얻어온다.
         ApiGradeNow apiGradeNow = new ApiGradeNow(UserInfo.getInstance().getUserId(), new CallBack()
@@ -150,20 +203,6 @@ public class MainActivity extends AppCompatActivity{
             }
         });
         apiGradeNow.execute();
-
-        ApiNotice apiNotice = new ApiNotice(UserInfo.getInstance().getUserId(), new CallBack()
-        {
-            @Override
-            public void callbackSuccess(String result)
-            {
-                // NoticeInfoClass.getInstance() 에 얻어온 정보 저장
-                transformView();
-            }
-
-            @Override
-            public void callbackFail() { }
-        });
-        apiNotice.execute();
     }
 
     // 로딩 화면 시작

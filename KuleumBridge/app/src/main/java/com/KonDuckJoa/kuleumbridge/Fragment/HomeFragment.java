@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.KonDuckJoa.kuleumbridge.Activity.MainActivity;
 import com.KonDuckJoa.kuleumbridge.Common.Data.UserInfo;
 import com.KonDuckJoa.kuleumbridge.Grade.Grade;
 import com.KonDuckJoa.kuleumbridge.R;
@@ -33,6 +34,13 @@ public class HomeFragment extends Fragment
         gradeNowSuccess(view);
 
         return view;
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        MainActivity.stopLoadingAnimation();
     }
 
     // 학생증 정보 수정
