@@ -40,6 +40,8 @@ public class NoticeInfo {
     {
         try
         {
+            notices[NoticeHandler.getIndex(noticeCategory)].clear();
+
             JSONObject responseNoticeJson = new JSONObject(responseNotice);
 
             JSONArray noticeJsonArray = responseNoticeJson.getJSONArray("DS_LIST");

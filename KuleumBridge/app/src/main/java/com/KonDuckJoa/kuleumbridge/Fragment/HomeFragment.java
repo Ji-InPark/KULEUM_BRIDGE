@@ -1,6 +1,8 @@
 package com.KonDuckJoa.kuleumbridge.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -35,7 +37,6 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment
 {
     private DrawerLayout mDrawer;
-    private Toolbar mToolbar;
     Context context;
 
     @Override
@@ -62,15 +63,15 @@ public class HomeFragment extends Fragment
             mDrawer.closeDrawers();
 
             int id = menuItem.getItemId();
-            String title = menuItem.getTitle().toString();
 
             switch(id)
             {
                 case R.id.Drawer_setting:
-                    Toast.makeText(context, title+ ":환경설정 창으로 이동합니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, ":환경설정 창으로 이동합니다", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.Drawer_logout:
-                    Toast.makeText(context, title + ": 로그아웃을 시도합니다.", Toast.LENGTH_SHORT).show();
+                    clearAutoLoginInfo();
+                    startActivity(Intent.makeRestartActivityTask(getActivity().getIntent().getComponent()));    // Activity 재시작 구문
                     break;
             }
 
@@ -81,6 +82,17 @@ public class HomeFragment extends Fragment
         gradeNowSuccess(view);
 
         return view;
+    }
+
+    private void clearAutoLoginInfo()
+    {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("login", getActivity().MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("id", "");
+        editor.putString("pwd", "");
+
+        editor.apply();
     }
 
     @Override
@@ -201,7 +213,7 @@ public class HomeFragment extends Fragment
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        if(item.getItemId()==android.R.id.home) // 왼쪽 상단 버튼 눌렀을 때
+        if(item.getItemId() == android.R.id.home) // 왼쪽 상단 버튼 눌렀을 때
         {
             mDrawer.openDrawer(GravityCompat.START);
 

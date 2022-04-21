@@ -59,6 +59,8 @@ public class UserInfo {
     {
         try
         {
+            gradeAllArray.clear();
+
             JSONObject responseJson = new JSONObject(gradeAllResponse);
 
             JSONArray gradeAllJson = responseJson.getJSONArray("DS_GRAD");
@@ -119,7 +121,8 @@ public class UserInfo {
         }
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(String birthDate)
+    {
         int year = Integer.parseInt(birthDate.substring(0, 2));
 
         if(year < 50)

@@ -43,11 +43,7 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.auto_login_layout);
         customProgress = new AnimationProgress(MainActivity.this);
-
-        // 로딩 화면 시작
-        customProgress.show();
 
         // 맛집 정보 불러오기
         setPlaceData();
@@ -71,6 +67,7 @@ public class MainActivity extends AppCompatActivity{
             public void callbackFail()
             {
                 stopLoadingAnimation();
+                setContentView(R.layout.login);
             }
         });
         apiResource.execute();
@@ -96,12 +93,6 @@ public class MainActivity extends AppCompatActivity{
         String inputId = String.valueOf(editTextId.getText());
         String inputPwd = String.valueOf(editTextPwd.getText());
 
-        // 로딩 애니메이션 시작
-        startLoadingAnimation();
-
-        // 눈속임을 위한 레이아웃 전환
-        setContentView(R.layout.auto_login_layout);
-
         // 로그인 함수
         Login(inputId, inputPwd);
     }
@@ -109,6 +100,12 @@ public class MainActivity extends AppCompatActivity{
     // 로그인 함수
     public void Login(String input_id, String input_pwd)
     {
+        // 로딩 애니메이션 시작
+        startLoadingAnimation();
+
+        // 눈속임을 위한 레이아웃 전환
+        setContentView(R.layout.auto_login_layout);
+
         // 인터넷 연결은 스레드를 통해서 백그라운드로 돌아가야 하므로(안드로이드 정책) AsyncTask 를 사용한다.
         // 그 AsyncTask 를 상속한 ApiConnectClass 클래스를 만들어서 객체로 사용하기로 함
         // 생성자의 파라매터로 id, pwd 를 받는다.
