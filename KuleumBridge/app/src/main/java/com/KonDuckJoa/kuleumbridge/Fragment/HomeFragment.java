@@ -156,15 +156,7 @@ public class HomeFragment extends Fragment
                 for (int j = 0; j < 4; j++)
                 {
                     TextView textView = new TextView(view.getContext());
-                    textView.setTextSize(16);
-                    textView.setTextColor(Color.parseColor("#000000"));
-                    textView.setPadding(10, 0, 20, 50);
-                    textView.setWidth(0);
-
-                    //글자 수 많으면 ... 으로 처리
-                    textView.setEllipsize(TextUtils.TruncateAt.END);
-                    textView.setSelected(true);
-
+                    setTextViewProperty(textView);
                     switch (j)
                     {
                         case 0:
@@ -208,6 +200,17 @@ public class HomeFragment extends Fragment
         byte[] encodeByte = Base64.decode(UserInfo.getInstance().getPhotoUrl(), Base64.DEFAULT);
 
         return BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+    }
+
+    private void setTextViewProperty(TextView textView)
+    {
+        textView.setTextSize(16);
+        textView.setTextColor(Color.parseColor("#000000"));
+        textView.setPadding(10, 0, 20, 50);
+        textView.setWidth(0);
+        textView.setSingleLine(true);
+        textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+        textView.setSelected(true);
     }
 
     @Override
