@@ -6,6 +6,13 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
     <style name="notice_tab_text" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">11sp</item>
         <item name="android:textColor">@color/black</item>
@@ -14,13 +21,10 @@
 
     <style name="Theme.NavigationDrawer" parent="Theme.MaterialComponents.DayNight.NoActionBar"></style>
 
-
     <style name="main_tab_text" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>
     </style>
-
-
 
 </resources>

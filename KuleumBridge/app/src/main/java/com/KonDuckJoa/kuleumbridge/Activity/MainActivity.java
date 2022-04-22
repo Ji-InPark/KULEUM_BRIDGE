@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -15,6 +16,8 @@ import com.KonDuckJoa.kuleumbridge.API.ApiGradeAll;
 import com.KonDuckJoa.kuleumbridge.API.ApiGradeNow;
 import com.KonDuckJoa.kuleumbridge.API.ApiLogin;
 import com.KonDuckJoa.kuleumbridge.API.ApiNotice;
+import com.KonDuckJoa.kuleumbridge.API.ApiPostLogin;
+import com.KonDuckJoa.kuleumbridge.API.ApiResource;
 import com.KonDuckJoa.kuleumbridge.Animation.AnimationProgress;
 import com.KonDuckJoa.kuleumbridge.Common.CallBack;
 import com.KonDuckJoa.kuleumbridge.Common.Data.UserInfo;
@@ -29,6 +32,8 @@ import java.io.IOException;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity{
+    private long backPressedTime = 0;
+
     // 로딩 애니메이션을 위한 객체
     public static AnimationProgress customProgress;
 
@@ -38,17 +43,34 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.auto_login_layout);
         customProgress = new AnimationProgress(MainActivity.this);
-
-        // 로딩 화면 시작
-        customProgress.show();
 
         // 맛집 정보 불러오기
         setPlaceData();
 
-        // 자동 로그인
-        autoLogin();
+        // api에 필요한 파라매터 세팅
+        setApiResource();
+    }
+
+    private void setApiResource()
+    {
+        ApiResource apiResource = new ApiResource(new CallBack()
+        {
+            @Override
+            public void callbackSuccess(String result)
+            {
+                // 자동 로그인
+                autoLogin();
+            }
+
+            @Override
+            public void callbackFail()
+            {
+                stopLoadingAnimation();
+                setContentView(R.layout.login);
+            }
+        });
+        apiResource.execute();
     }
 
     public void setPlaceData()
@@ -71,12 +93,6 @@ public class MainActivity extends AppCompatActivity{
         String inputId = String.valueOf(editTextId.getText());
         String inputPwd = String.valueOf(editTextPwd.getText());
 
-        // 로딩 애니메이션 시작
-        startLoadingAnimation();
-
-        // 눈속임을 위한 레이아웃 전환
-        setContentView(R.layout.auto_login_layout);
-
         // 로그인 함수
         Login(inputId, inputPwd);
     }
@@ -84,6 +100,12 @@ public class MainActivity extends AppCompatActivity{
     // 로그인 함수
     public void Login(String input_id, String input_pwd)
     {
+        // 로딩 애니메이션 시작
+        startLoadingAnimation();
+
+        // 눈속임을 위한 레이아웃 전환
+        setContentView(R.layout.auto_login_layout);
+
         // 인터넷 연결은 스레드를 통해서 백그라운드로 돌아가야 하므로(안드로이드 정책) AsyncTask 를 사용한다.
         // 그 AsyncTask 를 상속한 ApiConnectClass 클래스를 만들어서 객체로 사용하기로 함
         // 생성자의 파라매터로 id, pwd 를 받는다.
@@ -109,26 +131,57 @@ public class MainActivity extends AppCompatActivity{
     // ApiLoginClass 통해 로그인 성공시
     public void loginSuccess(String result)
     {
-        // 유저 정보 저장하는 부분
-        UserInfo.getInstance().setLoginInfo(result);
+        // Jsessionid 저장
+        UserInfo.getInstance().setJSESSIONID(result);
 
-        // GradeAll 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask 를 상속한 클래스를 활용해 값을 얻어온다.
-        ApiGradeAll apiGradeAll = new ApiGradeAll(UserInfo.getInstance().getUserId(), new CallBack()
+        ApiPostLogin apiPostLogin = new ApiPostLogin(new CallBack()
         {
             @Override
             public void callbackSuccess(String result)
             {
-                UserInfo.getInstance().setGradeAllInfo(result);
+                // 유저 정보 저장하는 부분
+                UserInfo.getInstance().setLoginInfo(result);
+
+                // GradeAll 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask 를 상속한 클래스를 활용해 값을 얻어온다.
+                ApiGradeAll apiGradeAll = new ApiGradeAll(UserInfo.getInstance().getUserId(), new CallBack()
+                {
+                    @Override
+                    public void callbackSuccess(String result)
+                    {
+                        UserInfo.getInstance().setGradeAllInfo(result);
+
+                        ApiNotice apiNotice = new ApiNotice(UserInfo.getInstance().getUserId(), new CallBack()
+                        {
+                            @Override
+                            public void callbackSuccess(String result)
+                            {
+                                // NoticeInfoClass.getInstance() 에 얻어온 정보 저장
+                                transformView();
+                            }
+
+                            @Override
+                            public void callbackFail() { }
+                        });
+                        apiNotice.execute();
+                    }
+
+                    @Override
+                    public void callbackFail()
+                    {
+                        stopLoadingAnimation();
+                        setContentView(R.layout.login);
+                    }
+                });
+                apiGradeAll.execute();
             }
 
             @Override
             public void callbackFail()
             {
-                stopLoadingAnimation();
-                setContentView(R.layout.login);
+
             }
         });
-        apiGradeAll.execute();
+        apiPostLogin.execute();
 
         // GradeNow 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask 를 상속한 클래스를 활요해 값을 얻어온다.
         ApiGradeNow apiGradeNow = new ApiGradeNow(UserInfo.getInstance().getUserId(), new CallBack()
@@ -147,20 +200,6 @@ public class MainActivity extends AppCompatActivity{
             }
         });
         apiGradeNow.execute();
-
-        ApiNotice apiNotice = new ApiNotice(UserInfo.getInstance().getUserId(), new CallBack()
-        {
-            @Override
-            public void callbackSuccess(String result)
-            {
-                // NoticeInfoClass.getInstance() 에 얻어온 정보 저장
-                transformView();
-            }
-
-            @Override
-            public void callbackFail() { }
-        });
-        apiNotice.execute();
     }
 
     // 로딩 화면 시작
@@ -338,4 +377,16 @@ public class MainActivity extends AppCompatActivity{
         mainTab.setTabTextColors(Color.parseColor(colorString),Color.parseColor(colorString));
     }
 
+    @Override
+    public void onBackPressed()
+    {
+        if(System.currentTimeMillis() - backPressedTime > 2000)
+        {
+            backPressedTime = System.currentTimeMillis();
+            Toast.makeText(this, "뒤로가기 버튼을 한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
+        finish();
+    }
 }

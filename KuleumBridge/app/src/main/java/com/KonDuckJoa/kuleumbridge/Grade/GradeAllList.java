@@ -98,6 +98,8 @@ public class GradeAllList extends Fragment {
     public static void setGradeAllInfo()
     {
         gradeAllArray = UserInfo.getInstance().getGradeAll();
+
+        clearArrays();
       
         // 소계 제외
         for (int i = 0; i < UserInfo.getInstance().getGradeAll().size(); i++)
@@ -112,6 +114,15 @@ public class GradeAllList extends Fragment {
         }
 
         isSet = true;
+    }
+
+    private static void clearArrays()
+    {
+        yearArray.clear();
+        divisionArray.clear();
+        nameArray.clear();
+        gradeCountArray.clear();
+        gradeRateArray.clear();
     }
 
     private TextView getTextViewWithSettings()

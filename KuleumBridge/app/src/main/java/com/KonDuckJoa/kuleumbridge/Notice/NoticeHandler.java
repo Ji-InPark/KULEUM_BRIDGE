@@ -9,6 +9,9 @@ public class NoticeHandler {
     private static HashMap<String, Integer> indexMap = createIndexMap();
     private static HashMap<Integer, String> categoryMap = createCategoryMap();
 
+    private static String[] noticeId = {"notice", "11688412", "11731332", "notice", "notice", "65659", "notice"};
+    private static String[] noticeSubject = {"0000300001", "", "", "0000300002", "0000300003", "", "0000300006"};
+
     private static HashMap<Integer, String> createCategoryMap()
     {
         HashMap<Integer, String> map = new HashMap<>();
@@ -83,5 +86,15 @@ public class NoticeHandler {
     public static String getCategory(int index)
     {
         return categoryMap.get(index);
+    }
+
+    public static String getNoticeId(int index)
+    {
+        return noticeId[index];
+    }
+
+    public static String getNoticeSubject(int index)
+    {
+        return noticeSubject[index];
     }
 }
