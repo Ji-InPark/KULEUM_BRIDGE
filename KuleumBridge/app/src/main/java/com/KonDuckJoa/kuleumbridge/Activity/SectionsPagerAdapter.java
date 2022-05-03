@@ -12,7 +12,7 @@ import com.KonDuckJoa.kuleumbridge.Fragment.TastePlaceFragment;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
     private Fragment[] fragments = new Fragment[3];
-    private String[] pageTitles = {"홈", "공지사항", "맛집"};
+    private String[] pageTitles = {"홈", "맛집", "공지사항"};
 
     public SectionsPagerAdapter(FragmentManager fm)
     {
@@ -23,8 +23,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     private void initializeFragments()
     {
         fragments[0] = new HomeFragment();
-        fragments[1] = new NoticeFragment();
-        fragments[2] = new TastePlaceFragment();
+        fragments[1] = new TastePlaceFragment();
+        fragments[2] = new NoticeFragment();
     }
 
     @Override
