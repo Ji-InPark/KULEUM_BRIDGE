@@ -12,64 +12,49 @@ import com.KonDuckJoa.kuleumbridge.R;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 
 public class GradeCheckActivity extends AppCompatActivity {
-    ArrayList<Grade> gradeAllArr = new ArrayList<>();
-    ArrayList<String> tab;
-    ArrayList<String> tab2;
-
-    TabLayout tabs;
-
-    String year = "";
-    String tabb ="";
-    int position = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.grade_detail);
-        gradeAllArr = UserInfo.getInstance().getGradeAll();
 
-        for (int i = 0; i < gradeAllArr.size(); i++) // String에 년도랑 학기 임시 저장(쉼표로 구분)
-            year += gradeAllArr.get(i).getCompletedYear() + " " + gradeAllArr.get(i).getSemester() + ",";
+        ArrayList<Grade> gradeAllArray = UserInfo.getInstance().getGradeAll();
+        ArrayList<String> tabNameArray = new ArrayList<>();
+        HashMap<String, Boolean> isDuplicatedTabNameMap = new HashMap<>();
 
-        tab = new ArrayList<>(Arrays.asList(year.split(",")));
-        tab2 = new ArrayList<>();
-
-        Collections.reverse(tab); // 순서 역순으로 바꿔줌
-        tab.remove(0); // 전체 소계 제거
-
-        for (int i = 0; i < tab.size(); i++)
+        if(!GradeAllList.getIsSet())
         {
-            if (tab.get(i).contains("소계")) //소계 다 제거함
-            {
-                tab.remove(i);
-            }
+            GradeAllList.setGradeAllInfo();
         }
 
-        for (String content : tab) //중복 된 요소 제거
+        for (int i = 0; i < gradeAllArray.size(); i++)
         {
-            if (!tab2.contains(content))
-            {
-                tab2.add(content);
-            }
+            if(gradeAllArray.get(i).getSemester().contains("소계")) continue;
+
+            tabNameArray.add(gradeAllArray.get(i).getCompletedYear() + " " + gradeAllArray.get(i).getSemester());
         }
 
-        tabs = findViewById(R.id.tabs);
-        tabs.setBackgroundColor(Color.parseColor("#9FF781"));
-        tabs.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
-        tabs.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#000000"));
+        Collections.reverse(tabNameArray); // 순서 역순으로 바꿔줌
+
+        TabLayout semesterTabLayout = findViewById(R.id.tabs);
+
+        semesterTabLayout.setBackgroundColor(Color.parseColor("#9FF781"));
+        semesterTabLayout.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
+        semesterTabLayout.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#000000"));
 
         // 탭 추가 과정
-        for (int i = 0; i < tab2.size(); i++)
+        for (int i = 0; i < tabNameArray.size(); i++)
         {
-            tabs.addTab(tabs.newTab().setText(tab2.get(i)));
-        }
+            if(isDuplicatedTabNameMap.getOrDefault(tabNameArray.get(i), false)) continue;
 
-        // 탭 아무것도 안눌렀을 때, 세부성적 버튼 클릭시 화면 초기화
-        tabb = tab2.get(0);
+            isDuplicatedTabNameMap.put(tabNameArray.get(i), true);
+
+            semesterTabLayout.addTab(semesterTabLayout.newTab().setText(tabNameArray.get(i)));
+        }
 
         if(savedInstanceState == null)
         {
@@ -77,27 +62,24 @@ public class GradeCheckActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.grade_fragment, fragment).commit();
 
             Bundle bundle = new Bundle();
-            bundle.putString("tabb",tabb);
+            bundle.putString("tabName", tabNameArray.get(0)); // 처음에는 0번 탭 선택
 
             fragment.setArguments(bundle);
         }
 
         // 탭 클릭했을 때
-        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
+        semesterTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
         {
             @Override
             public void onTabSelected(TabLayout.Tab tab)
             {
-                position = tab.getPosition();
-                tabb = tab2.get(position);
-
                 if(savedInstanceState == null)
                 {
                     GradeAllList fragment = new GradeAllList();
                     getSupportFragmentManager().beginTransaction().replace(R.id.grade_fragment, fragment).commit();
 
                     Bundle bundle = new Bundle();
-                    bundle.putString("tabb",tabb);
+                    bundle.putString("tabName", tab.getText().toString());
 
                     fragment.setArguments(bundle);
                 }

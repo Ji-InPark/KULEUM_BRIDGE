@@ -30,48 +30,43 @@ import jxl.read.biff.BiffException;
  지도로 보기 버튼 누르면 나타나는 화면 구성*/
 
 public class TastePlaceActivity extends AppCompatActivity implements OnMapReadyCallback {
+    private static final int placeCount = 120;
+
     private GoogleMap tasteMap;
-    private static String[] kindArray = new String[120]; // 종류
-    private static String[] nameArray = new String[120]; // 상호명
-    private static String[] addressArray = new String[120]; // 주소
-    private static double[] latitudeArray = new double[120]; // 위도
-    private static double[] longitudeArray = new double[120]; // 경도
+    private static String[] kindArray = new String[placeCount]; // 종류
+    private static String[] nameArray = new String[placeCount]; // 상호명
+    private static String[] addressArray = new String[placeCount]; // 주소
+    private static double[] latitudeArray = new double[placeCount]; // 위도
+    private static double[] longitudeArray = new double[placeCount]; // 경도
     private static int RowEnd = 0;  // 행의 개수를 세는 변수
 
     //엑셀 불러서 값 저장하는 과정
     public static void getDataFromExcel(InputStream inputStream)
     {
-        Workbook workbook;
-        Sheet sheet;
-
         try
         {
-            workbook = Workbook.getWorkbook(inputStream);
-            sheet = workbook.getSheet(0);
+            Workbook workbook = Workbook.getWorkbook(inputStream);
+            Sheet sheet = workbook.getSheet(0);
 
             RowEnd = sheet.getRows() - 1;
 
-            for (int row = 1; row <= RowEnd; row++)
+            for (int i = 1; i <= RowEnd; i++)
             {
-                kindArray[row] = sheet.getCell(0, row).getContents();
+                kindArray[i] = sheet.getCell(0, i).getContents();
 
-                nameArray[row] = sheet.getCell(1, row).getContents();
-                addressArray[row] = sheet.getCell(2, row).getContents();
+                nameArray[i] = sheet.getCell(1, i).getContents();
+                addressArray[i] = sheet.getCell(2, i).getContents();
 
-                NumberCell latitude = (NumberCell) sheet.getCell(3, row);
+                NumberCell latitude = (NumberCell) sheet.getCell(3, i);
                 latitude.getNumberFormat().setMaximumFractionDigits(5); // 소수점 5자리까지
-                latitudeArray[row] = Double.parseDouble(latitude.getContents()); //위도
+                latitudeArray[i] = Double.parseDouble(latitude.getContents()); //위도
 
-                NumberCell longitude = (NumberCell) sheet.getCell(4, row);
+                NumberCell longitude = (NumberCell) sheet.getCell(4, i);
                 longitude.getNumberFormat().setMaximumFractionDigits(5); // 소수점 5자리까지
-                longitudeArray[row] = Double.parseDouble(longitude.getContents()); // 경도
+                longitudeArray[i] = Double.parseDouble(longitude.getContents()); // 경도
             }
         }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        catch (BiffException e)
+        catch (Exception e)
         {
             e.printStackTrace();
         }
@@ -94,7 +89,7 @@ public class TastePlaceActivity extends AppCompatActivity implements OnMapReadyC
         tasteMap = googleMap;
 
         // 마커 추가 과정
-        for(int i = 1; i < RowEnd; i++)
+        for(int i = 1; i <= RowEnd; i++)
         {
             MarkerOptions marker = new MarkerOptions();
             marker.position(new LatLng(latitudeArray[i], longitudeArray[i])).title(nameArray[i]).snippet(addressArray[i]);

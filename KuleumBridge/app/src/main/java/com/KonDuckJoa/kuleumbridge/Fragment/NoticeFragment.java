@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.KonDuckJoa.kuleumbridge.Activity.MainActivity;
 import com.KonDuckJoa.kuleumbridge.Notice.Notice;
 import com.KonDuckJoa.kuleumbridge.Notice.NoticeHandler;
 import com.KonDuckJoa.kuleumbridge.Notice.NoticeInfo;
@@ -29,7 +30,7 @@ public class NoticeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.notice_layout,container,false);
+        View view = inflater.inflate(R.layout.notice_layout, container,false);
 
         addOnNoticeTabSelectedListener(view);
 
@@ -87,8 +88,8 @@ public class NoticeFragment extends Fragment {
                         String noticeURL = noticeArrayList.get(i).getUrl();       // 공지사항 URL
                         textView.setText(noticeTitle);
 
-                        String regexNT = changeRegex(noticeTitle); // 정규표현식으로 바뀐 noticeTitle
-                        Pattern pattern = Pattern.compile(regexNT); // 패턴에 컴파일되는 문자열은 정규표현식이 지켜져야 특수문자도 감지한다.
+                        String regexNoticeTitle = changeRegex(noticeTitle); // 정규표현식으로 바뀐 noticeTitle
+                        Pattern pattern = Pattern.compile(regexNoticeTitle); // 패턴에 컴파일되는 문자열은 정규표현식이 지켜져야 특수문자도 감지한다.
                         Linkify.TransformFilter mTransform = (matcher, s) -> {
                             return noticeURL;
                             // 스키마인 ""뒤에 noticeURL을 붙여서 리턴한다.
@@ -107,7 +108,8 @@ public class NoticeFragment extends Fragment {
         }
     }
 
-    private void addOnNoticeTabSelectedListener(View view) {
+    private void addOnNoticeTabSelectedListener(View view)
+    {
         TabLayout noticeTab = view.findViewById(R.id.notice_category_tab);
         setNoticeTabColor(noticeTab, "#000000");
 
@@ -116,8 +118,7 @@ public class NoticeFragment extends Fragment {
             @Override
             public void onTabSelected(TabLayout.Tab tab)
             {
-                int pos = tab.getPosition();
-                changeNoticeTab(pos,view);
+                changeNoticeTab(tab.getPosition(), view);
             }
 
             @Override
@@ -129,15 +130,16 @@ public class NoticeFragment extends Fragment {
     }
 
     // 공지사항 탭바 상호작용 함수
-    private void changeNoticeTab(int selectedIndex, View view) {
+    private void changeNoticeTab(int selectedIndex, View view)
+    {
         TableLayout[] tables = {
-                view.findViewById(R.id.notice_element_table0),
-                view.findViewById(R.id.notice_element_table1),
-                view.findViewById(R.id.notice_element_table2),
-                view.findViewById(R.id.notice_element_table3),
-                view.findViewById(R.id.notice_element_table4),
-                view.findViewById(R.id.notice_element_table5),
-                view.findViewById(R.id.notice_element_table6)
+            view.findViewById(R.id.notice_element_table0),
+            view.findViewById(R.id.notice_element_table1),
+            view.findViewById(R.id.notice_element_table2),
+            view.findViewById(R.id.notice_element_table3),
+            view.findViewById(R.id.notice_element_table4),
+            view.findViewById(R.id.notice_element_table5),
+            view.findViewById(R.id.notice_element_table6)
         };
 
         for(int i = 0; i < 7; i++)
@@ -148,7 +150,8 @@ public class NoticeFragment extends Fragment {
 
 
     // 문자열을 정규표현식을 만족하는 문자열로 바꿔주는 함수
-    private String changeRegex(String str) {
+    private String changeRegex(String str)
+    {
         String changedStr = str.replace("(","\\(");
         changedStr = changedStr.replace(")","\\)");
         changedStr = changedStr.replace("[","\\[");
@@ -159,6 +162,7 @@ public class NoticeFragment extends Fragment {
         changedStr = changedStr.replace("^","\\^");
         changedStr = changedStr.replace("&","\\&");
         changedStr = changedStr.replace("+","\\+");
+
         return changedStr;
     }
 

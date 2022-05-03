@@ -1,4 +1,4 @@
-# KU:LUEM BRIDGE
+# KU:LEUM BRIDGE
 
 ### **프로젝트 개요**
 
