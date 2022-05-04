@@ -35,7 +35,6 @@
             android:layout_height="50dp"
             android:background="@drawable/edittext_border"/>
 
-
         <EditText
             android:id="@+id/idInput"
             android:layout_width="300dp"
@@ -44,10 +43,10 @@
             android:background="@drawable/edittext_border"
             android:hint="  PORTAL ID"
             android:maxLines="1"
+            android:inputType="text"
             android:textColor="#ff000000"
             android:textColorHint="#808080"
             android:windowSoftInputMode="adjustPan" />
-
     </TableRow>
 
     <TableRow
@@ -73,8 +72,6 @@
             android:inputType="textPassword"
             android:windowSoftInputMode="adjustPan"
             android:background="@drawable/edittext_border" />
-
-
     </TableRow>
 
 
