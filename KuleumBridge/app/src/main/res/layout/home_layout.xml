@@ -8,7 +8,6 @@
     android:background="@drawable/background1"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".Activity.DrawerActivity"
     android:id="@+id/DrawLayout">
 
     <!-- 홈 레이아웃 -->

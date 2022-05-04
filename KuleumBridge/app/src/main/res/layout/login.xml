@@ -25,26 +25,28 @@
         android:text="학교생활의 연결,  \nKU:LEUM BRIDGE" />
 
     <EditText
-        android:layout_marginTop="50dp"
         android:id="@+id/idInput"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/edittext_border"
+        android:hint="   PORTAL ID"
+        android:maxLines="1"
         android:textColor="#ff000000"
         android:textColorHint="#808080"
-        android:hint="   PORTAL ID"
-        android:windowSoftInputMode="adjustPan"
-        android:background="@drawable/edittext_border"
-        />
+        android:windowSoftInputMode="adjustPan" />
 
     <EditText
         android:id="@+id/passwordInput"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
+        android:layout_marginTop="5dp"
         android:textColor="#ff000000"
         android:textColorHint="#808080"
         android:hint="   Password"
+        android:maxLines="1"
         android:inputType="textPassword"
         android:windowSoftInputMode="adjustPan"
         android:background="@drawable/edittext_border" />
