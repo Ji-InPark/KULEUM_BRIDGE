@@ -46,6 +46,7 @@
             android:inputType="text"
             android:textColor="#ff000000"
             android:textColorHint="#808080"
+            android:imeOptions="actionNext"
             android:windowSoftInputMode="adjustPan" />
     </TableRow>
 
@@ -65,13 +66,14 @@
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
+            android:background="@drawable/edittext_border"
             android:textColor="#ff000000"
             android:textColorHint="#808080"
             android:hint="  Password"
             android:maxLines="1"
             android:inputType="textPassword"
-            android:windowSoftInputMode="adjustPan"
-            android:background="@drawable/edittext_border" />
+            android:imeOptions="actionDone"
+            android:windowSoftInputMode="adjustPan" />
     </TableRow>
 
 
