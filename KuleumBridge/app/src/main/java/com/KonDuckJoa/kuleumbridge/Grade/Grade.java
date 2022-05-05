@@ -13,6 +13,7 @@ public class Grade {
     private String gradeRate;              // 등급    | 취득학점  | 총취득학점
     private String completedGradeCount;    // null   | 이수학점  | 총이수학점
 
+
     public Grade(String completedYear, String subjectName, String completedDivision,
                  String semester, String semesterCode, String gradeCount, String gradeRate, String completedGradeCount)
     {
@@ -61,5 +62,6 @@ public class Grade {
     {
         return completedYear + " " + semester + " " + subjectName + " " + gradeCount + " " + completedDivision + " " + gradeRate + "\n";
     }
+
 
 }

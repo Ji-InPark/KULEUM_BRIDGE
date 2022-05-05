@@ -26,6 +26,7 @@ public class GradeAllList extends Fragment {
     private static ArrayList<String> nameArray = new ArrayList<>();       //이름
     private static ArrayList<String> gradeCountArray = new ArrayList<>(); //학점
     private static ArrayList<String> gradeRateArray = new ArrayList<>();  //성적
+    private static ArrayList<String> gradeAvgArray = new ArrayList<>();   //학기 평균
 
     private static boolean isSet = false;
 
@@ -56,6 +57,7 @@ public class GradeAllList extends Fragment {
                 tableRow.setLayoutParams(new TableRow.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT));
+                tableRow.setBackground(getResources().getDrawable(R.drawable.border)); //Cell 마다 밑줄 추가
 
                 for (int j = 0; j < 4; j++)
                 {
@@ -91,7 +93,6 @@ public class GradeAllList extends Fragment {
                 tableLayout.addView(tableRow);
             }
         }
-
         return rootView;
     }
 
@@ -111,6 +112,7 @@ public class GradeAllList extends Fragment {
             nameArray.add(gradeAllArray.get(i).getSubjectName());
             gradeCountArray.add(gradeAllArray.get(i).getGradeCount());
             gradeRateArray.add(gradeAllArray.get(i).getGradeRate());
+
         }
 
         isSet = true;
@@ -127,8 +129,8 @@ public class GradeAllList extends Fragment {
 
     private TextView getTextViewWithSettings()
     {
-        TextView textView = new TextView(getActivity());
 
+        TextView textView = new TextView(getActivity());
         textView.setTextSize(19);
         textView.setTextColor(Color.parseColor("#000000"));
         textView.setWidth(0);
