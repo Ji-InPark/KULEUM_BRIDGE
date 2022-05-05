@@ -72,7 +72,7 @@
             android:hint="  Password"
             android:maxLines="1"
             android:inputType="textPassword"
-            android:imeOptions="actionDone"
+            android:imeOptions="actionGo"
             android:windowSoftInputMode="adjustPan" />
     </TableRow>
 
