@@ -5,11 +5,13 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.security.keystore.KeyGenParameterSpec;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.security.crypto.MasterKeys;
 import androidx.viewpager.widget.ViewPager;
 
 import com.KonDuckJoa.kuleumbridge.API.ApiGradeAll;
@@ -29,6 +31,7 @@ import com.KonDuckJoa.kuleumbridge.databinding.TabViewPagerBinding;
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity{
@@ -226,18 +229,14 @@ public class MainActivity extends AppCompatActivity{
             String encryptedPwd = encrypt.encrypt(inputPwd);
 
             // 암호화된 로그인 정보 저장 부분
-            // 이미 암호화된 정보가 있다면 저장 X
             SharedPreferences sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
 
-            if(sharedPreferences.getString("id", "").equals(""))
-            {
-                SharedPreferences.Editor editor = sharedPreferences.edit();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                editor.putString("id", encryptedId);
-                editor.putString("pwd", encryptedPwd);
+            editor.putString("id", encryptedId);
+            editor.putString("pwd", encryptedPwd);
 
-                editor.apply();
-            }
+            editor.apply();
         }
         catch(Exception e)
         {
@@ -275,6 +274,8 @@ public class MainActivity extends AppCompatActivity{
         }
         catch (Exception e)
         {
+            stopLoadingAnimation();
+            setContentView(R.layout.login);
             e.printStackTrace();
         }
     }
@@ -282,35 +283,11 @@ public class MainActivity extends AppCompatActivity{
     // 암호화를 위한 key를 불러오는 메소드
     public String getEncryptKey()
     {
+        KeyGenParameterSpec keyGenParameterSpec = MasterKeys.AES256_GCM_SPEC;
+
         try
         {
-            SharedPreferences sharedPreferences = getSharedPreferences("key", MODE_PRIVATE);
-
-            String key = sharedPreferences.getString("key", "");
-
-            // 만약 저장되어 있는 키가 없다면 키를 랜덤으로 만든다.
-            // 그리고 저장한다.
-            if(key.equals(""))
-            {
-                Random random = new Random();
-                StringBuilder sb = new StringBuilder(key);
-
-                for(int i = 0; i < 16; i++)
-                {
-                    sb.append(random.nextInt(10));
-                }
-
-                key = sb.toString();
-
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                editor.putString("key", key);
-
-                editor.apply();
-            }
-
-            return key;
-
+            return MasterKeys.getOrCreate(keyGenParameterSpec);
         }
         catch (Exception e)
         {
