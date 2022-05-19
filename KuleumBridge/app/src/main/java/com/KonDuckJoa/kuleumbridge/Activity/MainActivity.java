@@ -225,8 +225,14 @@ public class MainActivity extends AppCompatActivity{
 
         try
         {
-            String encryptedId = encrypt.encrypt(inputId);
-            String encryptedPwd = encrypt.encrypt(inputPwd);
+            Random random = new Random();
+
+            StringBuilder salt = new StringBuilder();
+
+            for(int i = 0; i < 10; i++) salt.append(random.nextInt(10));
+
+            String encryptedId = encrypt.encrypt(salt.toString() + inputId);
+            String encryptedPwd = encrypt.encrypt(salt.toString() + inputPwd);
 
             // 암호화된 로그인 정보 저장 부분
             SharedPreferences sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
@@ -266,8 +272,8 @@ public class MainActivity extends AppCompatActivity{
             Encrypt encrypt = new Encrypt(getEncryptKey());
 
             // 암호화된 id, pwd를 복호화
-            String decryptId = encrypt.decrypt(encryptedId);
-            String decryptPwd = encrypt.decrypt(encryptedPwd);
+            String decryptId = encrypt.decrypt(encryptedId).substring(10);
+            String decryptPwd = encrypt.decrypt(encryptedPwd).substring(10);
 
             // 복호화된 login 정보를 가지고 login
             Login(decryptId, decryptPwd);
