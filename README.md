@@ -10,7 +10,7 @@
 
 **현재 IOS는 사용이 불가능합니다**
 
-**현재 배포가 되지 않은 앱입니다.**
+https://play.google.com/store/apps/details?id=com.KonDuckJoa.kuleumbridge
 
 <br/>
 
