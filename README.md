@@ -17,12 +17,8 @@ https://play.google.com/store/apps/details?id=com.KonDuckJoa.kuleumbridge
 ### **어플리케이션의 기능**
 
 1. 공지사항 확인
-2. 종강까지 디데이 확인
-3. 건국대 근처 맛집
-4. 간편성적조회
-5. 모바일 학생증
-6. 취업 관련 도움 링크 제공
-7. 일정 스케줄 확인
+2. 건국대 근처 맛집
+3. 간편성적조회
 
 <br/>
 
