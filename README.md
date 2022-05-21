@@ -10,7 +10,9 @@
 
 **현재 IOS는 사용이 불가능합니다**
 
-https://play.google.com/store/apps/details?id=com.KonDuckJoa.kuleumbridge
+**Google PlayStore에 앱이 배포되어있습니다. 아래 이미지를 클릭하면 다운로드 링크로 이동합니다.**
+
+[![](https://adimorahblog.com/wp-content/uploads/2022/02/ezgif-5-a3dd39e7be.png )](https://play.google.com/store/apps/details?id=com.KonDuckJoa.kuleumbridge)
 
 <br/>
 
