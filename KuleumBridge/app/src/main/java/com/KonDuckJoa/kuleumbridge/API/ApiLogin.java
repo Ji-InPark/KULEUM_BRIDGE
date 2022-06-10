@@ -122,15 +122,22 @@ public class ApiLogin extends AsyncTask<String, String, Boolean> {
                     .build();
 
             Response response = okHttpClient.newCall(loginRequest).execute();
-            
-            if(response.body().string().contains("ERRMSGINFO") || response.header("set-Cookie") == null)
+
+            result = response.body().string();
+
+            if(result.contains("ERRMSGINFO"))
+            {
+                return false;
+            }
+
+            if(response.header("set-Cookie") == null)
             {
                 return null;
             }
 
             result = response.header("set-Cookie").split(";")[0].split("=")[1];
 
-            return !result.contains("ERRMSGINFO");
+            return true;
         }
         catch (Exception e)
         {
