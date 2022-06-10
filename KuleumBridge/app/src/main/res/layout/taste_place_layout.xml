@@ -169,7 +169,7 @@
                 android:layout_height="80dp"
                 android:layout_marginRight="30dp"
                 android:onClick="OnTasteButtonClick"
-                android:src="@drawable/jjang" />
+                android:src="@drawable/jjungsik" />
 
             <ImageView
                 android:id="@+id/Meat"
