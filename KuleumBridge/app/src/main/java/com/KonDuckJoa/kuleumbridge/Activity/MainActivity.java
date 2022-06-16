@@ -31,7 +31,6 @@ import com.KonDuckJoa.kuleumbridge.databinding.TabViewPagerBinding;
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.IOException;
-import java.security.GeneralSecurityException;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity{
@@ -70,7 +69,7 @@ public class MainActivity extends AppCompatActivity{
             public void callbackFail()
             {
                 stopLoadingAnimation();
-                setContentView(R.layout.login);
+                setContentView(R.layout.login_layout);
             }
         });
         apiResource.execute();
@@ -107,7 +106,7 @@ public class MainActivity extends AppCompatActivity{
         startLoadingAnimation();
 
         // 눈속임을 위한 레이아웃 전환
-        setContentView(R.layout.auto_login_layout);
+        setContentView(R.layout.login_skeleton_layout);
 
         // 인터넷 연결은 스레드를 통해서 백그라운드로 돌아가야 하므로(안드로이드 정책) AsyncTask 를 사용한다.
         // 그 AsyncTask 를 상속한 ApiConnectClass 클래스를 만들어서 객체로 사용하기로 함
@@ -125,7 +124,7 @@ public class MainActivity extends AppCompatActivity{
             public void callbackFail()
             {
                 stopLoadingAnimation();
-                setContentView(R.layout.login);
+                setContentView(R.layout.login_layout);
             }
         });
         apiLogin.execute();
@@ -172,7 +171,7 @@ public class MainActivity extends AppCompatActivity{
                     public void callbackFail()
                     {
                         stopLoadingAnimation();
-                        setContentView(R.layout.login);
+                        setContentView(R.layout.login_layout);
                     }
                 });
                 apiGradeAll.execute();
@@ -199,7 +198,7 @@ public class MainActivity extends AppCompatActivity{
             public void callbackFail()
             {
                 stopLoadingAnimation();
-                setContentView(R.layout.login);
+                setContentView(R.layout.login_layout);
             }
         });
         apiGradeNow.execute();
@@ -265,7 +264,7 @@ public class MainActivity extends AppCompatActivity{
             {
                 // 로딩 화면 중단
                 stopLoadingAnimation();
-                setContentView(R.layout.login);
+                setContentView(R.layout.login_layout);
                 return;
             }
 
@@ -281,7 +280,7 @@ public class MainActivity extends AppCompatActivity{
         catch (Exception e)
         {
             stopLoadingAnimation();
-            setContentView(R.layout.login);
+            setContentView(R.layout.login_layout);
             e.printStackTrace();
         }
     }

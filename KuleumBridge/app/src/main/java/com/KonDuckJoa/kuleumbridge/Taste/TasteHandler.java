@@ -37,7 +37,7 @@ public class TasteHandler {
         stringToDrawableMap.put("돈까스/회/일식", R.drawable.sushi);
         stringToDrawableMap.put("치킨/햄버거", R.drawable.asian);
         stringToDrawableMap.put("아시안/양식", R.drawable.hamburger);
-        stringToDrawableMap.put("중식", R.drawable.jungsik);
+        stringToDrawableMap.put("중식", R.drawable.chinese);
         stringToDrawableMap.put("고기", R.drawable.meat);
         stringToDrawableMap.put("술집", R.drawable.alchol);
 

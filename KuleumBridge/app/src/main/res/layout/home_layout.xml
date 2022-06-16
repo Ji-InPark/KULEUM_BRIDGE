@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background1"
+    android:background="@drawable/background_img"
     android:orientation="vertical"
     android:gravity="center"
     android:id="@+id/DrawLayout">
@@ -52,7 +52,7 @@
             android:layout_height="170dp"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
-            android:background="@drawable/calendar_view">
+            android:background="@drawable/rounded_rectangle_view">
 
             <ImageView
                 android:id="@+id/studentCard_photo"
@@ -109,7 +109,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_gravity="center"
-            android:background="@drawable/calendar_view"
+            android:background="@drawable/rounded_rectangle_view"
             android:isScrollContainer="true"
             android:stretchColumns="*">
             <TextView
