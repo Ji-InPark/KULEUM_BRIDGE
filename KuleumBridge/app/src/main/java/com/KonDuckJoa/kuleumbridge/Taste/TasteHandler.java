@@ -19,7 +19,7 @@ public class TasteHandler {
         idToStringMap.put(R.id.Caffe, "디저트");
         idToStringMap.put(R.id.IlSik, "일식");
         idToStringMap.put(R.id.Asian, "아시안");
-        idToStringMap.put(R.id.FastFood, "패스트푸드");
+        idToStringMap.put(R.id.FastFood, "치킨");
         idToStringMap.put(R.id.JungSik, "중식");
         idToStringMap.put(R.id.Meat, "고기");
         idToStringMap.put(R.id.Alchol, "술집");
