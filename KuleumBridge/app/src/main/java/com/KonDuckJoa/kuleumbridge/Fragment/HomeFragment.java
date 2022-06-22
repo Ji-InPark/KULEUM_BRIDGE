@@ -95,13 +95,6 @@ public class HomeFragment extends Fragment
         editor.apply();
     }
 
-    @Override
-    public void onResume()
-    {
-        super.onResume();
-        MainActivity.stopLoadingAnimation();
-    }
-
     // 학생증 정보 수정
     private void editStudentID(View view)
     {

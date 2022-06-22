@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity{
     private long backPressedTime = 0;
 
     // 로딩 애니메이션을 위한 객체
-    public static AnimationProgress customProgress;
+    private AnimationProgress customProgress;
 
     private TabViewPagerBinding tabViewPagerBinding;
 
@@ -205,13 +205,13 @@ public class MainActivity extends AppCompatActivity{
     }
 
     // 로딩 화면 시작
-    public static void startLoadingAnimation()
+    public void startLoadingAnimation()
     {
         customProgress.show();
     }
 
     // 로딩 애니메이션 종료
-    public static void stopLoadingAnimation()
+    public void stopLoadingAnimation()
     {
         customProgress.dismiss();
     }
@@ -350,6 +350,8 @@ public class MainActivity extends AppCompatActivity{
         // 탭과 뷰페이저를 연결
         mainTab.setupWithViewPager(viewPager);
         setMainTabColor(mainTab,"#000000");
+
+        stopLoadingAnimation();
     }
 
     // 메인 탭 텍스트 및 하단 표시부 색깔 변경 메소드
