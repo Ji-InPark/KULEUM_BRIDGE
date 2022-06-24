@@ -1,5 +1,6 @@
 package com.KonDuckJoa.kuleumbridge.Activity;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -7,7 +8,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.security.keystore.KeyGenParameterSpec;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,11 +38,14 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity{
     private long backPressedTime = 0;
+    private long refreshButtonPressedTime = 0;
 
     // 로딩 애니메이션을 위한 객체
     private AnimationProgress customProgress;
 
     private TabViewPagerBinding tabViewPagerBinding;
+
+    ObjectAnimator reloadButtonAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -315,7 +321,63 @@ public class MainActivity extends AppCompatActivity{
             case R.id.grade_all_check_button: // home_layout의 "전체 성적 조회" 버튼
                 startActivity(new Intent(this, GradeCheckActivity.class));
                 break;
+            case R.id.reload_now_grade_button:
+                ReloadNowGrade();
+                break;
         }
+    }
+
+    // 현재 성적 재조회 로직
+    private void ReloadNowGrade()
+    {
+        if(System.currentTimeMillis() - backPressedTime < 60000)
+        {
+            Toast.makeText(this, "1분 간격으로 시도해주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        backPressedTime = System.currentTimeMillis();
+
+        // 성적 다시가져오는 로직
+        // 그리고 애니메이션 종료하는 로직
+        ApiGradeNow apiGradeNow = new ApiGradeNow(UserInfo.getInstance().getUserId(), new CallBack()
+        {
+            @Override
+            public void callbackSuccess(String result)
+            {
+                UserInfo.getInstance().setGradeNowInfo(result);
+                stopReloadButton();
+            }
+
+            @Override
+            public void callbackFail()
+            {
+                stopLoadingAnimation();
+                setContentView(R.layout.login_layout);
+            }
+        });
+        apiGradeNow.execute();
+
+        initializeAndStartRotateReloadButton();
+    }
+
+    private void stopReloadButton()
+    {
+        reloadButtonAnimation.end();
+    }
+
+    private void initializeAndStartRotateReloadButton()
+    {
+        if(reloadButtonAnimation == null)
+        {
+            ImageButton refreshButton = findViewById(R.id.reload_now_grade_button);
+            reloadButtonAnimation = ObjectAnimator.ofFloat(refreshButton, View.ROTATION, -360f, 0f);
+            reloadButtonAnimation.setDuration(1000);
+            reloadButtonAnimation.setRepeatCount(ObjectAnimator.INFINITE);
+            reloadButtonAnimation.setInterpolator(new LinearInterpolator());
+        }
+
+        reloadButtonAnimation.start();
     }
 
     // 맛집 레이아웃의 9가지 맛집 아이콘 상호작용 메소드

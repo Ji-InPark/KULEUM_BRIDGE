@@ -96,6 +96,8 @@ public class UserInfo {
     {
         try
         {
+            gradeNowArray.clear();
+
             JSONObject responseJson = new JSONObject(gradeNowResponse);
 
             JSONArray gradeNowJson = responseJson.getJSONArray("DS_GRADEOFSTUDENT");
@@ -105,7 +107,8 @@ public class UserInfo {
             {
                 JSONObject subject = gradeNowJson.getJSONObject(i);
 
-                gradeNowArray.add(new Grade(subject.getString("LT_YY"),
+                gradeNowArray.add(new Grade(
+                        subject.getString("LT_YY"),
                         subject.getString("TYPL_KOR_NM"),
                         subject.getString("POBT_NM"),
                         subject.getString("COMM_NM"),
