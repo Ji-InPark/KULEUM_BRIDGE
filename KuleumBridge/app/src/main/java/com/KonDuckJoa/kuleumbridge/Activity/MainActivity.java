@@ -38,14 +38,12 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity{
     private long backPressedTime = 0;
-    private long refreshButtonPressedTime = 0;
+    private long reloadButtonPressedTime = 0;
 
     // 로딩 애니메이션을 위한 객체
     private AnimationProgress customProgress;
 
     private TabViewPagerBinding tabViewPagerBinding;
-
-    ObjectAnimator reloadButtonAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -330,13 +328,13 @@ public class MainActivity extends AppCompatActivity{
     // 현재 성적 재조회 로직
     private void ReloadNowGrade()
     {
-        if(System.currentTimeMillis() - backPressedTime < 60000)
+        if(System.currentTimeMillis() - reloadButtonPressedTime < 10000)
         {
-            Toast.makeText(this, "1분 간격으로 시도해주세요.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "잠시 뒤에 시도해주세요.", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        backPressedTime = System.currentTimeMillis();
+        reloadButtonPressedTime = System.currentTimeMillis();
 
         // 성적 다시가져오는 로직
         // 그리고 애니메이션 종료하는 로직
@@ -346,7 +344,6 @@ public class MainActivity extends AppCompatActivity{
             public void callbackSuccess(String result)
             {
                 UserInfo.getInstance().setGradeNowInfo(result);
-                stopReloadButton();
             }
 
             @Override
@@ -358,24 +355,16 @@ public class MainActivity extends AppCompatActivity{
         });
         apiGradeNow.execute();
 
-        initializeAndStartRotateReloadButton();
+        StartRotateReloadButton();
     }
 
-    private void stopReloadButton()
+    private void StartRotateReloadButton()
     {
-        reloadButtonAnimation.end();
-    }
-
-    private void initializeAndStartRotateReloadButton()
-    {
-        if(reloadButtonAnimation == null)
-        {
-            ImageButton refreshButton = findViewById(R.id.reload_now_grade_button);
-            reloadButtonAnimation = ObjectAnimator.ofFloat(refreshButton, View.ROTATION, -360f, 0f);
-            reloadButtonAnimation.setDuration(1000);
-            reloadButtonAnimation.setRepeatCount(ObjectAnimator.INFINITE);
-            reloadButtonAnimation.setInterpolator(new LinearInterpolator());
-        }
+        ImageButton refreshButton = findViewById(R.id.reload_now_grade_button);
+        ObjectAnimator reloadButtonAnimation = ObjectAnimator.ofFloat(refreshButton, View.ROTATION, -360f, 0f);
+        reloadButtonAnimation.setDuration(1000);
+        reloadButtonAnimation.setRepeatCount(1);
+        reloadButtonAnimation.setInterpolator(new LinearInterpolator());
 
         reloadButtonAnimation.start();
     }
