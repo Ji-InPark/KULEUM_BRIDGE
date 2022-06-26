@@ -63,6 +63,10 @@ public class UserInfo {
 
             JSONObject responseJson = new JSONObject(gradeAllResponse);
 
+            JSONObject photoJson = responseJson.getJSONObject("dmPhoto");
+
+            setPhotoUrl(photoJson.getString("PHOTO"));
+
             JSONArray gradeAllJson = responseJson.getJSONArray("DS_GRAD");
             setGradeAllLength(gradeAllJson.length());
 
@@ -78,10 +82,6 @@ public class UserInfo {
                         subject.getString("GRD"),
                         subject.getString("DETM_CD")));
             }
-
-            JSONObject photoJson = responseJson.getJSONObject("dmPhoto");
-
-            setPhotoUrl(photoJson.getString("PHOTO"));
         }
         catch (Exception e)
         {

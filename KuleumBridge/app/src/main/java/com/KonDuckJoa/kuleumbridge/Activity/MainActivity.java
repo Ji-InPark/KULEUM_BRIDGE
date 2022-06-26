@@ -313,6 +313,11 @@ public class MainActivity extends AppCompatActivity{
                 startActivity(new Intent(this, TastePlaceActivity.class));
                 break;
             case R.id.grade_all_check_button: // home_layout의 "전체 성적 조회" 버튼
+                if(UserInfo.getInstance().getGradeAllLength() == 0)
+                {
+                    Toast.makeText(this, "조회할 성적이 없습니다.", Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 startActivity(new Intent(this, GradeCheckActivity.class));
                 break;
         }
