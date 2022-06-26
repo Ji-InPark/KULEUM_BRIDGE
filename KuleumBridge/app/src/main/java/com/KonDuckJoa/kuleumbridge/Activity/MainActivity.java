@@ -175,6 +175,24 @@ public class MainActivity extends AppCompatActivity{
                     }
                 });
                 apiGradeAll.execute();
+
+                // GradeNow 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask 를 상속한 클래스를 활요해 값을 얻어온다.
+                ApiGradeNow apiGradeNow = new ApiGradeNow(UserInfo.getInstance().getUserId(), new CallBack()
+                {
+                    @Override
+                    public void callbackSuccess(String result)
+                    {
+                        UserInfo.getInstance().setGradeNowInfo(result);
+                    }
+
+                    @Override
+                    public void callbackFail()
+                    {
+                        stopLoadingAnimation();
+                        setContentView(R.layout.login_layout);
+                    }
+                });
+                apiGradeNow.execute();
             }
 
             @Override
@@ -184,24 +202,6 @@ public class MainActivity extends AppCompatActivity{
             }
         });
         apiPostLogin.execute();
-
-        // GradeNow 정보도 인터넷을 통해서 얻어오는 것이므로 AsyncTask 를 상속한 클래스를 활요해 값을 얻어온다.
-        ApiGradeNow apiGradeNow = new ApiGradeNow(UserInfo.getInstance().getUserId(), new CallBack()
-        {
-            @Override
-            public void callbackSuccess(String result)
-            {
-                UserInfo.getInstance().setGradeNowInfo(result);
-            }
-
-            @Override
-            public void callbackFail()
-            {
-                stopLoadingAnimation();
-                setContentView(R.layout.login_layout);
-            }
-        });
-        apiGradeNow.execute();
     }
 
     // 로딩 화면 시작

@@ -111,7 +111,7 @@ public class UserInfo {
                         subject.getString("COMM_NM"),
                         subject.getString("LT_SHTM"),
                         subject.getString("PNT"),
-                        subject.getString("CALCU_GRD"),
+                        subject.getString("CALCU_GRD").equals("null") ? "" : subject.getString("CALCU_GRD"),
                         ""));
             }
         }
