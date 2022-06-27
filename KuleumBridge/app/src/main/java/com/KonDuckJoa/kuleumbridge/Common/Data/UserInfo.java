@@ -203,7 +203,7 @@ public class UserInfo {
         return gradeNowArray;
     }
 
-    public void clearGrade()
+    private void clearGrade()
     {
         gradeAllArray.clear();
         gradeNowArray.clear();
