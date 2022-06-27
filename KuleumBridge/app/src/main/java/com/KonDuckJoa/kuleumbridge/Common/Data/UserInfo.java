@@ -61,6 +61,8 @@ public class UserInfo {
         {
             gradeAllArray.clear();
 
+            gradeNowArray.clear();
+
             JSONObject responseJson = new JSONObject(gradeAllResponse);
 
             JSONObject photoJson = responseJson.getJSONObject("dmPhoto");
