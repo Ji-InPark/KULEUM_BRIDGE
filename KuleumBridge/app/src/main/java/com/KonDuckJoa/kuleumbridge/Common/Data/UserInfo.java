@@ -59,9 +59,7 @@ public class UserInfo {
     {
         try
         {
-            gradeAllArray.clear();
-
-            gradeNowArray.clear();
+            clearGrade();
 
             JSONObject responseJson = new JSONObject(gradeAllResponse);
 
@@ -203,6 +201,12 @@ public class UserInfo {
 
     public ArrayList<Grade> getGradeNow() {
         return gradeNowArray;
+    }
+
+    public void clearGrade()
+    {
+        gradeAllArray.clear();
+        gradeNowArray.clear();
     }
 
 }
