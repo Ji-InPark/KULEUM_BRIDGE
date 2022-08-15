@@ -29,7 +29,8 @@
             android:required="false"/>
         <activity
             android:name="com.KonDuckJoa.kuleumbridge.Activity.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,16 +38,24 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.KonDuckJoa.kuleumbridge.Activity.GradeCheckActivity">
+        <activity
+            android:name="com.KonDuckJoa.kuleumbridge.Activity.GradeCheckActivity"
+            android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name="com.KonDuckJoa.kuleumbridge.Activity.TastePlaceActivity">
+        <activity
+            android:name="com.KonDuckJoa.kuleumbridge.Activity.TastePlaceActivity"
+            android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name="com.KonDuckJoa.kuleumbridge.Taste.TastePlaceList">
+        <activity
+            android:name="com.KonDuckJoa.kuleumbridge.Taste.TastePlaceList"
+            android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name="com.KonDuckJoa.kuleumbridge.Taste.TastePlaceInfo">
+        <activity
+            android:name="com.KonDuckJoa.kuleumbridge.Taste.TastePlaceInfo"
+            android:screenOrientation="portrait">
         </activity>
 
 
