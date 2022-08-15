@@ -66,9 +66,6 @@ public class HomeFragment extends Fragment
 
             switch(id)
             {
-                case R.id.Drawer_setting:
-                    Toast.makeText(context, ":환경설정 창으로 이동합니다", Toast.LENGTH_SHORT).show();
-                    break;
                 case R.id.Drawer_logout:
                     clearAutoLoginInfo();
                     startActivity(Intent.makeRestartActivityTask(getActivity().getIntent().getComponent()));    // Activity 재시작 구문
