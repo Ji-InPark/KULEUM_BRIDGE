@@ -13,6 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
+        android:background="#9CCAAE"
+        app:tabIndicatorColor="#AABBDD"
+        app:tabTextColor="@color/black"
         app:tabMode="scrollable"
         tools:ignore="SpeakableTextPresentCheck">
 

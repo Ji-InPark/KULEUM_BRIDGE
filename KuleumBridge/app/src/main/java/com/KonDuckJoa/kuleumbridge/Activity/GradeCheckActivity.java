@@ -42,10 +42,6 @@ public class GradeCheckActivity extends AppCompatActivity {
 
         TabLayout semesterTabLayout = findViewById(R.id.tabs);
 
-        semesterTabLayout.setBackgroundColor(Color.parseColor("#9FF781"));
-        semesterTabLayout.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
-        semesterTabLayout.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#000000"));
-
         // 탭 추가 과정
         for (int i = 0; i < tabNameArray.size(); i++)
         {
