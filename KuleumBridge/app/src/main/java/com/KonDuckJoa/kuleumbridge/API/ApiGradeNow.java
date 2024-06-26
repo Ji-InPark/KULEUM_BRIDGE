@@ -8,6 +8,7 @@ import com.KonDuckJoa.kuleumbridge.Common.CallBack;
 import com.KonDuckJoa.kuleumbridge.Common.Data.UserInfo;
 
 import java.net.SocketTimeoutException;
+import java.time.Year;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -17,31 +18,27 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class ApiGradeNow extends AsyncTask<String, String, Boolean> {
-    private String studentNumber, result;
-    private CallBack callBack;
+    private final String studentNumber;
+    private final CallBack callBack;
+    private String result;
 
-    public ApiGradeNow(String studentNumber, CallBack callBack)
-    {
+    public ApiGradeNow(String studentNumber, CallBack callBack) {
         this.studentNumber = studentNumber;
         this.callBack = callBack;
     }
 
     @Override
-    protected void onPostExecute(Boolean success)
-    {
+    protected void onPostExecute(Boolean success) {
         super.onPostExecute(success);
 
-        if(success)
-        {
+        if (success) {
             callBack.callbackSuccess(result);
         }
     }
 
     @Override
-    protected Boolean doInBackground(String... strings)
-    {
-        try
-        {
+    protected Boolean doInBackground(String... strings) {
+        try {
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
                     .connectTimeout(10, TimeUnit.SECONDS)
                     .readTimeout(10, TimeUnit.SECONDS)
@@ -50,13 +47,13 @@ public class ApiGradeNow extends AsyncTask<String, String, Boolean> {
 
             FormBody.Builder formBuilder = new FormBody.Builder();
 
-            for(Map.Entry<String, String> entry : ApiResource.parameterMap.entrySet())
-            {
+            for (Map.Entry<String, String> entry : ApiResource.parameterMap.entrySet()) {
                 formBuilder.add(unescapeJava(entry.getKey()), unescapeJava(entry.getValue()));
             }
 
             formBuilder.add(unescapeJava("@d1#stdNo"), unescapeJava(studentNumber));
-            formBuilder.add(unescapeJava("@d1#basiYy"), unescapeJava("2022"));
+            int year = Year.now().getValue();
+            formBuilder.add(unescapeJava("@d1#basiYy"), unescapeJava(String.valueOf(year)));
             formBuilder.add(unescapeJava("@d1#basiShtm"), unescapeJava("B01011"));
             formBuilder.add(unescapeJava("_AUTH_MENU_KEY"), unescapeJava("1140302"));
             formBuilder.add(unescapeJava("@d#"), unescapeJava("@d1#"));
@@ -90,13 +87,9 @@ public class ApiGradeNow extends AsyncTask<String, String, Boolean> {
             result = response.body().string();
 
             return !result.contains("ERRMSGINFO");
-        }
-        catch (SocketTimeoutException e)
-        {
+        } catch (SocketTimeoutException e) {
             return null;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
